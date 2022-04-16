@@ -1,0 +1,10 @@
+.title{
+	background-color: var(--info);
+	color: #fff !important;
+	padding: 0.2em 0.1em;
+	text-align: center;
+}
+
+.button{
+	color: #fff !important;
+}

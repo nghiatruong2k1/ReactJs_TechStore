@@ -1,0 +1,17 @@
+.card{
+	height: 100%;
+}
+
+
+.header{
+	background-color: #d9edf7;
+}
+.title{
+	color: #3c8dbc;
+	text-decoration: none;
+	word-break: break-word;
+}
+
+.text{
+	word-break: break-word;
+}

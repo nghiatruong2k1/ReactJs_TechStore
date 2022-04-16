@@ -1,0 +1,75 @@
+import {memo,useContext} from 'react';
+import {
+  Stack,
+  Grid,
+  Box,
+  Divider,
+  Card,
+  CardActions,
+  CardContent,
+  Rating,
+  Typography
+} from '@mui/material/';
+import {
+  Star
+} from '@mui/icons-material/';
+import {Frame,Image} from "../../../../../../../../Components/";
+import styles from "./styles.module.css";
+
+import DataName from "./Name/";
+import DataShortDes from "./ShortDes/";
+import DataPrice from "./Price/";
+import DataSalePrice from "./SalePrice/";
+import DataBookmask from "./Bookmask/";
+import DataAddToCart from "./AddToCart/";
+import DataContact from "./Contact/";
+function ViewData({data,loading,...props}){
+  return(
+  <Stack item py={1}>
+      <Card>
+        <Grid container>
+          <Grid item xs={3}>
+            <CardActions component={Box} px={2} disableSpacing>
+              <Frame square loading={!Boolean(data) || loading}>
+                <DataBookmask price={data && data.Price} salePrice={data && data.SalePrice}/>
+                <Image contain src={data && data.ImageUrl}/>
+              </Frame>
+            </CardActions>
+          </Grid>
+          <Grid item xs={6}>
+              <CardContent className={styles.content} height="100%" component={Box} px={1} py={1}>
+                <DataName loading={!Boolean(data) || loading} name={data && data.Name} alias={data && data.Alias}/>
+                <Rating
+                  value={data && data.Rating || 0}
+                  readOnly
+                  size="small"
+                  precision={0.1}
+                  max={5}
+                  emptyIcon={<Star />}
+                />
+                <Box spacing={1}>
+                  <small className="tag"> <i className="fa fa-check"></i> Verified</small> 
+                  <small className="tag"> 5 Years </small> 
+                  <small className="tag"> 80 reviews </small>
+                  <small className="tag"> Russia </small>
+                </Box>
+                <DataShortDes loading={!Boolean(data) || loading} shortDes={data && data.ShortDes}/>
+            </CardContent>
+          </Grid>
+          <Grid item xs={3}>
+            <CardContent component={Box} height="100%" align="center" px={1} py={1}>
+              <Stack spacing={1}>
+                <DataSalePrice loading={!Boolean(data) || loading} price={data && data.Price} salePrice={data && data.SalePrice}/>
+                <DataPrice loading={!Boolean(data) || loading} price={data && data.Price} salePrice={data && data.SalePrice}/>
+                <DataAddToCart loading={!Boolean(data) || loading} data={data || {}}/>
+                <DataContact loading={!Boolean(data) || loading} data={data || {}}/>
+              </Stack>
+            </CardContent>
+          </Grid>
+        </Grid>
+       </Card>
+    </Stack>
+  )
+}
+export default memo(ViewData);
+                    

@@ -1,0 +1,6 @@
+.header:after{
+	content: "";
+	height: 0.3em;
+	background-color: #dcdee3;
+	flex: 1 0 auto;
+}

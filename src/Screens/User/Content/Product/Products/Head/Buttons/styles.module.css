@@ -1,0 +1,12 @@
+.group{
+	background-color: #fff !important;
+	color: #969696 !important;
+}
+.button{
+	color: inherit !important;
+	border-color:#969696 !important;
+}
+.active{
+	color: var(--info) !important;
+	pointer-events: none !important;
+}

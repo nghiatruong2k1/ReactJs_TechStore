@@ -1,0 +1,8 @@
+.title,
+.foot{
+	padding: 0.3em 1em !important;
+}
+.body{
+	padding: 0.3em 1em!important;
+	min-height: 5em !important;
+}

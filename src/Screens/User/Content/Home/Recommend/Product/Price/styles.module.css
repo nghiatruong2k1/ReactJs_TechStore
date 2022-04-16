@@ -1,0 +1,12 @@
+.price{
+	display: block;
+	margin: 0.2em 0 !important;
+}
+.current{
+	color: var(--info);
+}
+.root{
+	opacity: 0.8;
+	font-size: 0.8em !important;
+	text-decoration: line-through;
+}

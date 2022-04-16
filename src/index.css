@@ -1,0 +1,60 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  font-size: 1em !important;
+  vertical-align: baseline;
+  box-sizing: border-box !important;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+html{
+  font-size: 16px !important;
+}
+body {
+  line-height: 1.5;
+  font-size: 1em;
+  margin: 0;
+/*  font-family: 'MyWebFont';*/
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+button
+,[class*="Button"]{
+  text-transform: initial !important;
+  line-height: 1.5rem !important;
+}
+
+a:not([class*="Button"]){
+  text-decoration: none;
+  color: inherit !important;
+  cursor: pointer;
+}
+a:not([class*="Button"]):hover{
+  color: var(--info) !important;
+}
+[disabled]{
+  opacity: 0.5 !important;
+}

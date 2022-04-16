@@ -1,0 +1,21 @@
+.section{
+	padding: 2em 0;
+	margin-top: 0.5em;
+	background-color: var(--indigo);
+	color: #fff;
+}
+
+.feild{
+	flex: 1;
+}
+.display{
+	color: #495057;
+    background-color: #fff;
+}
+
+.input{
+	padding: 0.5em 1em !important;
+}
+.submit{
+	padding: 0.5em 2em !important;
+}

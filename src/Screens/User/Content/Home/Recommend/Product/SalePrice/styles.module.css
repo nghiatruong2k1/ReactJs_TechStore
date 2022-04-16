@@ -1,0 +1,10 @@
+.price{
+	display: block;
+	margin: 0.2em 0 !important;
+}
+.sale{
+	color: #f00;
+}
+.hidden{
+	visibility: hidden;
+}

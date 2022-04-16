@@ -1,0 +1,24 @@
+import {memo,useReducer} from 'react';
+import clsx from 'clsx';
+import {Stack,Grid,Card,CardActions,Typography,CardContent,Divider} from '@mui/material/';
+import {} from '@mui/icons-material/';
+import styles from './styles.module.css';
+
+import {initData,reducer} from "./init";
+import Provider from "./provider";
+import OrderCard from "./Order/"
+function Orders({...props}){
+  const [state,dispath] = useReducer(reducer,initData);
+  return(
+    <Provider state={state} dispath={dispath}>
+      <Grid container spacing={2}>
+          {
+            state.datas.map(function(data,index){
+              return(<OrderCard data={data}key={index}/>)
+            })
+          }
+      </Grid>
+    </Provider>
+  )
+}
+export default memo(Orders);

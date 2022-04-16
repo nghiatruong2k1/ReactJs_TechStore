@@ -1,0 +1,19 @@
+import {memo} from 'react';
+import clsx from 'clsx';
+import {Grid,Tooltip,Badge,IconButton} from '@mui/material/';
+import {NotificationsActive} from '@mui/icons-material/';
+import styles from './styles.module.css';
+function Message({...props}){
+  return(
+  <Grid item {...props}>
+    <Tooltip title="Message" placement="top">
+      <IconButton className={styles.button}>
+        <Badge badgeContent={4} color="primary">
+          <NotificationsActive/>
+        </Badge>
+      </IconButton>
+    </Tooltip>
+  </Grid>
+  )
+}
+export default memo(Message);

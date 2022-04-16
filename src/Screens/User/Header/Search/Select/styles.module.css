@@ -1,0 +1,8 @@
+.control{
+	width: 25%;
+}
+.display{
+	text-align: center;
+	padding: 0.2em 0.5em 0.2em 0.1em !important;
+	background-color: transparent !important;
+}

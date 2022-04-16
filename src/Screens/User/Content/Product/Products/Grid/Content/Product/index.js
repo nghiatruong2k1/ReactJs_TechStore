@@ -1,0 +1,66 @@
+import {memo,useContext} from 'react';
+import {
+  Stack,
+  Grid,
+  Box,
+  Divider,
+  Card,
+  CardActions,
+  CardContent,
+  Rating,
+  Typography
+} from '@mui/material/';
+import {
+  Star
+} from '@mui/icons-material/';
+import {Frame,Image} from "../../../../../../../../Components/";
+import styles from "./styles.module.css";
+
+import DataName from "./Name/";
+import DataPrice from "./Price/";
+import DataSalePrice from "./SalePrice/";
+import DataBookmask from "./Bookmask/";
+import DataAddToCart from "./AddToCart/";
+import DataContact from "./Contact/";
+function Product({data,loading,...props}){
+  return(
+    <Grid item py={1} px={1} xs={3}>
+      <Card className={styles.card}>
+        <CardActions component={Box} px={2} disableSpacing>
+            <Frame square px={3} loading={!Boolean(data) || loading}>
+              <DataBookmask price={data && data.Price} salePrice={data && data.SalePrice}/>
+              <Image contain src={data && data.ImageUrl}/>
+            </Frame>
+         </CardActions>
+         <CardContent className={styles.content} component={Box} px={1} py={1}>
+                <DataName loading={!Boolean(data) || loading} name={data && data.Name} alias={data && data.Alias}/>
+                <Rating
+                  value={data && data.Rating || 0}
+                  readOnly
+                  size="small"
+                  precision={0.1}
+                  max={5}
+                  emptyIcon={<Star />}
+                />
+                <DataSalePrice loading={!Boolean(data) || loading} price={data && data.Price} salePrice={data && data.SalePrice}/>
+                <DataPrice loading={!Boolean(data) || loading} price={data && data.Price} salePrice={data && data.SalePrice}/>
+          </CardContent>
+          <Divider />
+          <CardContent component={Box} px={1} py={1}>
+            <Stack spacing={1} align="center">
+              <Box spacing={1}>
+                <small className="tag"> <i className="fa fa-check"></i> Verified</small> 
+                <small className="tag"> 5 Years </small> 
+                <small className="tag"> 80 reviews </small>
+                <small className="tag"> Russia </small>
+              </Box>
+              <DataAddToCart loading={!Boolean(data) || loading} data={data || {}}/>
+              <DataContact loading={!Boolean(data) || loading} data={data || {}}/>
+            </Stack>
+          </CardContent>
+       </Card>
+    </Grid>
+  )
+}
+export default memo(Product);
+                    

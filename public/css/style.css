@@ -1,0 +1,7 @@
+font-face {
+  font-family: 'MyWebFont';
+  src:  url('../fonts/time/times.ttf'),
+        url('../fonts/time/timesbd.ttf'),
+        url('../fonts/time/timesbi.ttf'),
+        url('../fonts/time/timesi.ttf');
+}

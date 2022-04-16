@@ -1,0 +1,11 @@
+.form{
+	border: 0.15em solid var(--info) !important;
+    border-radius: 0.55rem !important;
+    width: 100%;
+}
+.group{
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
