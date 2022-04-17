@@ -1,13 +1,14 @@
 import {memo,useState,useRef,useReducer,useContext,useEffect} from 'react';
 import {useCookies} from 'react-cookie'
 import clsx from 'clsx';
-import {Button,ClickAwayListener,Tooltip,Badge,Paper,Menu,MenuItem,ListItemButton,ListItemIcon,ListItemText,Avatar} from '@mui/material/';
+import {Button,Tooltip,Badge,Paper,Menu,MenuItem,ListItemButton,ListItemIcon,ListItemText,Avatar} from '@mui/material/';
 import {NavLink} from "react-router-dom";
 import {} from '@mui/icons-material/';
 import styles from '../styles.module.css';
 import {initData,reducer} from "./init"
 import LogoutButton from "./Logout/";
 function Profile({...props}){
+  const route = global.config.useRoute();
   const Fetch = global.config.useFetch();
   const [cookies,setCookies] = useCookies();
   const [state,dispath] = useReducer(reducer,initData);
@@ -46,26 +47,29 @@ function Profile({...props}){
         </Tooltip> 
         <Menu 
             anchorEl={buttonRef.current}
-            open={isOpen}
+            open={buttonRef.current && isOpen}
             onClose={handleClose}
             width = '10em'
-            arrow
           >
             {(state.TypeId == 4) && (
-              <MenuItem component={NavLink} to="/admin">
-                <ListItemIcon>
+                <MenuItem>
+                  <ListItemButton component={NavLink} to={`${route.admin.dashboard.index}`}>
+                    <ListItemIcon>
+                      <span className={clsx("fa fa-user")}/>
+                    </ListItemIcon>
+                    <ListItemText>Trang quản trị</ListItemText>
+                  </ListItemButton>
+                </MenuItem>
+              )}
+              <MenuItem>
+                <ListItemButton component={NavLink} to={`${route.user.profile.index}`}>
+                  <ListItemIcon>
                     <span className={clsx("fa fa-user")}/>
                   </ListItemIcon>
-                  <ListItemText>Trang quản trị</ListItemText>
+                  <ListItemText>Tài khoản</ListItemText>
+                </ListItemButton>
               </MenuItem>
-            )}
-            <MenuItem component={NavLink} to="/profile">
-              <ListItemIcon>
-                <span className={clsx("fa fa-user")}/>
-              </ListItemIcon>
-              <ListItemText>Tài khoản</ListItemText>
-            </MenuItem>
-            <LogoutButton />   
+              <LogoutButton /> 
           </Menu>   
       </div>
     )

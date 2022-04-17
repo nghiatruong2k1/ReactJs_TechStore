@@ -16,6 +16,15 @@ export const useRoute = function(){
 				brand:{
 					index:"/danh-sach-thuong-hieu",
 					search:"/tim-kiem-thuong-hieu"
+				},
+				profile:{
+					index:"/tai-khoan",
+					order:"/don-hang",
+					setting:"/tuy-chon",
+				}
+			},admin:{
+				dashboard:{
+					index:"/bang-quan-tri"
 				}
 			}
 		}

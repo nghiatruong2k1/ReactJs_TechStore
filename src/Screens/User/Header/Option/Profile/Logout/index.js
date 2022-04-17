@@ -1,7 +1,7 @@
 import {memo,useContext} from 'react';
 import {useCookies} from "react-cookie"
 import clsx from 'clsx';
-import {MenuItem,ListItemIcon,ListItemText} from '@mui/material/';
+import {MenuItem,LisitemButton,ListItemIcon,ListItemText} from '@mui/material/';
 import {NavLink} from "react-router-dom";
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
@@ -13,11 +13,13 @@ function LogoutButton({...props}){
     toast.handle.add({message:"Đăng xuất thành công!"})
   }
   return(
-    <MenuItem component={NavLink} to="" onClick={handleClick}>
-      <ListItemIcon>
-        <span className={clsx("fas fa-sign-out-alt")}/>
-      </ListItemIcon>
-      <ListItemText>Đăng xuất</ListItemText>
+    <MenuItem>
+      <LisitemButton  component={NavLink} to="" onClick={handleClick}>
+        <ListItemIcon>
+          <span className={clsx("fas fa-sign-out-alt")}/>
+        </ListItemIcon>
+        <ListItemText>Đăng xuất</ListItemText>
+      </LisitemButton>
     </MenuItem>
   )
 }
