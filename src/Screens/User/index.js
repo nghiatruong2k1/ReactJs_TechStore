@@ -25,9 +25,3 @@ function UserPage({...props}){
   )
 }
 export default memo(UserPage);
-/*
-
-      
-      
-      
-*/

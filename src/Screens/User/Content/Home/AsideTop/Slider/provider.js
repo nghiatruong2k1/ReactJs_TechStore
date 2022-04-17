@@ -1,9 +1,9 @@
 import {memo,createContext} from 'react';
 export const SliderContext = createContext();
-function SliderProvider({state,dispath,children,...props}){
+function SliderProvider({state,dispath,slider,children,...props}){
 	return(
 		<SliderContext.Provider value={{
-			state,dispath
+			state,dispath,slider
 		}}>
 			{children}
 		</SliderContext.Provider>

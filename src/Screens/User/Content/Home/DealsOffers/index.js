@@ -19,7 +19,7 @@ function DealsOffers({...props}){
   const [state,dispath] = useReducer(reducer,initData);
   return(
   <Provider state={state} dispath={dispath}>
-    <Grid container className={styles.content} mt={3}>
+    <Grid container className={styles.content} my={3}>
       <Grid item xs={12} lg={3}>
         <Stack p={3}>
           <Typography component="h5">Sản phẩm khuyến mãi</Typography>

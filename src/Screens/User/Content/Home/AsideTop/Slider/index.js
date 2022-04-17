@@ -12,14 +12,14 @@ import Arrows from "./Arrows/";
 import Dots from "./Dots/";
 function SliderContent({...props}){
   const [state,dispath] = useReducer(reducer,initData);
-  const thisRef = useRef();
+  const thisRef = useRef(null);
   return(
-  <Provider state={state} dispath={dispath}>
+  <Provider state={state} dispath={dispath} slider={thisRef.current}>
     <Grid item {...props}>
       <Box position="relative">
         <Images ref={thisRef}/>
-        <Arrows sliderRef={thisRef.current}/>
-        <Dots sliderRef={thisRef.current}/>
+        <Arrows/>
+        <Dots/>
       </Box> 
     </Grid>
   </Provider>

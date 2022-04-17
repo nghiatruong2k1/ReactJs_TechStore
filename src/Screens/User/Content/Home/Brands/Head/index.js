@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function Head({...props}){
   return(
     <Stack direction="row" width="100%" py={2} alignItems="center" className={styles.header}>
-      <Typography component="h5">Sản phẩm đề xuất:</Typography>
+      <Typography component="h5">Thương hiệu đề xuất:</Typography>
     </Stack>
   )
 }

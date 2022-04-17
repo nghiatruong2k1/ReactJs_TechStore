@@ -10,7 +10,7 @@ import ViewEmpty from "./ViewEmpty/";
 import ViewLoading from "./ViewLoading/";
 function ViewContent({loading,viewLoading,length,empty,children,...props}){
   if(loading){
-    if(viewLoading){
+    if(Boolean(viewLoading)){
       return (<ViewLoading />)
     }
   }else if(!Boolean(length) || length && length <= 0){

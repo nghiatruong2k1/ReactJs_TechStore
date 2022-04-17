@@ -10,18 +10,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function Dots({sliderRef,...props}){
-  const {state,dispath} = useContext(SliderContext)
+function Dots({...props}){
+  const {state,dispath,slider} = useContext(SliderContext)
   const thisRef = useRef();
   const settings = {
     arrows:false,
     dots: false,
-    initialSlide:state.initIndex ?? 0,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    lazyLoad:"progressive",
     rows:1,
     slidesPerRow:4
   };
@@ -42,7 +40,7 @@ function Dots({sliderRef,...props}){
               containerProps={{
                 className:clsx(styles.dotButton,{[styles.dotActive]:index == state.index}),
                 onClick:()=>{
-                  sliderRef && sliderRef.slickGoTo(index)
+                  slider && slider.slickGoTo(index)
                 }
               }}
             >

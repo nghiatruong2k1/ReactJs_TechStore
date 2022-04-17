@@ -1,18 +1,20 @@
-import {memo} from 'react';
+import {memo,useContext} from 'react';
 import clsx from 'clsx';
 import {Box,IconButton} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-function Arrows({sliderRef,...props}){
+import {SliderContext} from "../provider";
+function Arrows({...props}){
+  const {state,dispath,slider} = useContext(SliderContext)
   return(
     <>
       <IconButton
-        onClick={()=>{sliderRef && sliderRef.slickPrev()}}
+        onClick={()=>{slider && slider.slickPrev();}}
         className={clsx(styles.arrow,styles.left)}>
         <span className="fas fa-chevron-left"/>
       </IconButton>
       <IconButton
-        onClick={()=>{sliderRef && sliderRef.slickNext()}}
+        onClick={()=>{slider && slider.slickNext();}}
         className={clsx(styles.arrow,styles.right)}>
         <span className="fas fa-chevron-right"/>
       </IconButton>

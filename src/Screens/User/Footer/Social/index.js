@@ -9,7 +9,7 @@ function Social({...props}){
         disablePadding
         subheader={
           <ListSubheader disableGutters disableSticky component="h6">
-            Social
+           Mạng xã hội
           </ListSubheader>
         }
       >

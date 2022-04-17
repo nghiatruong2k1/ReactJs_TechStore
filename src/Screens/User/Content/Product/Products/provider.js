@@ -8,7 +8,7 @@ function ProductsProvider({state,dispath,action, children,...props}){
 		}else{
 			return  'alias'
 		}
-	},[])
+	},[action])
 	const handle = {
 		set:(key,value)=>{
 			dispath({key:'set',payload:{[key]:value}})

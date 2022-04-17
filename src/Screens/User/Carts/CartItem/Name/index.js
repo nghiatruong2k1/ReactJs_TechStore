@@ -9,7 +9,7 @@ function ItemName({...props}){
   const {state} = useContext(ItemContext);
   const route = global.config.route;
   return(
-      <Typography component={!state.isLoading && NavLink} 
+      <Typography component={!state.isLoading && NavLink || "span"} 
         to={`${route.user.product.detail}/${state.data.Alias}`} 
       >
         {!state.isLoading 

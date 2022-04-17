@@ -13,7 +13,7 @@ function Helps({...props}){
         disablePadding
         subheader={
           <ListSubheader disableGutters disableSticky component="h6">
-            Helps
+            Trợ giúp
           </ListSubheader>
         }
       >

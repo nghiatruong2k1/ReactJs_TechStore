@@ -12,9 +12,9 @@ function Footer({...props}){
   <Box component="section" className={styles.section} pb={10}>
     <Container maxWidth="xxl" component="footer" className={styles.container}>
         <Grid container columnSpacing={2} rowSpacing={1}>
+            <FooterHelps xs/>
             <FooterBrands xs/>
             <FooterCategories xs/>
-            <FooterHelps xs/>
             <FooterAccount xs/>
             <FooterSocial xs/>
         </Grid> 

@@ -16,14 +16,12 @@ function Images({...props},ref){
   const settings = {
     arrows:false,
     dots: false,
-    initialSlide: state.initIndex ?? 0,
     infinite: true,
     autoplay:true,
     autoplaySpeed:2000,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    lazyLoad:"progressive",
     rows:1,
     beforeChange:function(oldIndex,newIndex){
       dispath({key:"set",payload:{index:newIndex}})

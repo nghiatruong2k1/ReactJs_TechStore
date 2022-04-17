@@ -5,7 +5,9 @@ import {Button,Stack,Paper} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import DialogResult from "./DialogResult/";
+import {CartContext} from "../provider";
 function Buttons({...props}){
+  const {state,dispath} = useContext(CartContext);
   const [cookies,setCookies] = useCookies();
   const {cart} = useContext(global.config.UserContext);
   const {auth,toast} = useContext(global.config.context);
@@ -20,12 +22,16 @@ function Buttons({...props}){
       })
       if(newCart.length > 0){
         DialogResult({
-          totalItem:cart.handle.getCount(),
-          totalPrice:cart.handle.getPrice(),
+          count:cart.handle.getCount(),
+          sale:state.voucher && state.voucher.Value || 0,
+          price:cart.handle.getPrice(),
           onYes:function(){
             Fetch.post({
               api:"api/order",
-              params:newCart,
+              params:{
+                products:newCart,
+                voucher:state.voucher || {}
+              },
               onThen:function(result){
                 cart.handle.reset();
               }

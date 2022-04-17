@@ -30,7 +30,7 @@ function Popular({...props}){
                     <LoadingButton 
                       variant="contained" 
                       loading={!Boolean(data) || state.isLoading}
-                      component={(data && !state.isLoading) && NavLink | "li"} 
+                      component={(data && !state.isLoading) && NavLink || "button"} 
                       color="info"
                       className={styles.button}
                       to={`${route.user.product.category}/${data && data.Alias}`}

@@ -12,7 +12,7 @@ function Recommend({...props}){
   const [state,dispath] = useReducer(reducer,initData);
   return(
     <Provider state={state} dispath={dispath}>
-      <Grid container className={styles.content} mt={3}>
+      <Grid container className={styles.content} my={3}>
         <RecommendHead />
         <Grid container spacing={1}>
           <ViewContent loading = {false} length = {state.datas.length}>  
