@@ -1,6 +1,10 @@
 {
   "name": "TechStore",
   "version": "0.1.0",
+  "engines": {
+    "node": "17.0.1",
+    "npm": "8.5.0"
+  },
   "private": true,
   "dependencies": {
     "@ckeditor/ckeditor5-adapter-ckfinder": "^33.0.0",
