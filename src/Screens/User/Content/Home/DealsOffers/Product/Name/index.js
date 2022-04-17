@@ -5,7 +5,7 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {NavLink} from "react-router-dom";
 function DataName({loading,alias,name,...props}){
-  const route = global.config.route;
+  const route = global.config.useRoute();
   return(
       <Typography 
           component={!loading && NavLink || "span"} 

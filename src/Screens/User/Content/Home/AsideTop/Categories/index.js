@@ -19,7 +19,7 @@ import {initData,reducer} from './init'
 import Provider from "./provider";
 function Categories({...props}){
   const [state,dispath] = useReducer(reducer,initData);
-  const route = global.config.route;
+  const route = global.config.useRoute();
   return(
     <Provider state={state} dispath={dispath}>
       <Grid item {...props}>

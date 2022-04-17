@@ -13,7 +13,7 @@ function Brands({...props}){
   const [datas,setDatas] = useState([]);
   const [isLoading,setLoading] = useState(false);
   const Fetch = global.config.useFetch();
-  const route = global.config.route;
+  const route = global.config.useRoute();
   useEffect(function() {
     Fetch.get({
       api:"api/brand"

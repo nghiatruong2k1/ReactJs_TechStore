@@ -7,7 +7,7 @@ import {NavLink} from "react-router-dom";
 import {ItemContext} from "../provider";
 function ItemName({...props}){
   const {state} = useContext(ItemContext);
-  const route = global.config.route;
+  const route = global.config.useRoute();
   return(
       <Typography component={!state.isLoading && NavLink || "span"} 
         to={`${route.user.product.detail}/${state.data.Alias}`} 

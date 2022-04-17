@@ -3,7 +3,7 @@ import {Skeleton,Typography} from '@mui/material/';
 import styles from './styles.module.css';
 import {NavLink} from "react-router-dom";
 function DataName({loading,name,alias,...props}){
-  const route = global.config.route;
+  const route = global.config.useRoute();
   return(
       <Typography 
           component={!loading && NavLink} 

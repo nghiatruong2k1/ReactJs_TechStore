@@ -17,7 +17,7 @@ function Brands({...props}){
   const [datas,setDatas] = useState([]);
   const [isFetching,setFetching] = useState(false);
   const location = useLocation();
-  const route = global.config.route;
+  const route = global.config.useRoute();
   const Fetch = global.config.useFetch();
   useEffect(function() {
     Fetch.get({

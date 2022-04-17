@@ -14,7 +14,7 @@ import {Frame,Image} from "../../../../../../Components/";
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 function Item({data,loading,...props}){
-  const route = global.config.route;
+  const route = global.config.useRoute();
   return(
     <Grid item {...props}>
       <Card sx={{height:"100%"}}>

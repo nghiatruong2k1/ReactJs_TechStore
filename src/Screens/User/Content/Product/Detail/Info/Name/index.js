@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 
 import {DetailContext} from "../../provider";
 function DataName({...props}){
-  const route = global.config.route;
+  const route = global.config.useRoute();
   const {state} = useContext(DetailContext);
   if(!state.isLoading && state.data){
     let name = "Đang cập nhật";

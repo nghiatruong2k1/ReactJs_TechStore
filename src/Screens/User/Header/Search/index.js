@@ -10,7 +10,7 @@ import SearchInput from "./Input/";
 import SearchOption from "./Option/";
 function HeaderSearch({...props}){
   const [state,dispath] = useReducer(reducer,initData);
-  const route = global.config.route;
+  const route = global.config.useRoute();
   const navigator = useNavigate();
   function handleSubmit(event){
       event.preventDefault();

@@ -12,7 +12,7 @@ import ProductsView from "./Product/Products/";
 import DetailView from "./Product/Detail/";
 function Content({...props}){
 
-  const route = global.config.route;
+  const route = global.config.useRoute();
 
   return(
     <Box component="section" className={styles.section}  mt={3} >

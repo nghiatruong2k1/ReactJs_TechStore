@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom"
 import styles from './styles.module.css';
 
 function LeftNav({...props}){
-  const route = global.config.route;
+  const route = global.config.useRoute();
   return(
   <Stack component="ul" 
     direction="row" 

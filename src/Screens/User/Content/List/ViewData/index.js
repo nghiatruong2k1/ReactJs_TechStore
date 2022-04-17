@@ -6,7 +6,7 @@ import {Frame,Image} from "../../../../../Components/";
 import {ListContext} from "../provider";
 import {NavLink} from "react-router-dom";
 function ViewData({data,action,loading,...props}){
-  const route = global.config.route;
+  const route = global.config.useRoute();
   return(
     <Grid item xs={3}>
       <Card>

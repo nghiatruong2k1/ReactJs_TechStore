@@ -13,7 +13,7 @@ function Categories({...props}){
   const [datas,setDatas] = useState([]);
   const [isFetching,setFetching] = useState(false);
   const Fetch = global.config.useFetch();
-  const route = global.config.route;
+  const route = global.config.useRoute();
   useEffect(function() {
     Fetch.get({
           api:"api/category"
