@@ -1,6 +1,6 @@
-import {memo,useReducer,useContext,useEffect} from 'react';
+import {useReducer,useContext,useEffect} from 'react';
 import {reducer,initData} from "./init";
-import DialogResult from "../../Components/DialogResult/";
+import DialogResult from "../../../../Components/DialogResult/";
 function Cart(){
   const {toast} = useContext(global.config.context);
   const [state,dispath] = useReducer(reducer,{

@@ -1,4 +1,4 @@
-import {memo,useState,useEffect} from 'react';
+import {useState,useEffect} from 'react';
 function Component(){
   const [values,setValues] = useState([]);
   const Fetch = global.config.useFetch();

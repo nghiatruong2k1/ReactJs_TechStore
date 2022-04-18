@@ -10,13 +10,13 @@ import SearchInput from "./Input/";
 import SearchOption from "./Option/";
 function HeaderSearch({...props}){
   const [state,dispath] = useReducer(reducer,initData);
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
   const navigator = useNavigate();
   function handleSubmit(event){
       event.preventDefault();
       if(state.query.trim() != ""){
         navigator({
-          pathname:`${route.user[state.controller].search}/${state.query}`,
+          pathname:`${getRoute("user",state.controller,"search")}/${state.query}`,
           search: ""
         });
       }

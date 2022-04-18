@@ -1,4 +1,4 @@
-import {memo,useState,createContext,useContext} from 'react';
+import {memo,useState} from 'react';
 import {DetailDataContext} from "../Detail/provider";
 function AddProvider({children,...props}){
 	const [data,setData] = useState({});

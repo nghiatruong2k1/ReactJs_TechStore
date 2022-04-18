@@ -1,4 +1,4 @@
-import {memo,useState,useEffect,useContext} from 'react';
+import {useContext} from 'react';
 import ReactLoading from "react-loading";
 import {Button} from '@mui/material/';
 import styles from './styles.module.css';

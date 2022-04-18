@@ -5,12 +5,12 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {NavLink} from "react-router-dom";
 function DataName({loading,alias,name,...props}){
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
   return(
       <Typography 
           component={!loading && NavLink || "span"} 
           className={styles.name}
-          to={`${route.user.product.detail}/${alias}`} 
+          to={`${getRoute("user","product","detail")}/${alias}`} 
           align="center"
       >
       {

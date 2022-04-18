@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 
 import {DetailContext} from "../../provider";
 function DataName({...props}){
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
   const {state} = useContext(DetailContext);
   if(!state.isLoading && state.data){
     let name = "Đang cập nhật";
@@ -15,7 +15,7 @@ function DataName({...props}){
       <Typography 
             component={NavLink} 
             className="h4"
-            to={`${route.user.product.detail}/${state.data.Alias}`}
+            to={`${getRoute("user","product","detail")}/${state.data.Alias}`}
         >{name}
       </Typography>
     )

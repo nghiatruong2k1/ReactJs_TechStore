@@ -14,7 +14,7 @@ import {Frame,Image} from "../../../../../../Components/";
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 function Item({data,loading,...props}){
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
   return(
     <Grid item {...props}>
       <Card sx={{height:"100%"}}>
@@ -24,7 +24,7 @@ function Item({data,loading,...props}){
               className="h5"
               component={ (!loading && Boolean(data)) && NavLink || "span" }
               to={(!loading && Boolean(data)) 
-                && `${route.user.product.brand}/${data.Alias}` || "/"
+                && `${getRoute("user","product","brand")}/${data.Alias}` || "/"
               }
             >
               {

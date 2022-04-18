@@ -5,10 +5,46 @@ import {Button,Tooltip,Badge,Paper,Menu,MenuItem,ListItemButton,ListItemIcon,Lis
 import {NavLink} from "react-router-dom";
 import {} from '@mui/icons-material/';
 import styles from '../styles.module.css';
-import {initData,reducer} from "./init"
-import LogoutButton from "./Logout/";
+import {initData,reducer} from "./init";
+
+
+
+function ProfileLink({to,icon,text,...props}){
+  return(
+    <MenuItem sx={{padding:"0"}} {...props}>
+      <ListItemButton component={NavLink} to={to}>
+        <ListItemIcon>
+          {icon}
+        </ListItemIcon>
+        <ListItemText>{text}</ListItemText>
+      </ListItemButton>
+    </MenuItem>
+  )
+}
+
+function LogoutButton({...props}){
+  const {toast} = useContext(global.config.context);
+  const [cookies,setCookies,removeCookies] = useCookies();
+  function handleClick(){
+    removeCookies("token")
+    if(Boolean(cookies['token'])){
+      toast.handle.add({message:"Đăng xuất không thành công!",type:"warning"})
+    }else{
+      toast.handle.add({message:"Đăng xuất thành công!"})
+    }
+
+  }
+  return(
+    <ProfileLink to="" 
+      onClick={handleClick}
+      icon={<span className={clsx("fas fa-sign-out-alt")}/>}
+      text={"Đăng xuất"}
+    />
+  )
+}
+
 function Profile({...props}){
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
   const Fetch = global.config.useFetch();
   const [cookies,setCookies] = useCookies();
   const [state,dispath] = useReducer(reducer,initData);
@@ -47,28 +83,27 @@ function Profile({...props}){
         </Tooltip> 
         <Menu 
             anchorEl={buttonRef.current}
-            open={buttonRef.current && isOpen}
+            open={Boolean(buttonRef.current && isOpen)}
             onClose={handleClose}
             width = '10em'
+            MenuListProps={{
+              sx:{
+                padding:"0.5em"
+              }
+            }}
           >
             {(state.TypeId == 4) && (
-                <MenuItem>
-                  <ListItemButton component={NavLink} to={`${route.admin.dashboard.index}`}>
-                    <ListItemIcon>
-                      <span className={clsx("fa fa-user")}/>
-                    </ListItemIcon>
-                    <ListItemText>Trang quản trị</ListItemText>
-                  </ListItemButton>
-                </MenuItem>
+                <ProfileLink 
+                  to={`${getRoute("admin","dashboard","index")}`}
+                  icon={<span className={clsx("fa fa-user")}/>}
+                  text={"Trang quản trị"}
+                />
               )}
-              <MenuItem>
-                <ListItemButton component={NavLink} to={`${route.user.profile.index}`}>
-                  <ListItemIcon>
-                    <span className={clsx("fa fa-user")}/>
-                  </ListItemIcon>
-                  <ListItemText>Tài khoản</ListItemText>
-                </ListItemButton>
-              </MenuItem>
+              <ProfileLink 
+                to={`${getRoute("user","profile","index"}`}
+                icon={<span className={clsx("fa fa-user")}/>}
+                text={"Tài khoản"}
+              />
               <LogoutButton /> 
           </Menu>   
       </div>

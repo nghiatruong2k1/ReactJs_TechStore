@@ -7,10 +7,10 @@ import {NavLink} from "react-router-dom";
 import {ItemContext} from "../provider";
 function ItemName({...props}){
   const {state} = useContext(ItemContext);
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
   return(
       <Typography component={!state.isLoading && NavLink || "span"} 
-        to={`${route.user.product.detail}/${state.data.Alias}`} 
+        to={`${getRoute("user","product","detail")}/${state.data.Alias}`} 
       >
         {!state.isLoading 
           && (state.data.Name || "Đang cập nhật") 

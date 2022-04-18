@@ -1,9 +1,5 @@
 import {memo} from 'react';
-import clsx from 'clsx';
-import {Grid,Stack,Badge,Tooltip} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import {NavLink} from "react-router-dom";
-import styles from './styles.module.css';
+import {Grid,Stack} from '@mui/material/';
 
 import CartButton from "./Cart/";
 import ProfileButton from "./Profile/";

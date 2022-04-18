@@ -1,9 +1,9 @@
 import {memo,useState,createContext,useEffect} from 'react';
 import clsx from 'clsx';
-import useLoading from "./CustomHook/Loading/";
-import useUploadImage from "./CustomHook/UploadImage/";
-import useToast from "./CustomHook/Toast/";
-import useAuth from "./CustomHook/Auth/";
+import useLoading from "./Control/Loading/";
+import useUploadImage from "./Control/UploadImage/";
+import useToast from "./Control/Toast/";
+import useAuth from "./Control/Auth/";
 function AppProvider({children,...props}){
 	const AppContext = global.config.context;
 	const loading = useLoading();

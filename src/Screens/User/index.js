@@ -8,7 +8,7 @@ import Header from "./Header/";
 import Content from "./Content/";
 import Footer from "./Footer/";
 import Subscribe from "./Subscribe/";
-import Carts from "./Carts/";
+import Cart from "./Cart/";
 function UserPage({...props}){
   const location = useLocation();
   useEffect(function(){
@@ -20,7 +20,7 @@ function UserPage({...props}){
       <Content />
       <Subscribe />
       <Footer />
-      <Carts />
+      <Cart />
     </Provider>
   )
 }

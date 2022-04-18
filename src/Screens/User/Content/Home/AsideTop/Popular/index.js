@@ -10,7 +10,7 @@ import {initData,reducer} from './init'
 import Provider from "./provider";
 function Popular({...props}){
   const [state,dispath] = useReducer(reducer,initData);
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
   return(
     <Provider state={state} dispath={dispath}>
       <Grid item {...props}>
@@ -33,7 +33,7 @@ function Popular({...props}){
                       component={(data && !state.isLoading) && NavLink || "button"} 
                       color="info"
                       className={styles.button}
-                      to={`${route.user.product.category}/${data && data.Alias}`}
+                      to={`${getRoute("user","product","category")}/${data && data.Alias}`}
                     >Xem ngay
                     </LoadingButton>
                   </Grid> 

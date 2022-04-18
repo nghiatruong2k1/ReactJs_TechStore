@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom"
 import styles from './styles.module.css';
 
 function LeftNav({...props}){
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
   return(
   <Stack component="ul" 
     direction="row" 
@@ -15,10 +15,10 @@ function LeftNav({...props}){
         <Button component={NavLink} to="/">Trang chủ</Button>
       </Box>
       <Box component="li">
-        <Button component={NavLink} to={route.user.category.index}>Danh mục</Button>
+        <Button component={NavLink} to={getRoute("user","category","index")}>Danh mục</Button>
       </Box>
       <Box component="li">
-        <Button component={NavLink} to={route.user.brand.index}>Thương hiệu</Button>
+        <Button component={NavLink} to={getRoute("user","brand","index")}>Thương hiệu</Button>
       </Box>
       <Box component="li">
         <Button component={NavLink} to="service">Dịch vụ</Button>

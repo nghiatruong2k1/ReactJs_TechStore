@@ -18,7 +18,7 @@ function Categories({...props}){
   const [datas,setDatas] = useState([]);
   const [isFetching,setFetching] = useState(false);
   const location = useLocation();
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
   const Fetch = global.config.useFetch();
   useEffect(function() {
     Fetch.get({
@@ -50,7 +50,7 @@ function Categories({...props}){
         {
           datas.map(function(data,index){
             let isActive = false;
-            let url = route.user.product.category;
+            let url = getRoute("user","product","category");
             if(data){
               url+="/"+data.Alias;
               if(location.pathname.toLowerCase().indexOf(url.toLowerCase()) !== -1){

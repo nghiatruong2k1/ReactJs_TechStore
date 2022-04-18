@@ -1,4 +1,4 @@
-const {useFetch} = require('./CustomHook/Fetch/');
+const {useFetch} = require('./Config/useFetch');
 
 const {convertAlias} = require('./Config/convertAlias');
 const {formatBase64} = require('./Config/formatBase64');
@@ -10,7 +10,6 @@ const {useRoute} = require('./Config/useRoute');
 
 
 const {createContext} = require('react');
-const {createSearchParams} = require('react-router-dom');
 
 const AppContext = createContext({});
 const UserContext = createContext({});
@@ -19,7 +18,7 @@ const Base_Url_API = "https://localhost:44373/";
 const WebsiteName = "TechStore";
 
 function handleSetitle(title){
-	if(title && title != ""){
+	if(title && title !== ""){
 		document.title = this.WebsiteName+" - "+title;
 	}else{
 		document.title = this.WebsiteName;

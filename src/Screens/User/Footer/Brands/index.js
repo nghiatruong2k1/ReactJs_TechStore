@@ -13,7 +13,7 @@ function Brands({...props}){
   const [datas,setDatas] = useState([]);
   const [isLoading,setLoading] = useState(false);
   const Fetch = global.config.useFetch();
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
   useEffect(function() {
     Fetch.get({
       api:"api/brand"
@@ -49,7 +49,7 @@ function Brands({...props}){
                   (data && !isLoading) 
                   && (<ListItemButton 
                     component={NavLink} 
-                    to={route.user.product.category+"/"+data.Alias}
+                    to={getRoute("user","product","category")+"/"+data.Alias}
                   >
                     <ListItemText>{data.Name}</ListItemText>
                   </ListItemButton>)

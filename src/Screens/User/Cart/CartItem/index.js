@@ -1,4 +1,4 @@
-import {memo,useReducer,useContext} from 'react';
+import {memo,useReducer} from 'react';
 import clsx from 'clsx';
 import {
   Stack,
@@ -6,10 +6,7 @@ import {
   Divider,
   CardContent,
   CardActions,
-  Typography,
-  Checkbox
 } from '@mui/material/';
-import {ShoppingCart} from '@mui/icons-material/';
 import styles from './styles.module.css';
 
 import Provider from "./provider";

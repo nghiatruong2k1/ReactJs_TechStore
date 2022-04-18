@@ -1,8 +1,32 @@
+
+
+import {useContext} from "react";
+import DialogResult from "../Components/DialogResult/";
+
 import axios from "axios";
 axios.defaults.withCredentials = true;
 axios.defaults.credentials = "include";
 axios.defaults.xsrfCookieName = "token";
 axios.defaults.xsrfHeaderName = "token";
+
+export const useFetch = function(location){
+  const {loading,toast} = useContext(global.config.context);
+  return {
+    get:function(props){
+      handleGet({...props,location,toast,loading})
+    },post:function(props){
+      handlePost({...props,location,toast,loading})
+    },put:function(props){
+      handlePut({...props,location,toast,loading})
+    },delete:function({title,message,...props}){
+      DialogResult({
+        title,message, 
+        onYes:()=>(handleDelete({...props,location,toast,loading}))
+      });
+    }
+  }
+}
+
 
 async function handleFetch({api,params,promise,method,navigator,loading,toast,location,onStart,onEnd,onThen,onError,timedelay}){
     const url = global.config.Base_Url_API+api;

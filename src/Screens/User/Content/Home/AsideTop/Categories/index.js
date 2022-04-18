@@ -1,25 +1,20 @@
 import {memo,useReducer} from 'react';
-import clsx from 'clsx';
 import {
   Grid,
-  Stack,
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
   ListSubheader,
   Skeleton
 } from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
 import {NavLink} from "react-router-dom";
 
 import {initData,reducer} from './init'
 import Provider from "./provider";
 function Categories({...props}){
   const [state,dispath] = useReducer(reducer,initData);
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
   return(
     <Provider state={state} dispath={dispath}>
       <Grid item {...props}>
@@ -37,7 +32,7 @@ function Categories({...props}){
                 {
                   <ListItemButton 
                     component={(data && !state.isLoading) && NavLink || "button"} 
-                    to={`${route.user.product.category}/${data && data.Alias}`}
+                    to={`${getRoute("user","product","category")}/${data && data.Alias}`}
                   >
                     {
                       (data && !state.isLoading) 

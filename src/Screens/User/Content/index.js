@@ -12,25 +12,25 @@ import ProductsView from "./Product/Products/";
 import DetailView from "./Product/Detail/";
 function Content({...props}){
 
-  const route = global.config.useRoute();
+  const {getRoute} = global.config.useRoute();
 
   return(
     <Box component="section" className={styles.section}  mt={3} >
       <Container maxWidth="xxl" component="main"className={styles.main}>
         <Routes>
           <Route path="/*" element={<HomeContent />} />
-          <Route path={`${route.user.category.index}/*`} 
+          <Route path={`${getRoute("user","category","index")}/*`} 
             element={<ListContent action="category" title="Danh mục" />} />
-          <Route path={`${route.user.brand.index}/*`} 
+          <Route path={`${getRoute("user","brand","index")}/*`} 
             element={<ListContent action="brand" title="Thương hiệu" />} />
 
-          <Route path={`${route.user.product.category}/:alias`} 
+          <Route path={`${getRoute("user","product","category")}/:alias`} 
             element={<ProductsView action="category" />} />
-          <Route path={`${route.user.product.brand}/:alias`} 
+          <Route path={`${getRoute("user","product","brand")}/:alias`} 
             element={<ProductsView action="brand"/>} />
-          <Route path={`${route.user.product.search}/:query`} 
+          <Route path={`${getRoute("user","product","search")}/:query`} 
             element={<ProductsView action="search"/>} />
-          <Route path={`${route.user.product.detail}/:alias`}
+          <Route path={`${getRoute("user","product","detail")}/:alias`}
             element={<DetailView />} />
           }
 
