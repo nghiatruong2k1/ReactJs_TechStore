@@ -1,4 +1,4 @@
-export const convertAlias = (str)=>{
+export const convertAlias =  (str)=>{
 	let newStr = str
 				.toLowerCase()
 				.replace(/\s{1,}/g,"-")

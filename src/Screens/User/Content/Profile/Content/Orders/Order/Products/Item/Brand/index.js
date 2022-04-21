@@ -5,10 +5,10 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {ItemContext} from "../provider";
 function ItemBrand({...props}){
-  const {data} = useContext(ItemContext);
-  if(data){
+  const {data,loading} = useContext(ItemContext);
+  if(!loading){
     return(
-      <Typography>{data.BrandName}</Typography>
+      <Typography>{data && data.BrandName}</Typography>
     )
   }else{
     return(

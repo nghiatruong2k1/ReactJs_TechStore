@@ -7,10 +7,7 @@ const {formatDate} = require('./Config/formatDate');
 const {formatNumber} = require('./Config/formatNumber');
 const {LocalStorage} = require('./Config/LocalStorage');
 const {useRoute} = require('./Config/useRoute');
-
-
 const {createContext} = require('react');
-
 const AppContext = createContext({});
 const UserContext = createContext({});
 const AdminContext = createContext({});

@@ -80,7 +80,7 @@ export const handleGet =async function({...props}){
     const promise = async function(url,params){
       return await axios.get(url,{params})
     };
-    await handleFetch({...props,promise,method:"GET",timedelay:500})
+    await handleFetch({...props,promise,method:"GET",timedelay:1000})
 }
 export const handlePut =async function({...props}){
     const promise =async function(url,params){

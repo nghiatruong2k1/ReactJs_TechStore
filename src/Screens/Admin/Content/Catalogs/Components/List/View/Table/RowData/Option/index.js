@@ -14,10 +14,11 @@ import TrashButton from "./TrashButton/";
 import EditButton from "./EditButton/";
 import DeleteButton from "./DeleteButton/";
 function CellOption({...props}){
-  const {data} = useContext(RowDataContext);
+  const {data,loading} = useContext(RowDataContext);
   return(
     <TableCell
       align="center"
+      disabled={loading}
       style={{width:'max-content',maxWidth:'max-content'}} 
       {...props}
     >

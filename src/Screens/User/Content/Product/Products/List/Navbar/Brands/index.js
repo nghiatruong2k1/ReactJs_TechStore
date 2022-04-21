@@ -59,7 +59,7 @@ function Brands({...props}){
               <ListItem key={index} divider disablePadding> 
                 {
                   <ListItemButton 
-                        component={(Boolean(data) && !isFetching) && NavLink} 
+                        component={(Boolean(data) && !isFetching) && NavLink || "span"} 
                         className={clsx({[styles.active]:isActive})}
                         to={url}
                       >                    

@@ -6,9 +6,9 @@ import styles from './styles.module.css';
 import {Frame,Image} from "../../../../../../../../../../Components/"
 import {ItemContext} from "../provider";
 function ItemImage({...props}){
-  const {data} = useContext(ItemContext);
+  const {data,loading} = useContext(ItemContext);
   return(
-    <Frame square>
+    <Frame square loading={loading}>
       <Image contain src={data && data.ImageUrl}/>
     </Frame>
   )

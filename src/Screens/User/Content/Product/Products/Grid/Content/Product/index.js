@@ -27,13 +27,13 @@ function Product({data,loading,...props}){
     <Grid item py={1} px={1} xs={3}>
       <Card className={styles.card}>
         <CardActions component={Box} px={2} disableSpacing>
-            <Frame square px={3} loading={!Boolean(data) || loading}>
+            <Frame square px={3} loading={loading}>
               <DataBookmask price={data && data.Price} salePrice={data && data.SalePrice}/>
               <Image contain src={data && data.ImageUrl}/>
             </Frame>
          </CardActions>
          <CardContent className={styles.content} component={Box} px={1} py={1}>
-                <DataName loading={!Boolean(data) || loading} name={data && data.Name} alias={data && data.Alias}/>
+                <DataName loading={loading} name={data && data.Name} alias={data && data.Alias}/>
                 <Rating
                   value={data && data.Rating || 0}
                   readOnly
@@ -42,8 +42,8 @@ function Product({data,loading,...props}){
                   max={5}
                   emptyIcon={<Star />}
                 />
-                <DataSalePrice loading={!Boolean(data) || loading} price={data && data.Price} salePrice={data && data.SalePrice}/>
-                <DataPrice loading={!Boolean(data) || loading} price={data && data.Price} salePrice={data && data.SalePrice}/>
+                <DataSalePrice loading={loading} price={data && data.Price} salePrice={data && data.SalePrice}/>
+                <DataPrice loading={loading} price={data && data.Price} salePrice={data && data.SalePrice}/>
           </CardContent>
           <Divider />
           <CardContent component={Box} px={1} py={1}>
@@ -54,8 +54,8 @@ function Product({data,loading,...props}){
                 <small className="tag"> 80 reviews </small>
                 <small className="tag"> Russia </small>
               </Box>
-              <DataAddToCart loading={!Boolean(data) || loading} data={data || {}}/>
-              <DataContact loading={!Boolean(data) || loading} data={data || {}}/>
+              <DataAddToCart loading={loading} data={data || {}}/>
+              <DataContact loading={loading} data={data || {}}/>
             </Stack>
           </CardContent>
        </Card>

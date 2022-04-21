@@ -1,4 +1,4 @@
-export const formatByte=(x)=>{
+export const formatByte =(x)=>{
 		if(typeof(x) != 'number'){
 			x = 0;
 		}

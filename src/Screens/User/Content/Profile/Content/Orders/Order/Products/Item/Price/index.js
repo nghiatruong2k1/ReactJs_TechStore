@@ -5,11 +5,11 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {ItemContext} from "../provider";
 function ItemPrice({...props}){
-  const {data} = useContext(ItemContext);
-  if(data){
+  const {data,loading} = useContext(ItemContext);
+  if(!loading){
     let price = "Liên hệ";
     if(data.Price >0){
-      price = global.config.formatNumber(data.Price,3,0) +"đ";
+      price = global.config.formatNumber(data && data.Price,3,0) +"đ";
     }
     return(
       <Typography>{price}</Typography>

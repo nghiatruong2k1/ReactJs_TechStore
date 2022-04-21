@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 function Navbar({...props}){
   return(
     <Grid container>
-      <ul class="list-inline">
+      <ul className="list-inline">
       </ul>
     </Grid>
   )

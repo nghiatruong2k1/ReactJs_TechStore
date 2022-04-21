@@ -22,20 +22,19 @@ function Item({data,loading,...props}){
           title={
             <Typography
               className="h5"
-              component={ (!loading && Boolean(data)) && NavLink || "span" }
-              to={(!loading && Boolean(data)) 
-                && `${getRoute("user","product","brand")}/${data.Alias}` || "/"
+              component={ !loading && NavLink || "span" }
+              to={!loading  && `${getRoute("user","product","brand")}/${data.Alias}` || "/"
               }
             >
               {
-                (!loading && Boolean(data)) && data.Name 
+                !loading && data.Name 
                 || <Skeleton variant="text" className="skeleton" />
               }
             </Typography>
           }
         />
         <CardContent>
-          <Frame rectangle loading={loading || !Boolean(data)}>
+          <Frame rectangle loading={loading}>
             <Image contain src={data && data.ImageUrl}/>
           </Frame>  
         </CardContent>

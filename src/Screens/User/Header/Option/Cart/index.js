@@ -9,7 +9,7 @@ function Cart({...props}){
   return(
     <div className={styles.option} >
       <Tooltip PopperProps={{sx:{display:{xs:'block', md:'none'}}}} placement="top"title="Giỏ hàng" arrow>
-        <Button component={NavLink} onClick={()=>(cart.handle.open())} to="#" className={styles.button}>
+        <Button onClick={()=>(cart.handle.open())} className={styles.button}>
           <Badge badgeContent={cart.handle.getCount()+""} color="info" max={99}>
             <span className={clsx("fa fa-shopping-cart",styles.icon)}/>
           </Badge>

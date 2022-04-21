@@ -8,18 +8,18 @@ import Provider from "./provider";
 import ViewData from "./ViewData/";
 
 import {ViewContent} from "../../../../Components/";
-function CategoryContent({action,title,...props}){
+function ListContent({controller,action,title,...props}){
   useEffect(function(){
     global.config.setTitleWebsite(title);
   },[title]);
   const [state,dispath] = useReducer(reducer,initData);
   return(
-    <Provider state={state} dispath={dispath} action={action}>
+    <Provider state={state} dispath={dispath} controller={controller} action={action}>
       <Grid container columnSpacing={1} rowSpacing={1}>
         <ViewContent loading={false} length={state.datas.length}>
         {
           state.datas.map(function(data,index){
-            return(<ViewData loading={state.isLoading} data={data} key={index} action={action} />)
+            return(<ViewData loading={!Boolean(data) || state.isLoading} data={data} key={index} controller={controller} />)
           })
         }
         </ViewContent>
@@ -27,4 +27,4 @@ function CategoryContent({action,title,...props}){
     </Provider>
   )
 }
-export default memo(CategoryContent);
+export default memo(ListContent);

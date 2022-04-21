@@ -17,7 +17,9 @@ function Update({controller,children,id,handle,...props}){
     },set:function(key,value){
       dispath({key:'set',payload:{[key]:value}})
     },change:function(key,value){
-      dispath({key:'change',payload:{[key]:value}})
+      if(key){
+        dispath({key:'change',payload:{[key]:value}})
+      }
     },save:function(){
     	handle.save(state.data)
     }

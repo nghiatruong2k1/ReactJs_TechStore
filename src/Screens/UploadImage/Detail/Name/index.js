@@ -10,17 +10,14 @@ function InfoName({left,right,...props}){
   return(
     <Grid container alignItems="center">
       <Grid item {...left}>
-          <Typography>Image Name:</Typography>
+          <Typography>Tên ảnh:</Typography>
       </Grid>
       <Grid item {...right}>
         <TextField
-            required
-            id="outlined-required"
             label=""
-            defaultValue=""
             value={handle.get("name","")}
             onChange={handleChange}
-            placeholder="Image Name"
+            placeholder="Tên:"
             size="small"
             fullWidth
           />

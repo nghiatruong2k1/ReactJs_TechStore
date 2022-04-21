@@ -11,16 +11,19 @@ import Provider from "./provider";
 import ViewItem from "./Item";
 function Products({...props}){
   const [state,dispath] = useReducer(reducer,initData);
-  const {data} = useContext(OrderContext);
+  const {data,loading} = useContext(OrderContext);
   return(
-  <Provider state={state} dispath={dispath} orderId = {data.Id}>
+  <Provider state={state} dispath={dispath} loading={loading} orderId = {data && data.Id}>
     <Stack>
       <List disablePadding>     
           <ViewContent loading={state.isLoading} length={state.datas.length}>
           {
             state.datas.map(function(data,index){
               return(
-                <ViewItem data={data} key={index}/>
+                <ViewItem 
+                  loading={loading || state.isLoading || !Boolean(data)}
+                  data={data} key={index}
+                />
               )
             })
           }

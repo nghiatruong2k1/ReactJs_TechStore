@@ -27,10 +27,10 @@ import CellCheckbox from "./Checkbox/";
 import CellImage from "./Image/";
 import CellText from "./Text/";
 import CellOption from "./Option/";
-function RowData({data,isOld,...props}){
+function RowData({data,loading,isOld,...props}){
   const {displays} = useContext(ListContext);
   return(
-    <Provider data={data}>
+    <Provider data={data} loading={loading}>
       <TableRow className={clsx({[styles.old]:isOld})}>
         <CellCheckbox key={0} className={clsx(styles.cell)}/>
         {

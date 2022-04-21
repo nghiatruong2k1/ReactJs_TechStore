@@ -20,24 +20,24 @@ function Head({...props}){
   return(
     <Stack direction="row" spacing={1} alignItems="center">
       <Typography flex="1" variant="h4">
-        {uploadImage.state.action == "" && "Select image"}
-        {uploadImage.state.action == "add" && "Upload image"}
-        {uploadImage.state.action == "update" && "Update image"}
+        {uploadImage.state.action == "" && "Chọn hình ảnh"}
+        {uploadImage.state.action == "add" && "Cập nhật hình ảnh"}
+        {uploadImage.state.action == "update" && "Thêm hình ảnh"}
       </Typography>
       {
         uploadImage.state.action !== "" 
-        && (<Tooltip title="View images" placement="top">
+        && (<Tooltip title="Danh sách hình ảnh" placement="top">
               <IconButton onClick={(()=>(uploadImage.handle.set("action","")))} color="success">
                 <BurstMode />
               </IconButton>
           </Tooltip>)
-        || (<Tooltip onClick={(()=>(uploadImage.handle.set("action","add")))} title="Upload new image" placement="top">
+        || (<Tooltip title="Thêm hình ảnh" onClick={(()=>(uploadImage.handle.set("action","add")))} placement="top">
             <IconButton color="success">
               <AddPhotoAlternate />
             </IconButton>
         </Tooltip>)
       }
-      <Tooltip title="Close" placement="top">
+      <Tooltip title="Đóng" placement="top">
           <IconButton onClick={handleCancel} color="error">
             <HighlightOff className={styles.close} />
           </IconButton>

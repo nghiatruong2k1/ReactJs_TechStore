@@ -14,6 +14,7 @@ function App() {
   useEffect(function(){
     global.config.setTitleWebsite("");
   },[]);
+  const {getRoute} = global.config.useRoute()
   return (
       <AppProvider>
         <LoadingData />
@@ -21,8 +22,8 @@ function App() {
         <Toasts />
         <Auth />
         <Routes>
-          <Route path="/*" element={<UserPage />} />
-          <Route path="/admin/*" element={<AdminPage />} />
+          <Route path={`${getRoute("user")}/*`} element={<UserPage />} />
+          <Route path={`${getRoute("admin")}*`} element={<AdminPage />} />
         </Routes>
       </AppProvider>
   );

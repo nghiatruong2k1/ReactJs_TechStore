@@ -52,7 +52,14 @@ function MenuAccordion({icon,text,subData,...props}){
                   isActive = true;
                 }
                 return(
-                   <MenuItem active={isActive} icon={isActive && <RadioButtonChecked /> || <RadioButtonUnchecked />} {...data} key={index}/>
+                   <MenuItem 
+                    active={isActive} 
+                    icon={isActive 
+                      && <RadioButtonChecked /> 
+                      || <RadioButtonUnchecked />} 
+                      key={index}
+                      {...data} 
+                    />
                 )
               })
             }

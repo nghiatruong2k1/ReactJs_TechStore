@@ -100,7 +100,7 @@ function Profile({...props}){
                 />
               )}
               <ProfileLink 
-                to={`${getRoute("user","profile","index"}`}
+                to={`${getRoute("user","profile","index")}`}
                 icon={<span className={clsx("fa fa-user")}/>}
                 text={"Tài khoản"}
               />

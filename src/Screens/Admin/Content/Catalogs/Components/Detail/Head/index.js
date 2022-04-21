@@ -16,8 +16,9 @@ import Title from "../../../../Title/";
 import {DetailContext} from "../init";
 function DetailHead({title,...props}){
   const {state,handle,controller} = useContext(DetailContext);
+  const {getRoute} = global.config.useRoute();
   return(
-    <Title text={title} to={"/admin/catalog/"+controller}>
+    <Title text={title} to={getRoute("admin",controller,"index")}>
         <Tooltip title="Save" placement="top">
           <IconButton color="info"
             onClick={()=>{handle.save();}}

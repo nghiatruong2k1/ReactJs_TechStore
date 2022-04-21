@@ -1,36 +1,49 @@
-import {memo,useContext} from 'react';
+import {memo,useContext,useMemo} from 'react';
 import clsx from 'clsx';
-import {Grid,List,ListItem,ListItemText} from '@mui/material/';
+import {Grid,List,ListItem,ListItemText,Skeleton} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {OrderContext} from "../provider";
-function getColorStatus(id){
-  if(id == 1){
-    return "#9ea7ad"
-  }else if(id == 2){
-    return "#2dccff"
-  }else if(id == 3){
-    return "#56f000"
-  }else if(id == 4){
-    return "#ff3838"
-  }
-}
+
 function Detail({...props}){
-  const {data} = useContext(OrderContext);
+  const {data,loading} = useContext(OrderContext);
+
+  const [sale,price] = useMemo(function(){
+    if(data){
+      return [data.VoucherSale || 0,data.TotalPrice || 0];
+    }
+    return [0,0]
+  },[data])
+
   return(
-    <Grid item xs={4}>
+    <Grid item xs={4} {...props}>
       <List>
         <ListItem disablePadding>
+          <ListItemText>Giá:</ListItemText>
+          <ListItemText align="right">
+            {
+              !loading ? `${global.config.formatNumber(price,3,0)} đ`
+              : <Skeleton className="skeleton"/>
+            }
+        </ListItemText>
+        </ListItem>
+        <ListItem disablePadding>
           <ListItemText>Giảm giá:</ListItemText>
-          <ListItemText align="right">0%</ListItemText>
+          <ListItemText align="right">
+            {
+              !loading ? `${global.config.formatNumber(price*sale/100,3,0)} đ`
+              : <Skeleton className="skeleton"/>
+              }
+          </ListItemText>
         </ListItem>
         <ListItem disablePadding>
           <ListItemText>Tổng tiền:</ListItemText>
-          <ListItemText align="right">{global.config.formatNumber(data.TotalPrice,3,0)} đ</ListItemText>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemText>Trạng thái:</ListItemText>
-          <ListItemText align="right" sx={{color:getColorStatus(data.StatusId)}}>{data.StatusName}</ListItemText>
+          <ListItemText align="right">
+            {
+              !loading ? `${global.config.formatNumber(price - price*sale/100,3,0)} đ`
+              : <Skeleton className="skeleton"/>
+            }
+          </ListItemText>
         </ListItem>
       </List>
     </Grid>

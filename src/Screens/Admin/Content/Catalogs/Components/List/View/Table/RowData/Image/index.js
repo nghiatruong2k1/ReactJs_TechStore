@@ -5,14 +5,14 @@ import {Frame,Image} from "../../../../../../../../../../Components/";
 import {RowDataContext} from '../provider';
 import styles from './styles.module.css';
 function CellImage({display,...props}){
-  const {data} = useContext(RowDataContext);
+  const {data,loading} = useContext(RowDataContext);
   return(
     <TableCell
        align="center"
        style={{minWidth:'15em'}} 
        {...props}
     >
-       <Frame rectangle>
+       <Frame rectangle loading={loading}>
          <Image contain src={data && data[display.key]}/>
        </Frame>
     </TableCell>

@@ -72,6 +72,7 @@ function CartBody(){
 }
 function CartFooter(){
   const {cart} = useContext(global.config.UserContext);
+  const {getRoute} = global.config.useRoute();
   return(
     <CardActions className={styles.footer}>
       <Button 
@@ -79,7 +80,7 @@ function CartFooter(){
           startIcon={<ShoppingCartCheckout />}
           component={NavLink}
           onClick={()=>(cart.handle.close())}
-          to="/cart"
+          to={getRoute("user","cart","index")}
       >Xem chi tiết giỏ hàng
       </Button>
     </CardActions>

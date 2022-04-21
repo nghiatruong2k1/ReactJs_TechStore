@@ -5,19 +5,20 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {RowDataContext} from '../provider';
 function CellText({display,...props}){
-  const {data} = useContext(RowDataContext);
+  const {data,loading} = useContext(RowDataContext);
   return(
     <TableCell
           align="center"
           style={{minWidth:'10em'}}
           {...props}
       >
-      {data ?
+      {!loading ?
         (
           display && display.format 
-          && display.format(data[display.key]) || data[display.key]
+          && display.format(data && data[display.key]) || data && data[display.key]
         ) 
-        : <Skeleton variant="text" width="100%" />}
+        : <Skeleton variant="text" className="skeleton" />
+      }
     </TableCell>
   )
 }

@@ -1,8 +1,10 @@
 import {memo,useContext,useRef} from 'react';
-import {Grid,TextField,Typography} from '@mui/material/';
+import {Grid,FormControl,Typography} from '@mui/material/';
 import {DetailContext} from "../init";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+import "./index.css"
 function InputEditter({left,right,feild,label,placeholder,defaultValue,...props}){
   const {state,handle} = useContext(DetailContext);
   const editorRef = useRef(null);
@@ -18,22 +20,21 @@ function InputEditter({left,right,feild,label,placeholder,defaultValue,...props}
       </Grid>
       <Grid item {...right}>
         <CKEditor
-          config={{
-            language:"vi",
-          }}
-          editor= {ClassicEditor}
-          data={state.data[feild] ?? defaultValue ?? ""}
-          onReady={ editor => {
-            console.log(editor)
-          } }
-          onChange={ ( event, editor ) => {
-              handle.change(feild,editor.getData());
-          } }
-          onBlur={ ( event, editor ) => {
-          } }
-          onFocus={ ( event, editor ) => {
-          } }
-        />
+              config={{
+                language:"vi",
+              }}
+              editor= {ClassicEditor}
+              data={state.data[feild] ?? defaultValue ?? ""}
+              onReady={ editor => {
+              } }
+              onChange={ ( event, editor ) => {
+                  handle.change(feild,editor.getData());
+              } }
+              onBlur={ ( event, editor ) => {
+              } }
+              onFocus={ ( event, editor ) => {
+              } }
+            />      
       </Grid>
     </Grid>
   )

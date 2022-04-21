@@ -6,7 +6,7 @@ function DataName({loading,name,alias,...props}){
   const {getRoute} = global.config.useRoute();
   return(
       <Typography 
-          component={!loading && NavLink} 
+          component={!loading && NavLink || "span"} 
           className={styles.name}
           to={`${getRoute("user","product","detail")}/${alias}`}
       >

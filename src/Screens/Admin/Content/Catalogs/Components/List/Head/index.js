@@ -17,11 +17,12 @@ import Title from "../../../../Title/";
 import {ListContext} from "../provider";
 function Head({...props}){
   const {title,controller} = useContext(ListContext);
+  const {getRoute} = global.config.useRoute();
   return(
     <>
       <Title text={title}>
         <Tooltip title={"Thêm mới"} placement="top">
-          <IconButton component={NavLink} to={"/admin/catalog/"+controller+"/add"} color="info">
+          <IconButton component={NavLink} to={getRoute("admin",controller,"add")} color="info">
             <AddCircleOutlineRounded />
           </IconButton>
         </Tooltip>

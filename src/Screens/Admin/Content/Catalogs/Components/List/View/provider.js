@@ -12,7 +12,7 @@ function ViewProvider({state,dispath,displays,children,...props}){
         limit:state.view,
         offset:(state.page - 1) * state.view
       },onThen:(result => {
-          handle.set("datas",result.data);
+          handle.set("datas",result.data || []);
       }),onError:(error=> {
           handle.set("datas",[])
       }),onStart,onEnd
@@ -48,6 +48,7 @@ function ViewProvider({state,dispath,displays,children,...props}){
   useEffect(function(){
     handleGetData({
       onStart:()=>{
+          handle.set("datas",Array(state.view || 1).fill(undefined));
           handle.set("isLoading",true)
       },onEnd:()=>{
           handle.set("isLoading",false)

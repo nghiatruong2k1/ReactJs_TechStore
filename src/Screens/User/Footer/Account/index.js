@@ -1,32 +1,17 @@
-import {memo} from 'react';
-import {Grid
-  ,List
-  ,ListSubheader
-  ,ListItem
-  ,ListItemButton
-  ,ListItemText
-  ,ListItemIcon
-} from '@mui/material/';
-import {NavLink} from "react-router-dom"
-function Brands({...props}){
-  return(
-    <Grid item {...props}>
-      <List 
-        disablePadding
-        subheader={
-          <ListSubheader disableGutters disableSticky component="h6">
-            Account
-          </ListSubheader>
-        }
-      >
-        <ListItem disablePadding> 
-          <ListItemButton component={NavLink} to="/">
-            <ListItemIcon></ListItemIcon>
-            <ListItemText></ListItemText> 
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </Grid>
-  )
+
+function Social(){
+  return [
+    [{
+        icon:(<i className="fas fa-user"></i>)
+        ,text:"Trực tuyến:"
+      },{
+        icon:(<i className="fas fa-user"></i>)
+        ,text:"Khách hàng:"
+      },{
+        icon:(<i className="fas fa-user"></i>)
+        ,text:"Tổng:"
+      }]
+  ]
+      
 }
-export default memo(Brands);
+export default Social;

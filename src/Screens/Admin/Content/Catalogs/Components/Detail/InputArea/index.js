@@ -1,7 +1,7 @@
 import {memo,useContext} from 'react';
 import {Grid,TextField,Typography} from '@mui/material/';
 import {DetailContext} from "../init";
-function InputArea({left,right,feild,label,placeholder,defaultValue,...props}){
+function InputArea({left,right,feild,label,placeholder,defaultValue,TextFieldProps,...props}){
   const {state,handle} = useContext(DetailContext);
   function handleChange(event){
       handle.change(feild,event.target.value);
@@ -13,8 +13,6 @@ function InputArea({left,right,feild,label,placeholder,defaultValue,...props}){
       </Grid>
       <Grid item {...right}>
         <TextField
-          required
-          id="outlined-required"
           label=""
           value={state.data[feild] ??  ""}
           onChange={handleChange}
@@ -23,6 +21,7 @@ function InputArea({left,right,feild,label,placeholder,defaultValue,...props}){
           multiline
           rows={5}
           fullWidth
+          {...TextFieldProps}
         />
       </Grid>
     </Grid>

@@ -9,6 +9,7 @@ import {
 } from '@mui/material/';
 import styles from './styles.module.css';
 
+import {ViewContent} from "../../../../../../../../Components/"
 import {ViewContext} from '../provider';
 
 import RowTittle from "./RowTittle/";
@@ -16,27 +17,27 @@ import RowData from "./RowData/";
 import RowEmpty from "./RowEmpty/";
 function ViewTable({...props}){
   const {state,titles} = useContext(ViewContext);
-
   return(
     <TableContainer className={clsx(styles.container)}>
       <Table stickyHeader className={styles.table}> 
         <TableHead>
             <RowTittle />
         </TableHead>
-        <TableBody>   
-          {state.isLoading  && <RowData />
-            || (
-            (state.total > 0) 
-            && state.datas.map(function(data,index){
+        <TableBody> 
+          <ViewContent 
+            loading={false} 
+            length={state.datas.length}
+            empty={<RowEmpty />}
+          >
+            {
+              state.datas.map(function(data,index){
                   let isOld = (index % 2) != 0;
                   return(
-                   <RowData isOld={isOld} data={data} key={index}/>
+                   <RowData isOld={isOld} loading={!Boolean(data) || state.isLoading} data={data} key={index}/>
                   )
               })
-            || <RowEmpty />
-            )
-              
-          }
+            }
+          </ViewContent> 
         </TableBody>
       </Table>
     </TableContainer>

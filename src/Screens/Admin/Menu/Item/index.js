@@ -17,7 +17,7 @@ function MenuItem({icon,active,text,to,...props}){
       >
         <ListItemButton 
           component={NavLink}
-          to={`/admin/${to}`}
+          to={to || "/"}
           className={clsx(styles.button,{[styles.active]:active})}
         >
           <ListItemIcon className={styles.icon}>{icon}</ListItemIcon>

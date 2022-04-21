@@ -19,7 +19,7 @@ function Content({...props}){
           <ViewContent loading={false} length={state.datas.length}>
           {
             state.datas.map(function(data,index){
-              return (<ContentProduct loading={state.isLoading} data={data} key={index}/>)
+              return (<ContentProduct loading={!Boolean(data) || state.isLoading} data={data} key={index}/>)
             }) 
 
           }

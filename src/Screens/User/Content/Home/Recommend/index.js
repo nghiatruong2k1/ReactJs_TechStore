@@ -18,7 +18,7 @@ function Recommend({...props}){
           <ViewContent loading = {false} length = {state.datas.length}>  
             {
               state.datas.map(function(data,index){
-                return ( <RecommendProduct loading={state.isLoading} data={data} key={index}/>)
+                return ( <RecommendProduct loading={state.isLoading || !Boolean(data)} data={data} key={index}/>)
               })
             }
           </ViewContent>

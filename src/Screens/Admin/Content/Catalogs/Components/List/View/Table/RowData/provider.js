@@ -1,8 +1,8 @@
 import {memo,createContext,useContext,useState} from 'react';
 export const RowDataContext = createContext();
-function RowDataProvider({data,children,...props}){
+function RowDataProvider({data,loading,children,...props}){
 	return(
-		<RowDataContext.Provider value={{data}}>
+		<RowDataContext.Provider value={{data,loading}}>
 			{children}
 		</RowDataContext.Provider>
 	)

@@ -15,7 +15,7 @@ function AddProvider({children,...props}){
 	}
 	return(
 		<DetailDataContext.Provider value={{
-			data:{...data},handle,setData
+			data,handle,setData
 		}}>
 			{children}
 		</DetailDataContext.Provider>

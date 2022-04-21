@@ -26,7 +26,7 @@ function Brands({...props}){
                 state.datas.map(function(data,index){
                   return ( 
                     <BrandsItem 
-                      loading={state.isLoading} 
+                      loading={state.isLoading || !Boolean(data)} 
                       data={data} 
                       key={index}
                       xs={3}

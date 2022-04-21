@@ -11,13 +11,14 @@ import {NavLink} from "react-router-dom"
 function EditButton({...props}){
   const {controller} = useContext(ListContext);
   const {data} = useContext(RowDataContext);
+  const {getRoute} = global.config.useRoute();
   return(
     <Tooltip 
           title="Cập nhật" 
           placement="top"
         >
             <IconButton 
-              component={NavLink} to={"/admin/catalog/"+controller+"/update/"+data.Id}
+              component={NavLink} to={getRoute("admin",controller,"update")+"/"+data.Id}
               variant="outlined"
             >
                 <Edit />

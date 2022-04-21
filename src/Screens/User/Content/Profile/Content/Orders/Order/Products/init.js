@@ -1,5 +1,5 @@
 export const initData = {
-	datas:[],
+	datas:Array(3).fill(undefined),
 	total:0,
 	isLoading:false
 };

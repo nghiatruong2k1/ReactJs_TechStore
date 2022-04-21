@@ -35,6 +35,7 @@ function ListProvider({state,dispath,children,...props}){
     },get:function(){
       handleGetData({
         onStart:function(){
+          handle.set("datas",Array(state.view ?? 1).fill(undefined));
           dispath({key:'set',payload:{isLoading:true}})
         },onEnd:function(){
           dispath({key:'set',payload:{isLoading:false}})

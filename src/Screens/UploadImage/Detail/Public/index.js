@@ -12,7 +12,7 @@ function InfoPublic({left,right,...props}){
         <Switch value={true} checked={handle.get("isPublic")} onChange={handleChange} />
       </Grid>
       <Grid item {...right}>
-        <Typography>Is public</Typography>
+        <Typography>Công khai</Typography>
       </Grid>
     </Grid>
   )

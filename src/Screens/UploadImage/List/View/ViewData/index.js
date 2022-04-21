@@ -6,32 +6,23 @@ import {Frame,Image} from "../../../../../Components/";
 import styles from './styles.module.css';
 
 import {ListContext} from "../../provider";
-function ViewItem({...props}){
-  const {state} = useContext(ListContext);
+function ViewItem({data,loading,...props}){
   const {uploadImage} = useContext(global.config.context);
-  function handleClick(data){
-    uploadImage.handle.select(data)
+  function handleClick(){
+    data && uploadImage.handle.select(data)
   }
-  return(
-  <>
-  {
-    state.datas.map((data,index)=>{
-      const isActive = uploadImage.state.select.Id == data.Id;
-      return (    
-        <Grid key={index} item xs={2}{...props}>
-          <Card onClick={()=>(handleClick(data))} 
-            className={clsx({[styles.active]:isActive})}
-          >
-            <Frame square>
-              <Image contain src={data && data.Url}/>
-              <Radio className={styles.radio} checked={isActive}/>
-            </Frame>
-          </Card>
-        </Grid>
-      )
-    })
-  }
-  </>
+  const isActive = data && (uploadImage.state.select.Id == data.Id);
+  return (    
+    <Grid item xs={2}{...props}>
+      <Card  
+        className={clsx({[styles.active]:isActive})}
+      >
+        <Frame square loading={loading} p={1}>
+          <Image contain src={data && data.Url}/>
+          <Radio onClick={handleClick} className={styles.radio} checked={isActive ?? false}/>
+        </Frame>
+      </Card>
+    </Grid>
   )
 }
 export default memo(ViewItem);

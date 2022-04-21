@@ -8,6 +8,7 @@ import Content from "./Content/";
 import Menu from "./Menu/";
 import Logo from "./Logo/";
 import Footer from "./Footer/";
+import Tooldata from "./Tooldata/";
 function AdminPage({...props}){
   return(
     <Container component="section" className={styles.container} maxWidth="false" disableGutters>
@@ -21,6 +22,7 @@ function AdminPage({...props}){
             <Header />
             <Content />
             <Footer />
+            <Tooldata />
           </Stack>
         </Grid>
       </Grid>

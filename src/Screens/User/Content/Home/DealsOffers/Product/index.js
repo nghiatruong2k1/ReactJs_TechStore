@@ -25,14 +25,14 @@ function Product({data,loading,...props}){
     <Box className={"col-6 col-sm-4 col-lg-3 col-xxl-2"} p={1}>
       <Card style={{height:'100%'}}>
         <CardActions>
-          <Frame square loading={!Boolean(data) || loading}>
+          <Frame square loading={loading}>
             <DataBookmask price={data && data.Price} salePrice={data && data.SalePrice}/>
             <Image contain src={data && data.ImageUrl}/>
           </Frame>
         </CardActions>
         <Divider />
         <CardContent align="center" >
-            <DataName loading={!Boolean(data) || loading} name={data && data.Name} alias={data && data.Alias}/>
+            <DataName loading={loading} name={data && data.Name} alias={data && data.Alias}/>
             <Rating
               value={data && data.Rating || 0}
               readOnly

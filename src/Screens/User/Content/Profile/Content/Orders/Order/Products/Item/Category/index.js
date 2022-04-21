@@ -5,10 +5,10 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {ItemContext} from "../provider";
 function ItemCategory({...props}){
-  const {data} = useContext(ItemContext);
-  if(data){
+  const {data,loading} = useContext(ItemContext);
+  if(!loading){
     return(
-      <Typography>{data.CategoryName}</Typography>
+      <Typography>{data && data.CategoryName}</Typography>
     )
   }else{
     return(

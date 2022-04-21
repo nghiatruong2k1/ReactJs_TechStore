@@ -7,11 +7,12 @@ import {} from '@mui/icons-material/';
 import styles from '../styles.module.css';
 function Message({...props}){
   const [cookies] = useCookies();
+  const {getRoute} = global.config.useRoute();
   if(Boolean(cookies['token'])){
     return(
         <div className={styles.option}>
             <Tooltip PopperProps={{sx:{display:{xs:'block', md:'none'}}}} placement="top"title="Thông báo"arrow>
-              <Button component={NavLink} to="/" className={styles.button}>
+              <Button component={NavLink} to={getRoute("user","profile","message")} className={styles.button}>
                 <Badge badgeContent="0" color="info" max={99}>
                   <span className={clsx("fa fa-comment-dots",styles.icon)}/>
                 </Badge>

@@ -1,49 +1,131 @@
 import {useMemo} from "react";
 import { createSearchParams } from "react-router-dom";
-export const useRoute = function(){
-	return useMemo(function(){
-		const routes = {
-			user:{
-				product:{
-					detail:"/chi-tiet-san-pham",
-					category:"/danh-muc-san-pham",
-					brand:"/thuong-hieu-san-pham",
-					search:"/tim-kiem-san-pham"
-				},
-				category:{
-					index:"/danh-sach-danh-muc",
-					search:"/tim-kiem-danh-muc"
-				},
-				brand:{
-					index:"/danh-sach-thuong-hieu",
-					search:"/tim-kiem-thuong-hieu"
-				},
-				profile:{
-					index:"/tai-khoan",
-					order:"/don-hang",
-					setting:"/tuy-chon",
-				}
-			},admin:{
-				dashboard:{
-					index:"/bang-quan-tri"
-				}
-			}
-		};
-		function getRoute(area,controller,action,params,feild){
-			let search = "";
-			let url = "";
+class Controller {
+  constructor(name,action) {
+    this.name = name;
+    this.action = action;
+  }
+}
+class Route {
+  constructor(name,controller) {
+    this.name = name;
+    this.controller = controller;
+  }
+}
+const user = new Route("",{
+	product:new Controller("",{
+		index:"",
+		detail:"chi-tiet-san-pham",
+		category:"danh-muc-san-pham",
+		brand:"thuong-hieu-san-pham",
+		search:"tim-kiem-san-pham"
+	}),category:new Controller("",{
+		index:"danh-sach-danh-muc",
+		search:"tim-kiem-danh-muc"
+	}),brand:new Controller("",{
+		index:"danh-sach-thuong-hieu",
+		search:"tim-kiem-thuong-hieu"
+	}),profile:new Controller("tai-khoan",{
+		index:"thong-tin",
+		orders:"don-hang",
+		settings:"tuy-chon",
+		message:"thong-bao"
+	}),cart:new Controller("gio-hang",{
+		index:""
+	})
+});
+
+const admin = new Route("trang-quan-tri",{
+	dashboard:new Controller("",{
+		index:""
+	}),product:new Controller("san-pham",{
+		index:"danh-sach",
+		add:"them-san-pham",
+		update:"cap-nhat-san-pham"
+	}),category:new Controller("danh-muc",{
+		index:"danh-sach",
+		add:"them-danh-muc",
+		update:"cap-nhat-danh-muc"
+	}),brand:new Controller("thuong-hieu",{
+		index:"danh-sach",
+		add:"them-thuong-hieu",
+		update:"cap-nhat-thuong-hieu"
+	})
+});
+
+const routes = {
+	user,admin
+};
+
+function getRoute(area,controller,action,params){
+			let search;
 			if(params){
-				search = "?"+createSearchParams(params);
+				search = createSearchParams(params);
 			}
-			if(routes[area]){
-				if(routes[area][controller]){
-					if(routes[area][controller][action]){
-						return `${routes[area][controller][action]}${search}`
+			if(area !== undefined){
+				let _area = routes[area];
+				if(_area!= undefined){
+					area = _area.name;
+					if(controller !== undefined){
+						let _controller = _area.controller[controller]
+						if(_controller){
+							controller = _controller.name
+							if(action!= undefined){
+								if(_controller.action[action]){
+									action = _controller.action[action];
+								}else if(_controller.action.index){
+									action = _controller.action.index;
+								}
+							}
+						}
 					}
 				}
 			}
-			return `${area && "/"+area || ""}${controller && "/"+controller || ""}${action && "/"+action || ""}${search}`
+			return `${area && "/"+area || ""}${controller && "/"+controller || ""}${action && "/"+action || ""}${search && "?"+search || ""}`;
 		}
-		return {routes,getRoute}
+function getAreaName(area){
+	if(area !== undefined){
+		let _area = routes[area];
+		if(_area != undefined){
+			area = _area.name;
+		}
+	}
+	return area;
+}
+function getControllerName(area,controller){
+	if(area !== undefined){
+		let _area = routes[area];
+		if(_area != undefined){
+			area = _area.name;
+			if(controller !== undefined){
+				let _controller = _area.controller[controller]
+				if(_controller){
+					return _controller.name
+					
+				}
+			}
+		}
+	}
+	return controller;
+}
+function getActionName(area,controller,action){
+	if(area !== undefined){
+		let _area = routes[area];
+		if(_area != undefined){
+			area = _area.name;
+			if(controller !== undefined){
+				let _controller = _area.controller[controller]
+				if(_controller){
+					return _controller.action[action]
+					
+				}
+			}
+		}
+	}
+	return controller;
+}
+export const useRoute = function(){
+	return useMemo(function(){	
+		return {routes,getRoute,getControllerName,getActionName}
 	},[])
 }

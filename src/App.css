@@ -82,6 +82,9 @@ small, .small{
   align-items: center;
 	color: inherit !important;
 }
+[class*="MuiInput"][readonly]{
+  background-color: rgba(0, 0, 0, 0.01)!important;
+}
 [class*="MuiListItemButton-root"]{
 	padding: 0.2em 0.5em !important;
 }

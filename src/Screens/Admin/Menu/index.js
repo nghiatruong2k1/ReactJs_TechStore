@@ -1,4 +1,4 @@
-import {memo} from 'react';
+import {memo,useMemo} from 'react';
 import clsx from 'clsx';
 import {
   Stack,
@@ -20,19 +20,22 @@ import styles from './styles.module.css';
 import MenuItem from "./Item/";
 import MenuAccordion from "./Accordion/";
 function Menu({...props}){
-  const Catalogs = [{
-    text:"Sản phẩm",
-    to:"catalog/product"
-  },{
-    text:"Danh mục",
-    to:"catalog/category"
-  },{
-    text:"Thương hiệu",
-    to:"catalog/brand"
-  },{
-    text:"Hình ảnh",
-    to:"catalog/image"
-  }];
+  const {getRoute} = global.config.useRoute();
+  const Catalogs = useMemo(function(){
+    return[{
+      text:"Sản phẩm",
+      to:getRoute("admin","product","index")
+    },{
+      text:"Danh mục",
+      to:getRoute("admin","category","index")
+    },{
+      text:"Thương hiệu",
+      to:getRoute("admin","brand","index")
+    },{
+      text:"Hình ảnh",
+      to:getRoute("admin","image","index")
+    }]
+  },[]);
   const Sales = [{
     text:"Orders",
     to:"sale/orders"

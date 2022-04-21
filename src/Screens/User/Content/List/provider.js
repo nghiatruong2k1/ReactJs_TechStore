@@ -1,6 +1,6 @@
 import {memo,createContext,useEffect} from 'react';
 export const ListContext = createContext({});
-function ListProvider({state,dispath,action,children,...props}){
+function ListProvider({state,dispath,controller,action,children,...props}){
 	const handle = {
 		set:(key,value)=>{
 			dispath({key:'set',payload:{[key]:value}})
@@ -9,7 +9,7 @@ function ListProvider({state,dispath,action,children,...props}){
   	const Fetch = global.config.useFetch();
 	useEffect(function() {
 	    Fetch.get({
-	        api:"api/"+action
+	        api:"api/"+controller
 	        ,onThen:(result => {
 	            handle.set("datas",result.data ?? []);
 	        }),onError:(error=> {
@@ -21,10 +21,10 @@ function ListProvider({state,dispath,action,children,...props}){
 	        	handle.set("isLoading",false)
 	        })
 	    })
-	},[action])
+	},[controller])
 	return(
 		<ListContext.Provider value={{
-			state,handle,action
+			state,handle,controller
 		}}>
 			{children}
 		</ListContext.Provider>

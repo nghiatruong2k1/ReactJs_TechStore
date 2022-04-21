@@ -6,13 +6,14 @@ import styles from './styles.module.css';
 import {NavLink} from "react-router-dom";
 import {ItemContext} from "../provider";
 function ItemName({...props}){
-  const {data} = useContext(ItemContext);
-  if(data){
+  const {getRoute} = global.config.useRoute();
+  const {data,loading} = useContext(ItemContext);
+  if(!loading){
     return(
       <Typography component={NavLink} 
-        to={`/product/detail/${data.Id}`} 
+        to={`${getRoute("user","product","detail")}/${data && data.Alias}`} 
       >
-        {data.Name ?? "Đang cập nhật"}
+        {data && data.Name || "Đang cập nhật"}
       </Typography>
     )
   }else{

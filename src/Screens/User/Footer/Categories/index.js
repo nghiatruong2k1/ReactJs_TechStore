@@ -1,66 +1,35 @@
-import {memo,useState,useEffect} from 'react';
-import {
-  Grid,
-  List,
-  ListSubheader,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Skeleton
-} from '@mui/material/';
-import {NavLink} from "react-router-dom"
-function Categories({...props}){
+import {useState,useEffect} from 'react';
+function Categories(){
   const [datas,setDatas] = useState([]);
-  const [isFetching,setFetching] = useState(false);
+  const [isLoading,setLoading] = useState(false);
   const Fetch = global.config.useFetch();
   const {getRoute} = global.config.useRoute();
   useEffect(function() {
     Fetch.get({
-          api:"api/category"
-          ,onStart:(()=>{
-            setDatas(Array(5).fill(undefined));
-            setFetching(true);
-          })
-          ,onEnd:(()=>{
-            setFetching(false);
-          })
-          ,onThen:(result => {
-              setDatas(result.data ?? []);
-          }),onError:(error=> {
-              setDatas([])
-          })
-      })
+        api:"api/category"
+        ,onStart:(()=>{
+          setDatas(Array(5).fill(undefined));
+          setLoading(true);
+        })
+        ,onEnd:(()=>{
+          setLoading(false);
+        })
+        ,onThen:(result => {
+          if(result.data){
+            setDatas(result.data.map(function(data,index){
+              return {
+                text:data.Name,
+                to:`${getRoute("user","product","category")}/${data.Alias}`
+              }
+            }));
+          }else{
+            setDatas([]);
+          }
+        }),onError:(error=> {
+            setDatas([])
+        })
+    })
   },[])
-  return(
-    <Grid item {...props}>
-      <List 
-        disablePadding
-        subheader={
-          <ListSubheader disableGutters disableSticky component="h6">
-            Danh mục
-          </ListSubheader>
-        }
-      >
-        {
-          datas.map(function(data,index){
-            return(
-              <ListItem key={index} disablePadding> 
-                {
-                  (data && !isFetching) 
-                  && (<ListItemButton 
-                    component={NavLink} 
-                    to={getRoute("user","product","category")+"/"+data.Alias}
-                  >
-                    <ListItemText>{data.Name}</ListItemText>
-                  </ListItemButton>)
-                  || <Skeleton variant="text" height = '2em' width="100%"/>
-                }
-              </ListItem>
-            )
-          })
-        }
-      </List>
-    </Grid>
-  )
+  return [datas,isLoading]
 }
-export default memo(Categories);
+export default Categories;

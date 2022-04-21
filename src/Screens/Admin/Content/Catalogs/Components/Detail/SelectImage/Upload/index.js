@@ -4,7 +4,7 @@ import {Stack,Button} from '@mui/material/';
 import {CloudUpload} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {DetailContext} from '../../init';
-function InfoInput({...props}){
+function PropsUpload(){
   const {state,handle} = useContext(DetailContext);
   const {uploadImage} = useContext(global.config.context);
   function handleSubmit(result){
@@ -18,17 +18,6 @@ function InfoInput({...props}){
       onSubmit:handleSubmit
     })
   }
-  return(
-    <Stack direction="row">
-      <Button 
-        variant="contained" 
-        onClick = {handleClick}
-        className={styles.button} 
-        startIcon={<CloudUpload className={styles.icon}/>}
-      >
-        Upload Image
-      </Button>
-    </Stack>
-  )
+  return {onClick:handleClick}
 }
-export default memo(InfoInput);
+export default PropsUpload;

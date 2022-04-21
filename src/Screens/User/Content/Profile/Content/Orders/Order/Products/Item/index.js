@@ -9,10 +9,12 @@ import ItemName from "./Name/";
 import ItemPrice from "./Price/";
 import ItemCategory from "./Category/";
 import ItemBrand from "./Brand/";
+import ItemStatus from "./Status/";
+
 import Provider from "./provider";
-function ViewItem({data,...props}){
+function ViewItem({data,loading,...props}){
   return(
-  <Provider data={data}>
+  <Provider data={data} loading={loading}>
     <ListItem divider spacing={1}>
       <Grid container spacing={2}>
         <Grid item xs={1}>
@@ -27,6 +29,7 @@ function ViewItem({data,...props}){
           <ItemBrand />
         </Grid>
         <Grid item xs={4}>
+          <ItemStatus />
         </Grid>
       </Grid>
     </ListItem>

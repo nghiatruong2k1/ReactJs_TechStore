@@ -10,6 +10,7 @@ function OrderProductsProvider({state,dispath,orderId,children,...props}){
 	        }),onError:(error=> {
 	            dispath({key:'set',payload:{datas:[]}})
 	        }),onStart:(()=>{
+	        	dispath({key:'set',payload:{datas:Array(3).fill(undefined)}})
 	        	dispath({key:'set',payload:{isLoading:true}})
 	        }),onEnd:(()=>{
 	        	dispath({key:'set',payload:{isLoading:false}})
