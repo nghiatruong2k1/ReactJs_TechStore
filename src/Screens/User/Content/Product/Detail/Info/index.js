@@ -22,7 +22,7 @@ function DetailInfo({...props}){
         <InfoName />
         <Stack direction="row" spacing={2} alignItems="center">
           <Rating
-            value={state.data.rating ?? 0}
+            value={state.data && state.data.rating || 0}
             readOnly
             size="small"
             precision={0.1}

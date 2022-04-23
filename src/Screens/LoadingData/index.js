@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {memo,useContext} from 'react';
 import ReactLoading from "react-loading";
 import {Button} from '@mui/material/';
 import styles from './styles.module.css';
@@ -15,4 +15,4 @@ function LoadingData({...props}){
     return <></>
   }
 }
-export default LoadingData;
+export default memo(LoadingData);

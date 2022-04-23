@@ -3,10 +3,10 @@ import clsx from 'clsx';
 import {Grid,Stack,Typography} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-function ViewEmpty({children,...props}){
+function ViewEmpty({children,component,childrenComponent,...props}){
   return(
-    <Grid item xs={12}>
-      <Stack direction="row" alignItems="center"justifyContent="center" px={2} py={3}>
+    <Grid item xs={12} component={component|| "div"}>
+      <Stack component={childrenComponent || "div"} width="100%" direction="row" alignItems="center"justifyContent="center" px={2} py={3}>
         <Typography component="h3" className={styles.text}>
           {children || "Không tìm thấy nội dung"}
         </Typography>

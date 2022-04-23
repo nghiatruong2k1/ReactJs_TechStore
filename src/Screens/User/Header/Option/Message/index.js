@@ -1,29 +1,26 @@
-import {memo,useContext} from 'react';
+import {memo,useContext,useMemo} from 'react';
 import {useCookies} from 'react-cookie'
 import clsx from 'clsx';
-import {Tooltip,Badge,Button} from '@mui/material/';
-import {NavLink} from "react-router-dom";
-import {} from '@mui/icons-material/';
+import {Badge} from '@mui/material/';
 import styles from '../styles.module.css';
-function Message({...props}){
+import {OptionButton} from "../index";
+function Message(){
   const [cookies] = useCookies();
   const {getRoute} = global.config.useRoute();
-  if(Boolean(cookies['token'])){
-    return(
-        <div className={styles.option}>
-            <Tooltip PopperProps={{sx:{display:{xs:'block', md:'none'}}}} placement="top"title="Thông báo"arrow>
-              <Button component={NavLink} to={getRoute("user","profile","message")} className={styles.button}>
-                <Badge badgeContent="0" color="info" max={99}>
-                  <span className={clsx("fa fa-comment-dots",styles.icon)}/>
-                </Badge>
-                <small className={styles.text}> Thông báo </small>
-              </Button>
-            </Tooltip>  
-        </div>
-    )
-  }else{
-    return <></>
-  }
+  return(
+      <OptionButton
+        show={Boolean(cookies['token'])}
+        title="Thông báo"
+        to={getRoute("user","profile","message")}
+        icon = {(
+          <Badge badgeContent="0" color="info" max={99}>
+            <span className={clsx("fa fa-comment-dots",styles.icon)}/>
+          </Badge>
+        )}
+      >
+        
+      </OptionButton>
+  )
   
 }
 export default memo(Message);

@@ -1,7 +1,8 @@
 import {memo,createContext,useState,useEffect} from 'react';
-import {useParams} from "react-router-dom";
+import {useParams,useNavigate} from "react-router-dom";
 export const DetailContext = createContext();
 function DetailProvider({state,dispath,children,...props}){
+	const navigator = useNavigate();
 	const handle = {
 		set:(key,value)=>{
 			dispath({key:'set',payload:{[key]:value}})
@@ -26,7 +27,9 @@ function DetailProvider({state,dispath,children,...props}){
 	    })
 	},[alias])
 	useEffect(function(){
-	    global.config.setTitleWebsite(state.data && state.data.Name || "");
+	    if(state.data){
+	    	global.config.setTitleWebsite(state.data && state.data.Name || "");
+	    }
 	},[state.data])
 	return(
 		<DetailContext.Provider value={{state,handle}}>

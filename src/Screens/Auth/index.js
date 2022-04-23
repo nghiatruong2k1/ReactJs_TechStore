@@ -21,9 +21,11 @@ function Auth({...props}){
   if(Boolean(cookies['token'])){
     return (<></>)
   }else{
-    return(
+    
+  }
+  return(
       <Dialog
-          open={auth.state.isOpen}
+          open={!Boolean(cookies['token']) && auth.state.isOpen}
           onClose={()=>(auth.handle.close())}
           fullWidth={true}
           scroll={'body'}
@@ -42,7 +44,5 @@ function Auth({...props}){
           </DialogContent>
       </Dialog>
     )
-  }
-  
 }
 export default memo(Auth);

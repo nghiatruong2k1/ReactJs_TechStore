@@ -1,9 +1,10 @@
 
 import { confirmAlert } from 'react-confirm-alert'; 
 import clsx from 'clsx';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import {Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle} from '@mui/material';
 import styles from './styles.module.css';
-export default function DialogResult({onClose,onYes,onNo,title,message,...props}){
+export default function DialogResult({onClose,onYes,onNo,title,message,target,...props}){
   confirmAlert({
     customUI: ({onClose}) => {
       return (

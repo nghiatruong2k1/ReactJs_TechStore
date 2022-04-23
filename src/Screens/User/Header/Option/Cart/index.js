@@ -1,22 +1,24 @@
-import {memo,useContext} from 'react';
-import clsx from 'clsx';
-import {Tooltip,Badge,Button} from '@mui/material/';
-import {NavLink} from "react-router-dom";
-import {} from '@mui/icons-material/';
+import {memo,useContext,useMemo} from 'react';
+import {Badge} from '@mui/material/';
+import clsx from "clsx";
 import styles from '../styles.module.css';
-function Cart({...props}){
+import {OptionButton} from "../index";
+
+function Cart(){
   const {cart} = useContext(global.config.UserContext);
-  return(
-    <div className={styles.option} >
-      <Tooltip PopperProps={{sx:{display:{xs:'block', md:'none'}}}} placement="top"title="Giỏ hàng" arrow>
-        <Button onClick={()=>(cart.handle.open())} className={styles.button}>
-          <Badge badgeContent={cart.handle.getCount()+""} color="info" max={99}>
+  return (
+    <OptionButton
+      onClick={()=>{cart.handle.open();}}
+      show={true}
+      title={"Giỏ hàng"}
+      icon={(
+        <Badge badgeContent={cart.handle.getCount()+""} color="info" max={99}>
             <span className={clsx("fa fa-shopping-cart",styles.icon)}/>
-          </Badge>
-          <small className={styles.text}> Giỏ hàng </small>
-        </Button>
-      </Tooltip>  
-    </div>
+        </Badge>
+      )}
+    >
+      
+    </OptionButton>
   )
 }
 export default memo(Cart);

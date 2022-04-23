@@ -1,30 +1,69 @@
-import {memo} from 'react';
+import {memo,useMemo,useState,useContext} from 'react';
 import {Select,MenuItem,FormControl} from '@mui/material/';
 import styles from './styles.module.css';
+
+import {ProductsContext} from "../../provider";
 function SearchSelect({...props}){
-  const argsType = []
+  const {state,handle} = useContext(ProductsContext)
+  const argsType = useMemo(function(){
+    return [{
+      feild:"",
+      text:"--Chọn sắp xếp--",
+    },{
+      feild:"Name_desc",
+      text:"Tên giảm dần",
+    },{
+      feild:"Name",
+      text:"Tên tăng dần",
+    },{
+      feild:"Price_desc",
+      text:"Giá giảm dần",
+    },{
+      feild:"Price",
+      text:"Giá tăng dần",
+    }]
+  },[]);
+  const selectIndex = useMemo(function(){
+    const index = argsType.findIndex(function(type){
+      return type.desc == state.descSort && type.feild == state.feildSort
+    })
+    if(index >= 0){
+      return index
+    }else{
+      return 0
+    }
+  },[state.feildSort,state.descSort]);
+
+  function handleChange(event,obj){
+    const newSort = argsType[Number(obj.props.value)];
+    handle.set("sort",newSort.value)
+  }
   return(
     <FormControl className={styles.control}>
       <Select size="small"
           displayEmpty
           fullWidth
-          disableUnderline
           SelectDisplayProps={{
             className:styles.display
           }}
+          value={selectIndex}
+          onChange = {handleChange}
           renderValue={(selected) => {
-            if (selected) {
-              return argsType.find(type=>(type.value == selected)).text;
+            const select = argsType[selected];
+            if(select){
+              return select.text;
+            }else{
+              return argsType[0].text
             }
-            return "--Select sort--";
-         }}>
-        {
-          argsType.map(function(type,index){
-            return(
-              <MenuItem key={index} value={type.value}>{type.text}</MenuItem>
-            )
-          })
-        }
+         }}
+      >
+          {
+            argsType.map(function(type,index){
+              return(
+                <MenuItem key={index+1} value={index}>{type.text}</MenuItem>
+              )
+            })
+          }
       </Select>
     </FormControl>
   )

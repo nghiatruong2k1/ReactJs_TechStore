@@ -13,38 +13,47 @@ import LinkSetAction from "../../Components/LinkSetAction/";
 import SubmitButton from "../../Components/SubmitButton/";
 import FacebookButton from "../../Components/FacebookButton/";
 import GoogleButton from "../../Components/GoogleButton/";
+
+const rules = {
+    Email:{
+      isRequired:["Vui lòng nhập Email!"],
+      isEmail:[]
+    },Password:{
+      isRequired:["Vui lòng nhập mật khẩu!"]
+    },RePassword:{
+      isRequired:["Vui lòng nhập xác thực mật khẩu!"],
+      isConfirm:["Password","Xác thực mật khẩu không hợp lệ!"]
+    },IsAgree:{
+      isRequired:["Vui lòng đọc và đồng ý điều khoản sử dụng!"]
+    }
+}
 function FormRegister({...props}){
   const [cookies,setCookies] = useCookies();
   const Fetch = global.config.useFetch();
-  const {toast} = useContext(global.config.context);
-  function handleSubmit(event,{element,value}){
-    const {IsAgree,RePassword,...Account} = value;
-    if(RePassword != Account.Password){
-      element.RePassword.setCustomValidity("Nhập lại mật khẩu không chính xác")
+  const {auth,toast} = useContext(global.config.context);
+  const {checkObject} = global.config.useValidate();
+  
+  function handleSubmit({IsAgree,RePassword,...values},handle){
+    const check = checkObject({IsAgree,RePassword,...values},rules,handle.setValid);
+    if(check === 0){
+      Fetch.post({
+        api:"api/auth/register",
+        params:values,
+        onThen:function(result){
+          if(result.data == false){
+          }else{   
+            setCookies('token', result.data.value)  
+            auth.handle.close();
+          }
+        },onError:function(error){
+        }
+      })
     }
-    if(IsAgree == false){
-      element.IsAgree.setCustomValidity("Vui lòng đồng ý với điều khoản sử dụng")
-    }
-    // if(Account.Password !== RePassword){
-    //   handle.setValid("RePassword","Nhập lại mật khẩu không chính xác")
-    // }
-    // Fetch.post({
-    //   api:"api/auth/register",
-    //   params:Account,
-    //   onThen:function(result){
-    //     if(result.data == false){
-    //        toast.handle.add({message:"Email đã tồn tại!",type:"warning"})
-    //        toast.handle.add({message:"Đăng ký không thành công!"})
-    //     }else{   
-    //       setCookies('token', result.data)     
-    //       toast.handle.add({message:"Đăng ký thành công!"})
-    //     }
-    //   }
-    // })
   }
+
   return(
-    <FormProvider data = {{}} onSubmit={handleSubmit}>
-      <Stack spacing={2} sx={{
+    <FormProvider onSubmit={handleSubmit}>
+      <Stack spacing={1} sx={{
         px:{xs:0,sm:6,md:8,lg:10}
       }}>
         <InputEmail 
@@ -57,12 +66,16 @@ function FormRegister({...props}){
         />
         <InputPassword 
           name="RePassword"
-          placeholder="Nhập lại mật khẩu"
+          placeholder="Xác thực mật khẩu"
         />
-        <Typography> 
-          <InputCheckbox name="IsAgree" label="Bạn đồng ý với " style={{marginRight:'0'}}/>
-          <Link underline="none" to="/"> điều khoản và chính sách sử dụng</Link>
-        </Typography>
+        <InputCheckbox 
+          name="IsAgree" 
+          label={
+            <>Bạn đồng ý với 
+            <Link underline="none" to="/"> điều khoản và chính sách sử dụng</Link>
+            </>
+          } 
+        style={{marginRight:'0'}}/>
         <SubmitButton> Đăng ký </SubmitButton>
         <Typography>
           Bạn đã có tài khoản?

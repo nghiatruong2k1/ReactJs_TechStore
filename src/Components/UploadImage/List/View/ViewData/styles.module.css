@@ -1,0 +1,16 @@
+.card{
+	cursor: pointer;
+}
+.radio{
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	z-index: 5;
+}
+.delete{
+	position: absolute !important;
+	top: 0;
+	right: 0;
+	color: #f00 !important;
+	z-index: 5;
+}

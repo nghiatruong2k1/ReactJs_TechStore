@@ -37,7 +37,8 @@ function ProductsProvider({state,dispath,action, children,...props}){
 	        api:"api/product/"+action+"/"+params[feild],
 	        params:{
 	        	offset:(state.page - 1) * state.limit,
-	        	limit:state.limit
+	        	limit:state.limit,
+	        	sort:state.sort,
 	        },onThen:(result => {
 	            handle.set("datas",result.data ?? []);
 	        }),onError:(error=> {
@@ -68,7 +69,7 @@ function ProductsProvider({state,dispath,action, children,...props}){
 	        	handle.set("isLoading",false);
 	        })
 	    })
-	},[action,params[feild],state.page])
+	},[action,params[feild],state.page,state.sort])
 	useEffect(function() {
 	    handleGetDatas({})
 	},[state.limit])

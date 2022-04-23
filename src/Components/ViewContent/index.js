@@ -11,11 +11,11 @@ import ViewLoading from "./ViewLoading/";
 function ViewContent({loading,viewLoading,length,empty,children,...props}){
   if(loading){
     if(Boolean(viewLoading)){
-      return (<ViewLoading />)
+      return (<ViewLoading {...props}/>)
     }
   }else if(!Boolean(length) || length && length <= 0){
     if(!Boolean(empty) || typeof(empty) === 'string'){
-      return (<ViewEmpty children={empty}/>)
+      return (<ViewEmpty children={empty} {...props}/>)
     }else{
       return <>{empty}</>
     }

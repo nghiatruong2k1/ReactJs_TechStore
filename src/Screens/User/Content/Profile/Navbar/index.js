@@ -18,7 +18,7 @@ function ProfileNavbar({...props}){
   const args = useMemo(function(){
     return [
       {
-        text:"Thông tin tài khoản",
+        text:"Tài khoản",
         url:getRoute("user","profile","index")
       },{
         text:"Địa chỉ",

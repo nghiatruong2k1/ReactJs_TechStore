@@ -1,4 +1,4 @@
-import {memo,useRef,useReducer,useContext} from 'react';
+import {memo,useRef,useReducer,useContext,useMemo} from 'react';
 import {useCookies} from 'react-cookie';
 import clsx from 'clsx';
 import {Stack,Typography} from '@mui/material/';
@@ -14,30 +14,42 @@ import SubmitButton from "../../Components/SubmitButton/";
 import FacebookButton from "../../Components/FacebookButton/";
 import GoogleButton from "../../Components/GoogleButton/";
 
-
+const rules = {
+    Email:{
+      isRequired:["Vui lòng nhập Email!"],
+      isEmail:[]
+    },Password:{
+      isRequired:["Vui lòng nhập mật khẩu!"]
+    }
+}
 function FormLogin({...props}){
   const [cookies,setCookies] = useCookies();
   const Fetch = global.config.useFetch();
-  const {toast} = useContext(global.config.context);
-  function handleSubmit(event,{element,value}){
-    const {Save,...Account} = value;
-    Fetch.post({
-      api:"api/auth/login",
-      params:Account,
-      onThen:function(result){
-        if(result.data == false){
-           toast.handle.add({message:"Email hoặc mật khẩu không chính xác!",type:"warning"})
-           toast.handle.add({message:"Đăng nhập không thành công!"})
-        }else{   
-          setCookies('token', result.data)     
-          toast.handle.add({message:"Đăng nhập thành công!"})
+  const {auth,toast} = useContext(global.config.context);
+  const {checkObject} = global.config.useValidate();
+
+  function handleSubmit({Save,...values},handle){
+    const check = checkObject(values,rules,handle.setValid)
+    if(check === 0){
+      Fetch.post({
+        api:"api/auth/login",
+        params:values,
+        onThen:function(result){
+          console.log(result)
+          if(result.data == false){
+          }else{   
+            setCookies('token', result.data.value)   
+            auth.handle.close(); 
+          }
+        },onError:function(error){
+          
         }
-      }
-    })
+      })
+    }
   }
   return(
     <FormProvider onSubmit={handleSubmit}>
-      <Stack spacing={2} sx={{
+      <Stack spacing={1} sx={{
         px:{xs:0,sm:6,md:8,lg:12}
       }}>
         <InputEmail 

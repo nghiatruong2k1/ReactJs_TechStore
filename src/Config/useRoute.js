@@ -40,16 +40,22 @@ const admin = new Route("trang-quan-tri",{
 		index:""
 	}),product:new Controller("san-pham",{
 		index:"danh-sach",
-		add:"them-san-pham",
-		update:"cap-nhat-san-pham"
+		add:"them",
+		update:"cap-nhat"
 	}),category:new Controller("danh-muc",{
 		index:"danh-sach",
-		add:"them-danh-muc",
-		update:"cap-nhat-danh-muc"
+		add:"them",
+		update:"cap-nhat"
 	}),brand:new Controller("thuong-hieu",{
 		index:"danh-sach",
-		add:"them-thuong-hieu",
-		update:"cap-nhat-thuong-hieu"
+		add:"them",
+		update:"cap-nhat"
+	}),order:new Controller("don-hang",{
+		index:"danh-sach",
+		shipment:"giao-hang",
+		request:"phan-hoi",
+		voucher:"ma-giam-gia"
+
 	})
 });
 
@@ -70,12 +76,12 @@ function getRoute(area,controller,action,params){
 						let _controller = _area.controller[controller]
 						if(_controller){
 							controller = _controller.name
-							if(action!= undefined){
-								if(_controller.action[action]){
+							if(action != undefined){
+								if(_controller.action[action] != undefined){
 									action = _controller.action[action];
-								}else if(_controller.action.index){
-									action = _controller.action.index;
 								}
+							}else if(_controller.action.index != undefined){
+								action = _controller.action.index;
 							}
 						}
 					}
@@ -126,6 +132,6 @@ function getActionName(area,controller,action){
 }
 export const useRoute = function(){
 	return useMemo(function(){	
-		return {routes,getRoute,getControllerName,getActionName}
+		return {routes,getRoute,getAreaName,getControllerName,getActionName}
 	},[])
 }

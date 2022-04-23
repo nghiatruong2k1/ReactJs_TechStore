@@ -1,0 +1,13 @@
+.ck-editor{
+	display: flex;
+	flex-direction: column;
+	border-radius: 4px !important;
+}
+.ck-editor__main{
+	flex: 1;
+	
+}
+.ck-content{
+	min-height: 400px !important;
+	max-height: 500px !important;
+}

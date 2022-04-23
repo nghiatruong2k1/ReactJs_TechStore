@@ -3,12 +3,11 @@ import clsx from 'clsx';
 import {Container,Grid,Stack} from '@mui/material/';
 import styles from './styles.module.css';
 
-import Header from "./Header/";
-import Content from "./Content/";
-import Menu from "./Menu/";
-import Logo from "./Logo/";
-import Footer from "./Footer/";
-import Tooldata from "./Tooldata/";
+import Header from "./Screens/Header/";
+import Content from "./Screens/Content/";
+import Menu from "./Screens/Menu/";
+import Logo from "./Screens/Logo/";
+import Footer from "./Screens/Footer/";
 function AdminPage({...props}){
   return(
     <Container component="section" className={styles.container} maxWidth="false" disableGutters>
@@ -22,7 +21,6 @@ function AdminPage({...props}){
             <Header />
             <Content />
             <Footer />
-            <Tooldata />
           </Stack>
         </Grid>
       </Grid>

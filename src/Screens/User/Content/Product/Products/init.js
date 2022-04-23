@@ -2,6 +2,7 @@ export const initData = {
 	view:0,
 	limit:5,
 	page:1,
+	sort:"Id",
 	total:0,
 	datas:[],
 	isLoading:false

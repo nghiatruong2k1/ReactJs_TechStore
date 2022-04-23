@@ -23,7 +23,7 @@ function Head({...props}){
         {auth.state.action == 2 && "Đăng ký"}
         {auth.state.action == 3 && "Quên mật khẩu"}
       </Typography>
-      <Tooltip title="Close" placement="top" arrow>
+      <Tooltip title="Đóng" placement="top" arrow>
           <IconButton onClick={handleClose} color="error">
             <HighlightOff className={styles.close} />
           </IconButton>

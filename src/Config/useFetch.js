@@ -38,6 +38,7 @@ async function handleFetch({api,params,promise,method,navigator,loading,toast,lo
     await promise(url,params)
       .then(result => {
           console.log(`[Success ${method}]`,{location,url,result});
+          
           if(result.data.message && Array.isArray(result.data.message)){
             result.data.message.forEach(function(message){
               toast.handle.add(message);
@@ -50,19 +51,17 @@ async function handleFetch({api,params,promise,method,navigator,loading,toast,lo
       .catch(error=> {
           console.log(`[Error ${method}]`,{location,url,error});
           if(!error.response){
-            //toast.handle.add({message:"Lỗi kết nỗi Server",type:"error"});
+            toast.handle.add({message:"Lỗi kết nỗi Server",type:"error"});
           }else{
             switch (error.response.status) {
               case 400:
-                //toast.handle.add({message:"Lỗi kết nỗi Server",type:"error"});
+                toast.handle.add({message:"Lỗi kết nỗi Server",type:"error"});
                 break;
               default:
                 // statements_def
                 break;
             }
-          }
-          
-          
+          }               
           if(onError && typeof(onError)==="function"){
             onError(error);
           }

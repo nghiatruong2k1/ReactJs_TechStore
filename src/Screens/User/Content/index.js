@@ -15,8 +15,7 @@ import ProductDetail from "./Product/Detail/";
 
 function Content({...props}){
 
-  const {getRoute} = global.config.useRoute();
-  console.log(getRoute("user","profile"))
+  const {getRoute,getControllerName} = global.config.useRoute();
   return(
     <Box component="section" className={styles.section}  mt={3} >
       <Container maxWidth="xxl" component="main"className={styles.main}>
@@ -43,10 +42,10 @@ function Content({...props}){
             element={<ProductDetail />} />  
           {/*----------------end-product---------------*/}
           
-          <Route path={`${getRoute("user","profile","cart")}/*`} 
+          <Route path={`${getRoute("user","cart","index")}/*`} 
             element={<CartContent />} />
 
-          <Route path={`${getRoute("user","profile")}/*`} 
+          <Route path={`${getControllerName("user","profile")}/*`} 
             element={<ProfileContent />} />
         </Routes>
       </Container>

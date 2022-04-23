@@ -19,7 +19,7 @@ function Popular({...props}){
         {
           state.datas.map(function(data,index){
             return (
-                <Grid container component={ListItem} key={index} divider my={1} columnSpacing={1} alignItems="center">
+                <Grid container component={ListItem} key={index} divider my={0} py={1} columnSpacing={1} alignItems="center">
                   <Grid item xs={8}>
                     <Typography mb={1} className={styles.name}>
                         {

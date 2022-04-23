@@ -18,7 +18,7 @@ function getColorStatus(id){
 function Status({...props}){
   const {data,loading} = useContext(ItemContext);
   return(
-    <Chip icon={loading && <CircularProgress /> || <></>} label={data && data.StatusName} />
+    <Chip icon={loading && <CircularProgress style={{width:"1em",height:"1em"}}/> || <></>} label={data && data.StatusName || "Đang chờ"} />
   )
 }
 export default memo(Status);

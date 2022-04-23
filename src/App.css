@@ -57,6 +57,7 @@ h6, .h6 {
   font-size: 1.1rem !important; }
 small, .small{
 	font-size: 0.8rem !important;
+  line-height: 1.2em !important;
 }
 
 *[role="tooltip"]{
@@ -83,7 +84,7 @@ small, .small{
 	color: inherit !important;
 }
 [class*="MuiInput"][readonly]{
-  background-color: rgba(0, 0, 0, 0.01)!important;
+  background-color: rgba(0, 0, 0, 0.05)!important;
 }
 [class*="MuiListItemButton-root"]{
 	padding: 0.2em 0.5em !important;

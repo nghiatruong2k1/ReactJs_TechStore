@@ -7,6 +7,9 @@ const {formatDate} = require('./Config/formatDate');
 const {formatNumber} = require('./Config/formatNumber');
 const {LocalStorage} = require('./Config/LocalStorage');
 const {useRoute} = require('./Config/useRoute');
+const {useValidate} = require('./Config/useValidate');
+
+
 const {createContext} = require('react');
 const AppContext = createContext({});
 const UserContext = createContext({});
@@ -37,5 +40,6 @@ module.exports = global.config ={
 	formatByte:formatByte,
 	fileToBase64:formatBase64,
 	useFetch:useFetch,
-	useRoute:useRoute
+	useRoute:useRoute,
+	useValidate:useValidate
 }

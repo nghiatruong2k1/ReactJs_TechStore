@@ -1,35 +1,27 @@
 import {memo,forwardRef,createContext,useRef,useReducer} from 'react';
 import {FormControl} from '@mui/material/';
 
-
+import {reducer} from "./init";
 export const FormContext = createContext();
-function FormProvider({onSubmit,children,...props}){
-
-  function handleSubmit(event){
-    event.preventDefault();
-    if(onSubmit && typeof(onSubmit) == 'function'){
-      const state = Array.from(event.target).reduce(function(result,element){
-        if(Boolean(element.name)){
-          result.element[element.name] = element;
-          switch(element.type){
-            case 'checkbox':
-            case 'radio':{
-              result.value[element.name] = element.checked;
-              break;
-            }
-            default:{
-              result.value[element.name] = element.value;
-              break;
-            }
-          }
-        }
-        return result;
-      },{element:{},value:{}})
-      onSubmit(event,state)
+function FormProvider({values,valids,onSubmit,children,...props}){
+  const [state,dispath] = useReducer(reducer,{
+    values:values||{},valids:valids||{}
+  })
+  const handle = {
+    setValue:function(name,value){
+      dispath({key:"set_value",payload:{[name]:value}})
+    },setValid:function(name,value){
+      dispath({key:"set_valid",payload:{[name]:value || ""}})
     }
   }
+  function handleSubmit(event){
+    event.preventDefault();
+    onSubmit(state.values,handle);
+  }
   return(
-    <>
+    <FormContext.Provider value={{
+      values:state.values,valids:state.valids,handle:handle||{}
+    }}>
       <FormControl 
         onSubmit={handleSubmit} 
         fullWidth 
@@ -38,7 +30,7 @@ function FormProvider({onSubmit,children,...props}){
       >
         {children}
       </FormControl>
-    </>
+    </FormContext.Provider>
   )
 }
 export default memo(FormProvider);

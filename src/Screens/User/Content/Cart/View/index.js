@@ -24,7 +24,7 @@ function View({...props}){
             </TableRow>
           </TableHead>
           <tbody>
-            <ViewContent loading={false} empty="Giỏ hàng của bạn trống" length={cart.handle.getCount()}>
+            <ViewContent component={TableRow} childrenComponent={TableCell} loading={false} empty="Giỏ hàng của bạn trống" length={cart.handle.getCount()}>
               {
                 cart.state.datas.map(function(data,index){                 
                   if(data){

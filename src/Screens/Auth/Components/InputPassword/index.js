@@ -5,6 +5,10 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {FormContext} from "../FormProvider/";
 function InputPassword({name,placeholder, ...props}){
+  const {values,valids,handle} = useContext(FormContext);
+  function handleChange(event){
+    handle.setValue(name,event.target.value)
+  }
   const [isShow,setShow] = useState(false);
   function toggleShow(){
     setShow(!isShow)
@@ -15,10 +19,15 @@ function InputPassword({name,placeholder, ...props}){
         size="small"
         type={isShow && "text" || "password"}
         inputProps={{
-          minLength:5,
           name:name
         }}
-        required
+        value={values[name] || ""}
+        onChange={handleChange}
+        FormHelperTextProps={{
+          error:true,
+          component:'small'
+        }}
+        helperText={valids[name] || " "}
         placeholder={placeholder}
         InputProps={{
           startAdornment: (

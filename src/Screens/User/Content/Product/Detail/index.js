@@ -15,7 +15,7 @@ function ProductDetail({...props}){
   const [state,dispath] = useReducer(reducer,initData);
   return(
   <Provider state={state} dispath={dispath}>
-    <ViewContent loading={state.isLoading} length={state.data}>
+    <ViewContent loading={false} empty="Không tìm thấy sản phẩm" length={state.data}>
       <Grid container py={2} className={styles.top}>
         <DetailPicture xs={5} px={2} py={1}/>
         <DetailInfo xs={7} px={2} py={1}/>
