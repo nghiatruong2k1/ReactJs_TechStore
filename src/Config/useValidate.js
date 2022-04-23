@@ -178,6 +178,8 @@ function checkObject(values,rulerValues,setValid){
 }
 export const useValidate = function(){
 	return useMemo(function(){	
+
 		return {checkObject,validates}
+		
 	},[])
 }
