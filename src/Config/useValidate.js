@@ -79,6 +79,7 @@ const validates = (function(){
 				default:
 					break;
 			}
+			
 			return "Kiểu dữ liệu không hợp lệ (chỉ nhận chuỗi hoặc số)";
 		},rangeLength:function(value,props){
 			const [minL,maxL,message] = props
