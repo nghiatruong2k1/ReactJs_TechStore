@@ -1,4 +1,4 @@
-import {memo,createContext,useState} from 'react';
+import {memo,createContext} from 'react';
 export const SearchContext = createContext({});
 function SearchProvider({state,dispath,children,...props}){
 	const handle = {

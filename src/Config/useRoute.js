@@ -64,71 +64,87 @@ const routes = {
 };
 
 function getRoute(area,controller,action,params){
-			let search;
-			if(params){
-				search = createSearchParams(params);
-			}
-			if(area !== undefined){
-				let _area = routes[area];
-				if(_area!= undefined){
-					area = _area.name;
-					if(controller !== undefined){
-						let _controller = _area.controller[controller]
-						if(_controller){
-							controller = _controller.name
-							if(action != undefined){
-								if(_controller.action[action] != undefined){
-									action = _controller.action[action];
-								}
-							}else if(_controller.action.index != undefined){
-								action = _controller.action.index;
-							}
+	let search;
+	if(params){
+		search = createSearchParams(params);
+	}
+	if(area !== undefined){
+		let _area = getArea(area);
+		if(_area){
+			area = _area.name;
+			if(controller !== undefined){
+				let _controller = _area.controller[controller]
+				if(_controller){
+					controller = _controller.name
+					if(action != undefined){
+						if(_controller.action[action] != undefined){
+							action = _controller.action[action];
 						}
+					}else if(_controller.action.index != undefined){
+						action = _controller.action.index;
 					}
 				}
 			}
-			return `${area && "/"+area || ""}${controller && "/"+controller || ""}${action && "/"+action || ""}${search && "?"+search || ""}`;
 		}
-function getAreaName(area){
+	}
+	return `${area && "/"+area || ""}${controller && "/"+controller || ""}${action && "/"+action || ""}${search && "?"+search || ""}`;
+}
+function getArea(area){
 	if(area !== undefined){
-		let _area = routes[area];
-		if(_area != undefined){
-			area = _area.name;
+		if(typeof(area) === 'string'){
+			let _area = routes[area];
+			if(_area != undefined){
+				return _area
+			}
+		}else if(area instanceof Route){
+			return area;
 		}
+		
+	}
+	
+	return null;
+}
+function getAreaName(area){
+	let _area = getArea(area);
+	if(_area){
+		return _area.name;
 	}
 	return area;
 }
-function getControllerName(area,controller){
-	if(area !== undefined){
-		let _area = routes[area];
-		if(_area != undefined){
-			area = _area.name;
-			if(controller !== undefined){
-				let _controller = _area.controller[controller]
-				if(_controller){
-					return _controller.name
-					
-				}
+function getController(area,controller){
+	let _area = getArea(area);
+	if(_area){
+		if(controller !== undefined){
+			let _controller = _area.controller[controller]
+			if(_controller){
+				return _controller
+				
 			}
 		}
+	}
+	return null;
+}
+function getControllerName(area,controller){
+	let _controller = getController(area,controller)
+	if(_controller){
+		return _controller.name	
 	}
 	return controller;
 }
+
 function getActionName(area,controller,action){
-	if(area !== undefined){
-		let _area = routes[area];
-		if(_area != undefined){
-			area = _area.name;
-			if(controller !== undefined){
-				let _controller = _area.controller[controller]
-				if(_controller){
-					return _controller.action[action]
-					
-				}
+	let _controller = getController(area,controller);
+	if(_controller){
+		if(action != undefined){
+			if(_controller.action[action] != undefined){
+				action = _controller.action[action];
 			}
+		}else if(_controller.action.index != undefined){
+			action = _controller.action.index;
 		}
+		
 	}
-	return controller;
+	return action;
 }
 export const useRoute = function(){
 	return useMemo(function(){	

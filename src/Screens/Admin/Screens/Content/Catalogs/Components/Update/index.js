@@ -1,9 +1,8 @@
-import {memo,useEffect,useReducer,useContext} from 'react';
+import {memo,useContext} from 'react';
 import {useParams} from "react-router-dom";
 import Detail from "../Detail/";
 function Update({controller,rulers,children,...props}){
   const Fetch = global.config.useFetch();
-  const {toast} = useContext(global.config.context)
   const {id} = useParams();
   const handle = {
     save:function(data){

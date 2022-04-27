@@ -1,9 +1,7 @@
 import {memo,useContext} from 'react';
-import clsx from 'clsx';
 import {TableCell} from '@mui/material/';
 import {Frame,Image} from "../../../../../../../../../../../Components/";
 import {RowDataContext} from '../provider';
-import styles from './styles.module.css';
 function CellImage({display,...props}){
   const {data,loading} = useContext(RowDataContext);
   return(

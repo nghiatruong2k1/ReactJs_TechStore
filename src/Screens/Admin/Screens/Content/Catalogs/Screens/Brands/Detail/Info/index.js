@@ -1,12 +1,8 @@
 import {memo}      from 'react';
-import clsx        from 'clsx';
-import styles      from './styles.module.css';
 import {Stack}     from "@mui/material/";
 import Accordion   from "../../../../../../../Components/Accordion/";
 import InputText   from "../../../../Components/Detail/InputText/";
-import InputLabel   from "../../../../Components/Detail/InputLabel/";
 import InputNumber from "../../../../Components/Detail/InputNumber/";
-import InputSwitch from "../../../../Components/Detail/InputSwitch/";
 function BrandInfo({...props}){
   return(
   <Accordion title="Thông tin" {...props}>

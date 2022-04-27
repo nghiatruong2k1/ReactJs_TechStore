@@ -1,5 +1,4 @@
 import {memo} from 'react';
-import clsx from 'clsx';
 import {
   TableRow,
   TableCell,

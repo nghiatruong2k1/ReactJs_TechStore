@@ -28,14 +28,17 @@ export const useFetch = function(location){
 }
 
 
-async function handleFetch({api,params,promise,method,navigator,loading,toast,location,onStart,onEnd,onThen,onError,timedelay}){
+async function handleFetch(props){
+    const {api,params,method,promise} = props;
+    const {navigator,loading,toast,location} = props;
+    const {onStart,onEnd,onThen,onError} = props;
     const url = global.config.Base_Url_API+api;
     console.log(`[Start ${method}]`,{location,url,params});
     loading.handle.add();
     if(onStart && typeof(onStart)==="function"){
       onStart();
     };
-    await promise(url,params)
+    return await promise(url,params)
       .then(result => {
           console.log(`[Success ${method}]`,{location,url,result});
           
@@ -67,12 +70,10 @@ async function handleFetch({api,params,promise,method,navigator,loading,toast,lo
           }
       })
       .finally(()=>{
-        setTimeout(function() {
-          loading.handle.remove();
-          if(onEnd && typeof(onEnd)==="function"){
-              onEnd();
-            }
-        },timedelay ?? 500)
+        loading.handle.remove();
+        if(onEnd && typeof(onEnd)==="function"){
+          onEnd();
+        }
       })
 }
 export const handleGet =async function({...props}){

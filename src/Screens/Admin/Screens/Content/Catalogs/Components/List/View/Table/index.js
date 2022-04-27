@@ -1,11 +1,10 @@
-import {memo,useContext,useEffect} from 'react';
+import {memo,useContext} from 'react';
 import clsx from 'clsx';
 import {
   TableContainer,
   Table,
   TableHead,
-  TableBody,
-  TableRow
+  TableBody
 } from '@mui/material/';
 import styles from './styles.module.css';
 

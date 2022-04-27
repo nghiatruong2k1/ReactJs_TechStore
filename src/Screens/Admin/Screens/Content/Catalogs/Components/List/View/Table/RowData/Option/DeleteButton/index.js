@@ -19,9 +19,7 @@ function DeleteButton({...props}){
   function deleteData(){
     Fetch.delete({
       api:"api/admin/"+controller+"/"+data.Id
-      ,onEnd:function(){
-        handle.refetch();
-      },onStart:function(){
+      ,onStart:function(){
         setLoading(true)
       },onEnd:function(){
         handle.refetch();

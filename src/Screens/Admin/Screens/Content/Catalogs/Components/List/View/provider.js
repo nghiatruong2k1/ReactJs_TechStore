@@ -1,4 +1,4 @@
-import {memo,useState,createContext,useContext,useEffect} from 'react';
+import {memo,createContext,useContext,useEffect} from 'react';
 import {ListContext} from "../provider";
 export const ViewContext = createContext();
 function ViewProvider({state,dispath,displays,children,...props}){

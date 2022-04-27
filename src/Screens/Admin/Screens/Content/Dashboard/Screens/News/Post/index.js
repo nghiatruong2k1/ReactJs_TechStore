@@ -1,9 +1,6 @@
 import {memo} from 'react';
-import clsx from 'clsx';
 import {
   Card,
-  CardActionArea,
-  CardHeader,
   CardContent,
   Typography,
   Divider,

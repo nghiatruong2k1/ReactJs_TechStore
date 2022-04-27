@@ -1,4 +1,4 @@
-import {memo,useEffect} from 'react';
+import {memo} from 'react';
 
 import Provider from './provider';
 import ListView from "./View/";

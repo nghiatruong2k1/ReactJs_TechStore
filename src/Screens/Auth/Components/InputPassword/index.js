@@ -1,8 +1,5 @@
-import {memo,useState,useContext,useRef,useEffect} from 'react';
-import clsx from 'clsx';
+import {memo,useState,useContext} from 'react';
 import {TextField,InputAdornment,Tooltip,IconButton} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
 import {FormContext} from "../FormProvider/";
 function InputPassword({name,placeholder, ...props}){
   const {values,valids,handle} = useContext(FormContext);

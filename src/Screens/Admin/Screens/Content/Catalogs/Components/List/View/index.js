@@ -1,5 +1,4 @@
-import {memo,useState,useReducer,useMemo,useEffect}from 'react';
-import styles                            from './styles.module.css';
+import {memo,useReducer,useMemo}from 'react';
 
 import ViewOption                        from "./Option/";
 import ViewTable                         from "./Table/";
@@ -10,10 +9,6 @@ import {reducer,initData}                from './init';
 import Provider                          from "./provider";
 function View({...props}){
   const [state,dispath] = useReducer(reducer,initData);
-  const [isOpen,setOpen] = useState(true);
-  function toggleOpen(event){
-    setOpen(!isOpen)
-  }
   let title = useMemo(function(){
     if(state.inTrash){
       return "Thùng rác "+'('+(state.total || 0)+')'

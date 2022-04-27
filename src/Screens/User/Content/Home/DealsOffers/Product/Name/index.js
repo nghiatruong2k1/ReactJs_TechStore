@@ -1,5 +1,4 @@
 import {memo} from 'react';
-import clsx from 'clsx';
 import {Skeleton,Typography} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';

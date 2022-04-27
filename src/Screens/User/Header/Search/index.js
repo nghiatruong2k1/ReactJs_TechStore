@@ -1,6 +1,6 @@
 import {memo,useReducer} from 'react';
 import {Grid,Stack,FormControl} from '@mui/material/';
-import {useNavigate,createSearchParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import styles from './styles.module.css';
 
 import {initData,reducer} from "./init";

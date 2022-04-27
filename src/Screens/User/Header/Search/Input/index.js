@@ -1,4 +1,4 @@
-import {memo,useContext,useEffect,useState} from 'react';
+import {memo,useContext} from 'react';
 import {TextField} from '@mui/material/';
 import styles from './styles.module.css';
 import {SearchContext} from "../provider";

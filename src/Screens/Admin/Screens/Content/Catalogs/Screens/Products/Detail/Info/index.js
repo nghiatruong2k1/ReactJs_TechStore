@@ -5,7 +5,6 @@ import Brands      from "./Brands/";
 import Types       from "./Types/";
 import Accordion   from "../../../../../../../Components/Accordion/";
 import InputText   from "../../../../Components/Detail/InputText/";
-import InputLabel   from "../../../../Components/Detail/InputLabel/";
 import InputSelect from "../../../../Components/Detail/InputSelect/";
 function ProductInfo({...props}){
   const [categories] = Categories();

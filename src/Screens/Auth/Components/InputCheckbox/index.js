@@ -1,8 +1,5 @@
 import {memo,useContext} from 'react';
-import clsx from 'clsx';
-import {FormControl,FormHelperText,FormControlLabel,Checkbox,Tooltip} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
+import {FormControl,FormHelperText,FormControlLabel,Checkbox} from '@mui/material/';
 import {FormContext} from "../FormProvider/";
 function InputCheckbox({name,label,validate, ...props}){
   const {values,valids,handle} = useContext(FormContext);
