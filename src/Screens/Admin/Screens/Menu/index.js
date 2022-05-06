@@ -17,7 +17,7 @@ import {
 import styles from './styles.module.css';
 import MenuItem from "./Item/";
 import MenuAccordion from "./Accordion/";
-import {getRoute} from "../../../../Config/Route";
+import {getRoute} from "../../../../Config/Route/";
 function Menu({...props}){
   const Catalogs = useMemo(function(){
     return[{

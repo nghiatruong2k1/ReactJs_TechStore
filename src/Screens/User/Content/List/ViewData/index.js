@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import {Grid,Card,CardActions,CardContent,Typography,Skeleton,Divider} from '@mui/material/';
 import {Frame,Image} from "../../../../../Components/";
 import {NavLink} from "react-router-dom";
-import {getRoute} from "../../../../../Config/Route";
+import {getRoute} from "../../../../../Config/Route/";
 function ViewData({data,controller,loading,...props}){
   return(
     <Grid item xs={3}>

@@ -11,7 +11,7 @@ import CatalogProducts   from "./Catalogs/Screens/Products/";
 import CatalogCategories from "./Catalogs/Screens/Categories/";
 import CatalogBrands     from "./Catalogs/Screens/Brands/";
 
-import {getControllerName} from "../../../../Config/Route";
+import {getControllerName} from "../../../../Config/Route/";
 function Content({...props}){
   return(
     <Container component={"main"} className={styles.main}>

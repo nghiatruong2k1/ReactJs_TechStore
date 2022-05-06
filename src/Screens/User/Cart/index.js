@@ -25,7 +25,7 @@ import {NavLink} from "react-router-dom";
 import CartEmpty from "./CartEmpty/";
 import CartItem from "./CartItem/";
 import {formatNumber} from "../../../Config/Format/";
-import {getRoute} from "../../../Config/Route";
+import {getRoute} from "../../../Config/Route/";
 function CartHeader(){
   const {cart} = useContext(global.config.UserContext);
   return (

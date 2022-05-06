@@ -13,7 +13,7 @@ import {NavLink} from "react-router-dom";
 import {Frame,Image} from "../../../../../../Components/";
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-import {getRoute} from "../../../../../../Config/Route";
+import {getRoute} from "../../../../../../Config/Route/";
 function Item({data,loading,...props}){
   return(
     <Grid item {...props}>

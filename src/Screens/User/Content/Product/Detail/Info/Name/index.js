@@ -3,7 +3,7 @@ import {Skeleton,Typography} from '@mui/material/';
 import {NavLink} from "react-router-dom";
 
 import {DetailContext} from "../../provider";
-import {getRoute} from "../../../../../../../Config/Route"; 
+import {getRoute} from "../../../../../../../Config/Route/"; 
 function DataName({...props}){
   const {state} = useContext(DetailContext);
   if(!state.isLoading && state.data){

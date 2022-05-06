@@ -9,7 +9,7 @@ import SearchSelect from "./Select/";
 import SearchInput from "./Input/";
 import SearchOption from "./Option/";
 
-import {getRoute} from "../../../../Config/Route";
+import {getRoute} from "../../../../Config/Route/";
 
 function HeaderSearch({...props}){
   const [state,dispath] = useReducer(reducer,initData);

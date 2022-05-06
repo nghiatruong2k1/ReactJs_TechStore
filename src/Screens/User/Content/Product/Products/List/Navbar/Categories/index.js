@@ -13,7 +13,7 @@ import {
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {NavLink,useLocation} from "react-router-dom";
-import {getRoute} from "../../../../../../../../Config/Route";
+import {getRoute} from "../../../../../../../../Config/Route/";
 import {useFetch} from "../../../../../../../../Config/Fetch/";
 function Categories({...props}){
 

@@ -5,7 +5,7 @@ import {Grid} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import OrdersContent from "./Orders/";
-import {getActionName} from "../../../../../Config/Route";
+import {getActionName} from "../../../../../Config/Route/";
 function Content({...props}){
   return(
     <Grid item {...props}>

@@ -1,5 +1,5 @@
 import {useState,useEffect} from 'react';
-import {getRoute} from "../../../../Config/Route";
+import {getRoute} from "../../../../Config/Route/";
 import {useFetch} from "../../../../Config/Fetch/";
 function Brands(){
   const [datas,setDatas] = useState([]);

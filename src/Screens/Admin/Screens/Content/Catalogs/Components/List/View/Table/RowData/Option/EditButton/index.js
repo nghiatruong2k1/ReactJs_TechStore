@@ -8,7 +8,7 @@ import {ListContext} from "../../../../../provider";
 
 import {RowDataContext} from '../../provider';
 import {NavLink} from "react-router-dom";
-import { getRoute } from "../../../../../../../../../../../../Config/Route";
+import { getRoute } from "../../../../../../../../../../../../Config/Route/";
 function EditButton({...props}){
   const {controller} = useContext(ListContext);
   const {data,loading} = useContext(RowDataContext);

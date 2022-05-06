@@ -4,7 +4,7 @@ import {Routes,Route} from "react-router-dom";
 import ProductsView from "./Products/";
 import ProductDetail from "./Detail/";
 
-import {getActionName} from "../../../../Config/Route";
+import {getActionName} from "../../../../Config/Route/";
 function Product({...props}){
 	return(
 		<Routes>

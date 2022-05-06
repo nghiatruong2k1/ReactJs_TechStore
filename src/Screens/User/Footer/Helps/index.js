@@ -1,5 +1,5 @@
 
-import {getRoute} from "../../../../Config/Route";
+import {getRoute} from "../../../../Config/Route/";
 
 function Helps(){
   return [

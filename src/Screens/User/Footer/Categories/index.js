@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react';
 
-import {getRoute} from "../../../../Config/Route";
+import {getRoute} from "../../../../Config/Route/";
 import {useFetch} from "../../../../Config/Fetch/";
 function Categories(){
   const [datas,setDatas] = useState([]);

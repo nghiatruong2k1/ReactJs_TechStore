@@ -12,7 +12,7 @@ import ProfileContent from "./Profile/"
 
 
 
-import {getRoute,getRouteName,getControllerName} from "../../../Config/Route";
+import {getRoute,getRouteName,getControllerName} from "../../../Config/Route/";
 
 function Content({...props}){
   return(

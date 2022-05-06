@@ -3,7 +3,7 @@ import {Stack,Box,Button} from '@mui/material/';
 import {NavLink} from "react-router-dom"
 import styles from './styles.module.css';
 
-import {getRoute} from "../../../../../Config/Route";
+import {getRoute} from "../../../../../Config/Route/";
 
 function LeftNav({...props}){
   return(

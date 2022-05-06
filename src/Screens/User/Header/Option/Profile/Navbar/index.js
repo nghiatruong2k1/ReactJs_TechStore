@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import {Menu,MenuItem,ListItemButton,ListItemIcon,ListItemText} from '@mui/material/';
 import {NavLink} from "react-router-dom";
 import {useCookies} from 'react-cookie';
-import {getRoute} from "../../../../../../Config/Route";
+import {getRoute} from "../../../../../../Config/Route/";
 
 
 

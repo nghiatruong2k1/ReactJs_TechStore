@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import {Routes,Route} from "react-router-dom";
 import ListView from "./ListView/";
 
-import {getActionName} from "../../../../Config/Route";
+import {getActionName} from "../../../../Config/Route/";
 
 
 function List({controller,...props}){

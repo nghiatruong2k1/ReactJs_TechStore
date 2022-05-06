@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import styles from '../styles.module.css';
 import {OptionButton} from "../index";
 
-import {getRoute} from "../../../../../Config/Route";
+import {getRoute} from "../../../../../Config/Route/";
 function Order(){
   const [cookies] = useCookies();
   return(

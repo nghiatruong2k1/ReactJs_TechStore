@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 import {NavLink} from "react-router-dom";
 import {ItemContext} from "../provider";
 
-import { getRoute } from "../../../../../Config/Route";
+import { getRoute } from "../../../../../Config/Route/";
 function ItemName({...props}){
   const {state} = useContext(ItemContext);
   return(

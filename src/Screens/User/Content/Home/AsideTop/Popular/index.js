@@ -7,7 +7,7 @@ import {NavLink} from "react-router-dom";
 import {Frame,Image} from "../../../../../../Components/"
 import {initData,reducer} from './init'
 import Provider from "./provider";
-import {getRoute} from "../../../../../../Config/Route";
+import {getRoute} from "../../../../../../Config/Route/";
 function Popular({...props}){
   const [state,dispath] = useReducer(reducer,initData);
   return(
