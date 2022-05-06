@@ -1,3 +1,4 @@
+import {formatNumber} from "../../../../../../../../Config/Format/";
 export const initData = {
 	
 };
@@ -39,7 +40,7 @@ export const displays = [
       key:"Price",
       type:"text",
       format:(value)=>{
-        return global.config.formatNumber(value)
+        return formatNumber(value)
       },
       style:{
         minWidth:"8em"
@@ -49,7 +50,7 @@ export const displays = [
       key:"SalePrice",
       type:"text",
       format:(value)=>{
-        return global.config.formatNumber(value)
+        return formatNumber(value)
       },
       style:{
         minWidth:"8em"

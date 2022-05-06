@@ -17,8 +17,8 @@ function ProductDetail({...props}){
   <Provider state={state} dispath={dispath}>
     <ViewContent loading={false} empty="Không tìm thấy sản phẩm" length={state.data}>
       <Grid container py={2} className={styles.top}>
-        <DetailPicture xs={5} px={2} py={1}/>
-        <DetailInfo xs={7} px={2} py={1}/>
+        <DetailPicture xs={4} px={2} py={1}/>
+        <DetailInfo xs={8} px={2} py={1}/>
       </Grid>
       <Grid container py={2}>
         <DetailDescription xs={8} px={2} py={1}/>

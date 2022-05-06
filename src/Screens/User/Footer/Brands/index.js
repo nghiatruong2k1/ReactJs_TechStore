@@ -1,9 +1,10 @@
 import {useState,useEffect} from 'react';
+import {getRoute} from "../../../../Config/Route";
+import {useFetch} from "../../../../Config/Fetch/";
 function Brands(){
   const [datas,setDatas] = useState([]);
   const [isLoading,setLoading] = useState(false);
-  const Fetch = global.config.useFetch();
-  const {getRoute} = global.config.useRoute();
+  const Fetch = useFetch();
   useEffect(function() {
     Fetch.get({
         api:"api/brand"
@@ -19,7 +20,7 @@ function Brands(){
               setDatas(result.data.map(function(data,index){
                 return {
                   text:data.Name,
-                  to:`${getRoute("user","product","brand")}/${data.Alias}`
+                  to:`${getRoute("user","product","brand",{alias:data.Alias})}`
                 }
               }));
             }else{

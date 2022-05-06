@@ -15,9 +15,9 @@ import{NavLink}         from'react-router-dom';
 import Title            from "../../../../../../Components/Title/";
 
 import {ListContext}    from "../provider";
+import { getRoute } from '../../../../../../../../Config/Route/';
 function Head({...props}){
   const {title,controller} = useContext(ListContext);
-  const {getRoute} = global.config.useRoute();
   return(
     <>
       <Title text={title}>

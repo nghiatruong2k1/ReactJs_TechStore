@@ -6,15 +6,15 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import DialogResult from "./DialogResult/";
 import {CartContext} from "../provider";
+import {useFetch} from "../../../../../Config/Fetch/";
 function Buttons({...props}){
   const {state,dispath} = useContext(CartContext);
   const [cookies,setCookies] = useCookies();
   const {cart} = useContext(global.config.UserContext);
   const {auth,toast} = useContext(global.config.context);
-  const Fetch = global.config.useFetch();
+  const Fetch =useFetch();
   function handleOrderClick(){
     if(Boolean(cookies['token'])){
-      console.log(cart.state.datas)
       const newCart = cart.state.datas.filter(function(data){
         if(data){
           return data;
@@ -22,9 +22,7 @@ function Buttons({...props}){
       })
       if(newCart.length > 0){
         DialogResult({
-          count:cart.handle.getCount(),
-          sale:state.voucher && state.voucher.Value || 0,
-          price:cart.handle.getPrice(),
+          cart:newCart,state,
           onYes:function(){
             Fetch.post({
               api:"api/order",

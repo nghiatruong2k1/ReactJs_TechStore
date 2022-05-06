@@ -8,14 +8,14 @@ import {ListContext} from "../../../../../provider";
 import {ViewContext} from "../../../../provider";
 import {RowDataContext} from '../../provider';
 import {NavLink} from "react-router-dom"
-
+import { useFetch } from '../../../../../../../../../../../../Config/Fetch/';
 function DeleteButton({...props}){
   const {toast} = useContext(global.config.context);
   const {data,loading} = useContext(RowDataContext);
   const [isLoading,setLoading] = useState(false);
   const {controller} = useContext(ListContext);
   const {state,handle} = useContext(ViewContext);
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   function deleteData(){
     Fetch.delete({
       api:"api/admin/"+controller+"/"+data.Id

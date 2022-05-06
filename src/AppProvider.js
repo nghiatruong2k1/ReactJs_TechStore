@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import useLoading from "./Control/Loading/";
 import useToast from "./Control/Toast/";
 import useAuth from "./Control/Auth/";
+const AppContext = global.config.context;
 function AppProvider({children,...props}){
-	const AppContext = global.config.context;
 	const loading = useLoading();
 	const toast = useToast();
 	const auth = useAuth();

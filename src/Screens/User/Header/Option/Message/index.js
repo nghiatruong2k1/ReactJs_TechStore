@@ -4,9 +4,9 @@ import clsx from 'clsx';
 import {Badge} from '@mui/material/';
 import styles from '../styles.module.css';
 import {OptionButton} from "../index";
+import {getRoute} from "../../../../../Config/Route";
 function Message(){
   const [cookies] = useCookies();
-  const {getRoute} = global.config.useRoute();
   return(
       <OptionButton
         show={Boolean(cookies['token'])}
@@ -17,8 +17,7 @@ function Message(){
             <span className={clsx("fa fa-comment-dots",styles.icon)}/>
           </Badge>
         )}
-      >
-        
+      >      
       </OptionButton>
   )
   

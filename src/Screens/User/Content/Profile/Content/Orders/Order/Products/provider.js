@@ -1,7 +1,8 @@
 import {memo,createContext,useEffect} from 'react';
+import { useFetch } from '../../../../../../../../Config/Fetch/';
 export const OrderProductsContext = createContext();
 function OrderProductsProvider({state,dispath,orderId,children,...props}){
-	const Fetch = global.config.useFetch();
+	const Fetch = useFetch();
 	function getData(){
 		orderId && Fetch.get({
 	        api:"api/orderdetail/"+orderId

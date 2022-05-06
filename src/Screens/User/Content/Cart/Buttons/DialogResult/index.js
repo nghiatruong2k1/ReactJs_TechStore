@@ -7,10 +7,24 @@ import {Button,
   DialogContentText,
   DialogTitle,
   Typography,
-  Stack
+  Stack,
+  Divider
 } from '@mui/material';
 import styles from './styles.module.css';
-export default function DialogResult({count,price,sale,onYes,onNo,...props}){
+import { formatNumber } from '../../../../../../Config/Format';
+export default function DialogResult({cart,state,onYes,onNo,...props}){
+  const {count,price,items} = cart.reduce(function(result,product){
+    if(product){
+      console.log(result,product,state)
+      result.count+=product.Quantity;
+      result.price+=product.Price * product.Quantity;
+    }
+    return result
+  },{count:0,price:0,items:[]})
+  let salePrice = 0;
+  if(state.voucher){
+    salePrice = price * state.voucher.value / 100;
+  }
   confirmAlert({
     customUI: ({onClose}) => {
       return (
@@ -21,20 +35,20 @@ export default function DialogResult({count,price,sale,onYes,onNo,...props}){
           <DialogContent sx={{width:'30em'}} className={styles.body} dividers={true}>
              <Stack spacing={1}>
                 <Stack direction="row">
-                    <Typography>Số lượng:</Typography>
-                    <Typography flex="1" align="right">{global.config.formatNumber(count)} đ</Typography>
+                    <Typography>Tổng số lượng:</Typography>
+                    <Typography flex="1" align="right">{formatNumber(count)} </Typography>
                 </Stack>
                 <Stack direction="row">
-                    <Typography>Giá tiền:</Typography>
-                    <Typography flex="1" align="right">{global.config.formatNumber(price)} đ</Typography>
+                    <Typography>Tông tiền:</Typography>
+                    <Typography flex="1" align="right">{formatNumber(price)} đ</Typography>
                 </Stack>
                 <Stack direction="row">
                     <Typography>Giảm giá:</Typography>
-                    <Typography flex="1" align="right">{global.config.formatNumber(price*sale/100)} đ</Typography>
+                    <Typography flex="1" align="right">{formatNumber(salePrice)} đ</Typography>
                 </Stack>
                 <Stack direction="row">
-                    <Typography>Tổng:</Typography>
-                    <Typography flex="1" align="right">{global.config.formatNumber(price - price*sale/100)} đ</Typography>
+                    <Typography>Tổng thanh toán:</Typography>
+                    <Typography flex="1" align="right">{formatNumber(price - salePrice)} đ</Typography>
                 </Stack>
             </Stack>
           </DialogContent>

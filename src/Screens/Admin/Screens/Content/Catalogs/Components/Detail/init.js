@@ -1,4 +1,5 @@
 import {createContext} from "react";
+import {formatAlias} from "../../../../../../../Config/Format/"
 export const DetailContext = createContext({});
 export const initData = {
 	data:{},
@@ -24,7 +25,7 @@ export function reducer(prevState,{key,payload}) {
 		}
 		case 'change':{
 			if(payload["Name"]){
-				prevState.data.Alias = global.config.convertAlias(payload["Name"])
+				prevState.data.Alias = formatAlias(payload["Name"])
 			}
 			return{
 				...prevState,

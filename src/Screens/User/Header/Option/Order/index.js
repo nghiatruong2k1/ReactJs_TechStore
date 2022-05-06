@@ -4,11 +4,11 @@ import {memo} from 'react';
 import {useCookies} from 'react-cookie'
 import clsx from 'clsx';
 import styles from '../styles.module.css';
-
 import {OptionButton} from "../index";
+
+import {getRoute} from "../../../../../Config/Route";
 function Order(){
   const [cookies] = useCookies();
-  const {getRoute} = global.config.useRoute();
   return(
     <OptionButton
       show = {Boolean(cookies['token'])}

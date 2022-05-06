@@ -1,7 +1,13 @@
 import {useParams} from "react-router-dom";
 import {memo,createContext,useEffect,useMemo} from 'react';
+import {useFetch} from "../../../../../Config/Fetch/";
 export const ProductsContext = createContext();
-function ProductsProvider({state,dispath,action, children,...props}){
+function ProductsProvider({state,dispath,action,children,...props}){
+	const handle = {
+		set:(key,value)=>{
+			dispath({key:'set',payload:{[key]:value}})
+		}
+	}
 	const feild = useMemo(function() {
 		if(action == 'search'){
 			return 'query'
@@ -9,13 +15,8 @@ function ProductsProvider({state,dispath,action, children,...props}){
 			return  'alias'
 		}
 	},[action])
-	const handle = {
-		set:(key,value)=>{
-			dispath({key:'set',payload:{[key]:value}})
-		}
-	}
 	const params = useParams();
-	const Fetch = global.config.useFetch("product list");
+	const Fetch = useFetch("product list");
 	useEffect(function() {
 	    if(action !== undefined){
 	    	if(action == 'search'){
@@ -24,7 +25,7 @@ function ProductsProvider({state,dispath,action, children,...props}){
 		    	Fetch.get({
 			        api:"api/"+action+"/"+params[feild]
 			        ,onThen:(result => {
-			            global.config.setTitleWebsite(result.data.Name)
+			            global.config.setTitleWebsite(result.data && result.data.Name || "")
 			        }),onError:(error=> {
 			            global.config.setTitleWebsite("")
 			        })
@@ -40,9 +41,9 @@ function ProductsProvider({state,dispath,action, children,...props}){
 	        	limit:state.limit,
 	        	sort:state.sort,
 	        },onThen:(result => {
-	            handle.set("datas",result.data ?? []);
+	            dispath({key:'set',payload:{datas:result.data ?? []}})
 	        }),onError:(error=> {
-	            handle.set("datas",[]);
+	            dispath({key:'set',payload:{datas:[]}})
 	        }),onStart,onEnd
 	    });
   	}
@@ -50,9 +51,9 @@ function ProductsProvider({state,dispath,action, children,...props}){
   		Fetch.get({
 	        api:"api/product/"+action+"/count/"+params[feild]
 	        ,onThen:(result => {
-	            handle.set("total",result.data ?? 0);
+	            dispath({key:'set',payload:{total:result.data ?? 0}})
 	        }),onError:(error=> {
-	            handle.set("total",0);
+	            dispath({key:'set',payload:{total:0}})
 	        })
 	    })
   	}
@@ -63,10 +64,10 @@ function ProductsProvider({state,dispath,action, children,...props}){
 		document.documentElement.scrollTop = 0;
 	    handleGetDatas({
 	    	onStart:(()=>{
-	    		handle.set("datas",Array(state.limit ?? 1).fill(undefined))
-	        	handle.set("isLoading",true);
+	    		dispath({key:'set',payload:{datas:Array(state.limit ?? 1).fill(undefined)}})
+	    		dispath({key:'set',payload:{isLoading:true}})
 	        }),onEnd:(()=>{
-	        	handle.set("isLoading",false);
+	        	dispath({key:'set',payload:{isLoading:false}})
 	        })
 	    })
 	},[action,params[feild],state.page,state.sort])

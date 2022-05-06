@@ -1,8 +1,9 @@
 import {memo,useState} from 'react';
 import {DetailDataContext} from "../Detail/provider";
+import {useFetch} from "../../../Config/Fetch/";
 function AddProvider({children,...props}){
 	const [data,setData] = useState({});
-	const Fetch = global.config.useFetch();
+	const Fetch = useFetch();
 	const handle = {
 		refetch:function(){
 			setData({});

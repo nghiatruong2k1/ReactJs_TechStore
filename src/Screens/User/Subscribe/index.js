@@ -13,12 +13,14 @@ function Subscribe({...props}){
   return(
     <Box component="section" mt={3} className={styles.section}>
       <Container maxWidth="xxl" >
-        <Typography align="center" mb={1}>Delivering the latest product trends and industry news straight to your inbox</Typography>
+        <Typography align="center" mb={1}>
+          Cung cấp các tin tức sản phẩm mới nhất và tin tức ngành trực tiếp đến hộp thư của bạn.
+        </Typography>
         <Grid container justifyContent = 'center'>
           <Grid item xs={6}>
             <Stack direction = 'row' alignItems="center" spacing={1}>
                 <TextField 
-                    placeholder="Your email" 
+                    placeholder="Email của bạn:" 
                     type="email" 
                     className={styles.feild}
                     InputProps={{
@@ -32,9 +34,11 @@ function Subscribe({...props}){
                 />
                 <Button className={styles.submit} variant="contained" startIcon={<i className="fa fa-envelope"></i>}>Subscribe</Button>
             </Stack>
-            <Typography component="small" align="center">We’ll never share your email address with a third-party. </Typography>
           </Grid>
         </Grid>
+        <Typography align="center">
+          Chúng tôi sẽ không bao giờ chia sẻ địa chỉ email của bạn với bên thứ ba.
+        </Typography>
       </Container>
     </Box>
   )

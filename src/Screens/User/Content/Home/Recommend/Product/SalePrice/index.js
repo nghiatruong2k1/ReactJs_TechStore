@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import {Skeleton} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
+import {formatNumber} from "../../../../../../../Config/Format/";
 function DataPrice({loading,price,salePrice,...props}){
   let _className = "";
   let _priceText = "";
@@ -10,7 +11,7 @@ function DataPrice({loading,price,salePrice,...props}){
     if(price){
       if(salePrice){
         _className=styles.sale;
-        _priceText = global.config.formatNumber(salePrice,3,0)+" đ";
+        _priceText = formatNumber(salePrice,3,0)+" đ";
       }else{
         _className=styles.hidden;
       }

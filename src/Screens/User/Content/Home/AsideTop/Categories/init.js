@@ -1,7 +1,7 @@
 
 export const initData = {
-	datas:[],
-	isLoading:false
+	datas:Array(5).fill(undefined),
+	isLoading:true
 };
 export function reducer(prevState,{key,payload}) {
 	switch(key){

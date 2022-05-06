@@ -1,19 +1,21 @@
-import {useState} from "react";
+import {useState,useMemo} from "react";
 import Toast from "../../Components/Toast/";
 function useToast(){
   const [toasts,setToasts] = useState([]);
-  const handleToasts = {
-    add:function(props){
-      setToasts(function([...prevDatas]){
-        prevDatas.push(<Toast key={prevDatas.length} {...props} />);
-        return prevDatas;
-      })
-    },reset:function(){
-      setToasts([])
+  return useMemo(function(){
+    return {
+      state:toasts,
+      handle:{
+        add:function(props){
+          setToasts(function([...prevDatas]){
+            prevDatas.push(<Toast key={prevDatas.length} {...props} />);
+            return prevDatas;
+          })
+        },reset:function(){
+          setToasts([])
+        }
+      }
     }
-  }
-  return(
-    {state:toasts,handle:handleToasts}
-  )
+  },[toasts]);
 }
 export default useToast;

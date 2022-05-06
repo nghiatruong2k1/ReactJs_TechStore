@@ -1,8 +1,9 @@
 import {memo,createContext,useEffect} from 'react';
 import {useCookies} from "react-cookie";
+import { useFetch } from '../../../../../../Config/Fetch/';
 export const OrdersContext = createContext();
 function OrdersProvider({state,dispath,children,...props}){
-	const Fetch = global.config.useFetch();
+	const Fetch = useFetch();
 	const [cookies,setCookies] = useCookies();
 	useEffect(function(){
 	    if(Boolean(cookies['token'])){

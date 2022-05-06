@@ -1,4 +1,5 @@
 import {memo,useEffect,createContext} from 'react';
+import {useFetch} from "../../../../../Config/Fetch/";
 export const DealContext = createContext({});
 function DealProvider({state,dispath,children,...props}){
 	const handle = {
@@ -6,7 +7,7 @@ function DealProvider({state,dispath,children,...props}){
 			dispath({key:'set',payload:{[key]:value}})
 		}
 	}
-  	const Fetch = global.config.useFetch();
+  	const Fetch = useFetch();
 	useEffect(function() {
 	    Fetch.get({
 	        api:"api/product/type/1",

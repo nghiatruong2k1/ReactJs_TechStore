@@ -1,8 +1,9 @@
 import {memo,useState,createContext,useContext,useEffect} from 'react';
-import axios from 'axios';
+import { useFetch } from '../../../Config/Fetch/';
 export const ListContext = createContext();
+
 function ListProvider({state,dispath,children,...props}){
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   function handleGetData({onStart,onEnd}){
     Fetch.get({
       api:"api/admin/image/",

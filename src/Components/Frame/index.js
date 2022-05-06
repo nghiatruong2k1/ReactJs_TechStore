@@ -34,14 +34,8 @@ function Frame({loading,children,className,containerProps,contentProps,rectangle
 			...contentProps
 		};
 		contentAttr.onLoad = useMemo(function(){
-			let timeOut = null;
-			return function(){
-				timeOut = setTimeout(function(){
-					setLoad(true);
-				},500)
-			}
-			return function(){
-				clearTimeout(timeOut);
+			return function(event){
+				setLoad(true);
 			}
 		},[isLoaded]);
 		contentAttr.onLoadStart = useMemo(function(){

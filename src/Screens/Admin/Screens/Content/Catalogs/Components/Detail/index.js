@@ -1,11 +1,12 @@
 import {memo,useEffect,useContext,useReducer} from 'react';
 import {DetailContext,initData,reducer} from "./init";
 import styles from './styles.module.css';
+import { useFetch } from '../../../../../../../Config/Fetch/';
+import { checkObject } from '../../../../../../../Config/Validate';
 function DetailProvider({controller,children,rulers,id,handle,...props}){
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   const [state,dispath] = useReducer(reducer,initData);
   const {toast} = useContext(global.config.context);
-  const {checkObject} = global.config.useValidate();
   const handleData = {
     refetch:function(){
       Fetch.get({

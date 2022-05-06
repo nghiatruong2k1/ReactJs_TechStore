@@ -1,8 +1,9 @@
 import {memo,createContext,useContext,useEffect} from 'react';
 import {ListContext} from "../provider";
+import { useFetch } from '../../../../../../../../Config/Fetch/';
 export const ViewContext = createContext();
 function ViewProvider({state,dispath,displays,children,...props}){
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   const {controller} = useContext(ListContext);
 
   const handle = {

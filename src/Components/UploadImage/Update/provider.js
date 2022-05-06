@@ -1,9 +1,10 @@
 import {memo,createContext,useContext,useState,useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {DetailDataContext} from "../Detail/provider";
+import { useFetch } from '../../../Config/Fetch/';
 function UpdateProvider({children,...props}){
 	const [data,setData] = useState({});
-	const Fetch = global.config.useFetch();
+	const Fetch = useFetch();
 	const params = useParams();
 	function handleGetData(){
 		Fetch.get({

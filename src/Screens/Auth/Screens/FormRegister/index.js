@@ -1,9 +1,6 @@
 import {memo,useContext} from 'react';
 import {useCookies} from 'react-cookie';
-import clsx from 'clsx';
 import {Stack,Typography,Link} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
 
 import FormProvider from "../../Components/FormProvider/";
 import InputEmail from "../../Components/InputEmail/";
@@ -14,10 +11,11 @@ import SubmitButton from "../../Components/SubmitButton/";
 import FacebookButton from "../../Components/FacebookButton/";
 import GoogleButton from "../../Components/GoogleButton/";
 
+import { useFetch } from '../../../../Config/Fetch/';
 const rules = {
     Email:{
       isRequired:["Vui lòng nhập Email!"],
-      isEmail:[]
+      isEmail:[null,["gmail.com"]]
     },Password:{
       isRequired:["Vui lòng nhập mật khẩu!"]
     },RePassword:{
@@ -29,30 +27,28 @@ const rules = {
 }
 function FormRegister({...props}){
   const [cookies,setCookies] = useCookies();
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   const {auth,toast} = useContext(global.config.context);
-  const {checkObject} = global.config.useValidate();
   
   function handleSubmit({IsAgree,RePassword,...values},handle){
-    const check = checkObject({IsAgree,RePassword,...values},rules,handle.setValid);
-    if(check === 0){
-      Fetch.post({
-        api:"api/auth/register",
-        params:values,
-        onThen:function(result){
-          if(result.data == false){
-          }else{   
-            setCookies('token', result.data.value)  
-            auth.handle.close();
-          }
-        },onError:function(error){
+    Fetch.post({
+      api:"api/auth/register",
+      params:values,
+      onThen:function(result){
+        if(result.data == false){
+        }else{   
+          setCookies('token', result.data.value)  
+          auth.handle.close();
         }
-      })
-    }
+      },onError:function(error){
+      },onEnd:function(){
+        handle.end();
+      }
+    })
   }
 
   return(
-    <FormProvider onSubmit={handleSubmit}>
+    <FormProvider onSubmit={handleSubmit} rules={rules}>
       <Stack spacing={1} sx={{
         px:{xs:0,sm:6,md:8,lg:10}
       }}>

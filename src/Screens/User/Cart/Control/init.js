@@ -22,15 +22,33 @@ export function reducer(prevState,{key,payload}) {
 				isOpen:false
 			}
 		}
-		case 'set_price':{
+		case 'set_data':{
 			const carts = [...prevState.datas];
-			if(Number(payload.SalePrice) && payload.SalePrice > 0){
-	          		carts[payload.index].Price = payload.SalePrice
-	          	}else if(Number(payload.Price) && payload.Price > 0){
-	          		carts[payload.index].Price = payload.Price
-	          	}else{
-					carts[payload.index].Price = 0;
-	          	}
+			const {index,Price,SalePrice,Name,Alias} = payload.data;
+			if(carts[index]){
+				if(Number(SalePrice) && Number(SalePrice) > 0){
+					carts[index].Price = Number(SalePrice)
+				}else if(Number(Price) && Number(Price) > 0){
+					carts[index].Price = Number(Price)
+				}else{
+					carts[index].Price = 0;
+				}
+
+				carts[index].Name = Name;
+				carts[index].Alias = Alias;
+			}
+	        return {
+	        	...prevState,
+	        	datas:carts
+	        };
+		}
+		case 'set_quantity':{
+			const carts = [...prevState.datas];
+			if(carts[payload.index]){
+				if(Number(payload.quantity)){
+					carts[payload.index].Quantity = Number(payload.quantity);
+				}
+			}
 	        return {
 	        	...prevState,
 	        	datas:carts
@@ -38,16 +56,19 @@ export function reducer(prevState,{key,payload}) {
 		}
 		case 'add':{
 			const carts = [...prevState.datas];
+			const {Id,Name,Alias,Quantity,Price,SalePrice} = payload;
 			const oldIndex = carts.findIndex(function(data){
-	          return  data && (data.Id == payload.Id);
+	          return  data && (data.Id == Id);
 	        })
 	        if(oldIndex > -1){
-	          	carts[oldIndex].Quantity += payload.Quantity ?? 0;
+	          	carts[oldIndex].Quantity += Quantity ?? 0;
 	        }else{
 	        	carts.push({
-	        		Id:payload.Id,
-	        		Quantity:payload.Quantity,
-	        		Price:0
+	        		Id,
+					Name,
+					Alias,
+	        		Quantity,
+	        		Price:SalePrice ?? Price ?? 0
 	        	});
 	        }
 	        return {

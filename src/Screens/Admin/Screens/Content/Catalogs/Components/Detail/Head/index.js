@@ -17,9 +17,9 @@ import {
 import styles         from './styles.module.css';
 import Title          from "../../../../../../Components/Title/";
 import {DetailContext}from "../init";
+import { getRoute } from '../../../../../../../../Config/Route/';
 function DetailHead({title,...props}){
   const {state,handle,controller} = useContext(DetailContext);
-  const {getRoute} = global.config.useRoute();
   return(
     <Title text={title} to={getRoute("admin",controller,"index")} {...props}>
       <Tooltip title="Save" placement="top">

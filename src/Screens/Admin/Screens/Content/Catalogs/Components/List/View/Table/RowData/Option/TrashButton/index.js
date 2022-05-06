@@ -6,13 +6,14 @@ import styles from './styles.module.css';
 import {ListContext} from "../../../../../provider";
 import {ViewContext} from "../../../../provider";
 import {RowDataContext} from '../../provider';
+import { useFetch } from '../../../../../../../../../../../../Config/Fetch/';
 function TrashButton({...props}){
   const {toast} = useContext(global.config.context);
   const {data,loading} = useContext(RowDataContext);
   const [isLoading,setLoading] = useState(false);
   const {controller} = useContext(ListContext);
   const {state,handle} = useContext(ViewContext);
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   function putTrash(){
     const newTrash = !data.IsTrash;
     Fetch.put({

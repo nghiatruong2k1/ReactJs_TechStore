@@ -1,7 +1,8 @@
 import {memo,createContext,useEffect} from 'react';
+import {useFetch} from "../../../../../../Config/Fetch/";
 export const CategoryContext = createContext();
 function CategoryProvider({state,dispath,children,...props}){
-	const Fetch = global.config.useFetch();
+	const Fetch = useFetch();
 	const handle = {
 		set:(key,value)=>{
 			dispath({key:'set',payload:{[key]:value}})
@@ -9,16 +10,16 @@ function CategoryProvider({state,dispath,children,...props}){
 	}
 	useEffect(function() {
 	    Fetch.get({
-	          api:"api/category"
-	          ,onThen:(result => {
-	            handle.set("datas",result.data ?? []);
+	        api:"api/category"
+	        ,onThen:(result => {
+				dispath({key:'set',payload:{datas:result.data ?? []}})
 	        }),onError:(error=> {
-	            handle.set("datas",[]);
+	            dispath({key:'set',payload:{datas:[]}})
 	        }),onStart:(()=>{
-	        	handle.set("datas",Array(5).fill(undefined));
-	        	handle.set("isLoading",true)
+				dispath({key:'set',payload:{datas:Array(5).fill(undefined)}})
+				dispath({key:'set',payload:{isLoading:true}})
 	        }),onEnd:(()=>{
-	        	handle.set("isLoading",false)
+				dispath({key:'set',payload:{isLoading:false}})
 	        })
 	      })
 	},[])

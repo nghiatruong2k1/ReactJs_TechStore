@@ -7,11 +7,11 @@ import styles from './styles.module.css';
 import {ListContext} from "../../../../../provider";
 
 import {RowDataContext} from '../../provider';
-import {NavLink} from "react-router-dom"
+import {NavLink} from "react-router-dom";
+import { getRoute } from "../../../../../../../../../../../../Config/Route";
 function EditButton({...props}){
   const {controller} = useContext(ListContext);
   const {data,loading} = useContext(RowDataContext);
-  const {getRoute} = global.config.useRoute();
   return(
     <Tooltip 
       title="Cập nhật" 
@@ -20,7 +20,7 @@ function EditButton({...props}){
       <span>
         <IconButton 
           disabled={loading}
-          component={NavLink} to={getRoute("admin",controller,"update")+"/"+data.Id}
+          component={NavLink} to={getRoute("admin",controller,"update",{id:data && data.Id})}
           variant="outlined"
         >
             <Edit />

@@ -12,9 +12,9 @@ import {NavLink} from "react-router-dom";
 
 import {initData,reducer} from './init'
 import Provider from "./provider";
+import {getRoute} from "../../../../../../Config/Route";
 function Categories({...props}){
   const [state,dispath] = useReducer(reducer,initData);
-  const {getRoute} = global.config.useRoute();
   return(
     <Provider state={state} dispath={dispath}>
       <Grid item {...props}>
@@ -32,7 +32,7 @@ function Categories({...props}){
                 {
                   <ListItemButton 
                     component={(data && !state.isLoading) && NavLink || "button"} 
-                    to={`${getRoute("user","product","category")}/${data && data.Alias}`}
+                    to={`${getRoute("user","product","category",{alias:data && data.Alias})}`}
                   >
                     {
                       (data && !state.isLoading) 

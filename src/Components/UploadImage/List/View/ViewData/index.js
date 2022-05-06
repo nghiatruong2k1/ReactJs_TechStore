@@ -4,14 +4,14 @@ import {Grid,Card,Radio,IconButton} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import {Frame,Image} from "../../../../../Components/";
 import styles from './styles.module.css';
-
+import { useFetch } from '../../../../../Config/Fetch/';
 import {UploadImageContext} from "../../../provider";
 import {ListContext} from "../../provider";
 function ViewItem({data,loading,...props}){
 
   const uploadImage = useContext(UploadImageContext);
   const {handle} = useContext(ListContext);
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
 
   console.log(data,uploadImage.defaultData,uploadImage.state.data)
   const isActive = useMemo(function(){

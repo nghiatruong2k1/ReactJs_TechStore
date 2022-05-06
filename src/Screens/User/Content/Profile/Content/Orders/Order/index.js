@@ -8,6 +8,7 @@ import Provider from "./provider";
 import InfoContent from "./Info/";
 import DetailContent from "./Detail/";
 import ProductsContent from "./Products/";
+import { formatDate } from '../../../../../../../Config/Format';
 function Order({loading,data,index,...props}){
   return(
     <Provider loading={loading} data={data}>
@@ -27,7 +28,7 @@ function Order({loading,data,index,...props}){
               Ngày đặt hàng: 
               {
                 !loading &&
-                `${global.config.formatDate(data && data.CreateDate)}`
+                `${formatDate(data && data.CreateDate)}`
                 || <Skeleton variant="text" sx={{height:'100%',flex:"1"}} />
               }
             </Typography>

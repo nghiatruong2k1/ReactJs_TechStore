@@ -10,13 +10,14 @@ import {ListContext} from "../../../../../provider";
 import {ViewContext} from "../../../../provider";
 import {RowDataContext} from '../../provider';
 import styles from './styles.module.css';
+import { useFetch } from '../../../../../../../../../../../../Config/Fetch/';
 function PublicButton({...props}){
   const {toast} = useContext(global.config.context);
   const [isLoading,setLoading] = useState(false);
   const {data,loading} = useContext(RowDataContext);
   const {controller} = useContext(ListContext);
   const {state,handle} = useContext(ViewContext);
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   function putPublic(){
     Fetch.put({
       api:"api/admin/"+controller

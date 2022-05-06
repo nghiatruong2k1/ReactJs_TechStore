@@ -21,7 +21,7 @@ function Brands({...props}){
         </Grid>
         <Grid item xs={9} pl={2}>
           <Grid container spacing={1}>
-            <ViewContent loading = {false} length = {state.datas.length}>  
+            <ViewContent loading = {state.isLoading} length = {state.datas.length}>  
               {
                 state.datas.map(function(data,index){
                   return ( 

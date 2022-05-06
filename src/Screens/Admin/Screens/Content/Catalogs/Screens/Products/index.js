@@ -10,9 +10,8 @@ import ProductDetail    from "./Detail/";
 import Add              from "../../Components/Add";
 import Update           from "../../Components/Update";
 import {validateRuler}from "./validate";
-
+import { getActionName } from '../../../../../../../Config/Route/';
 function CatalogProduct({...props}){
-  const {getActionName} = global.config.useRoute();
   return(
       <Routes>
         <Route path={getActionName("admin","product","index")} element={<ProductList />} />
@@ -21,7 +20,7 @@ function CatalogProduct({...props}){
             <ProductDetail title="Thêm sản phẩm"/>
           </Add>
         }/>
-        <Route path={getActionName("admin","product","update")+"/:id"} element={
+        <Route path={getActionName("admin","product","update")} element={
           <Update rulers={validateRuler} controller="product">
             <ProductDetail title="Cập nhật sản phẩm"/>
           </Update>

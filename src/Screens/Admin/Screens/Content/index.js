@@ -11,14 +11,13 @@ import CatalogProducts   from "./Catalogs/Screens/Products/";
 import CatalogCategories from "./Catalogs/Screens/Categories/";
 import CatalogBrands     from "./Catalogs/Screens/Brands/";
 
+import {getControllerName} from "../../../../Config/Route";
 function Content({...props}){
-  const {getControllerName} = global.config.useRoute();
   return(
     <Container component={"main"} className={styles.main}>
       <Grid container display="grid">
         <Routes>
-          <Route path={`${getControllerName("admin","dashboard")}`} element={<Dashboard />} />
-
+          <Route path={`${getControllerName("admin","dashboard")}/*`} element={<Dashboard />} />
           <Route path={`${getControllerName("admin","product")}/*`} element={<CatalogProducts />} />
           <Route path={`${getControllerName("admin","category")}/*`} element={<CatalogCategories />} />
           <Route path={`${getControllerName("admin","brand")}/*`} element={<CatalogBrands />} />

@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import {Skeleton} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
+import {formatNumber} from "../../../../../../../../../Config/Format/";
 function DataPrice({loading,price,salePrice,...props}){
   let _className = "";
   let _priceText = "";
@@ -13,7 +14,7 @@ function DataPrice({loading,price,salePrice,...props}){
       }else{
         _className=styles.current
       }
-      _priceText = global.config.formatNumber(price,3,0)+" đ";
+      _priceText = formatNumber(price,3,0)+" đ";
     }else{
       _priceText = "Liên hệ"
       _className=styles.current

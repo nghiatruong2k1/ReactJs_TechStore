@@ -10,8 +10,8 @@ import Add            from "../../Components/Add";
 import Update         from "../../Components/Update";
 
 import {validateRuler} from "./validate";
+import { getActionName } from '../../../../../../../Config/Route/';
 function CatalogCategory({...props}){
-  const {getActionName} = global.config.useRoute();
   return(
       <Routes>
         <Route path={getActionName("admin","category","index")} element={<CategoryList/>} />
@@ -20,7 +20,7 @@ function CatalogCategory({...props}){
             <CategoryDetail title="Thêm danh mục"/>
           </Add>
         }/>
-        <Route path={getActionName("admin","category","update")+"/:id"} element={
+        <Route path={getActionName("admin","category","update")} element={
           <Update rulers={validateRuler} controller="category">
             <CategoryDetail title="Chỉnh sửa danh mục"/>
           </Update>

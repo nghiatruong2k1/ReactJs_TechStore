@@ -24,6 +24,8 @@ import styles from './styles.module.css';
 import {NavLink} from "react-router-dom";
 import CartEmpty from "./CartEmpty/";
 import CartItem from "./CartItem/";
+import {formatNumber} from "../../../Config/Format/";
+import {getRoute} from "../../../Config/Route";
 function CartHeader(){
   const {cart} = useContext(global.config.UserContext);
   return (
@@ -38,7 +40,7 @@ function CartHeader(){
       subheader={
         <>
           <Typography>
-            {"Tổng cộng: "+global.config.formatNumber(cart.handle.getCount(),3,0)+" sản phẩm"}
+            {"Tổng cộng: "+formatNumber(cart.handle.getCount(),3,0)+" sản phẩm"}
           </Typography>
         </>
       }
@@ -72,7 +74,6 @@ function CartBody(){
 }
 function CartFooter(){
   const {cart} = useContext(global.config.UserContext);
-  const {getRoute} = global.config.useRoute();
   return(
     <CardActions className={styles.footer}>
       <Button 

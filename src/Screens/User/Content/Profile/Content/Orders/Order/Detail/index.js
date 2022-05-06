@@ -4,7 +4,7 @@ import {Grid,List,ListItem,ListItemText,Skeleton} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {OrderContext} from "../provider";
-
+import { formatNumber } from '../../../../../../../../Config/Format';
 function Detail({...props}){
   const {data,loading} = useContext(OrderContext);
 
@@ -22,7 +22,7 @@ function Detail({...props}){
           <ListItemText>Giá:</ListItemText>
           <ListItemText align="right">
             {
-              !loading ? `${global.config.formatNumber(price,3,0)} đ`
+              !loading ? `${formatNumber(price,3,0)} đ`
               : <Skeleton className="skeleton"/>
             }
         </ListItemText>
@@ -31,7 +31,7 @@ function Detail({...props}){
           <ListItemText>Giảm giá:</ListItemText>
           <ListItemText align="right">
             {
-              !loading ? `${global.config.formatNumber(price*sale/100,3,0)} đ`
+              !loading ? `${formatNumber(price*sale/100,3,0)} đ`
               : <Skeleton className="skeleton"/>
               }
           </ListItemText>
@@ -40,7 +40,7 @@ function Detail({...props}){
           <ListItemText>Tổng tiền:</ListItemText>
           <ListItemText align="right">
             {
-              !loading ? `${global.config.formatNumber(price - price*sale/100,3,0)} đ`
+              !loading ? `${formatNumber(price - price*sale/100,3,0)} đ`
               : <Skeleton className="skeleton"/>
             }
           </ListItemText>

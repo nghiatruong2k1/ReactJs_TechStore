@@ -3,7 +3,7 @@ import clsx from "clsx";
 import {Stack,TextField,FormControl,FormHelperText,Typography,Slider} from '@mui/material/';
 import styles from './styles.module.css';
 import {DetailContext} from "../provider";
-
+import { formatByte } from '../../../../Config/Format';
 const MAX_SIZE = 1000000;
 
 
@@ -12,7 +12,7 @@ function validateFile(file){
     return "Định dạng file không hợp lệ (chỉ chấp nhận hình ảnh)";
   }
   if(file.size > MAX_SIZE){
-    return "Kích thước file vượt quá giới hạn ("+global.config.formatByte(MAX_SIZE)+")"
+    return "Kích thước file vượt quá giới hạn ("+formatByte(MAX_SIZE)+")"
   }
   return "";
 }
@@ -96,10 +96,10 @@ function InfoInput({...props}){
           (valid !== "") && <FormHelperText>{valid}</FormHelperText>
           || <Stack direction="row" spacing={2}>
               <Typography component="small">
-                Đang tải: {global.config.formatByte(load)}
+                Đang tải: {formatByte(load)}
               </Typography>
               <Typography component="small">
-                Tổng: {global.config.formatByte(file && file.size || 0)}
+                Tổng: {formatByte(file && file.size || 0)}
               </Typography>
             </Stack>
         }

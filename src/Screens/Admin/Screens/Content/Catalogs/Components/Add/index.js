@@ -1,8 +1,9 @@
 import {memo,useEffect,useReducer,useContext} from 'react';
 import styles from './styles.module.css';
 import Detail from "../Detail/";
+import { useFetch } from '../../../../../../../Config/Fetch/';
 function Add({controller,rulers,children,...props}){
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   const {toast} = useContext(global.config.context)
   const handle = {
     save:function(data){

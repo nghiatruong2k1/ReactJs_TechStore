@@ -12,8 +12,8 @@ import {
 import {NavLink,useLocation} from "react-router-dom"
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
+import { getRoute } from '../../../../../Config/Route/';
 function ProfileNavbar({...props}){
-  const {getRoute} = global.config.useRoute();
   const location = useLocation()
   const args = useMemo(function(){
     return [

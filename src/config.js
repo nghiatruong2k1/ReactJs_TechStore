@@ -1,15 +1,4 @@
-const {useFetch} = require('./Config/useFetch');
-
-const {convertAlias} = require('./Config/convertAlias');
-const {formatBase64} = require('./Config/formatBase64');
-const {formatByte} = require('./Config/formatByte');
-const {formatDate} = require('./Config/formatDate');
-const {formatNumber} = require('./Config/formatNumber');
 const {LocalStorage} = require('./Config/LocalStorage');
-const {useRoute} = require('./Config/useRoute');
-const {useValidate} = require('./Config/useValidate');
-
-
 const {createContext} = require('react');
 const AppContext = createContext({});
 const UserContext = createContext({});
@@ -19,9 +8,9 @@ const WebsiteName = "TechStore";
 
 function handleSetitle(title){
 	if(title && title !== ""){
-		document.title = this.WebsiteName+" - "+title;
+		document.title = WebsiteName+" - "+title;
 	}else{
-		document.title = this.WebsiteName;
+		document.title = WebsiteName;
 	}
 }
 
@@ -29,17 +18,9 @@ function handleSetitle(title){
 module.exports = global.config ={
 	Base_Url_API:Base_Url_API,
 	WebsiteName:WebsiteName,
+	setTitleWebsite:handleSetitle,
 	context:AppContext,
 	UserContext:UserContext,
 	AdminContext:AdminContext,
-	LocalStorage:LocalStorage,
-	setTitleWebsite:handleSetitle,
-	convertAlias:convertAlias,
-	formatNumber:formatNumber,
-	formatDate:formatDate,
-	formatByte:formatByte,
-	fileToBase64:formatBase64,
-	useFetch:useFetch,
-	useRoute:useRoute,
-	useValidate:useValidate
+	LocalStorage:LocalStorage
 }

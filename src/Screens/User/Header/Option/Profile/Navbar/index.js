@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import {Menu,MenuItem,ListItemButton,ListItemIcon,ListItemText} from '@mui/material/';
 import {NavLink} from "react-router-dom";
 import {useCookies} from 'react-cookie';
-
+import {getRoute} from "../../../../../../Config/Route";
 
 
 
@@ -38,7 +38,6 @@ function LogoutButton(){
 
 function Navbar(props){
   const {anchorEl,open,onClose,id,typeId} = props;
-  const {getRoute} = global.config.useRoute();
   return(
     <Menu 
       anchorEl={anchorEl}

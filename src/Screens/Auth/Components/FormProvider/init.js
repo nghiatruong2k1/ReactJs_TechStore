@@ -1,5 +1,5 @@
 
-export function reducer(prevState,{key,payload}) {
+export function reducer(prevState,[key,payload]) {
 	switch(key){
 		case 'set_value':{
 			return {
@@ -17,6 +17,12 @@ export function reducer(prevState,{key,payload}) {
 					...prevState.valids,
 					...payload
 				}
+			}
+		}
+		case 'set_loading':{
+			return {
+				...prevState,
+				isLoading:payload
 			}
 		}
 		default:{

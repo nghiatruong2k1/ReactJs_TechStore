@@ -1,4 +1,5 @@
 import {memo,useEffect,createContext} from 'react';
+import {useFetch} from "../../../../../Config/Fetch/";
 export const BrandsContext = createContext({});
 function BrandsProvider({state,dispath,children,...props}){
 	const handle = {
@@ -6,7 +7,7 @@ function BrandsProvider({state,dispath,children,...props}){
 			dispath({key:'set',payload:{[key]:value}})
 		}
 	}
-  	const Fetch = global.config.useFetch();
+  	const Fetch = useFetch();
 	useEffect(function() {
 	    Fetch.get({
 	        api:"api/brand",
@@ -14,14 +15,14 @@ function BrandsProvider({state,dispath,children,...props}){
 	        	limit:state.limit ?? 1,
 	        	offset:0
 	        },onThen:(result => {
-	            handle.set("datas",result.data ?? []);
+				dispath({key:'set',payload:{datas:result.data ?? []}})
 	        }),onError:(error=> {
-	            handle.set("datas",[]);
+	            dispath({key:'set',payload:{datas:[]}})
 	        }),onStart:(()=>{
-	        	handle.set("datas",Array(state.limit ?? 1).fill(undefined));
-	        	handle.set("isLoading",true)
+				dispath({key:'set',payload:{datas:Array(state.limit ?? 1).fill(undefined)}})
+				dispath({key:'set',payload:{isLoading:true}})
 	        }),onEnd:(()=>{
-	        	handle.set("isLoading",false)
+				dispath({key:'set',payload:{isLoading:false}})
 	        })
 	    })
 	},[])

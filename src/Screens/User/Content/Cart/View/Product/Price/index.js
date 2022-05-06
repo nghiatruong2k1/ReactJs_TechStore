@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import {Typography,Skeleton} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-
+import { formatNumber } from '../../../../../../../Config/Format';
 import {ItemContext} from "../provider";
 function Price({...props}){
   const {state} = useContext(ItemContext);
@@ -12,7 +12,7 @@ function Price({...props}){
   }else{
     let price = "Liên hệ";
     if(typeof(state.data.Price) === 'number' && state.data.Price > 0){
-      price = global.config.formatNumber(state.data.Price,3,0)+" đ";
+      price = formatNumber(state.data.Price,3,0)+" đ";
     }
 
     if(typeof(state.data.SalePrice) === 'number' && state.data.SalePrice > 0){

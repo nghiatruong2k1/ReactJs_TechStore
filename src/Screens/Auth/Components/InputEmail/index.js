@@ -12,7 +12,7 @@ function InputEmail({name,placeholder, ...props}){
   return(
     <TextField
         size="small"
-        type="email"
+        type="text"
         value={values[name] || ""}
         onChange={handleChange}
         FormHelperTextProps={{

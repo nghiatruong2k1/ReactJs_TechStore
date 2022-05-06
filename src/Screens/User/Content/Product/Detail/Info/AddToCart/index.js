@@ -7,13 +7,17 @@ function AddToCart({...props}){
   const [isLoading, setLoading] = useState(false);
   const {state} = useContext(DetailContext);
   const {cart} = useContext(global.config.UserContext);
+  const {toast} = useContext(global.config.context);
   function handleClick() {
-    setLoading(true)
-    state.data 
-    && cart.handle.add(
-      {...state.data,Quantity:state.quantity},
-      ()=>{setLoading(false)}
-    )
+    if(state.quantity >= 1){
+      setLoading(true);
+      state.data && cart.handle.add(
+        {...state.data,Quantity:state.quantity},
+        ()=>{setLoading(false)}
+      )
+    }else{
+        toast.handle.add({message:"Số lượng không hợp lệ!",type:"warning"})
+    }
   }
   return(
     <LoadingButton

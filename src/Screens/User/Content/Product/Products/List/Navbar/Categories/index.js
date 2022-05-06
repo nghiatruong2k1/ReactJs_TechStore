@@ -12,14 +12,15 @@ import {
 } from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-import {NavLink,useLocation} from "react-router-dom"
+import {NavLink,useLocation} from "react-router-dom";
+import {getRoute} from "../../../../../../../../Config/Route";
+import {useFetch} from "../../../../../../../../Config/Fetch/";
 function Categories({...props}){
 
   const [datas,setDatas] = useState([]);
   const [isFetching,setFetching] = useState(false);
   const location = useLocation();
-  const {getRoute} = global.config.useRoute();
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   useEffect(function() {
     Fetch.get({
           api:"api/category"
@@ -50,9 +51,9 @@ function Categories({...props}){
         {
           datas.map(function(data,index){
             let isActive = false;
-            let url = getRoute("user","product","category");
+            let url = "#";
             if(data){
-              url+="/"+data.Alias;
+              url=`${getRoute("user","product","category",{alias:data.Alias})}`;
               if(location.pathname.toLowerCase().indexOf(url.toLowerCase()) !== -1){
                 isActive = true;
               }

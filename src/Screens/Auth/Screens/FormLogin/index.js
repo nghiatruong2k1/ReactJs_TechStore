@@ -14,41 +14,41 @@ import SubmitButton from "../../Components/SubmitButton/";
 import FacebookButton from "../../Components/FacebookButton/";
 import GoogleButton from "../../Components/GoogleButton/";
 
+import { useFetch } from '../../../../Config/Fetch/';
+
 const rules = {
     Email:{
       isRequired:["Vui lòng nhập Email!"],
-      isEmail:[]
+      isEmail:[null,["gmail.com"]]
     },Password:{
       isRequired:["Vui lòng nhập mật khẩu!"]
     }
 }
 function FormLogin({...props}){
   const [cookies,setCookies] = useCookies();
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   const {auth,toast} = useContext(global.config.context);
-  const {checkObject} = global.config.useValidate();
 
   function handleSubmit({Save,...values},handle){
-    const check = checkObject(values,rules,handle.setValid)
-    if(check === 0){
-      Fetch.post({
-        api:"api/auth/login",
-        params:values,
-        onThen:function(result){
-          console.log(result)
-          if(result.data == false){
-          }else{   
-            setCookies('token', result.data.value)   
-            auth.handle.close(); 
-          }
-        },onError:function(error){
-          
+    Fetch.post({
+      api:"api/auth/login",
+      params:values,
+      onThen:function(result){
+        console.log(result)
+        if(result.data == false){
+        }else{   
+          setCookies('token', result.data.value)   
+          auth.handle.close(); 
         }
-      })
-    }
+      },onError:function(error){
+        
+      },onEnd:function(){
+        handle.end();
+      }
+    })
   }
   return(
-    <FormProvider onSubmit={handleSubmit}>
+    <FormProvider onSubmit={handleSubmit} rules={rules}>
       <Stack spacing={1} sx={{
         px:{xs:0,sm:6,md:8,lg:12}
       }}>

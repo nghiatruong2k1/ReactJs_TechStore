@@ -1,28 +1,29 @@
 import {memo,createContext,useState,useEffect} from 'react';
 import {useParams,useNavigate} from "react-router-dom";
+import { useFetch } from '../../../../../Config/Fetch/';
 export const DetailContext = createContext();
 function DetailProvider({state,dispath,children,...props}){
 	const navigator = useNavigate();
 	const handle = {
 		set:(key,value)=>{
-			dispath({key:'set',payload:{[key]:value}})
+			dispath(["set",{[key]:value}])
 		}
 	}
 	const {alias} = useParams();
-  	const Fetch = global.config.useFetch();
+  	const Fetch = useFetch();
 	useEffect(function() {
-	    Fetch.get({
+	    alias && Fetch.get({
 	        api:"api/product/"+alias
 	        ,onThen:(result => {
-	            handle.set("data",result.data ?? null);
+	            dispath(["data",result.data ?? null]);
 	        }),onError:(error=> {
-	            handle.set("data",null);
+	            dispath(["data",null]);
 	        }),onStart:(()=>{
-	        	handle.set("data",{});
-	        	handle.set("quantity",1);
-	        	handle.set("isLoading",true);
+	        	dispath(["data",{}]);
+	        	dispath(["quantity",1]);
+	        	dispath(["is_loading",true]);
 	        }),onEnd:(()=>{
-	        	handle.set("isLoading",false);
+	        	dispath(["is_loading",false]);
 	        })
 	    })
 	},[alias])

@@ -8,15 +8,17 @@ import Provider from "./provider";
 import SearchSelect from "./Select/";
 import SearchInput from "./Input/";
 import SearchOption from "./Option/";
+
+import {getRoute} from "../../../../Config/Route";
+
 function HeaderSearch({...props}){
   const [state,dispath] = useReducer(reducer,initData);
-  const {getRoute} = global.config.useRoute();
   const navigator = useNavigate();
   function handleSubmit(event){
       event.preventDefault();
       if(state.query.trim() != ""){
         navigator({
-          pathname:`${getRoute("user",state.controller,"search")}/${state.query}`,
+          pathname:`${getRoute("user",state.controller,"search",{query:state.query})}`,
           search: ""
         });
       }

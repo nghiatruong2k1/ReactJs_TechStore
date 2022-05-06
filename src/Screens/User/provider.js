@@ -1,7 +1,7 @@
 import {memo} from 'react';
 import useCart from "./Cart/Control/";
+const UserContext = global.config.UserContext;
 function UserProvider({children,...props}){
-	const UserContext = global.config.UserContext;
 	const cart = useCart();
 	return(
 		<UserContext.Provider value={{

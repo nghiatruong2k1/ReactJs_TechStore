@@ -1,11 +1,12 @@
 import {useReducer,useContext,useEffect} from 'react';
 import {reducer,initData} from "./init";
 import DialogResult from "../../../../Components/DialogResult/";
+import {LocalStorage} from "../../../../Config/LocalStorage"; 
 function Cart(){
   const {toast} = useContext(global.config.context);
   const [state,dispath] = useReducer(reducer,{
     ...initData,
-    datas:global.config.LocalStorage.get("cart",[])
+    datas:LocalStorage.get("cart",[])
   });
   useEffect(function(){
     const newCart = state.datas.filter(function(data){
@@ -13,7 +14,7 @@ function Cart(){
         return data
       }
     })
-    global.config.LocalStorage.set("cart",newCart)
+    LocalStorage.set("cart",newCart)
   },[state.datas])
   const handle = {
     open:function(){
@@ -57,8 +58,10 @@ function Cart(){
           },onNo:()=>{onEnd && onEnd()}
       });
 
-    },setPrice:function(index,Price,SalePrice){
-      dispath({key:'set_price',payload:{index,Price,SalePrice}})
+    },setQuantity:function(index,quantity){
+      dispath({key:'set_quantity',payload:{index,quantity}})
+    },setData:function(index,data){
+      dispath({key:'set_data',payload:{index,data}})
     },getCount:function(){
       return state.datas.reduce(function(result,data){
         if(data){

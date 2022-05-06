@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import {Skeleton} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-
+import {formatNumber} from "../../../../../../../Config/Format/";
 import {DetailContext} from "../../provider";
 function DataSalePrice({...props}){
   const {state} = useContext(DetailContext);
@@ -13,7 +13,7 @@ function DataSalePrice({...props}){
     if(state.data.Price){
       if(state.data.SalePrice){
         className=styles.sale;
-        salePrice = global.config.formatNumber(state.data.SalePrice,3,0)+" đ";
+        salePrice = formatNumber(state.data.SalePrice,3,0)+" đ";
 
         return(
           <span className={clsx(styles.price,className)}>{salePrice}</span>

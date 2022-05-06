@@ -1,38 +1,24 @@
 
 
-import {useContext} from "react";
-import DialogResult from "../Components/DialogResult/";
+import {useReducer,useContext, useMemo} from "react";
+import DialogResult from "../../Components/DialogResult";
 
 import axios from "axios";
+
 axios.defaults.withCredentials = true;
 axios.defaults.credentials = "include";
 axios.defaults.xsrfCookieName = "token";
 axios.defaults.xsrfHeaderName = "token";
 
-export const useFetch = function(location){
-  const {loading,toast} = useContext(global.config.context);
-  return {
-    get:function(props){
-      handleGet({...props,location,toast,loading})
-    },post:function(props){
-      handlePost({...props,location,toast,loading})
-    },put:function(props){
-      handlePut({...props,location,toast,loading})
-    },delete:function({title,message,...props}){
-      DialogResult({
-        title,message, 
-        onYes:()=>(handleDelete({...props,location,toast,loading}))
-      });
-    }
-  }
-}
 
 
-async function handleFetch(props){
-    const {api,params,method,promise} = props;
+async function handleFetch(props,promise){
+    const {api,params,method} = props;
     const {navigator,loading,toast,location} = props;
     const {onStart,onEnd,onThen,onError} = props;
+
     const url = global.config.Base_Url_API+api;
+
     console.log(`[Start ${method}]`,{location,url,params});
     loading.handle.add();
     if(onStart && typeof(onStart)==="function"){
@@ -76,27 +62,46 @@ async function handleFetch(props){
         }
       })
 }
-export const handleGet =async function({...props}){
-    const promise = async function(url,params){
-      return await axios.get(url,{params})
-    };
-    await handleFetch({...props,promise,method:"GET",timedelay:1000})
+
+const handleGet = async function(props){
+  const promise = async function(url,params){
+    return await axios.get(url,{params})
+  };
+  return await handleFetch({...props,method:"GET"},promise)
 }
-export const handlePut =async function({...props}){
-    const promise =async function(url,params){
-      return await axios.put(url,params)
-    };
-    handleFetch({...props,promise,method:"PUT"})
+const handlePut =async function(props){
+  const promise =async function(url,params){
+    return await axios.put(url,params)
+  };
+  return await handleFetch({...props,method:"PUT"},promise)
 }
-export const handlePost =async function({...props}){
-    const promise =async function(url,params){
-      return await axios.post(url,params)
-    };
-    handleFetch({...props,promise,method:"POST"})
+const handlePost =async function(props){
+  const promise =async function(url,params){
+    return await axios.post(url,params)
+  };
+  return await handleFetch({...props,method:"POST"},promise)
 }
-export const handleDelete =async function({...props}){
-    const promise =async function(url,params){
-      return await axios.delete(url,params)
-    }; 
-    handleFetch({...props,promise,method:"DELETE"})  
+const handleDelete =async function(props){
+  const promise =async function(url,params){
+    return await axios.delete(url,params)
+  }; 
+  return await handleFetch({...props,method:"DELETE"},promise)  
+}
+
+export const useFetch = function(location){
+  const {loading,toast} = useContext(global.config.context);
+  return {
+    get:function(props){
+      handleGet({...props,location,toast,loading})
+    },post:function(props){
+      handlePost({...props,location,toast,loading})
+    },put:function(props){
+      handlePut({...props,location,toast,loading})
+    },delete:function({title,message,...props}){
+      DialogResult({
+        title,message, 
+        onYes:()=>(handleDelete({...props,location,toast,loading}))
+      });
+    }
+  }
 }

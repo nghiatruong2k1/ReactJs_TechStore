@@ -4,27 +4,21 @@ import {Paper,FormControl,TextField,Typography,Tooltip,InputAdornment,IconButton
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 
-
+import { useFetch } from '../../../../../Config/Fetch/';
 import {CartContext} from "../provider";
-function validateCode(value){
-    if(value == ""){
-      return "Vui lòng nhập mã giảm giá"
-    }
-    const regex = /[^a-zA-Z0-9]/g;
-    if(regex.test(value)){
-      return "Mã giảm giá chỉ bao gồm a-z,A-Z,0-9" 
-    }
-    if(value.length != 10){
-      return "Mã giảm giá có độ dài 10 kí tự" 
-    }
-
-    return ""
+import {checkValue} from "../../../../../Config/Validate/";
+const ruler = {
+  isRequired:["Vui lòng nhập mã giảm giá"],
+  isRegex:[/[^a-zA-Z0-9]/g,"Mã giảm giá chỉ bao gồm a-z,A-Z,0-9"],
+  isLength:[10,"Mã giảm giá có độ dài {1} kí tự"]
 }
+
+
 function VoucherCode({...props}){
   const {state,dispath} = useContext(CartContext);
   const [value,setValue] = useState("");
   const [valid,setValid] = useState("");
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   const {toast} = useContext(global.config.context);
   useEffect(function(){
     console.log(state.voucher)
@@ -34,8 +28,10 @@ function VoucherCode({...props}){
   },[state.voucher])
   function handleSubmit(e){
     e.preventDefault();
-    let newValid = validateCode(value);
-    if(newValid == ""){
+    let check = checkValue(value,ruler,function(valids){
+      setValid(valids[0] ?? "");
+    });
+    if(check === 0){
       Fetch.get({
         api:"api/ordervoucher",
         params:{code:value},
@@ -49,7 +45,6 @@ function VoucherCode({...props}){
         }
       })
     }
-    setValid(newValid)
   }
   function handleChange(e){
     if(state.voucher){
@@ -61,8 +56,8 @@ function VoucherCode({...props}){
     //setValid("");
   }
   function handleBlur(e){
-    let newValid = validateCode(value);
-    setValid(newValid)
+    let newValid = checkValue(value,ruler);
+    setValid(newValid[0] || "")
   }
   return(
    <Paper  sx={{p:2,flex:1}}>

@@ -13,8 +13,8 @@ import {NavLink} from "react-router-dom";
 import {Frame,Image} from "../../../../../../Components/";
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
+import {getRoute} from "../../../../../../Config/Route";
 function Item({data,loading,...props}){
-  const {getRoute} = global.config.useRoute();
   return(
     <Grid item {...props}>
       <Card sx={{height:"100%"}}>
@@ -23,7 +23,7 @@ function Item({data,loading,...props}){
             <Typography
               className="h5"
               component={ !loading && NavLink || "span" }
-              to={!loading  && `${getRoute("user","product","brand")}/${data.Alias}` || "/"
+              to={!loading  && `${getRoute("user","product","brand",{alias:data && data.Alias})}` || "/"
               }
             >
               {

@@ -4,6 +4,8 @@ import {Skeleton} from '@mui/material/';
 import styles from './styles.module.css';
 
 import {DetailContext} from "../../provider";
+import {formatNumber} from "../../../../../../../Config/Format/";
+
 function DataPrice({...props}){
   const {state} = useContext(DetailContext);
   if(!state.isLoading && state.data){
@@ -15,7 +17,7 @@ function DataPrice({...props}){
       }else{
         className=styles.current
       }
-      price = global.config.formatNumber(state.data.Price,3,0)+" đ";
+      price = formatNumber(state.data.Price,3,0)+" đ";
     }else{
       price = "Liên hệ"
       className=styles.current

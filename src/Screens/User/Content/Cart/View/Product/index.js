@@ -7,8 +7,7 @@ import {
   Skeleton,
   Tooltip,
   IconButton,
-  Stack,
-  TextField
+  Stack
 } from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
@@ -23,6 +22,7 @@ import Category from "./Category/";
 import Type from "./Type/";
 import Price from "./Price/";
 import SalePrice from "./SalePrice/";
+import Quantity from "./Quantity/";
 import DeleteButton from "./DeleteButton/";
 
 function Product({data,index,...props}){
@@ -44,7 +44,7 @@ function Product({data,index,...props}){
         </Grid>
       </TableCell>
       <TableCell> 
-        <TextField size="small" type="number" inputProps={{min:1,max:100}} value={data.Quantity} /> 
+        <Quantity />
       </TableCell>
       <TableCell> 
         <div className="price-wrap"> 

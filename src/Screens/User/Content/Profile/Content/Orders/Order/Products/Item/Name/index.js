@@ -5,13 +5,13 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {NavLink} from "react-router-dom";
 import {ItemContext} from "../provider";
+import { getRoute } from '../../../../../../../../../../Config/Route/';
 function ItemName({...props}){
-  const {getRoute} = global.config.useRoute();
   const {data,loading} = useContext(ItemContext);
   if(!loading){
     return(
       <Typography component={NavLink} 
-        to={`${getRoute("user","product","detail")}/${data && data.Alias}`} 
+        to={`${getRoute("user","product","detail",{alias:data && data.Alias})}`} 
       >
         {data && data.Name || "Đang cập nhật"}
       </Typography>

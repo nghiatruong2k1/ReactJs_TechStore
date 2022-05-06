@@ -16,12 +16,20 @@ function UserPage({...props}){
   },[location])
   return(
     <Provider>
-      <Header />
+      <Header /> 
+      <Cart />
       <Content />
       <Subscribe />
       <Footer />
-      <Cart />
     </Provider>
   )
 }
 export default memo(UserPage);
+/*
+
+      
+      
+      
+
+
+*/

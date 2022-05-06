@@ -5,8 +5,8 @@ import BrandDetail    from "./Detail/";
 import Add            from "../../Components/Add";
 import Update         from "../../Components/Update";
 import {validateRuler}from "./validate";
+import { getActionName } from '../../../../../../../Config/Route/';
 function CatalogBrand({...props}){
-  const {getActionName} = global.config.useRoute();
   return(
       <Routes>
         <Route path={getActionName("admin","brand","index")} element={<BrandList/>} />
@@ -15,7 +15,7 @@ function CatalogBrand({...props}){
             <BrandDetail title="Thêm thương hiệu"/>
           </Add>
         }/>
-        <Route path={getActionName("admin","brand","update")+"/:id"} element={
+        <Route path={getActionName("admin","brand","update")} element={
           <Update rulers={validateRuler} controller="brand">
             <BrandDetail title="Chỉnh sửa thương hiệu"/>
           </Update>

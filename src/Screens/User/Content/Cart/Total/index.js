@@ -5,6 +5,7 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {Image} from "../../../../../Components/"
 import {CartContext} from "../provider";
+import {formatNumber} from "../../../../../Config/Format/";
 function Total({...props}){
   const {cart} = useContext(global.config.UserContext);
   const {state,dispath} = useContext(CartContext);
@@ -22,15 +23,15 @@ function Total({...props}){
       <Stack spacing={1}>
           <Stack direction="row">
               <Typography>Giá tiền:</Typography>
-              <Typography flex="1" align="right">{global.config.formatNumber(price)} đ</Typography>
+              <Typography flex="1" align="right">{formatNumber(price)} đ</Typography>
           </Stack>
           <Stack direction="row">
               <Typography>Giảm giá:</Typography>
-              <Typography flex="1" align="right">{global.config.formatNumber(price*sale/100)} đ</Typography>
+              <Typography flex="1" align="right">{formatNumber(price*sale/100)} đ</Typography>
           </Stack>
           <Stack direction="row">
               <Typography>Tổng:</Typography>
-              <Typography flex="1" align="right">{global.config.formatNumber(price - price*sale/100)} đ</Typography>
+              <Typography flex="1" align="right">{formatNumber(price - price*sale/100)} đ</Typography>
           </Stack>
           <Divider />
           <Stack direction="row" px={8}>

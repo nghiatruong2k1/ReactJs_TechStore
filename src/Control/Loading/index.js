@@ -1,23 +1,25 @@
-import {memo,useState} from 'react';
+import {useState,useMemo} from 'react';
 function useLoading(){
-	const [argsLoading,setLoading] = useState([]);
-	const handleLoading = {
-		add:function(){
-			setLoading(function([...prevDatas]){
-				prevDatas.push(true);
-				return prevDatas;
-			})
-		},remove:function(){
-			setLoading(function([...prevDatas]){
-				prevDatas.pop();
-				return prevDatas;
-			})
-		},reset:function(){
-			setLoading([])
+	const [loadings,setLoading] = useState([]);
+	return useMemo(function(){
+		return {
+			state:loadings,
+			handle:{
+				add:function(){
+					setLoading(function([...prevDatas]){
+						prevDatas.push(true);
+						return prevDatas;
+					})
+				},remove:function(){
+					setLoading(function([...prevDatas]){
+						prevDatas.pop();
+						return prevDatas;
+					})
+				},reset:function(){
+					setLoading([])
+				}
+			}
 		}
-	}
-	return(
-		{state:argsLoading,handle:handleLoading}
-	)
+	},[loadings]);
 }
 export default useLoading;

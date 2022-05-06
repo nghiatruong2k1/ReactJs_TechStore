@@ -2,15 +2,14 @@ import {memo,useReducer,useEffect} from 'react';
 import clsx from 'clsx';
 import {LoadingButton} from "@mui/lab/";
 import {Grid,Stack,Button,Typography,List,ListItem,Skeleton} from '@mui/material/';
-import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {NavLink} from "react-router-dom";
 import {Frame,Image} from "../../../../../../Components/"
 import {initData,reducer} from './init'
 import Provider from "./provider";
+import {getRoute} from "../../../../../../Config/Route";
 function Popular({...props}){
   const [state,dispath] = useReducer(reducer,initData);
-  const {getRoute} = global.config.useRoute();
   return(
     <Provider state={state} dispath={dispath}>
       <Grid item {...props}>
@@ -33,7 +32,7 @@ function Popular({...props}){
                       component={(data && !state.isLoading) && NavLink || "button"} 
                       color="info"
                       className={styles.button}
-                      to={`${getRoute("user","product","category")}/${data && data.Alias}`}
+                      to={`${getRoute("user","product","category",{alias:data && data.Alias})}`}
                     >Xem ngay
                     </LoadingButton>
                   </Grid> 

@@ -6,9 +6,10 @@ import styles from '../styles.module.css';
 
 import {OptionButton} from "../index";
 import Navbar from "./Navbar";
+import {useFetch} from "../../../../../Config/Fetch/";
 
 function Profile(){
-  const Fetch = global.config.useFetch();
+  const Fetch = useFetch();
   const [cookies,setCookies,removeCookies] = useCookies();
   const [state,dispath] = useReducer(reducer,initData);
   const buttonRef = useRef(null);
