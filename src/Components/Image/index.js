@@ -25,7 +25,7 @@ const Image = (function(){
 			Attr.className +=" "+styles.contain;
 		}
 		Attr.src = useMemo(function(){
-			let _src = "/images/default-no-img.jpg";
+			let _src = "";
 			if(src && src !=""){
 				_src = src;
 			}else if(srcDefault){

@@ -19,6 +19,7 @@ function Categories({...props}){
     <Provider state={state} dispath={dispath}>
       <Grid item {...props}>
       <List disablePadding
+        sx={{width:"100%"}}
         subheader={
           <ListSubheader align="center" disableGutters disableSticky component="h6">
             Danh mục

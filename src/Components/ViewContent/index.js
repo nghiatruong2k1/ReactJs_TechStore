@@ -13,7 +13,7 @@ function ViewContent({loading,viewLoading,length,empty,children,...props}){
     if(Boolean(viewLoading)){
       return (<ViewLoading {...props}/>)
     }
-  }else if(!Boolean(length) || length && length <= 0){
+  }else if(!Boolean(length)){
     if(!Boolean(empty) || typeof(empty) === 'string'){
       return (<ViewEmpty children={empty} {...props}/>)
     }else{

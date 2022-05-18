@@ -6,33 +6,17 @@ import styles from './styles.module.css';
 import Provider from "./provider";
 
 import InfoContent from "./Info/";
+import HeadContent from "./Head/";
 import DetailContent from "./Detail/";
 import ProductsContent from "./Products/";
 import { formatDate } from '../../../../../../../Config/Format';
-function Order({loading,data,index,...props}){
+function Order({loading,data,status,index,...props}){
   return(
-    <Provider loading={loading} data={data}>
+    <Provider loading={loading} data={data} status={status}>
       <Grid item xs={12}>
        <Card>
          <CardContent>
-           <Stack direction="row" spacing={5}>
-            <Typography sx={{fontWeight:'bold',display:"inline-flex",flex:1}}>
-              Mã đơn hàng:
-              {
-                !loading &&
-                  `${data && data.Id}`
-                || <Skeleton variant="text" sx={{height:'100%',flex:"1"}} />
-              }
-            </Typography>
-            <Typography sx={{fontWeight:'italic',display:"inline-flex",flex:1}}>
-              Ngày đặt hàng: 
-              {
-                !loading &&
-                `${formatDate(data && data.CreateDate)}`
-                || <Skeleton variant="text" sx={{height:'100%',flex:"1"}} />
-              }
-            </Typography>
-           </Stack>
+           <HeadContent />
          </CardContent>
          <Divider />
          <CardContent>

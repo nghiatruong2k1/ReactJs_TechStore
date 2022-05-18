@@ -5,16 +5,17 @@ export const ProductsContext = createContext();
 function ProductsProvider({state,dispath,action,children,...props}){
 	const handle = {
 		set:(key,value)=>{
-			dispath({key:'set',payload:{[key]:value}})
+			dispath(['set',{[key]:value}])
 		}
-	}
+	};
 	const feild = useMemo(function() {
 		if(action == 'search'){
 			return 'query'
 		}else{
 			return  'alias'
 		}
-	},[action])
+	},[action]);
+
 	const params = useParams();
 	const Fetch = useFetch("product list");
 	useEffect(function() {
@@ -25,7 +26,12 @@ function ProductsProvider({state,dispath,action,children,...props}){
 		    	Fetch.get({
 			        api:"api/"+action+"/"+params[feild]
 			        ,onThen:(result => {
-			            global.config.setTitleWebsite(result.data && result.data.Name || "")
+			        	if(result.data && result.data.Name && typeof(result.data.Name) == 'string')
+			      		{
+			      			global.config.setTitleWebsite(result.data.Name || "")
+			      		}else{
+			      			global.config.setTitleWebsite("")
+			      		}
 			        }),onError:(error=> {
 			            global.config.setTitleWebsite("")
 			        })
@@ -41,9 +47,9 @@ function ProductsProvider({state,dispath,action,children,...props}){
 	        	limit:state.limit,
 	        	sort:state.sort,
 	        },onThen:(result => {
-	            dispath({key:'set',payload:{datas:result.data ?? []}})
+	            dispath(['set_data',result.data])
 	        }),onError:(error=> {
-	            dispath({key:'set',payload:{datas:[]}})
+	            dispath(['set_data'])
 	        }),onStart,onEnd
 	    });
   	}
@@ -51,9 +57,9 @@ function ProductsProvider({state,dispath,action,children,...props}){
   		Fetch.get({
 	        api:"api/product/"+action+"/count/"+params[feild]
 	        ,onThen:(result => {
-	            dispath({key:'set',payload:{total:result.data ?? 0}})
+	            dispath(['set_total',result.data])
 	        }),onError:(error=> {
-	            dispath({key:'set',payload:{total:0}})
+	            dispath(['set_total'])
 	        })
 	    })
   	}
@@ -64,10 +70,10 @@ function ProductsProvider({state,dispath,action,children,...props}){
 		document.documentElement.scrollTop = 0;
 	    handleGetDatas({
 	    	onStart:(()=>{
-	    		dispath({key:'set',payload:{datas:Array(state.limit ?? 1).fill(undefined)}})
-	    		dispath({key:'set',payload:{isLoading:true}})
+	    		dispath(['set_data',Array(state.limit ?? 1).fill(undefined)])
+	    		dispath(['set_loading',true])
 	        }),onEnd:(()=>{
-	        	dispath({key:'set',payload:{isLoading:false}})
+	        	dispath(['set_loading',false])
 	        })
 	    })
 	},[action,params[feild],state.page,state.sort])

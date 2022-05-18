@@ -16,17 +16,29 @@ function CartContent({...props}){
   const [state,dispath] = useReducer(reducer,initData);
   return(
   <Provider state={state} dispath={dispath}>
-    <Grid container spacing={2}>
-      <Grid item xs={12} lg={8} >
-        <View />
-      </Grid>
-      <Grid item xs={12} lg={4}>
-        <Stack spacing={2}>
-          <VoucherCode />
-          <Total />
-          <Buttons />
-        </Stack>
-      </Grid>
+    <Grid container display="grid">
+      <View p={1} sx={{
+        gridColumn:{
+          lg:"1 / 2"
+        },gridRow:{
+          lg:"1 / span 3"
+        }
+      }}/>
+      <VoucherCode p={1} sx={{
+        gridColumn:{
+          lg:"2 / 3"
+        }
+      }}/>
+      <Total p={1} sx={{
+        gridColumn:{
+          lg:"2 / 3"
+        }
+      }}/>
+      <Buttons p={1} sx={{
+        gridColumn:{
+          lg:"2 / 3"
+        }
+      }}/>
     </Grid>
   </Provider>
   )

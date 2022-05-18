@@ -22,7 +22,14 @@ import DataBookmask from "./Bookmask/";
 
 function Product({data,loading,...props}){
   return(
-    <Box className={"col-6 col-sm-4 col-lg-3 col-xxl-2"} p={1}>
+    <Grid item sx={{
+      flex:{
+        xs:"1 0 calc(6 * 100% / 12)",
+        sm:"1 0 calc(4 * 100% / 12)",
+        md:"1 0 25%",
+        lg:"1 0 20%"
+      }
+    }} p={0.5}>
       <Card style={{height:'100%'}}>
         <CardActions>
           <Frame square loading={loading}>
@@ -43,7 +50,7 @@ function Product({data,loading,...props}){
             />
         </CardContent>
        </Card>
-    </Box>
+    </Grid>
   )
 }
 export default memo(Product);

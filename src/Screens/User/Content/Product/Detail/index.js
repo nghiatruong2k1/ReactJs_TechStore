@@ -21,7 +21,7 @@ function ProductDetail({...props}){
         <DetailInfo xs={8} px={2} py={1}/>
       </Grid>
       <Grid container py={2}>
-        <DetailDescription xs={8} px={2} py={1}/>
+        <DetailDescription xs={9} px={2} py={1}/>
       </Grid>
     </ViewContent>
   </Provider>

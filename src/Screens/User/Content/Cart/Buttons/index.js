@@ -1,7 +1,7 @@
 import {memo,useContext} from 'react';
 import {useCookies} from 'react-cookie'
 import clsx from 'clsx';
-import {Button,Stack,Paper} from '@mui/material/';
+import {Grid,Button,Stack,Paper} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import DialogResult from "./DialogResult/";
@@ -11,7 +11,9 @@ function Buttons({...props}){
   const {state,dispath} = useContext(CartContext);
   const [cookies,setCookies] = useCookies();
   const {cart} = useContext(global.config.UserContext);
-  const {auth,toast} = useContext(global.config.context);
+  const {auth} = useContext(global.config.AppContext);
+  const {toast} = useContext(global.config.context);
+  
   const Fetch =useFetch();
   function handleOrderClick(){
     if(Boolean(cookies['token'])){
@@ -30,8 +32,10 @@ function Buttons({...props}){
                 products:newCart,
                 voucher:state.voucher || {}
               },
-              onThen:function(result){
-                cart.handle.reset();
+              onThen:function({data}){
+                if(data && data.value){
+                  cart.handle.reset();
+                }
               }
             })
           }
@@ -45,12 +49,14 @@ function Buttons({...props}){
     }
   }
   return(
-    <Paper sx={{p:2}}>
-      <Stack direction="row" alignItems="center" justifyContent = 'space-between'>
+  <Grid item xs {...props}>
+    <Paper sx={{p:1,height:"100%"}}>
+      <Stack direction="row" height="100%" alignItems="center" justifyContent = 'space-between'>
         <Button color="secondary" variant="contained" startIcon={<i className="fas fa-chevron-left"></i>}>Quay lại</Button>
         <Button onClick={handleOrderClick} color="success"variant="contained" endIcon={<i className="fas fa-chevron-right"></i>}>Thanh toán</Button>
       </Stack>
     </Paper>
+  </Grid>
   )
 }
 export default memo(Buttons);

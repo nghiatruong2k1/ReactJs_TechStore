@@ -2,6 +2,7 @@ import {memo,useContext} from 'react';
 import {useCookies} from 'react-cookie';
 import {Stack,Typography,Link} from '@mui/material/';
 
+import LinkTo from "../../Components/LinkTo/";
 import FormProvider from "../../Components/FormProvider/";
 import InputEmail from "../../Components/InputEmail/";
 import InputPassword from "../../Components/InputPassword/";
@@ -10,7 +11,7 @@ import LinkSetAction from "../../Components/LinkSetAction/";
 import SubmitButton from "../../Components/SubmitButton/";
 import FacebookButton from "../../Components/FacebookButton/";
 import GoogleButton from "../../Components/GoogleButton/";
-
+import {getRoute} from "../../../../Config/Route/"
 import { useFetch } from '../../../../Config/Fetch/';
 const rules = {
     Email:{
@@ -26,19 +27,17 @@ const rules = {
     }
 }
 function FormRegister({...props}){
-  const [cookies,setCookies] = useCookies();
   const Fetch = useFetch();
-  const {auth,toast} = useContext(global.config.context);
+  const {auth,toast} = useContext(global.config.AppContext);
   
   function handleSubmit({IsAgree,RePassword,...values},handle){
     Fetch.post({
       api:"api/auth/register",
       params:values,
       onThen:function(result){
-        if(result.data == false){
-        }else{   
-          setCookies('token', result.data.value)  
-          auth.handle.close();
+        if(result.data.value && result.data.token){
+          auth.handle.login(result.data.value,result.data.token);
+          auth.handle.close(); 
         }
       },onError:function(error){
       },onEnd:function(){
@@ -54,28 +53,33 @@ function FormRegister({...props}){
       }}>
         <InputEmail 
           name="Email"
+          title="Email"
           placeholder="Nhập Email"
         />
         <InputPassword 
           name="Password"
+          title="Mật khẩu"
           placeholder="Nhập mật khẩu"
         />
         <InputPassword 
           name="RePassword"
-          placeholder="Xác thực mật khẩu"
+          title="Xác thực mật khẩu"
+          placeholder="Nhập xác thực mật khẩu"
         />
         <InputCheckbox 
           name="IsAgree" 
           label={
-            <>Bạn đồng ý với 
-            <Link underline="none" to="/"> điều khoản và chính sách sử dụng</Link>
-            </>
-          } 
-        style={{marginRight:'0'}}/>
+            <LinkTo 
+              beforeText="Bạn đồng ý với"
+              text="điều khoản và chính sách sử dụng"
+              underline="none" 
+              to={getRoute("user","about","dieu-khoan-va-chinh-sach")}
+            > 
+            </LinkTo>
+          } />
         <SubmitButton> Đăng ký </SubmitButton>
         <Typography>
-          Bạn đã có tài khoản?
-          <LinkSetAction action="login"> Đăng nhập </LinkSetAction>
+          <LinkSetAction beforeText="Bạn đã có tài khoản?" text="Đăng nhập" action="login" />
         </Typography> 
         <Stack 
           direction="row" 

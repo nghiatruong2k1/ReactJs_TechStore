@@ -7,8 +7,7 @@ import styles from './styles.module.css';
 
 import {Frame,Image} from "../../../../../../../Components/"
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 
 import {SliderContext} from "../provider";
 function Images({...props},ref){

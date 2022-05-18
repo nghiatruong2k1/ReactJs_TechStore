@@ -1,11 +1,19 @@
-import {memo}    from 'react';
-import ListView  from "../../../Components/List";
-import {displays}from "./init";
-function List({...props}){
+import {memo} from 'react';
+import DataGridView from "../../../Components/DataGrid";
+import {useGetData} from "../../../Components/DataGrid/provider";
+import Title     from "../../../../../../Components/Title/";
+import {displays} from "./init";
+function BrandList({...props}){
+  const propsGet = useGetData({
+    controller:"brand"
+  });
   return(
-    <>
-      <ListView displays={displays} title="Quản lý thương hiệu" controller="brand"/>
-    </>
+    <DataGridView 
+      displays={displays}
+      {...propsGet}
+    >
+      <Title text="Quản lý thương hiệu" />
+    </DataGridView>
   )
 }
-export default memo(List);
+export default memo(BrandList);

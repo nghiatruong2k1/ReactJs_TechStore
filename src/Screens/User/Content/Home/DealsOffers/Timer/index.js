@@ -1,4 +1,6 @@
 import {memo,useEffect,useState} from 'react';
+import {Stack} from "@mui/material/";
+import styles from "./styles.module.css";
 function loadTime(time) {
   let newTime = Number(time);
   if (newTime < 10) {
@@ -9,7 +11,7 @@ function loadTime(time) {
 }
 function Timer({...props}){
   const [timer,setTimer] = useState(function(){
-    return new Date("2022/12/30 14:30:00");
+    return new Date("2022/05/30 14:30:00");
   });
   const [timeD,setD] = useState(0);
   const [timeH,setH] = useState(0);
@@ -46,12 +48,24 @@ function Timer({...props}){
     }
   },[timer]);
   return(
-    <div className="timer">
-       <div> <span className="num">{loadTime(timeD)}</span> <small>Days</small></div>
-       <div> <span className="num">{loadTime(timeH)}</span> <small>Hours</small></div>
-       <div> <span className="num">{loadTime(timeM)}</span> <small>Min</small></div>
-       <div> <span className="num">{loadTime(timeS)}</span> <small>Sec</small></div>
-    </div>
+    <Stack direction="row" alignItems="center" justifyContent="center" spacing={2}>
+      <div className={styles.time}>
+        <span className={styles.num} >{loadTime(timeD)}</span>
+        <small className={styles.text}>Ngày</small>
+      </div>
+      <div className={styles.time}>
+        <span className={styles.num} >{loadTime(timeH)}</span>
+        <small className={styles.text}>Giờ</small>
+      </div>
+      <div className={styles.time}>
+        <span className={styles.num} >{loadTime(timeM)}</span>
+        <small className={styles.text}>Phút</small>
+      </div>
+      <div className={styles.time}>
+        <span className={styles.num} >{loadTime(timeS)}</span>
+        <small className={styles.text}>Giây</small>
+      </div>
+    </Stack>
   )
 }
 export default memo(Timer);

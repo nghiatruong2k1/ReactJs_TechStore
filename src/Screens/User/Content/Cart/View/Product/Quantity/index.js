@@ -2,12 +2,11 @@ import {memo,useContext,useState,useEffect} from 'react';
 import {TextField} from '@mui/material/';
 import {ItemContext} from "../provider";
 function Quantity({...props}){
-  const {data,state,index} = useContext(ItemContext);
+  const {data,index} = useContext(ItemContext);
   const [value,setValue] = useState(0);
   const {cart} = useContext(global.config.UserContext);
   function handleChange(event){
-      setValue(event.target.value)
-      
+      setValue(event.target.value)   
   }
   function handleBlur(){
     const newValue = Number(value);
@@ -21,12 +20,12 @@ function Quantity({...props}){
   }
   useEffect(() => {
       setValue(data.Quantity)
-  }, [data.Quantity]);
+  },[data.Quantity]);
   return(
     <TextField 
         size="small" 
         type="number" 
-        disabled={state.isLoading} 
+        disabled={!data} 
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}

@@ -1,11 +1,6 @@
 import {memo,useContext} from 'react';
 import {Grid,TextField,Typography} from '@mui/material/';
-import {DetailContext} from "../init";
-function InputNumber({left,right,name,label,placeholder,defaultValue,TextFieldProps,...props}){
-  const {state,handle} = useContext(DetailContext);
-  function handleChange(event){
-      handle.change(name,event.target.value);
-  }
+function InputNumber({left,right,name,label,placeholder,value,onChange,valid,onValid,TextFieldProps,...props}){
   return(
     <Grid container alignItems="center"{...props}>
       <Grid item {...left}>
@@ -14,8 +9,8 @@ function InputNumber({left,right,name,label,placeholder,defaultValue,TextFieldPr
       <Grid item {...right}>
         <TextField
           label=""
-          value={state.data[name] ?? 0}
-          onChange={handleChange}
+          value={value ?? ""}
+          onChange={(e)=>(onChange && onChange(e,Number(e.target.value)))}
           placeholder={placeholder ?? label ?? ""}
           size="small"
           type="number"
@@ -23,7 +18,7 @@ function InputNumber({left,right,name,label,placeholder,defaultValue,TextFieldPr
             error:true,
             component:'small'
           }}
-          helperText={state.valids[name] || " "}
+          helperText={valid ?? ""}
           fullWidth
           {...TextFieldProps}
         />

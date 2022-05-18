@@ -12,7 +12,7 @@ import {
 } from '@mui/icons-material/';
 import styles from './styles.module.css';
 function Head({...props}){
-  const {auth} = useContext(global.config.context);
+  const {auth} = useContext(global.config.AppContext);
   function handleClose(){
     auth.handle.close();
   }

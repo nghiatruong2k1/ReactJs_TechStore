@@ -1,4 +1,4 @@
-import {memo,useState} from 'react';
+import {memo,useReducer} from 'react';
 import clsx from 'clsx';
 import {
   Grid,
@@ -8,32 +8,32 @@ import {
   IconButton
 } from '@mui/material/';
 import {
-  ShoppingCart
+  PersonAddAlt
 } from '@mui/icons-material/';
 
 import styles from './styles.module.css';
-
+import {Accordion} from "../../../../../Components/"
 import OrdersChart from "./Chart/";
 import OrdersButton from "./Button/";
 import Provider from "./provider";
-import {Accordion} from "../../../../../Components/"
+import {types,initData,reducer} from "./init";
+
+
+
 
 function News({...props}){
-  const [isOpen,setOpen] = useState(true);
-  function toggleOpen(event){
-    setOpen(!isOpen)
-  }
+  const [state,dispath] = useReducer(reducer,initData);
   return(
-  <Provider>
+  <Provider state={state} dispath={dispath}>
     <Accordion 
-      title="Orders"
-      option={(
-        <>
-          <OrdersButton tooltip="Year" type={0}>Year</OrdersButton>
-          <OrdersButton tooltip="Month" type={1}>Month</OrdersButton>
-          <OrdersButton tooltip="Week" type={2}>Week</OrdersButton>
-        </>
-      )}
+      title="Đơn hàng"
+      option={
+       types.map(function(item,index){
+          return(
+            <OrdersButton key={index} active={index == state.inType} index={index}>{item.text}</OrdersButton>
+          )
+        })
+      }
       {...props}
     >
       <Stack spacing={3}>

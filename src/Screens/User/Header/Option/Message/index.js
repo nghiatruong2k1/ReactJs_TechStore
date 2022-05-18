@@ -6,10 +6,10 @@ import styles from '../styles.module.css';
 import {OptionButton} from "../index";
 import {getRoute} from "../../../../../Config/Route/";
 function Message(){
-  const [cookies] = useCookies();
+  const {auth} = useContext(global.config.AppContext);
   return(
       <OptionButton
-        show={Boolean(cookies['token'])}
+        show={auth.state.user}
         title="Thông báo"
         to={getRoute("user","profile","message")}
         icon = {(

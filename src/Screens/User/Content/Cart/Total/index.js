@@ -1,6 +1,6 @@
 import {memo,useContext,useMemo} from 'react';
 import clsx from 'clsx';
-import {Paper,Stack,Typography,Divider} from '@mui/material/';
+import {Grid,Paper,Stack,Typography,Divider} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {Image} from "../../../../../Components/"
@@ -19,7 +19,8 @@ function Total({...props}){
     return cart.handle.getPrice();
   },[cart.state])
   return(
-    <Paper sx={{p:2,flex:1}}>
+  <Grid item xs {...props}>
+    <Paper sx={{p:1,height:"100%"}}>
       <Stack spacing={1}>
           <Stack direction="row">
               <Typography>Giá tiền:</Typography>
@@ -39,6 +40,7 @@ function Total({...props}){
           </Stack>
       </Stack>
     </Paper>
+  </Grid>
   )
 }
 export default memo(Total);

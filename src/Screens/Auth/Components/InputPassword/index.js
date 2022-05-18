@@ -1,7 +1,8 @@
 import {memo,useState,useContext} from 'react';
 import {TextField,InputAdornment,Tooltip,IconButton} from '@mui/material/';
 import {FormContext} from "../FormProvider/";
-function InputPassword({name,placeholder, ...props}){
+import {ValidateTip} from "../../../../Components/";
+function InputPassword({name,placeholder,title,...props}){
   const {values,valids,handle} = useContext(FormContext);
   function handleChange(event){
     handle.setValue(name,event.target.value)
@@ -29,7 +30,7 @@ function InputPassword({name,placeholder, ...props}){
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <Tooltip placement="top" title={placeholder} arrow>
+              <Tooltip placement="top" title={title} arrow>
                 <span className="fas fa-lock"></span>
               </Tooltip>
             </InputAdornment>

@@ -1,17 +1,17 @@
-import {formatNumber} from "../../../../../../../../Config/Format/";
-export const initData = {
+
+export const initData                  = {
 	
 };
 export function reducer(prevState,{key,payload}) {
 	switch(key){
-		case 'set':{
+		case 'set'                         :{
 			return {
 				...prevState,
 				...payload
 			}
 		}
-		default:{
-		console.log(key,{prevState,"error":"Không tồn tại action"})
+		default                            :{
+		console.log(key,{prevState,"error" :"Không tồn tại action"})
 			return{
 				...prevState
 			}
@@ -20,85 +20,72 @@ export function reducer(prevState,{key,payload}) {
 };
 
 
-export const displays = [
+export const displays                  = [
     {
-      title:"Hình ảnh",
-      key:"ImageUrl",
-      type:"image",
-      style:{
-        minWidth:"15em"
+      title                            :"Hình ảnh",
+      name                             :"ImageUrl",
+      type                             :"image",
+      style                            :{
+        width                          :"10em",
+        minWidth                       :"10em"
       }
     },{
-      title:"Tên",
-      key:"Name",
-      type:"text",
-      style:{
-        minWidth:"10em"
+      title                            :"Tên",
+      name                             :"Name",
+      type                             :"text",
+      style                            :{
+        minWidth                       :"5em"
       }
     },{
-      title:"Giá",
-      key:"Price",
-      type:"text",
-      format:(value)=>{
-        return formatNumber(value)
-      },
-      style:{
-        minWidth:"8em"
+      title                            :"Giá",
+      name                             :"Price",
+      type                             :"number",
+      format                           :[3,0],
+      style                            :{
+        minWidth                       :"8em"
       }
     },{
-      title:"Khuyến mãi",
-      key:"SalePrice",
-      type:"text",
-      format:(value)=>{
-        return formatNumber(value)
-      },
-      style:{
-        minWidth:"8em"
+      title                            :"Khuyến mãi",
+      name                             :"SalePrice",
+      type                             :"number",
+      format                           :[3,0],
+      style                            :{
+        minWidth                       :"8em"
       }
     },{
-      title:"Danh mục",
-      key:"CategoryName",
-      type:"text",
-      style:{
-        width:"10em"
+      title                            :"Danh mục",
+      name                             :"CategoryName",
+      type                             :"text",
+      style                            :{
+        minWidth                          :"10em"
       }
     },{
-      title:"Thương hiệu",
-      key:"brandName",
-      type:"text",
-      style:{
-        width:"10em"
+      title                            :"Thương hiệu",
+      name                             :"BrandName",
+      type                             :"text",
+      style                            :{
+        minWidth                          :"10em"
       }
     },{
-      title:"Loại",
-      key:"TypeName",
-      type:"text",
-      style:{
-        width:"10em"
+      title                            :"Loại",
+      name                             :"TypeName",
+      type                             :"text",
+      style                            :{
+        minWidth                          :"10em"
       }
     },{
-      title:"Ngày tạo",
-      key:"CreateDate",
-      type:"text",
-      style:{
-        width:"max-content"
-      },format:(value)=>{
-        if(value){
-          let date = new Date(value);
-          return date.toLocaleString('en-US');
-        }
-      },
+      title                            :"Ngày tạo",
+      name                             :"CreateDate",
+      type                             :"datetime",
+      style                            :{
+        minWidth                          :"5em"
+      },format                         :"shortdate"
     },{
-      title:"Ngày sửa",
-      key:"UpdateDate",
-      type:"text",
-      style:{
-        width:"max-content"
-      },format:(value)=>{
-        if(value){
-          let date = new Date(value);
-          return date.toLocaleString('en-US');
-        }
-      }
+      title                            :"Ngày sửa",
+      name                             :"UpdateDate",
+      type                             :"datetime",
+      style                            :{
+        minWidth                          :"5em"
+      },format                         :"shortdate"
     }
 ];

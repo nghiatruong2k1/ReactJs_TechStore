@@ -3,12 +3,7 @@ import clsx from 'clsx';
 import {Grid,Typography,FormControl,FormHelperText,Select,MenuItem} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-import {DetailContext} from "../init";
-function InputSelect({left,right,name,feildValue,feildText,label,placeholder,defaultValue,values=[],...props}){
-  const {state,handle} = useContext(DetailContext);
-  function handleChange(event,obj){
-      handle.change(name,event.target.value);
-  }
+function InputSelect({left,right,name,nameValue,nameText,value,onChange,valid,onValid,values=[],label,placeholder,...props}){
   return(
   <>
     <Grid container alignItems="center"{...props}>
@@ -20,36 +15,36 @@ function InputSelect({left,right,name,feildValue,feildText,label,placeholder,def
         <Select
           fullWidth
           displayEmpty
-          value={state.data[name] ?? 0}
-          onChange={handleChange}
+          value={value || 0}
+          onChange={(e)=>(onChange && onChange(e,e.target.value))}
           size="small"
           renderValue={() => {
-            if(state.data[name]) {
-              let selectValue = values.find(c=>c[feildValue] == state.data[name]);
-              if(selectValue){
-                return selectValue[feildText]
-              }
+            let selectValue = values.find(c=>c[nameValue] == value);
+            if(selectValue){
+                return selectValue[nameText]
             }
-            return "--"+placeholder ?? label+"--";
+            return "--"+(placeholder ?? label ?? "")+"--";
          }}
        >
           <MenuItem
              key={0}
              value={0}
            >
-            {"--"+placeholder ?? label ?? ""+"--"}
+            {"--"+(placeholder ?? label ?? "")+"--"}
           </MenuItem>
          {values.map((value,index) => (
            <MenuItem
              key={index+1}
-             value={value[feildValue]}
+             value={value[nameValue]}
            >
-             {value[feildText]}
+             {value[nameText]}
            </MenuItem>
          ))}
        </Select>
-       <FormHelperText component="small" error>{state.valids[name] || " "}</FormHelperText>
       </FormControl>
+      </Grid>
+      <Grid item xs={12}>
+       <FormHelperText component="small" error>{valid ?? ""}</FormHelperText> 
       </Grid>
     </Grid>
   </>

@@ -1,35 +1,69 @@
-import {memo,createContext,useEffect} from 'react';
+import {memo,createContext,useContext,useEffect} from 'react';
 import {useCookies} from "react-cookie";
 import { useFetch } from '../../../../../../Config/Fetch/';
 export const OrdersContext = createContext();
 function OrdersProvider({state,dispath,children,...props}){
 	const Fetch = useFetch();
-	const [cookies,setCookies] = useCookies();
-	useEffect(function(){
-	    if(Boolean(cookies['token'])){
-	      Fetch.get({
+	const {auth} = useContext(global.config.AppContext);
+	function handleGetData(onStart, onEnd){
+		const status = state.status[state.statusIndex];
+		status && Fetch.get({
 	        api:"api/order",
 	        params:{
-	        	limit:5,
-	        	offset:0
-	        },
-	        onStart:function(){
-	        	dispath({key:"set",payload:{datas:[undefined,undefined]}})
-	        	dispath({key:"set",payload:{isLoading:true}})
-	        },onEnd:function(){
-	        	dispath({key:"set",payload:{isLoading:false}})
-	        },
-	        onThen:function({data,...result}){
-	         	dispath({key:"set",payload:{'datas':data ?? []}})
+	        	statusId:status.Id,
+	        	limit:state.limit,
+        		offset:(state.page - 1) * state.limit
+	        },onThen:function({data}){
+	         	dispath(["set_datas",data])
+	        },onError:function(){
+	        	dispath(["set_datas",[]])
+	        },onStart,onEnd
+	    });
+	}
+	function handleGetTotal(onStart, onEnd){
+		const status = state.status[state.statusIndex];
+		status && Fetch.get({
+	        api:"api/order/count"
+	        ,params:{
+	        	statusId:status.Id
 	        }
-	      })
+	        ,onThen:function({data}){
+	         	dispath(["set_total",data])
+	        },onStart,onEnd
+	    });
+	}
+	useEffect(function(){
+		document.documentElement.scrollTop = 0;
+	    if(Boolean(auth.state.user)){
+		    handleGetData(
+		      	function(){
+		        	dispath(["set_datas",[undefined]])
+		        	dispath(["set_loading",true])
+		        },function(){
+		        	dispath(["set_loading",false])
+		        });     
 	    }else{
-	      	dispath({key:"set",payload:{'datas':[]}})
+	      	dispath(["set_datas",[]])
 	    }
-	},[cookies['token']])
+	},[auth.state.user,state.page,state.statusIndex])
+	useEffect(function(){
+	    if(Boolean(auth.state.user)){
+	      	handleGetTotal(
+		        function(){
+		        	dispath(["set_total",0])
+		        });      
+	    }else{
+	      	dispath(["set_total",0])
+	    }
+	},[auth.state.user,state.limit,state.statusIndex]);
 	return(
 		<OrdersContext.Provider value={{
-			state
+			state,dispath,handle:{
+				refetch:function(){
+					handleGetData();
+					handleGetTotal();
+				}
+			}
 		}}>
 			{children}
 		</OrdersContext.Provider>

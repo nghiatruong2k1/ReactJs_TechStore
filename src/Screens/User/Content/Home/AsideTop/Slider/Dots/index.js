@@ -7,8 +7,7 @@ import {SliderContext} from "../provider";
 
 import {Frame,Image} from "../../../../../../../Components/"
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 
 function Dots({...props}){
   const {state,dispath,slider} = useContext(SliderContext)
@@ -39,7 +38,7 @@ function Dots({...props}){
               key={index} 
               containerProps={{
                 className:clsx(styles.dotButton,{[styles.dotActive]:index == state.index}),
-                onClick:()=>{
+                onClick:(e)=>{
                   slider && slider.slickGoTo(index)
                 }
               }}

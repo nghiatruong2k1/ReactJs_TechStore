@@ -1,6 +1,6 @@
 import {memo,useState,useContext,useEffect} from 'react';
 import clsx from 'clsx';
-import {Paper,FormControl,TextField,Typography,Tooltip,InputAdornment,IconButton,Checkbox} from '@mui/material/';
+import {Grid,Paper,FormControl,TextField,Typography,Tooltip,InputAdornment,IconButton,Checkbox} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 
@@ -21,7 +21,6 @@ function VoucherCode({...props}){
   const Fetch = useFetch();
   const {toast} = useContext(global.config.context);
   useEffect(function(){
-    console.log(state.voucher)
     if(state.voucher){
       setValue(state.voucher.Code ?? "")
     }
@@ -60,7 +59,8 @@ function VoucherCode({...props}){
     setValid(newValid[0] || "")
   }
   return(
-   <Paper  sx={{p:2,flex:1}}>
+  <Grid item xs {...props}>
+   <Paper sx={{p:1,height:"100%"}}>
     <FormControl component="form" onSubmit={handleSubmit} fullWidth>
         <Typography>Mã giảm giá:*</Typography>
         <TextField 
@@ -92,6 +92,7 @@ function VoucherCode({...props}){
         />
     </FormControl>
   </Paper>
+  </Grid>
   )
 }
 export default memo(VoucherCode);

@@ -2,14 +2,19 @@
 import ReactDOM from 'react-dom';
 import './index.css';
 import './config';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter }from'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
+import App from "./App";
+import Provider from "./provider";
+
+
 ReactDOM.render(
   <BrowserRouter>
     <CookiesProvider>
-      <App />
+      <Provider>
+        <App />
+      </Provider>
     </CookiesProvider>
   </BrowserRouter>,
   document.getElementById('root')

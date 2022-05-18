@@ -30,8 +30,19 @@ export const formatBase64 = (file)=>{
     }
     return(n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l]);
 }
+
+export const typeDade = {
+	"sortdate":"",
+	"sortdatetime":"",
+	"longdate":"",
+	"longdatetime":"",
+	"time":"",
+}
 export const formatDate = (date,strFormat)=>{
 	const ndate = new Date(date);
+	if(ndate == "Invalid Date"){
+		return "";
+	}
 	return ndate.toLocaleString();
 }
 export const formatNumber = (number,n, x)=>{

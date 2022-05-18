@@ -1,5 +1,5 @@
 import {memo,useContext} from 'react';
-import {useCookies} from 'react-cookie'
+import {useCookies} from 'react-cookie';
 import clsx from 'clsx';
 import {
   Dialog,
@@ -16,16 +16,13 @@ import AuthFormLogin from "./Screens/FormLogin/";
 import AuthFormRegister from "./Screens/FormRegister/";
 import AuthFormForget from "./Screens/FormForget/";
 function Auth({...props}){
-  const [cookies,setCookies] = useCookies();
-  const {auth} = useContext(global.config.context);
-  if(Boolean(cookies['token'])){
+  const {auth} = useContext(global.config.AppContext);
+  if(auth.state.user){
     return (<></>)
-  }else{
-    
-  }
-  return(
+  }else{  
+    return(
       <Dialog
-          open={!Boolean(cookies['token']) && auth.state.isOpen}
+          open={auth.state.isOpen}
           onClose={()=>(auth.handle.close())}
           fullWidth={true}
           scroll={'body'}
@@ -44,5 +41,6 @@ function Auth({...props}){
           </DialogContent>
       </Dialog>
     )
+  }
 }
 export default memo(Auth);

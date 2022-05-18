@@ -19,6 +19,7 @@ function Item({data,loading,...props}){
     <Grid item {...props}>
       <Card sx={{height:"100%"}}>
         <CardHeader 
+          sx={{py:1}}
           title={
             <Typography
               className="h5"
@@ -33,7 +34,7 @@ function Item({data,loading,...props}){
             </Typography>
           }
         />
-        <CardContent>
+        <CardContent sx={{py:1}}>
           <Frame rectangle loading={loading}>
             <Image contain src={data && data.ImageUrl}/>
           </Frame>  

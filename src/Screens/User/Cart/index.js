@@ -10,54 +10,20 @@ import {
   CardHeader,
   CardContent,
   CardActions,
-  Typography,
-  IconButton,
-  Tooltip,
-  Button
+  Typography
 } from '@mui/material/';
-import {
-  ShoppingCart,
-  ShoppingCartCheckout,
-  Close
-} from '@mui/icons-material/';
 import styles from './styles.module.css';
-import {NavLink} from "react-router-dom";
-import CartEmpty from "./CartEmpty/";
-import CartItem from "./CartItem/";
-import {formatNumber} from "../../../Config/Format/";
-import {getRoute} from "../../../Config/Route/";
-function CartHeader(){
-  const {cart} = useContext(global.config.UserContext);
-  return (
-    <CardHeader
-      avatar={
-        <ShoppingCart className={styles.icon}/>
-      }
-      titleTypographyProps={{
-        component:"h5"
-      }}
-      title={"Giỏ hàng"}
-      subheader={
-        <>
-          <Typography>
-            {"Tổng cộng: "+formatNumber(cart.handle.getCount(),3,0)+" sản phẩm"}
-          </Typography>
-        </>
-      }
-      action={
-        <Tooltip placement="top" title="Đóng">
-          <IconButton onClick={()=>(cart.handle.close())}>
-            <Close />
-          </IconButton>
-        </Tooltip>
-      }
-    ></CardHeader>
-  )
-}
+
+import CartEmpty from "./Empty/";
+import CartItem from "./Item/";
+import CartHeader from "./Header/";
+import CartFooter from "./Footer/";
+
+
 function CartBody(){
   const {cart} = useContext(global.config.UserContext);
   return (
-      <CardContent className={styles.content}>
+      <CardContent sx={{flex:1,overflow:"scroll"}}>
         <Stack component="ul" spacing={1}>
             { (cart.handle.getCount() == 0) && <CartEmpty />
               || cart.state.datas.map(function(data,index){
@@ -72,21 +38,7 @@ function CartBody(){
     </CardContent>
   )
 }
-function CartFooter(){
-  const {cart} = useContext(global.config.UserContext);
-  return(
-    <CardActions className={styles.footer}>
-      <Button 
-          variant="contained" 
-          startIcon={<ShoppingCartCheckout />}
-          component={NavLink}
-          onClick={()=>(cart.handle.close())}
-          to={getRoute("user","cart","index")}
-      >Xem chi tiết giỏ hàng
-      </Button>
-    </CardActions>
-  )
-}
+
 function Cart({...props}){
   const {cart} = useContext(global.config.UserContext);
   return(

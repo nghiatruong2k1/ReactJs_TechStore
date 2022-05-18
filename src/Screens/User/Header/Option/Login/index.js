@@ -5,12 +5,11 @@ import clsx from 'clsx';
 
 import {OptionButton} from "../index";
 function Login(){
-  const {auth} = useContext(global.config.context);
-  const [cookies,setCookies] = useCookies();
+  const {auth} = useContext(global.config.AppContext);
   return (
     <OptionButton
       onClick={()=>{auth.handle.open();}}
-      show={!Boolean(cookies['token'])}
+      show={!auth.state.user}
       title="Đăng nhập"
       icon={(<span className={clsx("fas fa-sign-in-alt",styles.icon)}/>)}
     >

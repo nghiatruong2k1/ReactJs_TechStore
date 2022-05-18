@@ -9,14 +9,20 @@ import {OrderContext} from "../provider";
 import {initData,reducer} from "./init";
 import Provider from "./provider";
 import ViewItem from "./Item";
+import ViewPaging from "./Paging";
 function Products({...props}){
   const [state,dispath] = useReducer(reducer,initData);
   const {data,loading} = useContext(OrderContext);
   return(
   <Provider state={state} dispath={dispath} loading={loading} orderId = {data && data.Id}>
+
     <Stack>
       <List disablePadding>     
-          <ViewContent loading={state.isLoading} length={state.datas.length}>
+          <ViewContent 
+            loading={state.isLoading} 
+            length={state.datas.length}
+            empty={"Đơn hàng rỗng!"}
+          >
           {
             state.datas.map(function(data,index){
               return(
@@ -29,6 +35,7 @@ function Products({...props}){
           }
           </ViewContent>
       </List>
+      <ViewPaging />
     </Stack>
   </Provider>
   )

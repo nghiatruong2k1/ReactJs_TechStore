@@ -17,7 +17,7 @@ function DashboardTitle({to,children,text,...props}){
       <Stack direction="row" spacing={1}>
         {
           to &&
-          (<Tooltip title="Back" placement="top">
+          (<Tooltip title="Quay lại" placement="top" arrow>
             <IconButton component={NavLink} to={to ?? "/"}>
               <ArrowCircleLeft />
             </IconButton>

@@ -1,11 +1,6 @@
 import {memo,useContext,Fragment} from 'react';
 import {
-  Paper,
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
+  Grid,Card,CardContent,List
 } from '@mui/material/';
 
 import {ViewContent} from "../../../../../Components/"
@@ -13,31 +8,35 @@ import Product from "./Product/";
 function View({...props}){
   const {cart} = useContext(global.config.UserContext);
   return(
-    <TableContainer component={Paper} sx={{p:2}}>
-      <Table stickyHeader>
-          <TableHead className="text-muted">
-            <TableRow className="small text-uppercase">
-              <TableCell className="col-6">Sản phẩm</TableCell>
-              <TableCell className="col-2">Số lượng</TableCell>
-              <TableCell className="col-2">Giá</TableCell>
-              <TableCell className="col-2"> </TableCell>
-            </TableRow>
-          </TableHead>
-          <tbody>
-            <ViewContent component={TableRow} childrenComponent={TableCell} loading={false} empty="Giỏ hàng của bạn trống" length={cart.handle.getCount()}>
-              {
-                cart.state.datas.map(function(data,index){                 
-                  if(data){
-                    return(<Product data={data} index={index} key={index} />)
-                  }else{
-                    return <Fragment key={index}></Fragment>
-                  }
-                })
+  <Grid item xs {...props}>
+    <Card sx={{p:1,height:"100%"}}>
+      <CardContent className="text-muted" sx={{
+        display:{xs:"none",md:"flex"}
+      }}>
+        <Grid container className="small text-uppercase">
+          <Grid item xs={5}>Sản phẩm</Grid>
+          <Grid item xs={2}>Số lượng</Grid>
+          <Grid item xs={3}>Giá</Grid>
+          <Grid item xs={2}></Grid>
+        </Grid>
+      </CardContent>
+      <CardContent>
+        <ViewContent loading={false} empty="Giỏ hàng của bạn trống" length={cart.handle.getCount()}>
+          <List>
+          {
+            cart.state.datas.map(function(data,index){                 
+              if(data){
+                return(<Product data={data} index={index} key={index} />)
+              }else{
+                return <Fragment key={index}></Fragment>
               }
-            </ViewContent>
-          </tbody>
-      </Table >
-    </TableContainer>
+            })
+          }
+          </List>
+        </ViewContent>
+      </CardContent>
+    </Card>
+  </Grid>
   )
 }
 export default memo(View);

@@ -11,22 +11,22 @@ export function reducer(prevState,[key,payload]) {
 				...payload
 			}
 		}
-		case 'data':{
+		case 'set_data':{
 			return {
 				...prevState,
-				data:payload
+				data:(typeof(payload) === 'object') && payload || null
 			}
 		}
-		case 'quantity':{
+		case 'set_quantity':{
 			return {
 				...prevState,
-				quantity:payload
+				quantity:Number.isNaN(payload) && Number(payload) || 0
 			}
 		}
-		case 'is_loading':{
+		case 'set_loading':{
 			return {
 				...prevState,
-				isLoading:payload
+				isLoading:Boolean(payload)
 			}
 		}
 		default:{

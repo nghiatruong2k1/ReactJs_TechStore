@@ -1,0 +1,9 @@
+
+.old{
+	background-color: rgba(0, 0, 0, 0.02) !important;
+}
+.cell{
+	padding: 0.25em !important;
+	border-left: 1px solid rgba(0, 0, 0, 0.02) !important;
+	border-right: 1px solid rgba(0, 0, 0, 0.02) !important;
+}

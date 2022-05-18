@@ -9,14 +9,15 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Typography
+  Typography,
+  SvgIcon
 } from '@mui/material/';
 import {
   Feed,Add,Remove,Save
 } from '@mui/icons-material/';
 import styles from './styles.module.css';
 
-function AccordionContent({title,option,className,children,...props}){
+function AccordionContent({title,icon,option,className,children,...props}){
   const [isOpen,setOpen] = useState(true);
   function toggleOpen(event){
     setOpen(!isOpen)
@@ -31,19 +32,19 @@ function AccordionContent({title,option,className,children,...props}){
           expanded={isOpen}
         >
           <AccordionSummary className={styles.sumary}>
-              <Stack direction = 'row' alignItems="center" width="100%" spacing={1}>
-                <Feed className={styles.icon} />
-                <Typography variant="h5" flex="1" className={styles.title} >
-                    {title}
-                </Typography>
-                {isOpen && option}
-                <Tooltip title={isOpen && "Đóng" ||  "Mở"} placement="top">
-                  <IconButton 
-                      onClick={toggleOpen}>
-                      {isOpen && <Remove /> ||  <Add />}
-                  </IconButton>
-                </Tooltip>
-              </Stack>
+            <Stack direction = 'row' alignItems="center" width="100%" spacing={1}>
+              <SvgIcon component={icon || Feed} className={styles.icon} />
+              <Typography variant="h5" flex="1" className={styles.title} >
+                  {title}
+              </Typography>
+              {isOpen && option}
+              <Tooltip title={isOpen && "Đóng" ||  "Mở"} placement="top">
+                <IconButton 
+                    onClick={toggleOpen}>
+                    {isOpen && <Remove /> ||  <Add />}
+                </IconButton>
+              </Tooltip>
+            </Stack>
           </AccordionSummary>
           <Divider/>
           <AccordionDetails>

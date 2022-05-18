@@ -5,21 +5,25 @@ function PopularProvider({state,dispath,children,...props}){
 	const Fetch = useFetch();
 	const handle = {
 		set:(key,value)=>{
-			dispath({key:'set',payload:{[key]:value}})
+			dispath(['set',{[key]:value}])
 		}
 	}
 	useEffect(function() {
 	    Fetch.get({
-	        api:"api/category/popular"
+	        api:"api/category/popular",
+	        params:{
+	        	limit:3,
+	        	offset:0
+	        }
 			,onThen:(result => {
-				dispath({key:'set',payload:{datas:result.data ?? []}})
+	            dispath(['set_data',result.data])
 	        }),onError:(error=> {
-	            dispath({key:'set',payload:{datas:[]}})
+	            dispath(['set_data'])
 	        }),onStart:(()=>{
-				dispath({key:'set',payload:{datas:Array(3).fill(undefined)}})
-				dispath({key:'set',payload:{isLoading:true}})
+	    		dispath(['set_data',Array(state.limit ?? 3).fill(undefined)])
+	    		dispath(['set_loading',true])
 	        }),onEnd:(()=>{
-				dispath({key:'set',payload:{isLoading:false}})
+	        	dispath(['set_loading',false])
 	        })
 	      })
 	},[])

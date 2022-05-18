@@ -21,10 +21,10 @@ function ProfileLink({to,icon,text,...props}){
 }
 
 function LogoutButton(){
-  const {toast,auth} = useContext(global.config.context);
-  const [cookies,setCookies,removeCookies] = useCookies();
+  const {toast} = useContext(global.config.context);
+  const {auth} = useContext(global.config.AppContext);
   function handleClick(){
-    console.log(removeCookies("token"))
+    auth.handle.logout();
     auth.handle.open();
   }
   return(
@@ -37,7 +37,7 @@ function LogoutButton(){
 }
 
 function Navbar(props){
-  const {anchorEl,open,onClose,id,typeId} = props;
+  const {anchorEl,open,onClose} = props;
   return(
     <Menu 
       anchorEl={anchorEl}
@@ -49,14 +49,7 @@ function Navbar(props){
           padding:"0.5em"
         }
       }}
-    >
-      {(typeId == 4) && (
-          <ProfileLink 
-            to={`${getRoute("admin","dashboard","index")}`}
-            icon={<span className={clsx("fa fa-user")}/>}
-            text={"Trang quản trị"}
-          />
-        )}
+    > 
         <ProfileLink 
           to={`${getRoute("user","profile","index")}`}
           icon={<span className={clsx("fa fa-user")}/>}
@@ -67,3 +60,10 @@ function Navbar(props){
   )
 }
 export default memo(Navbar);
+{/*(typeId == 4) && (
+          <ProfileLink 
+            to={`${getRoute("admin","dashboard","index")}`}
+            icon={<span className={clsx("fa fa-user")}/>}
+            text={"Trang quản trị"}
+          />
+        )*/}

@@ -1,42 +1,36 @@
-import {memo,useState,useMemo,createContext} from 'react';
+import { array } from 'prop-types';
+import {memo,useState,useMemo,createContext,useEffect} from 'react';
+import {useFetch} from "../../../../../../../Config/Fetch/"
+
+import {getInitData,types} from "./init";
+
+
 export const OrdersContext = createContext();
-function OrdersProvider({children,...props}){
-	const [typeChart,setType] = useState(0);
-	const datas = useMemo(function(){
-		switch (typeChart) {
-			case 0:
-				return [100,121,122,118,130,141,140,150,145,175]
-				break;
-			case 1:
-				return [10,11,13,14,15,13,17,14,16,15,18,20]
-				break;
-			case 2:
-				return [1,2,3,4,4,4,3]
-				break;
-			default:
-				return []
-				break;
-		}
-	},[typeChart]);
-	const labels = useMemo(function(){
-		switch (typeChart) {
-			case 0:
-				return [2013,2014,2015,2016,2017,2018,2019,2020,2021,2022]
-				break;
-			case 1:
-				return ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
-				break;
-			case 2:
-				return ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-				break;
-			default:
-				return []
-				break;
-		}
-	},[typeChart]);
+
+
+function OrdersProvider({state,dispath,children,...props}){
+	const Fetch = useFetch();
+	useEffect(function(){
+		Fetch.get({
+			api:"api/admin/order/statistic",
+			onThen:function({data}){
+				dispath(['set_datas',data])
+			},onError:function(){
+				dispath(['set_datas'])
+			}
+		});
+		Fetch.get({
+			api:"api/orderstatus",
+			onThen:function({data}){
+				dispath(['set_status',data])
+			},onError:function(){
+				dispath(['set_status'])
+			}
+		});
+	},[])
 	return(
 		<OrdersContext.Provider value={{
-			chart:{get:typeChart,set:setType},datas,labels
+			state,dispath
 		}}>
 			{children}
 		</OrdersContext.Provider>

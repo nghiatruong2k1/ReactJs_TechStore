@@ -16,38 +16,43 @@ import {
 }                     from '@mui/icons-material/';
 import styles         from './styles.module.css';
 import Title          from "../../../../../../Components/Title/";
-import {DetailContext}from "../init";
 import { getRoute } from '../../../../../../../../Config/Route/';
+import {DetailContext} from "../index";
 function DetailHead({title,...props}){
   const {state,handle,controller} = useContext(DetailContext);
   return(
     <Title text={title} to={getRoute("admin",controller,"index")} {...props}>
-      <Tooltip title="Save" placement="top">
-        <IconButton color="info"
-          onClick={()=>{handle.save();}}
-        >
-          <Save />
-        </IconButton>
+      <Tooltip title="Lưu và làm mới" placement="top" arrow>
+        <span>
+          <IconButton disabled={state.isLoading} color="info"
+            onClick={()=>{handle.save && handle.save(handle.refetch);}}
+          >
+            <Save />
+          </IconButton>
+        </span>
       </Tooltip>
-      <Tooltip title="Save and continue Edit" placement="top">
-        <IconButton color="secondary"
-          onClick={()=>{handle.save();}}
-        >
-          <SaveAs />
-        </IconButton>
+      <Tooltip title="Lưu" placement="top" arrow>
+        <span>
+          <IconButton disabled={state.isLoading} color="secondary"
+            onClick={()=>{handle.save && handle.save();}}
+          >
+            <SaveAs />
+          </IconButton>
+        </span>
       </Tooltip>
-      <Tooltip title="Copy" placement="top">
-        <IconButton color="success">
-          <ContentCopy />
-        </IconButton>
+      <Tooltip title="Sao chép" placement="top" arrow>
+        <span>
+          <IconButton disabled={state.isLoading} color="success">
+            <ContentCopy />
+          </IconButton>
+        </span>
       </Tooltip>
-      <Tooltip 
-        title={"Sync"} 
-        placement="top"
-      >
-        <IconButton onClick={()=>(handle.refetch())}>
-          <Autorenew />
-        </IconButton>
+      <Tooltip title={"Làm mới"} placement="top" arrow>
+        <span>
+          <IconButton disabled={state.isLoading} onClick={()=>{handle.refetch && handle.refetch();}}>
+            <Autorenew />
+          </IconButton>
+        </span>
       </Tooltip>
     </Title>
   )

@@ -1,26 +1,54 @@
-import {useMemo,useReducer} from 'react';
-import clsx from 'clsx';
-import {} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
+import {useMemo,useReducer,useEffect} from 'react';
+import {useCookies} from 'react-cookie';
 import {initData,reducer} from "./init";
+import {useFetch} from "../../Config/Fetch/";
 function Auth(){
   const [state,dispath] = useReducer(reducer,initData);
-  return useMemo(function(){
+  const Fetch = useFetch();
+  const [cookies,setCookies,removeCookies] = useCookies();
+  const handle = useMemo(function(){
     return {
-      state:state,
-      handle:{
         set:(key,value)=>{
-          dispath({key:'set',payload:{[key]:value}})
+          dispath(['set',{[key]:value}])
         },open:function(action){
-          dispath({key:'open',payload:action})
+          dispath(['open',action])
         },close:function(){
-          dispath({key:'close'})
+          dispath(['close'])
+        },login:function(user,token){
+          dispath(['set_user',user])
+          setCookies("token",token);
+        },logout:function(){
+          dispath(['set_user',null]);
+          removeCookies("token")
         },goAction:function(action){
-          dispath({key:'go_action',payload:action})
+          dispath(['set_action',action])
         }
       }
-    }
   },[state]);
+  useEffect(function(){
+    if(Boolean(cookies['token'])){
+      Fetch.get({
+        api:"api/user",
+        onThen:function(result){
+          if(typeof(result.data) === 'object'){
+            dispath(['set_user',result.data]);
+          }else{
+            dispath(['set_user',null]);
+            removeCookies('token')
+          }
+        },onError:function(){
+          dispath(['set_user',null])
+        },onStart:function(){
+          dispath(['set_user',{}])
+          dispath(['set_loading',true])
+        },onEnd:function(){
+          dispath(['set_loading',false])
+        }
+      })
+    }else{
+      dispath(['set_user',null]);
+    }
+  },[cookies['token']])
+  return {state,handle}
 }
 export default Auth;

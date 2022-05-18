@@ -12,7 +12,7 @@ const icons = {
   help:Help
 }
 const TIME_OUT = 10000
-const TIME_RUN = 400
+const TIME_RUN = 500
 function Toast({title,message,type}){
   const [isShow,setShow] = useState(true);
   const [isRender,setRender] = useState(true);
@@ -34,13 +34,12 @@ function Toast({title,message,type}){
     if(isShow){
       timeOut = setTimeout(function(){
         handleClose();
-      },TIME_OUT-TIME_RUN)
+      },TIME_OUT)
     }
     return function(){
       if(timeOut){
         clearTimeout(timeOut)
       }
-
     }
   },[isShow])
   if(isRender){

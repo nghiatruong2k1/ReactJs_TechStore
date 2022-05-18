@@ -10,13 +10,9 @@ import {
   BarChart,Add,Remove
 } from '@mui/icons-material/';
 
-
-import {Accordion} from "../../../../../Components/"
-
-import OrdersCard from "./Orders/";
-import ProductWarehouseCard from "./ProductWarehouse/";
-import PendingsCard from "./Pendings/";
-import RegistersCard from "./Registers/";
+import {getRoute} from "../../../../../../../Config/Route/";
+import {Accordion} from "../../../../../Components/";
+import CardStatistic from "./CardStatistic/";
 import styles from './styles.module.css';
 function Statistics({...props}){
   const [isOpen,setOpen] = useState(true);
@@ -25,15 +21,36 @@ function Statistics({...props}){
   }
   return(
       <Accordion 
-        title="Common statistics"
+        title="Thống kê"
         {...props}
       >
         <Grid container columnSpacing={2} rowSpacing={2}>
-              <OrdersCard xs={12} sm={6} lg={3} xl={4} />
-              <PendingsCard xs={12} sm={6} lg={3} xl={4} />
-              <RegistersCard xs={12} sm={6} lg={3} xl={4} />
-              <ProductWarehouseCard xs={12} sm={6} lg={3} xl={4} />
-          </Grid>
+            <CardStatistic 
+              api="api/admin/order/count"
+              to={getRoute("admin","order","index")} 
+              title="Đơn hàng"
+              cardProps={{sx:{backgroundColor:'#17a2b8'}}}
+              xs={12} sm={6} lg={3} xl={4} 
+            />
+            <CardStatistic 
+              api="api/admin/user/count" 
+              to={getRoute("admin","user","index")}
+              title="Tài khoản"
+              cardProps={{sx:{backgroundColor:'#28a745'}}}
+              xs={12} sm={6} lg={3} xl={4} 
+            />
+            <CardStatistic 
+              title="Lượt truy cập"
+              to={getRoute("admin","user","dashboard")}
+              cardProps={{sx:{backgroundColor:'#dc3545'}}}
+              xs={12} sm={6} lg={3} xl={4} 
+            />
+            <CardStatistic               
+              title="Phản hồi"
+              cardProps={{sx:{backgroundColor:'#ffc107'}}}
+              xs={12} sm={6} lg={3} xl={4} 
+            />
+        </Grid>
       </Accordion>    
   )
 }

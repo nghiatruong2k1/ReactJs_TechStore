@@ -12,36 +12,44 @@ function Popular({...props}){
   const [state,dispath] = useReducer(reducer,initData);
   return(
     <Provider state={state} dispath={dispath}>
-      <Grid item {...props}>
-      <Stack component={List}>
-        <Typography className={styles.title} component="h6">Danh mục nỗi bật</Typography>
+    <Grid item {...props}>
+      <Typography className={styles.title} component="h6">Danh mục nỗi bật</Typography>
+      <Stack component={List} sx={{flexDirection:{xs:"row",lg:"column"},overflow:"auto"}}>
         {
           state.datas.map(function(data,index){
             return (
-                <Grid container component={ListItem} key={index} divider my={0} py={1} columnSpacing={1} alignItems="center">
-                  <Grid item xs={8}>
-                    <Typography mb={1} className={styles.name}>
-                        {
-                          (data && !state.isLoading) && data.Name 
-                          || <Skeleton variant="text" className="skeleton"/>
-                        }
-                    </Typography>
-                    <LoadingButton 
-                      variant="contained" 
-                      loading={!Boolean(data) || state.isLoading}
-                      component={(data && !state.isLoading) && NavLink || "button"} 
-                      color="info"
-                      className={styles.button}
-                      to={`${getRoute("user","product","category",{alias:data && data.Alias})}`}
-                    >Xem ngay
-                    </LoadingButton>
-                  </Grid> 
-                  <Grid item xs={4}>
-                    <Frame square loading={!Boolean(data) || state.isLoading}>
-                      <Image contain src={data && data.ImageUrl}/>
-                    </Frame>
-                  </Grid>
+              <Grid container 
+                sx={{flex:{xs:"1 0 100%",sm:"1 0 50%",lg:"1 0 100%"}}} 
+                component={ListItem} 
+                key={index} 
+                divider 
+                my={0} py={1} 
+                columnSpacing={1}
+                alignItems="center"
+              >
+                <Grid item xs={8}>
+                  <Typography mb={1} className={styles.name}>
+                      {
+                        (data && !state.isLoading) && data.Name 
+                        || <Skeleton variant="text" className="skeleton"/>
+                      }
+                  </Typography>
+                  <LoadingButton 
+                    variant="contained" 
+                    loading={!Boolean(data) || state.isLoading}
+                    component={(data && !state.isLoading) && NavLink || "button"} 
+                    color="info"
+                    className={styles.button}
+                    to={`${getRoute("user","product","category",{alias:data && data.Alias})}`}
+                  >Xem ngay
+                  </LoadingButton>
+                </Grid> 
+                <Grid item xs={4}>
+                  <Frame square loading={!Boolean(data) || state.isLoading}>
+                    <Image contain src={data && data.ImageUrl}/>
+                  </Frame>
                 </Grid>
+              </Grid>
             )
           },[])
         }

@@ -4,7 +4,7 @@ export const RecommendContext = createContext({});
 function RecommendProvider({state,dispath,children,...props}){
 	const handle = {
 		set:(key,value)=>{
-			dispath({key:'set',payload:{[key]:value}})
+			dispath(['set',{[key]:value}])
 		}
 	}
   	const Fetch = useFetch();
@@ -15,14 +15,14 @@ function RecommendProvider({state,dispath,children,...props}){
 	        	limit:state.limit ?? 1,
 	        	offset:0
 	        },onThen:(result => {
-	            handle.set("datas",result.data);
+	            dispath(["set_datas",result.data]);
 	        }),onError:(error=> {
-	            handle.set("datas",[]);
+	            dispath(["set_datas",[]]);
 	        }),onStart:(()=>{
-	        	handle.set("datas",Array(state.limit ?? 1).fill(undefined));
-	        	handle.set("isLoading",true)
+	        	dispath(["set_datas",Array(state.limit ?? 1).fill(undefined)]);
+	        	dispath(["set_loading",true])
 	        }),onEnd:(()=>{
-	        	handle.set("isLoading",false)
+	        	dispath(["set_loading",false])
 	        })
 	    })
 	},[])

@@ -6,6 +6,7 @@ import ProductDetail from "./Detail/";
 
 import {getActionName} from "../../../../Config/Route/";
 function Product({...props}){
+	console.log(getActionName("user","product","category"))
 	return(
 		<Routes>
 			<Route path={`${getActionName("user","product","category")}`} 

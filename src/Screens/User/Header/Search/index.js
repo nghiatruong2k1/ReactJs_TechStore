@@ -18,7 +18,7 @@ function HeaderSearch({...props}){
       event.preventDefault();
       if(state.query.trim() != ""){
         navigator({
-          pathname:`${getRoute("user",state.controller,"search",{query:state.query})}`,
+          pathname:getRoute("user",state.controller,"search",{query:state.query}),
           search: ""
         });
       }

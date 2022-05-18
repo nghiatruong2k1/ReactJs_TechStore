@@ -3,12 +3,24 @@ export const initData = {
 	datas:[],
 	isLoading:false
 };
-export function reducer(prevState,{key,payload}) {
+export function reducer(prevState,[key,payload]) {
 	switch(key){
 		case 'set':{
 			return {
 				...prevState,
 				...payload
+			}
+		}
+		case 'set_data':{
+			return {
+				...prevState,
+				datas:Array.isArray(payload) && payload || []
+			}
+		}
+		case 'set_loading':{
+			return {
+				...prevState,
+				isLoading:Boolean(payload)
 			}
 		}
 		default:{

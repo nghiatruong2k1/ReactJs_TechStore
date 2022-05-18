@@ -12,14 +12,14 @@ function CategoryProvider({state,dispath,children,...props}){
 	    Fetch.get({
 	        api:"api/category"
 	        ,onThen:(result => {
-				dispath({key:'set',payload:{datas:result.data ?? []}})
+	            dispath(['set_data',result.data])
 	        }),onError:(error=> {
-	            dispath({key:'set',payload:{datas:[]}})
+	            dispath(['set_data'])
 	        }),onStart:(()=>{
-				dispath({key:'set',payload:{datas:Array(5).fill(undefined)}})
-				dispath({key:'set',payload:{isLoading:true}})
+	    		dispath(['set_data',Array(state.limit ?? 4).fill(undefined)])
+	    		dispath(['set_loading',true])
 	        }),onEnd:(()=>{
-				dispath({key:'set',payload:{isLoading:false}})
+	        	dispath(['set_loading',false])
 	        })
 	      })
 	},[])

@@ -1,25 +1,28 @@
 const {LocalStorage} = require('./Config/LocalStorage');
 const {createContext} = require('react');
+const Context = createContext({});
 const AppContext = createContext({});
+
 const UserContext = createContext({});
 const AdminContext = createContext({});
-const Base_Url_API = "https://localhost:44373/";
+
 const WebsiteName = "TechStore";
 
-function handleSetitle(title){
-	if(title && title !== ""){
-		document.title = WebsiteName+" - "+title;
-	}else{
-		document.title = WebsiteName;
+const handleTitle = (function(){
+	document.title = WebsiteName;
+	return function(title){
+		if(title && title !== ""){
+			document.title = WebsiteName+"|"+title;
+		}else{
+			
+		}
 	}
-}
-
-
+})();
 module.exports = global.config ={
-	Base_Url_API:Base_Url_API,
 	WebsiteName:WebsiteName,
-	setTitleWebsite:handleSetitle,
-	context:AppContext,
+	setTitleWebsite:handleTitle,
+	context:Context,
+	AppContext:AppContext,
 	UserContext:UserContext,
 	AdminContext:AdminContext,
 	LocalStorage:LocalStorage

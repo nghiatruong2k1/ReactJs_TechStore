@@ -1,10 +1,5 @@
 export const initData = {
-	data:{
-		Name:"Tài khoản",
-		Id:0,
-		TypeId:0
-	},isOpen:false
-	,isLoading:false
+	isOpen:false
 };
 export function reducer(prevState,{key,payload}) {
 	switch(key){
@@ -12,15 +7,6 @@ export function reducer(prevState,{key,payload}) {
 			return {
 				...prevState,
 				...payload
-			}
-		}
-		case 'set_data':{
-			return {
-				...prevState,
-				data:{
-					...prevState.data,
-					...payload
-				}
 			}
 		}
 		case 'reset':{

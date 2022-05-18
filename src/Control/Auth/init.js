@@ -10,9 +10,11 @@ export const getAction = (function(){
 }());
 export const initData = {
 	isOpen:false,
+	user:undefined,
+	isLoading:false,
 	action:getAction()
 };
-export function reducer(prevState,{key,payload}) {
+export function reducer(prevState,[key,payload]) {
 	switch(key){
 		case 'set':{
 			return {
@@ -33,7 +35,19 @@ export function reducer(prevState,{key,payload}) {
 				isOpen:false
 			}
 		}
-		case 'go_action':{
+		case 'set_user':{
+			return{
+				...prevState,
+				user:(typeof(payload) === 'object') && payload || null
+			}
+		}
+		case 'set_loading':{
+			return{
+				...prevState,
+				isLoading:payload
+			}
+		}
+		case 'set_action':{
 			return {
 				...prevState,
 				action:getAction(payload)

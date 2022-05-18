@@ -10,6 +10,7 @@ import Dashboard from "./Dashboard/";
 import CatalogProducts   from "./Catalogs/Screens/Products/";
 import CatalogCategories from "./Catalogs/Screens/Categories/";
 import CatalogBrands     from "./Catalogs/Screens/Brands/";
+import CatalogOrders     from "./Catalogs/Screens/Orders/";
 
 import {getControllerName} from "../../../../Config/Route/";
 function Content({...props}){
@@ -21,6 +22,7 @@ function Content({...props}){
           <Route path={`${getControllerName("admin","product")}/*`} element={<CatalogProducts />} />
           <Route path={`${getControllerName("admin","category")}/*`} element={<CatalogCategories />} />
           <Route path={`${getControllerName("admin","brand")}/*`} element={<CatalogBrands />} />
+          <Route path={`${getControllerName("admin","order")}/*`} element={<CatalogOrders />} />
         </Routes>
       </Grid>
     </Container>

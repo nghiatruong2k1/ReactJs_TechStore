@@ -10,6 +10,7 @@ import InputEmail from "../../Components/InputEmail/";
 import InputPassword from "../../Components/InputPassword/";
 import InputCheckbox from "../../Components/InputCheckbox/";
 import LinkSetAction from "../../Components/LinkSetAction/";
+import LinkTo from "../../Components/LinkTo/";
 import SubmitButton from "../../Components/SubmitButton/";
 import FacebookButton from "../../Components/FacebookButton/";
 import GoogleButton from "../../Components/GoogleButton/";
@@ -25,9 +26,8 @@ const rules = {
     }
 }
 function FormLogin({...props}){
-  const [cookies,setCookies] = useCookies();
   const Fetch = useFetch();
-  const {auth,toast} = useContext(global.config.context);
+  const {auth,toast} = useContext(global.config.AppContext);
 
   function handleSubmit({Save,...values},handle){
     Fetch.post({
@@ -35,9 +35,8 @@ function FormLogin({...props}){
       params:values,
       onThen:function(result){
         console.log(result)
-        if(result.data == false){
-        }else{   
-          setCookies('token', result.data.value)   
+        if(result.data.value && result.data.token){
+          auth.handle.login(result.data.value,result.data.token);
           auth.handle.close(); 
         }
       },onError:function(error){
@@ -54,20 +53,21 @@ function FormLogin({...props}){
       }}>
         <InputEmail 
           name="Email"
+          title="Email"
           placeholder="Nhập Email"
         />
         <InputPassword 
           name="Password"
+          title="Mật khẩu"
           placeholder="Nhập mật khẩu"
         />
         <Stack direction="row" justifyContent = 'space-between' alignItems = 'center'> 
           <InputCheckbox name="Save" label="Lưu tài khoản"/>
-          <LinkSetAction action="forgetPassword">Quên mật khẩu</LinkSetAction>
+          <LinkSetAction action="forgetPassword"text="Quên mật khẩu"/>
         </Stack>
         <SubmitButton> Đăng nhập </SubmitButton>
         <Typography>
-          Bạn chưa có tài khoản?
-          <LinkSetAction action="register"> Đăng ký </LinkSetAction>
+          <LinkSetAction action="register" beforeText="Bạn chưa có tài khoản?" text="Đăng ký"/>
         </Typography> 
         <Stack 
           direction="row" 

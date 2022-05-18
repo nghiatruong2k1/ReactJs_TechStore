@@ -2,7 +2,7 @@ export const initData = {
 	isOpen:false,
 	datas:[]
 };
-export function reducer(prevState,{key,payload}) {
+export function reducer(prevState,[key,payload]) {
 	switch(key){
 		case 'set':{
 			return {
@@ -10,22 +10,19 @@ export function reducer(prevState,{key,payload}) {
 				...payload
 			}
 		}
-		case 'open':{
+		case 'set_open':{
 			return{
 				...prevState,
-				isOpen:true
-			}
-		}
-		case 'close':{
-			return{
-				...prevState,
-				isOpen:false
+				isOpen:Boolean(payload)
 			}
 		}
 		case 'set_data':{
 			const carts = [...prevState.datas];
-			const {index,Price,SalePrice,Name,Alias} = payload.data;
-			if(carts[index]){
+			const {Id,Price,SalePrice,Name,Alias,ImageUrl} = payload.data;
+			const index = carts.findIndex(function(data){
+	          return  data && (data.Id == Id);
+	        })
+			if(index > -1){
 				if(Number(SalePrice) && Number(SalePrice) > 0){
 					carts[index].Price = Number(SalePrice)
 				}else if(Number(Price) && Number(Price) > 0){
@@ -36,6 +33,7 @@ export function reducer(prevState,{key,payload}) {
 
 				carts[index].Name = Name;
 				carts[index].Alias = Alias;
+				carts[index].ImageUrl = ImageUrl;
 			}
 	        return {
 	        	...prevState,
@@ -45,8 +43,9 @@ export function reducer(prevState,{key,payload}) {
 		case 'set_quantity':{
 			const carts = [...prevState.datas];
 			if(carts[payload.index]){
-				if(Number(payload.quantity)){
-					carts[payload.index].Quantity = Number(payload.quantity);
+				const newQuantity = Number(payload.quantity);
+				if(!Number.isNaN(newQuantity)){
+					carts[payload.index].Quantity = newQuantity;
 				}
 			}
 	        return {
@@ -56,7 +55,7 @@ export function reducer(prevState,{key,payload}) {
 		}
 		case 'add':{
 			const carts = [...prevState.datas];
-			const {Id,Name,Alias,Quantity,Price,SalePrice} = payload;
+			const {Id,Quantity} = payload;
 			const oldIndex = carts.findIndex(function(data){
 	          return  data && (data.Id == Id);
 	        })
@@ -65,10 +64,7 @@ export function reducer(prevState,{key,payload}) {
 	        }else{
 	        	carts.push({
 	        		Id,
-					Name,
-					Alias,
-	        		Quantity,
-	        		Price:SalePrice ?? Price ?? 0
+	        		Quantity
 	        	});
 	        }
 	        return {

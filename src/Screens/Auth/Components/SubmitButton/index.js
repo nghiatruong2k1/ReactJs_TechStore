@@ -9,14 +9,15 @@ function SubmitButton({children,...props}){
   const {isLoading} = useContext(FormContext);
   return(
     <LoadingButton
-          disabled={isLoading}
-          loading={isLoading}
-          loadingPosition="start"
-          className={styles.button}
-          variant="contained"
-          type="submit"
-          {...props}
-        >
+      disabled={isLoading}
+      loading={isLoading}
+      loadingPosition="start"
+      startIcon={(<></>)}
+      className={styles.button}
+      variant="contained"
+      type="submit"
+      {...props}
+    >
           {children}
     </LoadingButton>
   )

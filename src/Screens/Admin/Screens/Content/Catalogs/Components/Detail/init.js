@@ -1,45 +1,55 @@
-import {createContext} from "react";
-import {formatAlias} from "../../../../../../../Config/Format/"
-export const DetailContext = createContext({});
 export const initData = {
-	data:{},
-	valids:{},
-	isLoading:false
+  isLoading:false,
+  values:{},
+  valids:{}
 };
-export function reducer(prevState,{key,payload}) {
-	switch(key){
-		case 'set':{
-			return {
-				...prevState,
-				...payload
-			}
-		}
-		case 'set_valid':{
-			return {
-				...prevState,
-				valids:{
-					...prevState.valids,
-					...payload
-				}
-			}
-		}
-		case 'change':{
-			if(payload["Name"]){
-				prevState.data.Alias = formatAlias(payload["Name"])
-			}
-			return{
-				...prevState,
-				data:{
-					...prevState.data,
-					...payload
-				}
-			}
-		}
-		default:{
-		console.log(key,{prevState,"error":"Không tồn tại action"})
-			return{
-				...prevState
-			}
-		}
-	}
+export function reducer(prevState,[key,payload]) {
+  switch(key){
+    case 'set_loading':{
+      return {
+        ...prevState,
+        isLoading:Boolean(payload)
+      }
+    }
+    case 'set_values':{
+      return {
+        ...prevState,
+        values:(typeof(payload) === 'object') && payload || {}
+      }
+    }
+    case 'change_values':{
+      if(typeof(payload) === 'object'){
+        return{
+          ...prevState,
+          values:{
+            ...prevState.values,
+            ...payload
+          }
+        }
+      }
+      return{
+        ...prevState
+      }
+    }
+    case 'change_valids':{
+      if(typeof(payload) === 'object'){
+        return{
+          ...prevState,
+          valids:{
+            ...prevState.valids,
+            ...payload
+          }
+        }
+      }
+      return{
+        ...prevState
+      }
+    }
+    default:{
+    console.log(key,{prevState,"error":"Không tồn tại action"})
+      return{
+        ...prevState
+      }
+    }
+  }
 };

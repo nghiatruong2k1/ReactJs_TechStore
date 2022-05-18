@@ -1,12 +1,10 @@
 import {memo,useContext,useRef} from 'react';
 import {Grid,FormControl,FormHelperText,Typography} from '@mui/material/';
-import {DetailContext} from "../init";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import "./index.css"
-function InputEditter({left,right,name,label,placeholder,defaultValue,...props}){
-  const {state,handle} = useContext(DetailContext);
+function InputEditter({left,right,name,label,placeholder,value,onChange,valid,onValid,...props}){
   return(
     <Grid container alignItems="center"{...props}>
       <Grid item {...left}>
@@ -14,23 +12,23 @@ function InputEditter({left,right,name,label,placeholder,defaultValue,...props})
       </Grid>
       <Grid item {...right}>
         <FormControl fullWidth>
+          <FormHelperText component="small" error>{valid ?? ""}</FormHelperText>   
           <CKEditor
             config={{
               language:"vi",
             }}
             editor= {ClassicEditor}
-            data={state.data[name] ?? defaultValue ?? ""}
+            data={value || ""}
             onReady={ editor => {
             } }
             onChange={ ( event, editor ) => {
-                handle.change(name,editor.getData());
+                onChange && onChange(event,editor.getData());
             } }
             onBlur={ ( event, editor ) => {
             } }
             onFocus={ ( event, editor ) => {
             } }
           />   
-          <FormHelperText component="small" error>{state.valids[name] || " "}</FormHelperText>   
         </FormControl>
       </Grid>
     </Grid>

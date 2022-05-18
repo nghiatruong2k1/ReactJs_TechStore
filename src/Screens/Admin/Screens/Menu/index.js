@@ -48,24 +48,15 @@ function Menu({...props}){
   },[]);
   const Customers = useMemo(function(){
     return[{
-      text:"List",
-      to:"customer/list"
+      text:"Danh sách",
+      to:getRoute("admin","customer","index")
     },{
-      text:"Roles",
-      to:"customer/roles"
-    },{
-      text:"Trực tuyến",
-      to:"customer/online"
-    },{
-      text:"Vendors",
-      to:"customer/vendors"
+      text:"Phản hồi",
+      to:getRoute("admin","customer","vendors")
     }]
   },[]);
   const Themes = useMemo(function(){
     return[{
-      text:"Danh sách",
-      to:getRoute("admin","theme","index")
-    },{
       text:"Widget",
       to:getRoute("admin","theme","widget")
     },{

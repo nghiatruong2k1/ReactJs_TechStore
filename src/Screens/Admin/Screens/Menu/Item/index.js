@@ -1,4 +1,4 @@
-import {memo,useState} from 'react';
+import {memo,useState,useEffect} from 'react';
 import {useLocation} from "react-router-dom";
 import clsx from 'clsx';
 import {
@@ -11,6 +11,19 @@ import{NavLink }from'react-router-dom';
 import styles from '../styles.module.css';
 function MenuItem({icon,activeIcon,text,to,...props}){
   const [isActive,setActive] = useState(false);
+  const location = useLocation();
+  useEffect(function(){
+    if(to){
+      const index = location.pathname.toString().indexOf(to);
+      if(index === 0){
+        setActive(true);
+      }else{
+        setActive(false)
+      }
+    }else{
+      setActive(false)
+    }
+  },[location])
   return(
       <ListItem 
         disablePadding

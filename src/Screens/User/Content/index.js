@@ -19,21 +19,21 @@ function Content({...props}){
     <Box component="section" className={styles.section}  mt={3} >
       <Container maxWidth="xxl" component="main"className={styles.main}>
         <Routes>
-          <Route path="/*" element={<HomeContent />} />
+          <Route path="*" element={<HomeContent />} />
 
-          <Route path={`/${getControllerName("user","category")}/*`} 
+          <Route path={`${getControllerName("user","category")}/*`} 
             element={<ListContent controller="category"/>} />
 
-          <Route path={`/${getControllerName("user","brand")}/*`} 
+          <Route path={`${getControllerName("user","brand")}/*`} 
             element={<ListContent controller="brand" />} />
           
           <Route path={`${getControllerName("user","cart")}/*`} 
             element={<CartContent />} />
 
-          <Route path={`/${getControllerName("user","product")}/*`} 
+          <Route path={`${getControllerName("user","product")}/*`} 
             element={<ProductContent />} />
 
-          <Route path={`/${getControllerName("user","profile")}/*`} 
+          <Route path={`${getControllerName("user","profile")}/*`} 
             element={<ProfileContent />} />
 
         </Routes>

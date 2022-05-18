@@ -2,57 +2,58 @@ import {memo,useReducer} from 'react';
 import clsx from 'clsx';
 import {
   Grid,
-  TableRow,
-  TableCell,
+  ListItem,
   Skeleton,
+  Typography,
   Tooltip,
   IconButton,
   Stack
 } from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-
-import {initData,reducer} from "./init";
+import {NavLink} from "react-router-dom";
 import Provider from "./provider";
 
-import Image from "./Image/";
-import Name from "./Name/";
-import Brand from "./Brand/";
-import Category from "./Category/";
-import Type from "./Type/";
-import Price from "./Price/";
-import SalePrice from "./SalePrice/";
+import {formatNumber} from "../../../../../../Config/Format/";
+import {getRoute} from "../../../../../../Config/Route/";
+import {Frame,Image} from "../../../../../../Components/";
 import Quantity from "./Quantity/";
 import DeleteButton from "./DeleteButton/";
 
 function Product({data,index,...props}){
-  const [state,dispath] = useReducer(reducer,initData);
   return(
-  <Provider data={data} state={state} dispath={dispath} index={index}>
-    <TableRow>
-      <TableCell>
+  <Provider data={data} index={index}>
+  <ListItem divider>
+    <Grid container alignItems="center">
+      <Grid item xs={5}>
         <Grid container spacing={1}>
-          <Grid item xs={4}>
-            <Image />
+          <Grid item xs={2}>
+            <Frame square loading={!data}>
+              <Image contain src={data && data.ImageUrl}/>
+            </Frame>
           </Grid>
           <Grid item xs={8}>
-            <Name />
-            <Brand/>
-            <Category/>
-            <Type/>
+            <Typography component={data && NavLink || "p"} to={getRoute("user","product","detail",{alias:data && data.Alias})}>
+              {
+                data && (data.Name ?? "Đang cập nhật")
+                ||(<Skeleton className="skeleton" />)
+              }
+            </Typography>
           </Grid>
         </Grid>
-      </TableCell>
-      <TableCell> 
+      </Grid>
+      <Grid item xs={2}> 
         <Quantity />
-      </TableCell>
-      <TableCell> 
-        <div className="price-wrap"> 
-          <SalePrice /> 
-          <Price />
-        </div>
-      </TableCell>
-      <TableCell>  
+      </Grid>
+      <Grid item xs={3}> 
+        <Typography>
+          {
+            data && (formatNumber(data.Price,3,0) + " đ")
+            ||(<Skeleton className="skeleton" />)
+          }
+        </Typography>
+      </Grid>
+      <Grid item xs={2}>  
         <Stack direction="row">
           <Tooltip placement="top" title="Theo dõi sản phẩm">
             <IconButton>
@@ -61,8 +62,9 @@ function Product({data,index,...props}){
           </Tooltip>
           <DeleteButton />
         </Stack>
-      </TableCell>
-    </TableRow>
+      </Grid>
+    </Grid>
+  </ListItem>
   </Provider>
   )
 }

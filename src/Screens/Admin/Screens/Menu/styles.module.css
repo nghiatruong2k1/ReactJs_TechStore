@@ -22,7 +22,7 @@
 .icon{
 	color: inherit !important;
 	justify-content: center;
-	min-width: 2.4em !important;
+	width: 1.8em !important;
 }
 .text{
 	font-weight: bold !important;

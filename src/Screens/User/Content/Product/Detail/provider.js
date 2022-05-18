@@ -15,15 +15,15 @@ function DetailProvider({state,dispath,children,...props}){
 	    alias && Fetch.get({
 	        api:"api/product/"+alias
 	        ,onThen:(result => {
-	            dispath(["data",result.data ?? null]);
+	            dispath(["set_data",result.data]);
 	        }),onError:(error=> {
-	            dispath(["data",null]);
+	            dispath(["set_data"]);
 	        }),onStart:(()=>{
-	        	dispath(["data",{}]);
-	        	dispath(["quantity",1]);
-	        	dispath(["is_loading",true]);
+	        	dispath(["set_data",{}]);
+	        	dispath(["set_quantity",1]);
+	        	dispath(["set_loading",true]);
 	        }),onEnd:(()=>{
-	        	dispath(["is_loading",false]);
+	        	dispath(["set_loading",false]);
 	        })
 	    })
 	},[alias])

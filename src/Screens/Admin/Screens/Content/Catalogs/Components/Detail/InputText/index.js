@@ -1,11 +1,6 @@
 import {memo,useContext} from 'react';
-import {Grid,TextField,Typography} from '@mui/material/';
-import {DetailContext} from "../init";
-function InputText({left,right,name,label,placeholder,defaultValue,TextFieldProps,validate,...props}){
-  const {state,handle} = useContext(DetailContext);
-  function handleChange(event){
-      handle.change(name,event.target.value);
-  }
+import {Grid,TextField,Typography,FormHelperText} from '@mui/material/';
+function InputText({left,right,name,label,placeholder,value,onChange,valid,onValid,TextFieldProps,validate,...props}){
   return(
     <Grid container alignItems="center"{...props}>
       <Grid item {...left}>
@@ -14,20 +9,16 @@ function InputText({left,right,name,label,placeholder,defaultValue,TextFieldProp
       <Grid item {...right}>
         <TextField
           label=""
-          value={state.data[name] ??  ""}
-          onChange={handleChange}
+          value={value ?? ""}
+          onChange={(e)=>(onChange && onChange(e,e.target.value))}
           placeholder={placeholder ?? label ?? ""}
           size="small"
-          FormHelperTextProps={{
-            error:true,
-            component:'small',
-            sx:{display:state.valids[name] && 'block' || 'none'}
-
-          }}
-          helperText={state.valids[name] || " "}
           fullWidth
           {...TextFieldProps}
         />
+      </Grid>
+      <Grid item xs={12}>
+       <FormHelperText component="small" error>{valid ?? ""}</FormHelperText> 
       </Grid>
     </Grid>
   )

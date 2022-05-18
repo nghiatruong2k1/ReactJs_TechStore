@@ -20,4 +20,7 @@
 	fill: var(--info) !important;
 	width: 0.8em !important;
 	height: 0.8em !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

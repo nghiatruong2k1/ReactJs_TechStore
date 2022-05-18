@@ -6,7 +6,7 @@ export const ListContext = createContext({});
 function ListProvider({state,dispath,controller,action,children,...props}){
 	const handle = {
 		set:(key,value)=>{
-			dispath({key:'set',payload:{[key]:value}})
+			dispath(['set',{[key]:value}])
 		}
 	}
   	const Fetch = useFetch();
@@ -14,14 +14,14 @@ function ListProvider({state,dispath,controller,action,children,...props}){
 	    Fetch.get({
 	        api:"api/"+controller
 	        ,onThen:(result => {
-	            dispath({key:'set',payload:{datas:result.data ?? []}})
+	            dispath(['set_data',result.data])
 	        }),onError:(error=> {
-	            dispath({key:'set',payload:{datas:[]}})
+	            dispath(['set_data'])
 	        }),onStart:(()=>{
-	    		dispath({key:'set',payload:{datas:Array(state.limit ?? 4).fill(undefined)}})
-	    		dispath({key:'set',payload:{isLoading:true}})
+	    		dispath(['set_data',Array(state.limit ?? 4).fill(undefined)])
+	    		dispath(['set_loading',true])
 	        }),onEnd:(()=>{
-	        	dispath({key:'set',payload:{isLoading:false}})
+	        	dispath(['set_loading',false])
 	        })
 	    })
 	},[controller])

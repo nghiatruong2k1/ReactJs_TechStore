@@ -1,8 +1,7 @@
 import {memo,useContext,useEffect,useRef} from 'react';
 import clsx from 'clsx';
-import {Grid,Box,Stack,Skeleton} from '@mui/material/';
+import {Grid,Box,Card,CardContent,Button,Stack,Skeleton} from '@mui/material/';
 import styles from './styles.module.css';
-import './styles.css';
 import {DetailContext} from "../provider";
 function FullDes({...props}){
   const {state} = useContext(DetailContext);
@@ -14,16 +13,21 @@ function FullDes({...props}){
   },[state])
   return(
     <Grid item {...props}>
-      <Stack>
-        {
-          (!state.isLoading && state.data)
-          && (
-              <Box className="product-detail-description" ref={thisRef}></Box>
-          )||(
-            <Skeleton variant="text" width="100%" height = '10em'  />
-          )
-      }
-      </Stack>
+      <Card>
+        <CardContent className={styles.content}>
+          {
+            (!state.isLoading && state.data)
+            && (
+                <>
+                  <Box className={styles.fulldes} ref={thisRef}></Box>
+                  <Button className={styles.button} sx={{px:5}} variant="contained">Xem chi tiết</Button>
+                </>
+            )||(
+              <Skeleton variant="text" width="100%" height = '10em'  />
+            )
+          }
+        </CardContent>
+      </Card>
     </Grid>
   )
 }

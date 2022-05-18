@@ -3,6 +3,12 @@ import {useMemo} from "react";
 
 function validateLength(value,callback){
 	switch (typeof(value)) {
+		case "object":{
+			if(Array.isArray(value)){
+				return ""
+			}
+			break;
+		}
 		case "number":{
 			value=value+"";
 		}
@@ -16,12 +22,18 @@ function validateLength(value,callback){
 	return "Kiểu dữ liệu không hợp lệ (chỉ nhận chuỗi hoặc số)";
 }
 function validateNumber(value,callback){
+	if(value === null){
+		return ""
+	}
 	switch (typeof(value)) {
 		case "string":{
-			 value = Number(value.trim());
-			 if(Number.isNaN(value));{
-				 break;
-			 }
+			value = value.trim();
+			if(value === ""){
+				return callback && callback(value) || "";
+			}
+			if(Number.isNaN(value));{
+				break;
+			}
 		}
 		case "number":{
 			return callback && callback(value) || "";
@@ -150,7 +162,7 @@ export const validates = (function(){
 	}
 }());
 export function checkValue(value,rulers,values,callback){
-	const valids =  Object.keys(rulers).reduce(function(mess,ruler){
+	const valids = Object.keys(rulers).reduce(function(mess,ruler){
 		if(validates.hasOwnProperty(ruler)){
 			const mes = validates[ruler](value,rulers[ruler],values);
 			if(mes != ""){
@@ -161,16 +173,19 @@ export function checkValue(value,rulers,values,callback){
 		}
 		return mess
 	},[]);
-	callback && callback(valids);
-	return valids.length;
+	const error = callback && callback(valids) || valids.length;
+	return error;
 }
 export function checkObject(values,rulerValues,callback){
-	return Object.keys(rulerValues).reduce(function(result,key){	
-		const valids = checkValue(values[key],rulerValues[key],values,function(valids){
-			callback && callback(key,valids);
-		});
-		return result + valids;
-	},0);
+	if(typeof(rulerValues) === "object" && typeof(values) === "object"){
+		return Object.keys(rulerValues).reduce(function(result,key){	
+			const valids = checkValue(values[key],rulerValues[key],values,function(valids){
+				return callback && callback(key,valids);
+			});
+			return result + valids;
+		},0);
+	}
+	return 0;
 }
 export const useValidate = function(){
 	return useMemo(function(){	

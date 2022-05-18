@@ -8,19 +8,22 @@ import {Button,
   DialogTitle,
   Typography,
   Stack,
+  List,
+  ListItem,
+  ListItemText,
   Divider
 } from '@mui/material';
 import styles from './styles.module.css';
 import { formatNumber } from '../../../../../../Config/Format';
 export default function DialogResult({cart,state,onYes,onNo,...props}){
-  const {count,price,items} = cart.reduce(function(result,product){
+  const {count,price} = cart.reduce(function(result,product){
     if(product){
       console.log(result,product,state)
       result.count+=product.Quantity;
       result.price+=product.Price * product.Quantity;
     }
     return result
-  },{count:0,price:0,items:[]})
+  },{count:0,price:0})
   let salePrice = 0;
   if(state.voucher){
     salePrice = price * state.voucher.value / 100;
@@ -33,24 +36,51 @@ export default function DialogResult({cart,state,onYes,onNo,...props}){
             <i className="fas fa-bell"></i>{"Xác nhận thanh toán"}
           </DialogTitle>
           <DialogContent sx={{width:'30em'}} className={styles.body} dividers={true}>
-             <Stack spacing={1}>
-                <Stack direction="row">
-                    <Typography>Tổng số lượng:</Typography>
-                    <Typography flex="1" align="right">{formatNumber(count)} </Typography>
-                </Stack>
-                <Stack direction="row">
-                    <Typography>Tông tiền:</Typography>
-                    <Typography flex="1" align="right">{formatNumber(price)} đ</Typography>
-                </Stack>
-                <Stack direction="row">
-                    <Typography>Giảm giá:</Typography>
-                    <Typography flex="1" align="right">{formatNumber(salePrice)} đ</Typography>
-                </Stack>
-                <Stack direction="row">
-                    <Typography>Tổng thanh toán:</Typography>
-                    <Typography flex="1" align="right">{formatNumber(price - salePrice)} đ</Typography>
-                </Stack>
-            </Stack>
+            <List spacing={1}>
+                {
+                  cart.map(function(product,index){
+                    return(
+                      <ListItem disablePadding secondaryAction={"x"+formatNumber(product.Quantity,3,0)}>
+                        <ListItemText 
+                          primary={product.Name} 
+                          secondary={"Giá: "+formatNumber(product.Price) +" đ"}
+                        />
+                      </ListItem>
+                    )
+                  })
+                }
+            </List>
+            <Divider />
+            <List spacing={1}>
+                <ListItem disablePadding 
+                  secondaryAction={formatNumber(count,3,0)}
+                >
+                  <ListItemText 
+                    primary={"Tổng số lượng:"}
+                  />
+                </ListItem>
+                <ListItem disablePadding 
+                  secondaryAction={formatNumber(price,3,0)+" đ"}
+                >
+                  <ListItemText 
+                    primary={"Tổng giá:"}
+                  />
+                </ListItem>
+                <ListItem disablePadding 
+                  secondaryAction={formatNumber(salePrice,3,0) +" đ"}
+                >
+                  <ListItemText 
+                    primary={"Giảm giá:"}
+                  />
+                </ListItem>
+                <ListItem disablePadding 
+                  secondaryAction={formatNumber(price-salePrice,3,0) +" đ"}
+                >
+                  <ListItemText 
+                    primary={"Tổng thanh toán:"}
+                  />
+                </ListItem>
+            </List>
           </DialogContent>
           <DialogActions className={styles.foot}>
               <Button onClick={()=>{onNo && onNo();onClose();}}

@@ -1,0 +1,13 @@
+.content{
+	position: relative;
+}
+.fulldes{
+	max-height: 500px;
+	overflow: hidden;
+}
+.button{
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%,50%);
+}

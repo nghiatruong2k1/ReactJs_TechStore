@@ -4,19 +4,17 @@ import {Tooltip,Button} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {OrdersContext} from "../provider";
-function OrdersButton({tooltip,type,children,...props}){
-  const {chart} = useContext(OrdersContext);
+function OrdersButton({index,active,children,...props}){
+  const {dispath} = useContext(OrdersContext);
   function handleClick(){
-    chart.set(type)
+    dispath(['set_type',index])
   }
   return(
-    <Tooltip title={tooltip} placement="top">
-      <Button size="small" onClick={handleClick} className={clsx(styles.button,{
-        [styles.active]:type==chart.get
+    <Button size="small" onClick={handleClick} className={clsx(styles.button,{
+        [styles.active]:active
       })} variant="contained">
         {children}
-      </Button>
-    </Tooltip>
+    </Button>
   )
 }
 export default memo(OrdersButton);

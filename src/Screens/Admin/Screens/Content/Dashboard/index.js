@@ -10,9 +10,7 @@ import News             from "./Screens/News/";
 import Statistics       from "./Screens/Statistics/";
 import Orders           from "./Screens/Orders/";
 import Registers        from "./Screens/Registers/";
-import OrderTotals      from "./Screens/OrderTotals/";
 import IncompleteOrders from "./Screens/IncompleteOrders/";
-import LatestOrders     from "./Screens/LatestOrders/";
 import SearchKeywords   from "./Screens/SearchKeywords/";
 function Dashboard({...props}){
   return(
@@ -20,10 +18,8 @@ function Dashboard({...props}){
       <Title text="Dashboard" gridColumn="1 / span 2"/>
       <News gridColumn="1 / span 2"/>
       <Statistics gridColumn="1 / span 2"/>
-      <Orders gridColumn="1 / 2"/>
-      <Registers gridColumn="2 / 3"/>
-      <OrderTotals gridColumn="1 / 2"/>
-      <LatestOrders gridColumn="2 / 3"/>
+      <Orders gridColumn="1 / span 2"/>
+      <Registers gridColumn="1 / span 2"/>
       <IncompleteOrders gridColumn="1 / 2"/>
       <SearchKeywords gridColumn="2 / 3" />
     </>

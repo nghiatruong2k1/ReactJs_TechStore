@@ -3,18 +3,22 @@ import clsx from 'clsx';
 import {Link} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-function LinkSetAction({children,action,...props}){
-  const {auth} = useContext(global.config.context);
+function LinkSetAction({text,beforeText,afterText,action,...props}){
+  const {auth} = useContext(global.config.AppContext);
   function handleClick(event){
-    console.log(event)
+    event.preventDefault();
     auth.handle.goAction(action)
   }
   return(
+    <span>
+    {beforeText && (beforeText+" ")}
     <Link 
       underline="none"
       className={styles.link}
       onClick={handleClick}
-    >{children}</Link>
+    >{text}</Link>
+    {afterText && (" "+afterText)}
+    </span>
   )
 }
 export default memo(LinkSetAction);

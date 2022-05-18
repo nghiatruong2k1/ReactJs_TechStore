@@ -3,7 +3,7 @@ import { createSearchParams } from "react-router-dom";
 class Action {
 	constructor(name,params) {
 	 	this.name = name ?? "";
-	  	this.params = params ?? {};
+	  this.params = params ?? {};
 	}
 	
   }
@@ -49,19 +49,21 @@ const admin = new Area("trang-quan-tri",{
 	dashboard:new Controller("",{
 		index:new Action()
 	}),product:new Controller("san-pham",{
-		index:new Action("danh-sach"),
+		index:new Action(""),
 		add:new Action("them"),
 		update:new Action("cap-nhat/:id")
 	}),category:new Controller("danh-muc",{
-		index:new Action("danh-sach"),
+		index:new Action(""),
 		add:new Action("them"),
 		update:new Action("cap-nhat/:id")
 	}),brand:new Controller("thuong-hieu",{
-		index:new Action("danh-sach"),
+		index:new Action(""),
 		add:new Action("them"),
 		update:new Action("cap-nhat/:id")
 	}),order:new Controller("don-hang",{
-		index:new Action("danh-sach"),
+		index:new Action(""),
+		update:new Action("cap-nhat/:id"),
+		add:new Action("them"),
 		shipment:new Action("giao-hang"),
 		request:new Action("phan-hoi"),
 		voucher:new Action("ma-giam-gia")
@@ -182,7 +184,7 @@ export function getAction(area,controller,action){
 				let _action = _controller.action[action];
 				if(_action){
 					return _action;
-				}			
+				}		
 			}
 		}else if(action instanceof Action){
 			return action;
@@ -197,7 +199,7 @@ export function getActionName(area,controller,action){
 			if(_action){
 				action = _action.name;
 			}
-			return action;
+			return action
 		}else if(action instanceof Action){
 			action = action.name || "";
 		}	
@@ -209,14 +211,17 @@ export function getActionUrl(area,controller,action,params = {}){
 		let _action;
 		if(typeof(action) === "string"){
 			_action = getAction(area,controller,action);
+			if(!_action){
+				_action = new Action(action);
+			}
 		}else if(action instanceof Action){
 			_action = action;
 		}	
 		if(_action instanceof Action){
 			if(typeof(params) !== "object"){
 				params = {}
-			}	
-			const newParams = {...action.params,...params}
+			}
+			const newParams = {..._action.params,...params}
 			const regex = (/\:[a-zA-Z]{1,}\?{0,1}/g)
 			const newAction = (_action.name ?? "").split("/").reduce(function(result,value){
 			  const args = value.match(regex);

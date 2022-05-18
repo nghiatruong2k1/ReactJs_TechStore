@@ -1,17 +1,13 @@
-import {memo,useState,createContext,useEffect} from 'react';
-import clsx from 'clsx';
-import useLoading from "./Control/Loading/";
-import useToast from "./Control/Toast/";
+import {memo,createContext} from 'react';
 import useAuth from "./Control/Auth/";
-const AppContext = global.config.context;
+import useUploadImage from "./Screens/UploadImage/Hook/";
+
+const AppContext = global.config.AppContext;
 function AppProvider({children,...props}){
-	const loading = useLoading();
-	const toast = useToast();
 	const auth = useAuth();
+	const image = useUploadImage();
 	return(
-		<AppContext.Provider value={{
-			loading,toast,auth
-		}}>
+		<AppContext.Provider value={{auth,image}}>
 			{children}
 		</AppContext.Provider>
 	)
