@@ -21,7 +21,7 @@ function ViewContent({loading,viewLoading,length,empty,children,...props}){
     }
   }
 
-  return <>{children}</>
+  return children
   
 }
 export default memo(ViewContent);

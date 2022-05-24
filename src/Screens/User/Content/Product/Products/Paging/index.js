@@ -7,13 +7,13 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {ProductsContext} from '../provider';
 function ViewPaging({...props}){
-  const {state,handle} = useContext(ProductsContext);
+  const {state,dispath} = useContext(ProductsContext);
   const pageCount = Math.ceil(state.total / state.limit);
   if(state.page > 1 && pageCount >= 1 && state.page > pageCount){
-    handle.set("page",state.page - 1);
+    dispath(["set_page",state.page - 1]);
   }
   function handleChange(event,index){
-    handle.set("page",index)
+    dispath(["set_page",index])
   }
   if(pageCount > 1){
     return(

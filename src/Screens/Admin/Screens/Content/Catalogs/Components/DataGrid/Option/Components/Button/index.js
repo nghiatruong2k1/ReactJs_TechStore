@@ -9,20 +9,16 @@ import {
 } from '@mui/material/';
 import styles from './styles.module.css';
 
-const OptionButton = forwardRef(function({title,icon,children,loading,className,buttonProps,onClick,...props},ref){
-  if(!buttonProps.hidden){
+const OptionButton = forwardRef(function({hidden,title,icon,children,loading,className,...props},ref){
+  if(!hidden){
     return(
       <Tooltip title={title} placement="top" arrow>
-        <span ref={ref} {...props}>
+        <span ref={ref}>
           <IconButton 
-            {...buttonProps}
-            className={clsx({[className]:className,[buttonProps.className]:buttonProps.className})}
+            className={clsx({[className]:className})}
             disabled={loading}
-            component={buttonProps.to  && NavLink || "button"}
-            onClick={(e)=>{
-              onClick && onClick(e);
-              buttonProps.onClick && buttonProps.onClick(e)
-            }}
+            {...props}
+            component={props.to  && NavLink || "button"}
           >
             {icon}
           </IconButton>
@@ -36,11 +32,9 @@ const OptionButton = forwardRef(function({title,icon,children,loading,className,
 })
 OptionButton.displayName = "OptionButton";
 OptionButton.propTypes = {
-  buttonProps:PropTypes.object
+  hidden:PropTypes.bool
 }
 OptionButton.defaultProps = {
-  buttonProps:{
-    hidden:false
-  }
+  hidden:false
 }
 export default memo(OptionButton)

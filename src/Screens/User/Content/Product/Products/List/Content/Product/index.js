@@ -8,7 +8,8 @@ import {
   CardActions,
   CardContent,
   Rating,
-  Typography
+  Typography,
+  Chip
 } from '@mui/material/';
 import {
   Star
@@ -47,12 +48,11 @@ function ViewData({data,loading,...props}){
                   max={5}
                   emptyIcon={<Star />}
                 />
-                <Box spacing={1}>
-                  <small className="tag"> <i className="fa fa-check"></i> Verified</small> 
-                  <small className="tag"> 5 Years </small> 
-                  <small className="tag"> 80 reviews </small>
-                  <small className="tag"> Russia </small>
-                </Box>
+                <Stack direction="row" spacing={1}>
+                  <Chip icon={<i className="fas fa-check-circle"></i>} label="Còn hàng" variant="outlined" />
+                  <Chip icon={<i className="fas fa-shopping-cart"></i>} label="Lượt mua" variant="outlined" />
+                  <Chip icon={<i className="fas fa-eye"></i>} label="Lượt xem" variant="outlined" />
+                </Stack>
                 <DataShortDes loading={loading} shortDes={data && data.ShortDes}/>
             </CardContent>
           </Grid>

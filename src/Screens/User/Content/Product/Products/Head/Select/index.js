@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 import {ProductsContext} from "../../provider";
 function SearchSelect({...props}){
-  const {state,handle} = useContext(ProductsContext)
+  const {state,dispath} = useContext(ProductsContext)
   const argsType = useMemo(function(){
     return [{
       feild:"",
@@ -36,7 +36,7 @@ function SearchSelect({...props}){
 
   function handleChange(event,obj){
     const newSort = argsType[Number(obj.props.value)];
-    handle.set("sort",newSort.value)
+    dispath(["set_sort",newSort.value])
   }
   return(
     <FormControl className={styles.control}>

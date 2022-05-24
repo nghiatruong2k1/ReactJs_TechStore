@@ -9,7 +9,8 @@ import DetailDescription from "./Description/";
 import DetailImages       from "./Images/";
 import {validateProduct}from "./validate";
 
-function ProductDetail({title,useHandleDetail,...props}){
+function ProductDetail({title,useHandleDetail,useHandleImage,...props}){
+
 
   const detailProps = useHandleDetail({
     rulers:validateProduct,controller:"product"
@@ -23,7 +24,7 @@ function ProductDetail({title,useHandleDetail,...props}){
       <DetailPrice />
       <DetailOption />
       <DetailDescription gridColumn="1 / span 2"/>
-      <DetailImages gridColumn="1 / span 2"/>
+      <DetailImages useHandleImage={useHandleImage} gridColumn="1 / span 2"/>
       
     </DetailProvider>
   )

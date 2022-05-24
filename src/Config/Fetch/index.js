@@ -1,9 +1,9 @@
 
 
-import {useReducer,useContext,useEffect,useMemo} from "react";
+import {useReducer,useContext,useEffect,useMemo,useRef} from "react";
 import DialogResult from "../../Components/DialogResult";
-
 import axios from "axios";
+import {initState,reducer} from "./init";
 
 
 
@@ -28,6 +28,20 @@ function showToast(toast,mes){
       toast.handle.add(mes);
       break;
     }
+  }
+}
+function handleError(toast,error){
+  if(error.response){
+    let mes = "";
+    if(error.response.data && error.response.data.InnerException){
+      mes = error.response.data.InnerException.Message;
+    }else{
+      mes = error.message
+    }
+    mes +=` (mã lỗi ${error.response.status})`;
+    showToast(toast,{message:mes,type:"error"})
+  }else if(error.message){
+    showToast(toast,{message:error.message,type:"error"})
   }
 }
 
@@ -58,12 +72,8 @@ async function handleFetch(props,promise,location){
             typeof(onThen)==="function" && onThen(result);
         })
         .catch(error=> {
-            console.log(`[Error ${method}]`,{location,url,error});
-            if(error.message){
-              showToast(toast,{message:error.message,type:"error"})
-            }else{
-              console.log(error)
-            }            
+            console.log(`[Error ${method}]`,{location,url,error});   
+            handleError(toast,error);        
             typeof(onError)==="function" && onError(error);
         })
         .finally(()=>{
@@ -117,38 +127,45 @@ export const useFetch = function(location){
     }
   },[location])
 }
-export const useGet = function({onStart,onEnd,onThen,onError,initData,location,...props},args){
+export const useGet = function(initData,callback,args = [],location){
   const {loading,toast} = useContext(global.config.context);
-  const [state,dispath] = useReducer(function(prev,[key,payload]){
-    return{
-      ...prev,
-      [key]:payload
-    }
-  },{data:initData,isLoading:false,isError:false});
+  const [state,dispath] = useReducer(reducer,{...initState,data:initData});
+  const propsRef = useRef();
   useEffect(function(){
-    handleGet({
-      onStart:function(){
-        dispath(["isLoading",true])
-        onStart && onStart();
-      },onEnd:function(){
-        dispath(["isLoading",false])
-        onEnd && onEnd();
-      },onThen:function(result){
-        dispath(["isError",false])
-        if(onThen){
-          dispath(["data",onThen(result) ?? initData])
-        }else{
-          dispath(["data",result.data ?? initData])
-        }      
-      },onError:function(error){
-        dispath(["isError",true])
-        if(onError){
-          dispath(["data",onError(error) ?? initData])
-        }else{
-          dispath(["data",initData])
-        }
-      },...props,toast,loading},location);
-  },args ?? [])
+    propsRef.current = callback && callback();
+  },[callback])
+  useEffect(function(){
+    const {onStart,onEnd,onThen,onError,...props} = propsRef.current;
+      handleGet({
+        onStart:function(){
+          dispath(["set_loading",true])
+          if(onStart){
+            dispath(["set_data",onStart() ?? initData])
+          }
+        },onEnd:function(){
+          dispath(["set_loading",false])
+          onEnd && onEnd();
+        },onThen:function(result){
+          dispath(["set_error",false])
+          if(onThen){
+            dispath(["set_data",onThen(result) ?? initData])
+          }else{
+            dispath(["set_data",result.data ?? initData])
+          }      
+        },onError:function(error){
+          dispath(["set_error",true])
+          if(onError){
+            dispath(["set_data",onError(error) ?? initData])
+          }else{
+            dispath(["set_data",initData])
+          }
+        },...props,toast,loading
+      },location
+    );
+    return function(){
+      
+    }
+  },[...args])
 
-  return state
+  return [state,dispath]
 }

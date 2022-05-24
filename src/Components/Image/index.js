@@ -4,6 +4,10 @@ import styles from './styles.module.css';
 const Image = (function(){
 	return function({src,srcDefault,alt,className,cover,contain,...props},ref){
 		const thisRef = useRef();
+		useImperativeHandle(ref,()=>({
+				...thisRef.current
+			})
+		);
 		let Attr = {
 			...props,
 			ref:thisRef,
@@ -33,10 +37,6 @@ const Image = (function(){
 			};
 			return _src;	
 		},[src,srcDefault])
-		useImperativeHandle(ref,()=>({
-				...thisRef.current
-			})
-		);
 		return(
 			<img {...Attr}/>
 		);

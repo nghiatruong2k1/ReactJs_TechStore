@@ -25,7 +25,6 @@ export const initData = {
 	    src:"/images/banners/slide2.png"
 	  }
 	],index:0
-	,initIndex:0
 };
 export function reducer(prevState,{key,payload}) {
 	switch(key){

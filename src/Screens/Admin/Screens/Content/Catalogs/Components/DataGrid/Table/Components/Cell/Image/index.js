@@ -3,9 +3,9 @@ import {Box} from '@mui/material/';
 import {Frame,Image} from "../../../../../../../../../../../Components/";
 function CellImage({name,nameAlt,loading,data,sx,...props}){
   return(
-    <Box {...sx} {...props}>
+    <Box sx={{...sx}} {...props}>
       <Frame rectangle loading={loading}>
-        <Image contain alt={data && data[nameAlt]} src={data && data[name]}/>
+        <Image contain name={name} alt={data && data[nameAlt]} src={data && data[name]}/>
       </Frame>
     </Box>
   )

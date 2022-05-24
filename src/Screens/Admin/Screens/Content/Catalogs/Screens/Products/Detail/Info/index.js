@@ -25,13 +25,13 @@ function ProductInfo({...props}){
           handle.changeValue("Name",v ?? "")
           handle.changeValue("Alias",formatAlias(v ?? ""))
         }}
-        valid={state.validValues && state.validValues["Name"]}
+        valid={state.valids && state.valids["Name"]}
         label="Tên sản phẩm" 
         name="Name"/>
       <InputText 
         left={{xs:12}}right={{xs:12}} 
         value={state.values && state.values["Alias"]}
-        valid={state.validValues && state.validValues["Alias"]}
+        valid={state.valids && state.valids["Alias"]}
 
         label="Bí danh" 
         TextFieldProps={{

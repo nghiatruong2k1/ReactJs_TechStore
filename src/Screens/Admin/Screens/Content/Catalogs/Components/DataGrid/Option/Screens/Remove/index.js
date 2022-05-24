@@ -12,9 +12,6 @@ function RemoveButton({...props}){
     <OptionButton 
       title={`${state.inTrash && "Khôi phục" || "Xóa tạm"} (đã chọn)`} 
       icon={state.inTrash && <RestoreFromTrash /> || <DeleteForeverRounded />}
-      buttonProps={{    
-        ...option.deleteProps
-      }}
       onClick={(e)=>{
         handleAllClick(e,".trash-btn");
         option.deleteProps 
@@ -22,6 +19,7 @@ function RemoveButton({...props}){
         && option.deleteProps.onClick(e)
       }}
       {...props}
+      {...option.deleteProps}
     ></OptionButton>
   )
 }

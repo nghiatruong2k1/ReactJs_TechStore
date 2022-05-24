@@ -6,7 +6,7 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 function CellText({name,data,sx,loading,text,...props}){
   return(
-      <Typography whiteSpace = 'nowrap' fontWeight = 'inherit' {...props}>
+      <Typography name={name} whiteSpace = 'nowrap' fontWeight = 'inherit' {...props}>
         {!loading ?
           (
             data && data[name] || text || ""

@@ -9,12 +9,15 @@ import styles from './styles.module.css';
 function PublicButton({data,loading,...props}){
   const [isLoading,setLoading] = useState(false);
   const {state,dataset} = useContext(DataContext);
+  const attr = useMemo(function(){
+    return dataset.publicProps && dataset.publicProps(data,setLoading) || {}
+  },[data])
   return(
     <OptionButton 
       title={data && data.IsPublic && "Công khai" || "Riêng tư"} 
       loading={loading || isLoading}
       icon={data && data.IsPublic && <Visibility /> || <VisibilityOff />}
-      buttonProps = {dataset.publicProps && dataset.publicProps(data,setLoading)}
+      {...attr}
     />
   )
 }

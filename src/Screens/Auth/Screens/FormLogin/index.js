@@ -1,16 +1,11 @@
-import {memo,useRef,useReducer,useContext,useMemo} from 'react';
-import {useCookies} from 'react-cookie';
-import clsx from 'clsx';
+import {memo,useContext} from 'react';
 import {Stack,Typography} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
 
 import FormProvider from "../../Components/FormProvider/";
 import InputEmail from "../../Components/InputEmail/";
 import InputPassword from "../../Components/InputPassword/";
 import InputCheckbox from "../../Components/InputCheckbox/";
 import LinkSetAction from "../../Components/LinkSetAction/";
-import LinkTo from "../../Components/LinkTo/";
 import SubmitButton from "../../Components/SubmitButton/";
 import FacebookButton from "../../Components/FacebookButton/";
 import GoogleButton from "../../Components/GoogleButton/";
@@ -29,14 +24,13 @@ function FormLogin({...props}){
   const Fetch = useFetch();
   const {auth,toast} = useContext(global.config.AppContext);
 
-  function handleSubmit({Save,...values},handle){
-    Fetch.post({
+  async function handleSubmit({Save,...values},handle){
+    await Fetch.post({
       api:"api/auth/login",
       params:values,
       onThen:function(result){
-        console.log(result)
-        if(result.data.value && result.data.token){
-          auth.handle.login(result.data.value,result.data.token);
+        if(result.data.token){
+          auth.handle.login(result.data.token);
           auth.handle.close(); 
         }
       },onError:function(error){

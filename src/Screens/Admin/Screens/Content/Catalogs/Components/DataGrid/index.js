@@ -6,12 +6,12 @@ import ViewPaging                        from "./Paging/";
 
 import Accordion                         from "../../../../../Components/Accordion/";
 import Provider                          from "./provider";
-function DataGrid({state,dispath,handle,displays,dataset,option,config,title,icon,children,...props}){
+function DataGrid({state,dispath,handle,displays,dataset,option,config,events,title,icon,children,...props}){
   let lstTitle = useMemo(function(){
     return `${title || "Danh sách"} (${state.total || 0}) ${state.inTrash && "(thùng rác)" || ""}`;
   },[state.inTrash,state.total,title]);
   return(
-  <Provider {...{state,dispath,handle,displays,dataset,option,config}}>
+  <Provider {...{state,dispath,handle,displays,dataset,option,config,events}}>
     {children}
     <Accordion 
       {...props}
@@ -30,6 +30,7 @@ DataGrid.propTypes = {
   displays:PropTypes.array,
   handle:PropTypes.object,
   config:PropTypes.object,
+  events:PropTypes.object,
   option:PropTypes.object,
   dataset:PropTypes.object,
   title:PropTypes.string
@@ -39,8 +40,15 @@ DataGrid.defaultProps = {
   displays:[],
   handle:{},
   config:{},
+  events:{},
   option:{},
-  dataset:{},
+  dataset:{
+    addProps:{},
+    updateProps:function(){},
+    deleteProps:function(){},
+    trashProps:function(){},
+    refetchProps:function(){}
+  },
   title:"",
 }
 export default memo(DataGrid);

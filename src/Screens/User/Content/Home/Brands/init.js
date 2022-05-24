@@ -1,7 +1,7 @@
 
 export const initData = {
-	limit:8,
 	isLoading:true,
+	index:0,
 	datas:Array(8).fill(undefined)
 };
 export function reducer(prevState,[key,payload]) {
@@ -22,6 +22,13 @@ export function reducer(prevState,[key,payload]) {
 			return {
 				...prevState,
 				isLoading:Boolean(payload)
+			}
+		}
+		case 'set_index':{
+			payload = Number(payload)
+			return {
+				...prevState,
+				index: !Number.isNaN(payload) && payload || 0
 			}
 		}
 		default:{

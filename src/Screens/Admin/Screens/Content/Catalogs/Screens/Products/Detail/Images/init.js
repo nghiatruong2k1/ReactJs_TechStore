@@ -8,7 +8,7 @@ export const displays  = [
     }
   },{
     title      :"Mô tả",
-    name        :"Alt",
+    name       :"Alt",
     type       :"text",
     style      :{
       minWidth :"10em"

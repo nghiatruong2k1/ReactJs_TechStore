@@ -16,7 +16,7 @@ function Footer({...props}){
       </Button>
       <Button color="success" startIcon={<CheckCircle />}
         variant="contained" onClick={()=>{
-          handle.submit();
+          state.select && handle.submit();
           handle.close();
         }}>
         Chọn hình ảnh

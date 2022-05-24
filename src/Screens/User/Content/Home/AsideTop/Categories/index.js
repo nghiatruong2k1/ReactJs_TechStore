@@ -9,14 +9,19 @@ import {
   Skeleton
 } from '@mui/material/';
 import {NavLink} from "react-router-dom";
-
-import {initData,reducer} from './init'
-import Provider from "./provider";
 import {getRoute} from "../../../../../../Config/Route/";
+import {useGet} from "../../../../../../Config/Fetch/";
 function Categories({...props}){
-  const [state,dispath] = useReducer(reducer,initData);
+  const [state] = useGet([],function(){
+    return {
+      api:"api/category"
+      ,onStart:(()=>{
+        return Array(5).fill(undefined);
+      })
+    }
+  },[],"Home Aside Categories");
   return(
-    <Provider state={state} dispath={dispath}>
+    <>
       <Grid item {...props}>
       <List disablePadding
         sx={{width:"100%"}}
@@ -27,7 +32,8 @@ function Categories({...props}){
         }
       >
         {
-          state.datas.map(function(data,index){
+          Array.isArray(state.data) && 
+          state.data.map(function(data,index){
             return(
               <ListItem divider key={index} disablePadding> 
                 {
@@ -48,7 +54,7 @@ function Categories({...props}){
         }
       </List>
     </Grid>
-    </Provider>
+    </>
   )
 }
 export default memo(Categories);

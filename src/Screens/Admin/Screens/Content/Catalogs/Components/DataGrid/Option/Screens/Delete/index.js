@@ -10,10 +10,11 @@ function TrashButton({...props}){
   if(state.inTrash){
     return(
       <OptionButton 
-        {...props}
         title={"Xóa (đã chọn)"} 
         icon={<DeleteForeverRounded />}
-      ></OptionButton>
+        {...props}
+        {...option.deleteProps}
+      />
     )
   }else{
     return <></>

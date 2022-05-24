@@ -11,12 +11,9 @@ function AddButton({onClick,...props}){
   return(
     <OptionButton 
       title="Thêm mới"
-      onClick={onClick}
-      buttonProps={{    
-        ...option.addProps
-      }}
       icon={<AddCircleOutlineRounded />}
       {...props}
+      {...option.addProps}
     >
     </OptionButton>
   )

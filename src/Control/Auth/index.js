@@ -14,8 +14,7 @@ function Auth(){
           dispath(['open',action])
         },close:function(){
           dispath(['close'])
-        },login:function(user,token){
-          dispath(['set_user',user])
+        },login:function(token){
           setCookies("token",token);
         },logout:function(){
           dispath(['set_user',null]);
@@ -26,7 +25,13 @@ function Auth(){
       }
   },[state]);
   useEffect(function(){
-    if(Boolean(cookies['token'])){
+    console.log(cookies['token'],Boolean(cookies['token']),typeof(cookies['token']))
+    if(Boolean(cookies['token']) 
+      && typeof(cookies['token']) == 'string' 
+      && cookies['token'] != 'undefined'
+      && cookies['token'] != 'null'
+      && cookies['token'] != ''
+    ){
       Fetch.get({
         api:"api/user",
         onThen:function(result){
@@ -39,7 +44,6 @@ function Auth(){
         },onError:function(){
           dispath(['set_user',null])
         },onStart:function(){
-          dispath(['set_user',{}])
           dispath(['set_loading',true])
         },onEnd:function(){
           dispath(['set_loading',false])

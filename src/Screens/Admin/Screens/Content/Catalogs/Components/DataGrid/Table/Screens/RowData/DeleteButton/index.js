@@ -7,13 +7,18 @@ import OptionButton from "../../../../Option/Components/Button/"
 function DeleteButton({data,loading,...props}){
   const [isLoading,setLoading] = useState(false);
   const {dataset} = useContext(DataContext);
+
+  const attr = useMemo(function(){
+    return dataset.deleteProps && dataset.deleteProps(data,setLoading) || {}
+  },[data]);
+
   if(data && data.IsTrash){
     return(
       <OptionButton 
         title={"Xóa vĩnh viễn"} 
         loading={loading || isLoading}
         icon={<DeleteForeverRounded />}
-        buttonProps = {dataset.deleteProps && dataset.deleteProps(data,setLoading)}
+        {...attr}
       />
     )
   }else{

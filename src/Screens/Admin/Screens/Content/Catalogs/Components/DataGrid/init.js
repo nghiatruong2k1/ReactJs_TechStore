@@ -14,6 +14,31 @@ export function reducer(prevState,[key,payload]) {
 				datas:Array.isArray(payload) && payload || []
 			}
 		}
+		case 'add_data':{
+			return{
+				...prevState,
+				datas:[payload,...prevState.datas]
+			}
+		}
+		case 'remove_data':{
+			return{
+				...prevState,
+				datas:prevState.datas.filter(function(data,index){
+					return data != payload
+				})
+			}
+		}
+		case 'change_data':{
+			return{
+				...prevState,
+				datas:prevState.datas.map(function(data,index){
+					return {
+						...data
+					}
+				})
+
+			}
+		}
 		case 'set_total':{
 			const total = Number(payload);
 			return {

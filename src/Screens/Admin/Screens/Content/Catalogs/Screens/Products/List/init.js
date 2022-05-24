@@ -26,7 +26,6 @@ export const displays                  = [
       name                             :"ImageUrl",
       type                             :"image",
       style                            :{
-        width                          :"10em",
         minWidth                       :"10em"
       }
     },{

@@ -130,16 +130,13 @@ small, .small{
   cursor: wait !important;
   opacity: 0.7 !important;
 }
-[class*="Mui"]{
+[class*="Mui"]:not([class*="fa"]){
   font-family: inherit !important;
 }
 [class*="MuiInputBase-input"]{
   height: auto !important;
 }
 
-[class*="MuiIconButton-root"]{
-  font-size: 1em !important;
-}
 [class*="MuiListItemIcon-root"]{
   min-width: auto !important;
   padding-right: 0.5em !important;
@@ -164,11 +161,14 @@ small, .small{
 [class*="MuiTableContainer-root"]{
   overflow: auto;
 }
-/*[class*="fa-"],
-[class*="MuiSvgIcon-root"]{
-  font-size: 1.4em !important;
-}*/
-[class*="fa-"]{
+
+[class*="MuiIconButton-root"]{
+  font-size: 1em !important;
+}
+
+[class*="fa-"],
+[class*="fa-"]::before,
+[class*="MuiSvgIcon-"]{
   color: inherit !important;
   width: 1em !important;
   height: 1em !important;

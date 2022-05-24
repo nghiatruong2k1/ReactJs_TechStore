@@ -7,30 +7,69 @@ import {DetailContext} from "../../../../Components/Detail/";
 import {useFetch} from "../../../../../../../../../Config/Fetch/";
 import {displays} from "./init";
 
-export function useAddImage({}){
+export function useAddImages({controller}){
   const Fetch = useFetch();
-  const {state,handle,dispath} = useContext(DetailContext);
-}
+  const {state,handle,dispath,events} = useContext(DetailContext);
 
-function ProductImages({...props}){
-  const Fetch = useFetch();
-  const {state,handle,dispath} = useContext(DetailContext);
-  const {image} = useContext(global.config.AppContext);
-
-  const {option,...propsGet} = useInitData(function(){
+  const propsGet = useInitData(function(){
     if(state.values && state.values.Id){
       return{
-        controller:"productimage",
+        controller:controller,
         params:{
           ProductId:state.values.Id
         }
       }
     }
-  },[state.values]);
+  },[state.values.Id]);
+
   useEffect(function(){
-    console.log(propsGet.state.datas)
+    const handlePost = function({target}){
+      target && target.data && target.data.value &&
+      Array.isArray(propsGet.state.datas) && (propsGet.state.datas.length > 0) 
+      && Fetch.post({
+          api:`api/admin/${controller}/multiple`,
+          params:propsGet.state.datas.map(function(data){
+            return {
+              ...data,
+              ProductId:target.data.value.Id
+            }
+          })
+      })
+    }
+    events.add("SubmitThen",handlePost);
+    return function(){
+      events.remove("SubmitThen",handlePost);
+    } 
   },[propsGet.state.datas])
 
+  return {...propsGet}
+}
+
+export function useUpdateImages({controller}){
+  const Fetch = useFetch();
+  const {state,handle,dispath,events} = useContext(DetailContext);
+
+  const propsGet = useGetData(function(){
+    if(state.values && state.values.Id){
+      return{
+        controller:controller,
+        params:{
+          ProductId:state.values.Id
+        }
+      }
+    }
+  },[state.values.Id]);
+  return {...propsGet}
+}
+
+
+
+function ProductImages({useHandleImage,...props}){
+  const {state} = useContext(DetailContext);
+  const {option,dataset,handle,...propsGet} = useHandleImage({
+    controller:"productimage"
+  });
+  const {image} = useContext(global.config.AppContext);
   return(
     <DataGridView  
       title="Hình ảnh"
@@ -38,21 +77,44 @@ function ProductImages({...props}){
       config={{
         empty:"Không có hình ảnh"
       }}
+      handle={{
+        ...handle
+      }}
       option={{
         ...option,
         addProps:{
           onClick:function(){
             image.handle.open({
               onSubmit:function({value:{Name,Id,Url}}){
-                propsGet && propsGet.handle && propsGet.handle.addData({
+                const data = {
                   ImageId:Id,
                   ImageUrl:Url,
                   Alt:Name,
+                  ProductId:state.values && state.values.Id,
+                  IsDefault:false,
                   IsPublic:true,
                   IsTrash:false
-                })
+                };
+                handle.addData && handle.addData(data)
               }
             })
+          }
+        }
+      }}
+      dataset={{
+        ...dataset,
+        updateProps:function(data,setLoading){
+          return{
+            onClick:function(){
+              image.handle.open({
+                onSubmit:function({value:{Name,Id,Url}}){
+                  data.ImageId  = Id;
+                  data.ImageUrl = Url;
+                  data.Alt = Name;
+                  handle.changeData && handle.changeData(data)
+                }
+              })
+            }
           }
         }
       }}

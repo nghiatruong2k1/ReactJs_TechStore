@@ -15,7 +15,7 @@ function SliderContent({...props}){
   const thisRef = useRef(null);
   return(
   <Provider state={state} dispath={dispath} slider={thisRef.current}>
-    <Grid item {...props}>
+    <Grid item p={0.5} {...props}>
       <Box position="relative">
         <Images ref={thisRef}/>
         <Arrows/>

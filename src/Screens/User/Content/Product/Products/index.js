@@ -8,7 +8,7 @@ import Provider from "./provider";
 import {initData,reducer} from "./init";
 import ListView from "./List/";
 import GridView from "./Grid/";
-function ProductsView({action,...props}){
+function ProductsView({action,useHandleGet,...props}){
   const [state,dispath] = useReducer(reducer,initData);
   return(
   <Provider state={state} dispath={dispath} action={action}>

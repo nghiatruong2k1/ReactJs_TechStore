@@ -3,30 +3,35 @@ import {Routes,Route,useLocation}from'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Provider from "./AppProvider";
-
+import {getAreaName} from "./Config/Route/";
 import Auth from "./Screens/Auth/";
 import LoadingData from "./Screens/LoadingData/";
 import Toasts from "./Screens/Toasts/";
 import UploadImage from "./Screens/UploadImage/";
 import UserPage from "./Screens/User/";
 import AdminPage from "./Screens/Admin/";
-import {getAreaName} from "./Config/Route/";
+    
+
 function App({...props}){
-	  const location = useLocation();
-	  useEffect(function(){
-	    document.documentElement.scrollTop = 0;
-	  },[location])
+	const location = useLocation();
+
+	useEffect(function(){
+	  document.documentElement.scrollTop = 0;
+	},[location]);
+
+
 	return(
 		<Provider>
-	        <LoadingData />
+			<LoadingData />
 	        <Toasts />
 	        <Auth />
 	        <UploadImage />
 	        <Routes>
-	          <Route path={`${getAreaName("user")}/*`} element={<UserPage />} /> 
-	          <Route path={`${getAreaName("admin")}*`} element={<AdminPage />} />     
+	          <Route path={`${getAreaName("user")}/*`} element={<UserPage />} />  
+	          <Route path={`${getAreaName("admin")}*`} element={<AdminPage />} />          
 	        </Routes>  
 	    </Provider>
 	)
 }
 export default memo(App);
+	        

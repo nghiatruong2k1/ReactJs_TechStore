@@ -1,19 +1,27 @@
-import {memo} from 'react';
+import {memo,useEffect,useReducer} from 'react';
 import clsx from 'clsx';
-import {Routes,Route} from "react-router-dom";
-import ListView from "./ListView/";
+import {Grid} from '@mui/material/';
+import styles from './styles.module.css';
 
-import {getActionName} from "../../../../Config/Route/";
+import {reducer,initData} from "./init";
+import Provider from "./provider";
+import ViewData from "./ViewData/";
 
-
-function List({controller,...props}){
+import {ViewContent} from "../../../../Components/";
+function ListView({controller,action,...props}){
+  const [state,dispath] = useReducer(reducer,initData);
   return(
-    <Routes>
-      <Route path={`${getActionName("user",controller,"index")}`} 
-        element={<ListView controller={controller} />} />
-      <Route path={`${getActionName("user",controller,"search")}`} 
-        element={<ListView controller={controller} action="search" />} />
-    </Routes>
+    <Provider state={state} dispath={dispath} controller={controller} action={action}>
+      <Grid container columnSpacing={1} rowSpacing={1}>
+        <ViewContent loading={state.isLoading} length={state.total}>
+        {
+          state.datas.map(function(data,index){
+            return(<ViewData loading={!Boolean(data) || state.isLoading} data={data} key={index} controller={controller} />)
+          })
+        }
+        </ViewContent>
+      </Grid>
+    </Provider>
   )
 }
-export default memo(List);
+export default memo(ListView);

@@ -26,12 +26,12 @@ const user = new Area("",{
 		category:new Action("danh-muc/:alias"),
 		brand:new Action("thuong-hieu/:alias"),
 		search:new Action("tim-kiem/:query")
-	}),category:new Controller("danh-muc",{
-		index:new Action("danh-sach"),
-		search:new Action("tim-kiem/:query")
-	}),brand:new Controller("thuong-hieu",{
-		index:new Action("danh-sach"),
-		search:new Action("tim-kiem/:query")
+	}),category:new Controller("",{
+		index:new Action("danh-sach-danh-muc"),
+		search:new Action("tim-kiem-danh-muc/:query")
+	}),brand:new Controller("",{
+		index:new Action("danh-sach-thuong-hieu"),
+		search:new Action("tim-kiem-thuong-hieu/:query")
 	}),profile:new Controller("tai-khoan",{
 		index:new Action("thong-tin"),
 		orders:new Action("don-hang"),
@@ -96,7 +96,7 @@ export function getRoute(area,controller,action,params = {}){
 		return result;
 	},"");
 }
-export function getRouteName(area,controller,action,params = {}){
+export function getRouteName(area,controller,action){
 	let url = [];
 	if(area){
 		url.push(getAreaName(area));
@@ -110,7 +110,6 @@ export function getRouteName(area,controller,action,params = {}){
 		}
 	}
 	return url.reduce(function(result,value){
-
 		if(value){
 			return result+="/"+value
 		}

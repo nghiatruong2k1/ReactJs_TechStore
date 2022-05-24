@@ -1,8 +1,9 @@
+
 export const initData = {
 	view:0,
 	limit:5,
 	page:1,
-	sort:"Id",
+	sort:null,
 	total:0,
 	datas:[],
 	isLoading:false
@@ -33,6 +34,30 @@ export function reducer(prevState,[key,payload]) {
 				total:!Number.isNaN(payload) && Number(payload) || 0
 			}
 		}
+		case 'set_page':{
+			return {
+				...prevState,
+				page:!Number.isNaN(payload) && Number(payload) || 1
+			}
+		}
+		case 'set_limit':{
+			return {
+				...prevState,
+				limit:!Number.isNaN(payload) && Number(payload) || 0
+			}
+		}
+		case 'set_sort':{
+			return {
+				...prevState,
+				sort:(typeof(payload) === 'string') && payload
+			}
+		}
+		case 'set_view':{
+			return {
+				...prevState,
+				view:!Number.isNaN(payload) && Number(payload) || 0
+			}
+		}
 		default:{
 		console.log(key,{prevState,"error":"Không tồn tại action"})
 			return{
@@ -41,4 +66,5 @@ export function reducer(prevState,[key,payload]) {
 		}
 	}
 };
+
 

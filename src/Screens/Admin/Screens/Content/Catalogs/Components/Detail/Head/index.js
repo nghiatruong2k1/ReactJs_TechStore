@@ -25,7 +25,11 @@ function DetailHead({title,...props}){
       <Tooltip title="Lưu và làm mới" placement="top" arrow>
         <span>
           <IconButton disabled={state.isLoading} color="info"
-            onClick={()=>{handle.save && handle.save(handle.refetch);}}
+            onClick={()=>{handle.save && handle.save({
+              onEnd:function(){
+                handle.refetch && handle.refetch()
+              }
+            });}}
           >
             <Save />
           </IconButton>

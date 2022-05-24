@@ -14,15 +14,14 @@ function UserPage({...props}){
       <Cart />
       <Content />
       <Subscribe />
-      <Footer />
+      <Footer />  
     </Provider>
   )
 }
 export default memo(UserPage);
 /*
 
-      
-      
+    
       
 
 

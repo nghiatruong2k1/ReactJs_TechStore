@@ -1,21 +1,76 @@
-import {memo,createContext,useContext,useEffect,useMemo,useReducer,useState} from 'react';
+import {memo,createContext,useContext,useEffect,useMemo,useReducer,useRef,useState} from 'react';
 import { useFetch } from '../../../../../../../Config/Fetch/';
 import { getRoute } from '../../../../../../../Config/Route/';
 import {reducer,initData,reducerDisplay}                from './init';
 
 export const DataContext = createContext();
+
+
+const initEvent = function(){
+  const es = [
+    "ChangeDatasource",
+    "ChangeData"
+  ].reduce(function(result,name){
+      if(typeof(result[name]) !== "function"){
+        result[name] = [];
+      }
+      return result;
+  },{});
+  function add(eventName,callback){
+    if(es[eventName]){
+      if(typeof(callback) === 'function'){
+        if(Array.isArray(es)){
+          const index = es[eventName].findIndex((e)=>(e != callback))
+          if(index == -1){
+            es[eventName].push(callback)
+          }else{
+            es[eventName][index] = callback;
+          }
+        }
+      }else {
+        console.error(`${callback} is not a function!`);
+      }
+    }else{
+      console.error(`Event ${eventName} not found!`);
+    }
+  } 
+  function remove(eventName,callback){
+    if(es[eventName]){
+      if(typeof(callback) === 'function'){
+       if( Array.isArray(es)){
+          const index = es[eventName].findIndex((e)=>(e != callback))
+          if(index == -1){
+            delete es[eventName][index];
+          }
+        }
+      }else {
+        console.error(`${callback} is not a function!`);
+      }
+    }else{
+      console.error(`Event ${eventName} not found!`);
+    }
+  } 
+  function run(eventName,params){
+    if(es[eventName]){
+      if(typeof(params) === 'object'){
+        es[eventName].forEach((handle)=>{
+          handle({
+            eventName:eventName,
+            target:params
+          })
+        })
+      }else {
+        console.error(`${params} is not a object!`);
+      }
+    }else{
+      console.error(`Event ${eventName} not found!`);
+    }
+  } 
+  return {add,remove,run}
+}; 
 export function useInitData(callback,args = []){
   const [state,dispath] = useReducer(reducer,initData);
   const Fetch = useFetch();
-  const {onChange} = useMemo(function(){
-    if(typeof(callback) === 'function'){
-      return callback() ?? {};
-    }else if(typeof(callback) === 'object'){
-      return callback;
-    }else{
-      return {}
-    }
-  },[...args]);
   useEffect(function(){
     dispath(['set_page',1])
     dispath(['set_datas',[]])
@@ -23,7 +78,6 @@ export function useInitData(callback,args = []){
 
   useEffect(function(){
     dispath(['set_total',state.datas.length]);
-    onChange && onChange(state.datas);
   },[state.datas]);
 
   const handle = {
@@ -34,11 +88,9 @@ export function useInitData(callback,args = []){
     },setTrash:function(trash){
       dispath(['set_trash',trash])
     },addData:function(data){
-      dispath(['set_datas',[data,...state.datas]])
-    },removeData:function(data){
-      dispath(['set_datas',[data,...state.datas]])
+      dispath(['add_data',data])
     },changeData:function(data){
-      
+      dispath(['change_data',data])
     }
   };
   const option = {
@@ -47,35 +99,33 @@ export function useInitData(callback,args = []){
     }
   }
   const dataset = {
-    updateProps:function(data){
-      return {
-        
-      }
-    },publicProps:function(data,setLoading){
+    publicProps:function(data,setLoading){
       return {
         onClick:function(){
-           
+          data.IsPublic = !data.IsPublic
+          dispath(['change_data',data])
         }
       }
     },trashProps:function(data,setLoading){
       return {
         title:"Xóa",
         onClick:function(){
-          
+          dispath(['remove_data',data])
         }
       }
     },deleteProps:function(data,setLoading){
       return {
-        onClick:function(){
-                   
-        }
+        hidden:true
       }
     }
   }
   return {state,dispath,handle,dataset,option}
 }
+
+
 export function useGetData(callback,args = []){
   const [state,dispath] = useReducer(reducer,initData);
+  const eventRef = useRef({});
   const Fetch = useFetch();
   const {controller,params} = useMemo(function(){
     if(typeof(callback) === 'function'){
@@ -85,34 +135,38 @@ export function useGetData(callback,args = []){
     }else{
       return {}
     }
-  },[...args])
-  function handleGetData({onStart,onEnd}){
-    controller && Fetch.get({
-      api:"api/admin/"+controller
-      ,params:{
-        isTrash:state.inTrash,
-        limit:state.limit,
-        offset:(state.page - 1) * state.limit,
-        ...params
-      },onThen:(result => {
-          dispath(['set_datas',result.data]);
-      }),onError:(error=> {
-          dispath(['set_datas',[]]);
-      }),onStart,onEnd
-    })
-  }
-  function handleGetLength(){
-    controller && Fetch.get({
-      api:"api/admin/"+controller+"/count"
-      ,params:{
-        isTrash:state.inTrash,
-        ...params
-      },onThen:(result => {
-        dispath(['set_total',result.data]);
-      }),onError:(error=>{
-        dispath(['set_total',0]);
+  },[...args]);
+  async function handleGetData({onStart,onEnd}){
+    if(controller){
+      return await Fetch.get({
+        api:"api/admin/"+controller
+        ,params:{
+          isTrash:state.inTrash,
+          limit:state.limit,
+          offset:(state.page - 1) * state.limit,
+          ...params
+        },onThen:(result => {
+            dispath(['set_datas',result.data]);
+        }),onError:(error=> {
+            dispath(['set_datas',[]]);
+        }),onStart,onEnd
       })
-    })
+    }
+  }
+  async function handleGetLength(){
+    if(controller){
+      return await Fetch.get({
+        api:"api/admin/"+controller+"/count"
+        ,params:{
+          isTrash:state.inTrash,
+          ...params
+        },onThen:(result => {
+          dispath(['set_total',result.data]);
+        }),onError:(error=>{
+          dispath(['set_total',0]);
+        })
+      })
+    }
   }
 
   useEffect(function(){
@@ -129,7 +183,7 @@ export function useGetData(callback,args = []){
           dispath(['set_loading',false]);
       }
     });
-  },[state.page,state.limit,controller,params,state.inTrash,...args]);
+  },[state.page,state.limit,state.inTrash,controller,params]);
 
   useEffect(function(){
     handleGetLength();
@@ -143,6 +197,24 @@ export function useGetData(callback,args = []){
       dispath(['set_page',page])
     },setTrash:function(trash){
       dispath(['set_trash',trash])
+    },changeData:function(data){
+      data && Fetch.put({
+        api:"api/admin/"+controller
+        ,params:{
+          ...data
+        },onEnd:function(){
+          handle.refetch && handle.refetch();
+        }
+      })
+    },addData:function(data){
+      data && Fetch.post({
+        api:"api/admin/"+controller
+        ,params:{
+          ...data
+        },onEnd:function(){
+          handle.refetch && handle.refetch();
+        }
+      })
     }
   };
   const option = {
@@ -158,7 +230,7 @@ export function useGetData(callback,args = []){
     },publicProps:function(data,setLoading){
       return {
         onClick:function(){
-           data && Fetch.put({
+          data && Fetch.put({
             api:"api/admin/"+controller
             ,params:{
                 ...data,

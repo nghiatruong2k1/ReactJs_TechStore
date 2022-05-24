@@ -6,6 +6,7 @@ function CellCheckbox({name,loading,data,onChange,...props}){
     <Checkbox 
       checked={Boolean(data && data[name])}
       onChange={(e)=>{onChange && onChange(e,e.target.checked)}}
+      name={name}
       {...props}
     />
   )

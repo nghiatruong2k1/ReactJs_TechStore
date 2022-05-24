@@ -1,7 +1,7 @@
 import {memo} from 'react';
 import clsx from 'clsx';
 import {
-  Grid,
+  Box,
   Card,
   CardContent,
   CardActions,
@@ -16,7 +16,7 @@ import styles from './styles.module.css';
 import {getRoute} from "../../../../../../Config/Route/";
 function Item({data,loading,...props}){
   return(
-    <Grid item {...props}>
+    <Box sx={{p:1}}>
       <Card sx={{height:"100%"}}>
         <CardHeader 
           sx={{py:1}}
@@ -40,7 +40,7 @@ function Item({data,loading,...props}){
           </Frame>  
         </CardContent>
       </Card>
-  </Grid>
+  </Box>
   )
 }
 export default memo(Item);

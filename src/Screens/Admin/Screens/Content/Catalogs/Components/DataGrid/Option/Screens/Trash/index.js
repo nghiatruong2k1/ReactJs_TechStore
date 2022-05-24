@@ -12,10 +12,8 @@ function TrashButton({onClick,...props}){
       onClick={()=>(handle.setTrash && handle.setTrash(!state.inTrash))}
       title={state.inTrash && "Danh sách" || "Thùng rác"} 
       icon={<DeleteSweep />}
-      buttonProps={{    
-        ...option.trashProps
-      }}
       {...props}
+      {...option.trashProps}
     ></OptionButton>
   )
 }

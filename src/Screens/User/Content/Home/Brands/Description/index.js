@@ -1,10 +1,11 @@
 import {memo} from 'react';
 import clsx from 'clsx';
-import {Card,CardContent,CardActions,CardHeader,Typography} from '@mui/material/';
+import {Grid,Card,CardContent,CardActions,CardHeader,Typography} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-function Description({...props}){
+function Description({sx,...props}){
   return(
+  <Grid item sx={{p:1,...sx}} xs {...props}>
     <Card sx={{backgroundColor:"#ffdcb0",height:"100%"}}>
       <CardHeader
         px={2}
@@ -16,6 +17,7 @@ function Description({...props}){
         </Typography>
       </CardContent>
     </Card>
+  </Grid>
   )
 }
 export default memo(Description);

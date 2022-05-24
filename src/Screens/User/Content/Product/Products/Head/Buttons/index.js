@@ -5,9 +5,9 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {ProductsContext} from "../../provider";
 function Buttons({...props}){
-  const {state,handle} = useContext(ProductsContext)
+  const {state,dispath} = useContext(ProductsContext)
   function handleClick(view){
-    handle.set("view",view)
+    dispath(["set_view",view]);
   }
   return(
   <ButtonGroup size="small" className={styles.group}>

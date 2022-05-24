@@ -12,11 +12,9 @@ function RefetchButton({...props}){
       title="Tải lại" 
       icon={<Autorenew />} 
       onClick={()=>(handle.refetch && handle.refetch())}
-      buttonProps={{    
-        ...option.refetchProps
-      }}
-      {...props}>
-    </OptionButton>
+      {...props}
+      {...option.refetchProps}
+    />
   )
 }
 export default memo(RefetchButton);

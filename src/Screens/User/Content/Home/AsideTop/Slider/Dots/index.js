@@ -1,4 +1,4 @@
-import {memo,useContext,useRef,useEffect} from 'react';
+import {memo,useContext,useRef,useEffect,useState,useMemo} from 'react';
 import clsx from 'clsx';
 import {Box,Button} from '@mui/material/';
 import {} from '@mui/icons-material/';
@@ -10,21 +10,23 @@ import Slider from "react-slick";
 
 
 function Dots({...props}){
-  const {state,dispath,slider} = useContext(SliderContext)
+  const {state,dispath,slider} = useContext(SliderContext);
   const thisRef = useRef();
-  const settings = {
-    arrows:false,
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    rows:1,
-    slidesPerRow:4
-  };
+  const settings = useMemo(function(){
+    return {
+      arrows:false,
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      rows:1,
+      slidesPerRow:4
+    }
+  },[]);
 
   useEffect(function(){
-    thisRef.current && thisRef.current.slickGoTo(state.index / 4)
+    thisRef.current && thisRef.current.slickGoTo(state.index / thisRef.current.innerSlider.state.slideCount)
   },[state.index])
   return(
     <Box className={styles.dots} px={10}>

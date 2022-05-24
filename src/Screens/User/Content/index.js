@@ -3,16 +3,21 @@ import {Box,Container} from '@mui/material/';
 import styles from './styles.module.css';
 
 import {Routes,Route} from "react-router-dom";
-import HomeContent from "./Home/"
-import ListContent from "./List/"
-import ProductContent from "./Product/"
-import CartContent from "./Cart/"
-import ProfileContent from "./Profile/"
+
+
+import HomeContent from "./Home/";
+
+
+import ListContent from "./List/";
+
+import ProductContent from "./Product/";
+import CartContent from "./Cart/";
+import ProfileContent from "./Profile/";
 
 
 
 
-import {getRoute,getRouteName,getControllerName} from "../../../Config/Route/";
+import {getRouteName,getControllerName} from "../../../Config/Route/";
 
 function Content({...props}){
   return(
@@ -21,11 +26,15 @@ function Content({...props}){
         <Routes>
           <Route path="*" element={<HomeContent />} />
 
-          <Route path={`${getControllerName("user","category")}/*`} 
+          <Route path={`${getRouteName("user","category","index")}`} 
             element={<ListContent controller="category"/>} />
+          <Route path={`${getRouteName("user","category","search")}`} 
+            element={<ListContent action="search" controller="category"/>} />
 
-          <Route path={`${getControllerName("user","brand")}/*`} 
+          <Route path={`${getRouteName("user","brand","index")}`} 
             element={<ListContent controller="brand" />} />
+          <Route path={`${getRouteName("user","brand","search")}`} 
+            element={<ListContent action="search" controller="brand"/>} />
           
           <Route path={`${getControllerName("user","cart")}/*`} 
             element={<CartContent />} />

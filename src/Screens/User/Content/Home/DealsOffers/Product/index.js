@@ -1,7 +1,6 @@
 import {memo,useContext} from 'react';
 import clsx from 'clsx';
 import {
-  Grid,
   Box,
   Divider,
   Card,
@@ -22,14 +21,7 @@ import DataBookmask from "./Bookmask/";
 
 function Product({data,loading,...props}){
   return(
-    <Grid item sx={{
-      flex:{
-        xs:"1 0 calc(6 * 100% / 12)",
-        sm:"1 0 calc(4 * 100% / 12)",
-        md:"1 0 25%",
-        lg:"1 0 20%"
-      }
-    }} p={0.5}>
+    <Box px={0.5} py={1} sx={{cursor:"grab"}}>
       <Card style={{height:'100%'}}>
         <CardActions>
           <Frame square loading={loading}>
@@ -50,7 +42,7 @@ function Product({data,loading,...props}){
             />
         </CardContent>
        </Card>
-    </Grid>
+    </Box>
   )
 }
 export default memo(Product);

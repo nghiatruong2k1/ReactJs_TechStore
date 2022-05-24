@@ -2,7 +2,9 @@
 	background-color: var(--info);
 	color: #fff !important;
 	padding: 0.2em 0.1em;
+	margin-bottom: 0.3em !important;
 	text-align: center;
+	width: 100%;
 }
 
 .button{
