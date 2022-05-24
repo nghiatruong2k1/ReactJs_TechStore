@@ -8,7 +8,7 @@ import ToggleNav from "./Toggle/";
 function Navbar({fixed,...props}){
   return(
     <Grid item {...props}>
-      <Divider sx={{display:{xs:'none',lg:'flex'}}}/>
+      <Divider sx={{display:{xs:'none',lg:fixed && 'none' || 'flex'}}}/>
       <Grid 
         container py={0.5} 
         className={styles.navbar} 

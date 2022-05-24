@@ -43,8 +43,7 @@ function Header({...props}){
         <HeaderNavbar 
           fixed = {isFixed}
           xs={1.4}
-          lg={12}
-          sx={{display:{lg:'block'}}}
+          lg={isFixed && 1 || 12}
         />
       </Grid> 
     </Container>
