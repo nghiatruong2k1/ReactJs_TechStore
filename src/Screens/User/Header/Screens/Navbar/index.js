@@ -5,7 +5,7 @@ import LeftNav from "./Left/";
 import RightNav from "./Right/";
 import ToggleNav from "./Toggle/";
 
-function Navbar(props){
+function Navbar({fixed,...props}){
   return(
     <Grid item {...props}>
       <Divider sx={{display:{xs:'none',lg:'flex'}}}/>
@@ -13,12 +13,12 @@ function Navbar(props){
         container py={0.5} 
         className={styles.navbar} 
         component="nav"
-        sx={{display:{xs:'none',lg:'flex'}}}
+        sx={{display:{xs:'none',lg:fixed && 'none' || 'flex'}}}
       >
         <LeftNav />
         <RightNav />
       </Grid>
-      <ToggleNav boxProps={{sx:{display:{xs:'inline-flex',lg:'none'}}}}/>
+      <ToggleNav boxProps={{sx:{display:{xs:'inline-flex',lg:fixed && 'inline-flex' || 'none'}}}}/>
     </Grid>
   )
 }

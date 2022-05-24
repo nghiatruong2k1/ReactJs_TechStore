@@ -41,6 +41,7 @@ function Header({...props}){
         <HeaderCart xs={1.4} lg={1}/>
         <HeaderOrder xs={1.4} lg={1}/>
         <HeaderNavbar 
+          fixed = {isFixed}
           xs={1.4}
           lg={12}
           sx={{display:{lg:'block'}}}
