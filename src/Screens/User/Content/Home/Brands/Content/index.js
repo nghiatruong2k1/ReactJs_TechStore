@@ -21,13 +21,13 @@ function Content({children,...props},ref){
       arrows:false,
       dots: false,
       speed: 500,
-      slidesToShow: 1,
+      rows:2,
+      slidesToShow: 4,
       slidesToScroll: 1,
       autoplaySpeed:2000,
       swipeToSlide:true,
       infinite: true,
       autoplay:true,
-      rows:1,
       responsive: [
         {
           breakpoint: theme.breakpoints.values.xl,
@@ -44,16 +44,19 @@ function Content({children,...props},ref){
         },{
           breakpoint: theme.breakpoints.values.md,
           settings: {
+            rows:1,
             slidesToShow: 3
           }
         },{
           breakpoint: theme.breakpoints.values.sm,
           settings: {
+            rows:1,
             slidesToShow: 2
           }
         },{
           breakpoint: theme.breakpoints.values.xs,
           settings: {
+            rows:1,
             slidesToShow: 1
           }
         }
