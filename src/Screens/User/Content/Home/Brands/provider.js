@@ -11,7 +11,7 @@ function BrandsProvider({state,dispath,slider,children,...props}){
 	        }),onError:(error=> {
 	            dispath(['set_data'])
 	        }),onStart:(()=>{
-	    		dispath(['set_data',Array(state.limit ?? 4).fill(undefined)])
+	    		dispath(['set_data',Array(8).fill(undefined)])
 	    		dispath(['set_loading',true])
 	        }),onEnd:(()=>{
 	        	dispath(['set_loading',false])

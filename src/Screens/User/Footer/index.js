@@ -51,11 +51,11 @@ function Footer({...props}){
   <Box component="section" className={styles.section} pb={10}>
     <Container maxWidth="xxl" component="footer" className={styles.container}>
         <Grid container columnSpacing={2} rowSpacing={1}>
-            <FooterList title="Trợ giúp:"  getDatas={getHelps} xs/>
-            <FooterList title="Thương hiệu:" getDatas={getBrands} xs/>
-            <FooterList title="Danh mục:" getDatas={getCategories} xs/>
-            <FooterList title="Tài khoản:" getDatas={getAccount} xs/>
-            <FooterList title="Mạng xã hội:" getDatas={getSocial} xs/>
+            <FooterList title="Trợ giúp:"  getDatas={getHelps} xs={12} sm={6} lg={3} xl="auto"/>
+            <FooterList title="Thương hiệu:" getDatas={getBrands} xs={12} sm={6} lg={3} xl="auto"/>
+            <FooterList title="Danh mục:" getDatas={getCategories} xs={12} sm={6} lg={3} xl="auto"/>
+            <FooterList title="Tài khoản:" getDatas={getAccount} xs={12} sm={6} lg={3} xl="auto"/>
+            <FooterList title="Mạng xã hội:" getDatas={getSocial} xs={12} xl="auto"/>
         </Grid> 
     </Container>
   </Box>

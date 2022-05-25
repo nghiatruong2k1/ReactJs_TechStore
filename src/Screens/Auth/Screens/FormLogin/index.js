@@ -43,7 +43,7 @@ function FormLogin({...props}){
   return(
     <FormProvider onSubmit={handleSubmit} rules={rules}>
       <Stack spacing={1} sx={{
-        px:{xs:0,sm:6,md:8,lg:12}
+        px:{xs:0,sm:3,md:6,lg:12}
       }}>
         <InputEmail 
           name="Email"

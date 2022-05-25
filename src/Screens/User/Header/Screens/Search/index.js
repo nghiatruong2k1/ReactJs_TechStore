@@ -13,12 +13,13 @@ import SearchToggle from "./Toggle/";
 
 import {getRoute} from "../../../../../Config/Route/";
 
-function HeaderSearch({...props}){
+function HeaderSearch({fixed,...props}){
   const [state,dispath] = useReducer(reducer,initData);
   const navigator = useNavigate();
   function handleSubmit(event){
       event.preventDefault();
       if(state.query.trim() != ""){
+        dispath(['set_query',""])
         navigator({
           pathname:getRoute("user",state.controller,"search",{query:state.query}),
           search: ""
@@ -28,27 +29,29 @@ function HeaderSearch({...props}){
   return(
   <Provider state={state} dispath={dispath}>
     <Grid item {...props}>
-      <FormControl 
-          onSubmit={handleSubmit} 
-          component="form" 
-          method="POST" 
-          className={styles.form}
-          sx={{py:0.3,px:0.15,display:{xs:'none',lg:'block'}}}
-          fullWidth
-        >
-          <FormGroup row sx={{alignItems:'center'}}>
-            <SearchSelect 
-              value={state.controller}
-              onChange={(e,v)=>{dispath(['set_controller',v])}}
-            />
-            <SearchInput      
-              value={state.query ?? ""}
-              onChange={(e,v)=>{dispath(['set_query',v])}}
-            />
-            <SearchOption />
-          </FormGroup>
-      </FormControl>
-        <SearchToggle boxProps={{sx:{display:{xs:'inline-flex',lg:'none'}}}}/>
+      <Grid container>
+        <FormControl 
+            onSubmit={handleSubmit} 
+            component="form" 
+            method="POST" 
+            fullWidth
+            className={styles.form}
+            sx={{py:0.3,px:0.15,display:{xs:'none',lg:'block'}}}
+          >
+            <FormGroup row sx={{alignItems:'center'}}>
+              <SearchSelect 
+                value={state.controller}
+                onChange={(e,v)=>{dispath(['set_controller',v])}}
+              />
+              <SearchInput      
+                value={state.query ?? ""}
+                onChange={(e,v)=>{dispath(['set_query',v])}}
+              />
+              <SearchOption />
+            </FormGroup>
+        </FormControl>
+        {/* fixed && <SearchToggle /> */}
+      </Grid>
     </Grid>
   </Provider>
   )

@@ -27,7 +27,15 @@ function Auth({...props}){
           fullWidth={true}
           scroll={'body'}
           PaperProps={{
-            className:styles.container
+            className:styles.container,
+            sx:{ 
+              m:{
+                xs:0.5,
+                sm:1,
+                md:1.5,
+                lg:2
+              }
+            }
           }}
         >
           <DialogTitle className={styles.head}>

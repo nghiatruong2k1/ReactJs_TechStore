@@ -8,7 +8,8 @@ import {Routes,Route} from "react-router-dom";
 import HomeContent from "./Home/";
 
 
-import ListContent from "./List/";
+import ListGet from "./List/Screens/ListGet/";
+import ListSearch from "./List/Screens/ListSearch/";
 
 import ProductContent from "./Product/";
 import CartContent from "./Cart/";
@@ -27,14 +28,14 @@ function Content({...props}){
           <Route path="*" element={<HomeContent />} />
 
           <Route path={`${getRouteName("user","category","index")}`} 
-            element={<ListContent controller="category"/>} />
+            element={<ListGet controller="category" title="danh mục"/>} />
           <Route path={`${getRouteName("user","category","search")}`} 
-            element={<ListContent action="search" controller="category"/>} />
+            element={<ListSearch param={"query"} controller="category"/>} />
 
           <Route path={`${getRouteName("user","brand","index")}`} 
-            element={<ListContent controller="brand" />} />
+            element={<ListGet controller="brand" title="thương hiệu" />} />
           <Route path={`${getRouteName("user","brand","search")}`} 
-            element={<ListContent action="search" controller="brand"/>} />
+            element={<ListSearch param={"query"} controller="brand"/>} />
           
           <Route path={`${getControllerName("user","cart")}/*`} 
             element={<CartContent />} />

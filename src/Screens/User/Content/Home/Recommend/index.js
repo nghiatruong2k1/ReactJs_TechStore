@@ -1,6 +1,5 @@
 import {memo,useReducer} from 'react';
 import {Box,Grid,Divider} from '@mui/material/';
-import styles from './styles.module.css';
 
 import {initData,reducer} from './init';
 import Provider from "./provider";
@@ -12,11 +11,11 @@ function Recommend({...props}){
   return(
     <Provider state={state} dispath={dispath}>
       <Box my={3}>
-        <Divider textAlign="left" component="h3" className={styles.title}>
+        <Divider textAlign="left" component="h3">
           Sản phẩm đề xuất:
         </Divider>
         <Grid container spacing={1}>
-          <ViewContent loading = {false} length = {state.datas.length}>  
+          <ViewContent loading = {state.isLoading} length = {state.datas.length}>  
             {
               state.datas.map(function(data,index){
                 return ( <RecommendProduct loading={state.isLoading || !Boolean(data)} data={data} key={index}/>)

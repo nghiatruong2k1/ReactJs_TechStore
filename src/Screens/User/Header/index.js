@@ -34,7 +34,7 @@ function Header({...props}){
           sx={{px:{lg:2,md:1.8,sm:1.5,xs:1.2}}}
         />
         <Grid item xs/>
-        <HeaderSearch xs={1.4} lg={isFixed && 5.5 || 5}/>
+        <HeaderSearch fixed = {isFixed} xs={1.4} lg={isFixed && 5.5 || 5}/>
         <HeaderLogin xs={1.4} lg={1}/>
         <HeaderProfile xs={1.4} lg={1}/>
         <HeaderMessage xs={1.4} lg={1}/> 

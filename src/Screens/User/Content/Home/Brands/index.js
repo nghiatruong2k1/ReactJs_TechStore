@@ -1,8 +1,5 @@
 import {memo,useReducer,useRef} from 'react';
-import clsx from 'clsx';
 import {Box,Grid,Divider} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
 
 import BrandsDescription from "./Description/";
 import BrandsContent from "./Content/";
@@ -14,7 +11,7 @@ function Brands({...props}){
   return(
   <Provider state={state}dispath={dispath} slider={sliderRef.current}>
     <Box my={3}>
-      <Divider textAlign="left" component="h3" className={styles.title}>
+      <Divider textAlign="left" component="h3">
           Thương hiêụ:
       </Divider>
       <Grid container>

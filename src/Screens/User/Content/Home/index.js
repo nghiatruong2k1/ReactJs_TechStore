@@ -12,10 +12,14 @@ function HomeContent({...props}){
   return(
     <>
       <AsideTop />
-      <DealsOffers />
       <Brands />
+      <DealsOffers />
       <Recommend />
     </>
   )
 }
 export default memo(HomeContent);
+/*
+      
+      
+*/

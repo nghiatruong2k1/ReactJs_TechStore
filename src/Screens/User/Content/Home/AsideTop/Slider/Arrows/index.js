@@ -4,8 +4,7 @@ import {Box,IconButton} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {SliderContext} from "../provider";
-function Arrows({...props}){
-  const {state,dispath,slider} = useContext(SliderContext)
+function Arrows({slider,...props}){
   return(
     <>
       <IconButton

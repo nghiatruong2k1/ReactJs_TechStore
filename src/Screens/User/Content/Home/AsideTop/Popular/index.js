@@ -1,15 +1,10 @@
-import {memo,useContext,useRef,useEffect,forwardRef,useMemo} from 'react';
-import clsx from 'clsx';
+import {memo,useRef,useMemo} from 'react';
 import { useTheme } from '@mui/material/styles';
-import {LoadingButton} from "@mui/lab/";
-import {Box,Grid,Stack,Button,Typography,List,ListItem,Skeleton} from '@mui/material/';
-import {NavLink} from "react-router-dom";
+import {Box,Grid,Typography} from '@mui/material/';
 import Slider from "react-slick";
 
 
 import styles from './styles.module.css';
-import {Frame,Image} from "../../../../../../Components/";
-import {getRoute} from "../../../../../../Config/Route/";
 import {useGet} from "../../../../../../Config/Fetch/";
 import {ViewContent} from "../../../../../../Components/";
 
@@ -17,7 +12,8 @@ import {ViewContent} from "../../../../../../Components/";
 import PopularItem from "./Item/";
 
 
-function Populars({...props},ref){
+function Populars({...props}){
+  const thisRef = useRef();
   const [state] = useGet([],function(){
     return {
       api:"api/category/popular",
@@ -36,42 +32,58 @@ function Populars({...props},ref){
       speed: 500,
       slidesToScroll: 1,
       autoplaySpeed:2000,
-      slidesToShow: 2,
       infinite: true,
       autoplay:true,
-      swipeToSlide:true,
-      vertical:false,
-      responsive: [
-        {
-          breakpoint: theme.breakpoints.values.xl,
-          settings:{
-            vertical:true
-          }
-        },{
-          breakpoint: theme.breakpoints.values.lg,
-          settings:{
-            vertical:true
-          }
-        },{
-          breakpoint: theme.breakpoints.values.md,
-          settings:{
-            vertical:false
-          }
-        },{
-          breakpoint: theme.breakpoints.values.sm,
-          settings:{
-            vertical:false
-          }
-        }
-      ]
+      swipeToSlide:true
     }
   },[]);
+  const responsive = useMemo(function(){
+    return [
+      {
+        breakpoint: theme.breakpoints.values.xl,
+        settings:{
+          vertical: true,
+          verticalSwiping: true,
+          slidesToShow: 2
+        }
+      },{
+        breakpoint: theme.breakpoints.values.lg,
+        settings:{
+          vertical: true,
+          verticalSwiping: true,
+          slidesToShow: 2
+        }
+      },{
+        breakpoint: theme.breakpoints.values.md,
+        settings:{
+          vertical:false,
+          verticalSwiping: false,
+          slidesToShow: 2
+        }
+      },{
+        breakpoint: theme.breakpoints.values.sm,
+        settings:{
+          vertical:false,
+          verticalSwiping: false,
+          slidesToShow: 2
+        }
+      },{
+        breakpoint: theme.breakpoints.values.xs,
+        settings:{
+          vertical:false,
+          verticalSwiping: false,
+          slidesToShow: 1
+        }
+      }
+    ]
+  },[theme])
+  thisRef.current && console.log(thisRef.current)
   return(
   <Grid item xs px={0} {...props} >
     <Typography className={styles.title} component="h6">Danh mục nỗi bật</Typography>
     <Box position="relative">
       <ViewContent loading={state.isLoading} length={state.data.length}>    
-        <Slider ref={ref} {...settings}>
+        <Slider ref={thisRef} {...settings} responsive={responsive}>
           {
             state.data.map(function(data,index){
               return (
@@ -89,5 +101,5 @@ function Populars({...props},ref){
   </Grid>
   )
 }
-export default memo(forwardRef(Populars));
+export default memo(Populars);
 

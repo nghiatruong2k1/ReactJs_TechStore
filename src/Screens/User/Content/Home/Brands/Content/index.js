@@ -1,9 +1,6 @@
-import {memo,useContext,useRef,useEffect,forwardRef,useMemo} from 'react';
-import clsx from 'clsx';
+import {memo,useContext,useEffect,forwardRef,useMemo} from 'react';
 import { useTheme } from '@mui/material/styles';
-import {Box,Grid,Button} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
+import {Box,Grid} from '@mui/material/';
 import {BrandsContext} from "../provider";
 
 import {ViewContent} from "../../../../../../Components/"
@@ -21,49 +18,50 @@ function Content({children,...props},ref){
       arrows:false,
       dots: false,
       speed: 500,
-      rows:2,
-      slidesToShow: 4,
       slidesToScroll: 1,
       autoplaySpeed:2000,
       swipeToSlide:true,
-      infinite: true,
       autoplay:true,
-      responsive: [
-        {
-          breakpoint: theme.breakpoints.values.xl,
-          settings: {
-            rows:2,
-            slidesToShow: 4
-          }
-        },{
-          breakpoint: theme.breakpoints.values.lg,
-          settings: {
-            rows:2,
-            slidesToShow: 3
-          }
-        },{
-          breakpoint: theme.breakpoints.values.md,
-          settings: {
-            rows:1,
-            slidesToShow: 3
-          }
-        },{
-          breakpoint: theme.breakpoints.values.sm,
-          settings: {
-            rows:1,
-            slidesToShow: 2
-          }
-        },{
-          breakpoint: theme.breakpoints.values.xs,
-          settings: {
-            rows:1,
-            slidesToShow: 1
-          }
-        }
-      ]
+      infinite:true
     }
   },[]);
-
+  const responsive = useMemo(function(){
+    return [
+      {
+        breakpoint: theme.breakpoints.values.xl,
+        settings: {
+          rows:2,
+          slidesToShow: 1,
+          slidesPerRow:4
+        }
+      },{
+        breakpoint: theme.breakpoints.values.lg,
+        settings: {
+          rows:2,
+          slidesToShow: 1,
+          slidesPerRow:3
+        }
+      },{
+        breakpoint: theme.breakpoints.values.md,
+        settings: {
+          rows:1,
+          slidesToShow: 3
+        }
+      },{
+        breakpoint: theme.breakpoints.values.sm,
+        settings: {
+          rows:1,
+          slidesToShow: 2
+        }
+      },{
+        breakpoint: theme.breakpoints.values.xs,
+        settings: {
+          rows:1,
+          slidesToShow: 1
+        }
+      }
+    ]
+  },[theme])
   useEffect(function(){
     ref.current && ref.current.slickGoTo(state.index / ref.current.innerSlider.state.slideCount);
   },[state.index])
@@ -75,6 +73,7 @@ function Content({children,...props},ref){
         beforeChange={(oldIndex,newIndex)=>{
           dispath(["set_index",newIndex])
         }} 
+      responsive={responsive}
       {...settings}>
         {
           state.datas.map(function(data,index){

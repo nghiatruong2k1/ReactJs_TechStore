@@ -1,0 +1,14 @@
+.badge{
+	position: absolute !important;
+	right: 3%;
+	top: 3%;
+}
+.sale{
+	position: relative !important;
+	transform: unset !important;
+	font-size: 0.8em !important;
+	padding: 0.35em 0.6em !important;
+	border-radius: 0.4em !important;
+	background-color: #f00 !important;
+	color: #fff !important;
+}

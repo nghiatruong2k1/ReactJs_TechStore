@@ -9,8 +9,8 @@ import {Frame,Image} from "../../../../../../../Components/"
 import Slider from "react-slick";
 
 
-function Dots({...props}){
-  const {state,dispath,slider} = useContext(SliderContext);
+function Dots({slider,...props}){
+  const {state} = useContext(SliderContext);
   const thisRef = useRef();
   const settings = useMemo(function(){
     return {
@@ -29,7 +29,7 @@ function Dots({...props}){
     thisRef.current && thisRef.current.slickGoTo(state.index / thisRef.current.innerSlider.state.slideCount)
   },[state.index])
   return(
-    <Box className={styles.dots} px={10}>
+    <Box className={styles.dots} sx={{px:{xs:2,sm:4,md:8,lg:10}}}>
       <Slider ref={thisRef} {...settings}>
       {
         state.datas.map(function(item,index){

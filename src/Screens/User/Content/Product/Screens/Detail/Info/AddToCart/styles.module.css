@@ -1,0 +1,10 @@
+.button{
+	background-color: #ff6a00 !important;
+	border:0.1em solid #ff6a00 !important;
+	padding: 0.5em 1em !important;
+	color: #fff !important;
+	box-shadow: unset !important;
+}
+.button:focus{
+	box-shadow: 0 0 0 0.2rem rgb(255 128 38 / 50%) !important;
+}
