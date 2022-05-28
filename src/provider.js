@@ -1,18 +1,24 @@
-import {memo,useState,createContext,useEffect} from 'react';
-import clsx from 'clsx';
-import useLoading from "./Control/Loading/";
-import useToast from "./Control/Toast/";
-
+import {memo,useEffect} from 'react';
+import { BrowserRouter }from'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
+import CustomMessageProvider from './Screens/CustomMessage/provider';
+import CustomThemeProvider from './Screens/CustomTheme/provider';
+import useLoading from "./Screens/Loading/Control/";
 const GlobalContext = global.config.context;
 function GlobalProvider({children,...props}){
 	const loading = useLoading();
-	const toast = useToast();
-	return(
-		<GlobalContext.Provider value={{
-			loading,toast
-		}}>
-			{children}
-		</GlobalContext.Provider>
+	return(	
+	<BrowserRouter>
+		<CookiesProvider>
+			<GlobalContext.Provider value={{loading}}>	
+				<CustomThemeProvider>
+					<CustomMessageProvider>
+						{children}
+					</CustomMessageProvider>
+				</CustomThemeProvider>	
+			</GlobalContext.Provider>
+		</CookiesProvider>
+	</BrowserRouter>
 	)
 }
 export default memo(GlobalProvider);

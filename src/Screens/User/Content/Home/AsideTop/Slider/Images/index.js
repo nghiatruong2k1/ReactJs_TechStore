@@ -32,7 +32,7 @@ function Images({...props},ref){
       {
         state.datas.map(function(item,index){
           return(
-            <Frame containerProps={{component:Paper}} className={styles.item} rectangle key={index}>
+            <Frame containerProps={{component:Paper,variant:"outlined"}} className={styles.item} rectangle key={index}>
               <Image cover src={item.src}/>
             </Frame>
           )

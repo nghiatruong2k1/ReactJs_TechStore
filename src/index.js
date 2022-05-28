@@ -1,22 +1,19 @@
-
+import {Fragment} from "react";
 import ReactDOM from 'react-dom';
 import './index.css';
 import './config';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter }from'react-router-dom';
-import { CookiesProvider } from 'react-cookie';
+
 import App from "./App";
 import Provider from "./provider";
 
 
 ReactDOM.render(
-  <BrowserRouter>
-    <CookiesProvider>
-      <Provider>
-        <App />
-      </Provider>
-    </CookiesProvider>
-  </BrowserRouter>,
+  <Fragment>
+    <Provider>
+      <App />
+    </Provider>
+  </Fragment>,
   document.getElementById('root')
 );
 

@@ -27,7 +27,6 @@
     text-overflow: ellipsis;
     text-align: center;
     white-space: nowrap;
-    display: block;
     width: 100%;
     font-size: 0.8em !important;
 }

@@ -46,7 +46,7 @@ const OptionButton = forwardRef((
               {...props}
             >
               <span className={styles.icon}>{icon}</span>
-              <Typography sx={{display:{xs:"none","lg":"block"}}} component="small" className={styles.text}>{title}</Typography>
+              <Typography className={styles.text} sx={{display:{xs:"none","lg":"block"}}} >{title}</Typography>
             </Button>
           </Tooltip>  
           {children}

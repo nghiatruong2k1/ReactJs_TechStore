@@ -21,6 +21,7 @@ function PopularItem({data,loading,...props}){
       <Card component={Grid} container 
         sx={{ width:'100%',m:0}} 
         columnSpacing={1}
+        variant="outlined"
         alignItems="center"
       >
         <CardContent component={Grid} item xs={7} sm={8}>

@@ -79,13 +79,13 @@ const initEvent = function(){
       },onEnd:function(){
         dispath(['set_loading',false]);
       },onThen:function(result){
-        dispath(['set_values',result.data]);
         if(id > 0 && result.status === 204){
           toast.handle.add({message:"Không tìm thấy dữ liệu!",type:"warning"})
           navigator({
             pathname:getRoute("admin",controller,"index")
           })
         }
+        dispath(['set_values',result.data]);
       },onError:function(error){
       }
     });

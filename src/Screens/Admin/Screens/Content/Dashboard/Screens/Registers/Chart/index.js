@@ -1,9 +1,7 @@
 import {memo,useContext,useMemo,useRef} from 'react';
-import clsx from 'clsx';
 import {} from '@mui/material/';
 import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
-import { Bar ,Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import {  Chart } from "chart.js"
 import { 
   Decimation,

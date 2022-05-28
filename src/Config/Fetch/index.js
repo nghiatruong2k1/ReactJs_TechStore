@@ -2,6 +2,7 @@
 
 import {useReducer,useContext,useEffect,useMemo,useRef} from "react";
 import DialogResult from "../../Components/DialogResult";
+import { useSnackbar} from "notistack"
 import axios from "axios";
 import {initState,reducer} from "./init";
 
@@ -14,23 +15,32 @@ axios.defaults.xsrfHeaderName = "token";
 
 const Base_Url_API = "https://localhost:44373/";
 
-function showToast(toast,mes){
-  switch(mes.message){
-    case 'Network Error':{
-      toast.handle.add({...mes,message:"Kiểm tra lại kết nối mạng!",type:"error"});
-      break;
-    }
-    case 'Request failed with status code 404':{
-      toast.handle.add({...mes,message:"Yêu cầu bị lỗi!",type:"error"});
+async function showToast(toast,mes){
+  switch(typeof(mes)){
+    case 'string':
+    case 'number':{
       break;
     }
     default:{
-      toast.handle.add(mes);
+      switch(mes.message){
+        case 'Network Error':{
+          toast({...mes,message:"Kiểm tra lại kết nối mạng!",type:"error"});
+          break;
+        }
+        case 'Request failed with status code 404':{
+          toast({...mes,message:"Yêu cầu bị lỗi!",type:"error"});
+          break;
+        }
+        default:{
+          toast(mes);
+          break;
+        }
+      }
       break;
     }
   }
 }
-function handleError(toast,error){
+async function handleError(toast,error){
   if(error.response){
     let mes = "";
     if(error.response.data && error.response.data.InnerException){
@@ -42,6 +52,19 @@ function handleError(toast,error){
     showToast(toast,{message:mes,type:"error"})
   }else if(error.message){
     showToast(toast,{message:error.message,type:"error"})
+  }
+};
+
+
+async function handleResult(toast,result){
+  if(result.data.message){
+    if(Array.isArray(result.data.message)){
+      result.data.message.forEach(function(message){
+        showToast(toast,message)
+      })
+    }else {
+      showToast(result.data.message)
+    }
   }
 }
 
@@ -58,17 +81,7 @@ async function handleFetch(props,promise,location){
       return await promise(url,params)
         .then(result => {
             console.log(`[Success ${method}]`,{location,url,result});         
-            if(result.data.message){
-              if(Array.isArray(result.data.message)){
-                result.data.message.forEach(function(message){
-                  toast.handle.add(message);
-                })
-              }else if(typeof(result.data.message) === "object"){
-                toast.handle.add(result.data.message);
-              }else if(typeof(result.data.message) === "string"){
-                toast.handle.add({message:result.data.message,type:"info"});
-              }
-            }
+            handleResult(toast,result)
             typeof(onThen)==="function" && onThen(result);
         })
         .catch(error=> {
@@ -109,26 +122,28 @@ const handleDelete =async function(props,location){
 }
 
 export const useFetch = function(location){
-  const {loading,toast} = useContext(global.config.context);
+  const {loading} = useContext(global.config.context);
+  const { enqueueSnackbar } = useSnackbar();
   return useMemo(function(){
     return {
       get:function(props){
-        handleGet({...props,toast,loading},location)
+        handleGet({...props,toast:enqueueSnackbar,loading},location)
       },post:function(props){
-        handlePost({...props,toast,loading},location)
+        handlePost({...props,toast:enqueueSnackbar,loading},location)
       },put:function(props){
-        handlePut({...props,toast,loading},location)
+        handlePut({...props,toast:enqueueSnackbar,loading},location)
       },delete:function({title,message,...props}){
         DialogResult({
           title,message, 
-          onYes:()=>(handleDelete({...props,toast,loading},location))
+          onYes:()=>(handleDelete({...props,toast:enqueueSnackbar,loading},location))
         });
       }
     }
   },[location])
 }
 export const useGet = function(initData,callback,args = [],location){
-  const {loading,toast} = useContext(global.config.context);
+  const {loading} = useContext(global.config.context);
+  const { enqueueSnackbar } = useSnackbar();
   const [state,dispath] = useReducer(reducer,{...initState,data:initData});
   const propsRef = useRef();
   useEffect(function(){
@@ -159,7 +174,7 @@ export const useGet = function(initData,callback,args = [],location){
           }else{
             dispath(["set_data",initData])
           }
-        },...props,toast,loading
+        },...props,toast:enqueueSnackbar,loading
       },location
     );
     return function(){

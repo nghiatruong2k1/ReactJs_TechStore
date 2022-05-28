@@ -1,7 +1,6 @@
 import {memo,useContext,useRef,useEffect,forwardRef,useMemo} from 'react';
-import clsx from 'clsx';
 import { useTheme } from '@mui/material/styles';
-import {Box,Grid,Button} from '@mui/material/';
+import {Box,Grid,Paper} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {DealContext} from "../provider";
@@ -62,7 +61,7 @@ function Content({children,...props},ref){
   },[state.index])
 
   return(
-  <Grid item xs {...props} px={0.5}>
+  <Grid item xs {...props} px={0.5} py={0.25}>
     <Box position="relative">
       <ViewContent loading={state.isLoading} length={state.datas.length}>    
       <Slider ref={ref} 

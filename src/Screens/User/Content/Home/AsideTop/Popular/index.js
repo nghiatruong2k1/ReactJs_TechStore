@@ -77,7 +77,6 @@ function Populars({...props}){
       }
     ]
   },[theme])
-  thisRef.current && console.log(thisRef.current)
   return(
   <Grid item xs px={0} {...props} >
     <Typography className={styles.title} component="h6">Danh mục nỗi bật</Typography>

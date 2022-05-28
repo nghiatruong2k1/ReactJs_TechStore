@@ -1,32 +1,37 @@
 import {memo,useContext,useEffect,useRef} from 'react';
-import clsx from 'clsx';
-import {Grid,Box,Card,CardContent,Button,Stack,Skeleton} from '@mui/material/';
-import styles from './styles.module.css';
+import {Grid,Box,Card,CardContent,CardActions,Button,Stack,Skeleton} from '@mui/material/';
 import {DetailContext} from "../provider";
-function FullDes({...props}){
-  const {state} = useContext(DetailContext);
-  const thisRef = useRef(null);
-  useEffect(function(){
-    if(thisRef.current){
-      thisRef.current.innerHTML = state.data.FullDes || "";
+import { makeStyles } from '@mui/styles';
+const useStyles = makeStyles((theme)=>{
+  return {
+    content:{
+      maxHeight:"40em",
+      overflow:"hidden"
+    },fulldes:{
+      '& *':{
+        maxWidth:"100%"
+      }
     }
-  },[state])
+  }}
+);
+function FullDes({fullDes,loading,...props}){
+  const styles = useStyles();
+  const fullRef = useRef();
+  useEffect(function(){
+    if(fullDes && fullRef.current){
+      fullRef.current.innerHTML = fullDes
+    }
+  },[fullDes])
   return(
     <Grid item {...props}>
       <Card>
         <CardContent className={styles.content}>
-          {
-            (!state.isLoading && state.data)
-            && (
-                <>
-                  <Box className={styles.fulldes} ref={thisRef}></Box>
-                  <Button className={styles.button} sx={{px:5}} variant="contained">Xem chi tiết</Button>
-                </>
-            )||(
-              <Skeleton variant="text" width="100%" height = '10em'  />
-            )
-          }
+          <Box className={styles.fulldes} ref={fullRef}></Box>
+          {loading  && (<Skeleton variant="text" width="100%" height = '20em'  />)}
         </CardContent>
+        <CardActions sx={{justifyContent:"center"}}>
+          <Button className={styles.button} sx={{px:5}} variant="contained">Xem chi tiết</Button>
+        </CardActions>
       </Card>
     </Grid>
   )

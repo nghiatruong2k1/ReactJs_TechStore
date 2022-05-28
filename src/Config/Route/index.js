@@ -20,7 +20,9 @@ class Area {
   }
 }
 const user = new Area("",{
-	product:new Controller("san-pham",{
+	home:new Controller("",{
+		index:new Action()
+	}),product:new Controller("san-pham",{
 		index:new Action(),
 		detail:new Action("chi-tiet/:alias"),
 		category:new Action("danh-muc/:alias"),

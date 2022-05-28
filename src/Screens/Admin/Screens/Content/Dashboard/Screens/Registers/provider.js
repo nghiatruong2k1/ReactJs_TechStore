@@ -1,9 +1,5 @@
-import { array } from 'prop-types';
-import {memo,useState,useMemo,createContext,useEffect} from 'react';
-import {useFetch} from "../../../../../../../Config/Fetch/"
-
-import {getInitData,types} from "./init";
-
+import {memo,createContext,useEffect} from 'react';
+import {useFetch} from "../../../../../../../Config/Fetch/";
 
 export const OrdersContext = createContext();
 

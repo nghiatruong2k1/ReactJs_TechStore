@@ -2,8 +2,6 @@ import {memo,useState,useContext,useEffect} from 'react';
 import clsx from 'clsx';
 import {Grid,Paper,FormControl,TextField,Typography,Tooltip,InputAdornment,IconButton,Checkbox} from '@mui/material/';
 import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
-
 import { useFetch } from '../../../../../Config/Fetch/';
 import {CartContext} from "../provider";
 import {checkValue} from "../../../../../Config/Validate/";
@@ -19,7 +17,6 @@ function VoucherCode({...props}){
   const [value,setValue] = useState("");
   const [valid,setValid] = useState("");
   const Fetch = useFetch();
-  const {toast} = useContext(global.config.context);
   useEffect(function(){
     if(state.voucher){
       setValue(state.voucher.Code ?? "")
@@ -27,19 +24,22 @@ function VoucherCode({...props}){
   },[state.voucher])
   function handleSubmit(e){
     e.preventDefault();
-    let check = checkValue(value,ruler,function(valids){
-      setValid(valids[0] ?? "");
+    let check = checkValue(value,ruler,{},function(valids){
+      setValid(valids[0] || "");
+      return valids.length > 0 ? 1 : 0;
     });
+    console.log(check)
     if(check === 0){
       Fetch.get({
         api:"api/ordervoucher",
         params:{code:value},
         onThen:function(result){
-          dispath({key:"set",payload:{voucher:result.data}})
-          toast.handle.add({message:"Áp dụng mã giảm giá thành công!",type:"success"})
+          setValid("");
+          dispath(["set_voucher",result.data.value])
         },onError:function(error){
+          dispath(["set_voucher",null]);
           if(error.response && error.response.status == 404){
-            setValid("Mã giảm giá không hợp lệ!")
+            setValid("Có lỗi xãy ra!");
           }
         }
       })
@@ -47,7 +47,7 @@ function VoucherCode({...props}){
   }
   function handleChange(e){
     if(state.voucher){
-      dispath({key:"set",payload:{voucher:null}})
+      dispath(["set_voucher",null])
     }
     setValue(e.target.value)
   }

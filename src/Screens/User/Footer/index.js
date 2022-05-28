@@ -1,64 +1,40 @@
 import {memo,Fragment} from 'react';
-import {Box,Container,Grid,List,ListSubheader,ListItem,ListItemButton,ListItemIcon,ListItemText,Skeleton} from '@mui/material/';
-import {NavLink} from "react-router-dom"
-import styles from './styles.module.css';
+import {Box,Container,Paper,Grid} from '@mui/material/';
 
-import getBrands from "./Brands/";
-import getCategories from "./Categories/";
-import getHelps from "./Helps/";
-import getAccount from "./Account/";
-import getSocial from "./Social/";
+import FooterBrands from "./Screens/Brands/";
+import FooterCategories from "./Screens/Categories/";
+import FooterHelps from "./Screens/Helps/";
+import FooterAccount from "./Screens/Account/";
+import FooterSocial from "./Screens/Social/";
 
-function FooterList({title,getDatas,...props}){
-  const [datas,isLoading] = getDatas();
-  return(
-    <Grid item {...props}>
-      <List 
-        disablePadding
-        subheader={
-          <ListSubheader disableGutters disableSticky component="h6">
-           {title}
-          </ListSubheader>
-        }
-      >
-        {
-          Array.isArray(datas) && 
-          datas.map(function(data,index){
-            return(
-              <ListItem disablePadding key={index}> 
-                <ListItemButton component={(Boolean(data) && !isLoading) && NavLink || "span"} to={data && data.to || ""}>
-                  {
-                    (Boolean(data) && !isLoading) && (
-                    <>
-                      <ListItemIcon>{data && data.icon}</ListItemIcon>
-                      <ListItemText>{data && data.text}</ListItemText>
-                    </>
-                    ) ||
-                      <Skeleton variant='text' className="skeleton" />
-                  } 
-                </ListItemButton>
-              </ListItem>
-            )
-          })
-        }
 
-      </List>
-    </Grid>
-  )
-}
+import { makeStyles } from '@mui/styles';
+const useStyles = makeStyles((theme)=>{
+  return {
+    section:{
+      background:theme.palette.background.default
+    },container:{
+      color:"#fff",
+      backgroundColor:"var(--help)"
+    }
+  }}
+);
+
 function Footer({...props}){
+  const styles = useStyles();
   return(
-  <Box component="section" className={styles.section} pb={10}>
-    <Container maxWidth="xxl" component="footer" className={styles.container}>
+  <Box component="footer" pt={2} className={styles.section}>
+    <Container maxWidth="xxl" component={Paper} pb={10} className={styles.container}>
         <Grid container columnSpacing={2} rowSpacing={1}>
-            <FooterList title="Trợ giúp:"  getDatas={getHelps} xs={12} sm={6} lg={3} xl="auto"/>
-            <FooterList title="Thương hiệu:" getDatas={getBrands} xs={12} sm={6} lg={3} xl="auto"/>
-            <FooterList title="Danh mục:" getDatas={getCategories} xs={12} sm={6} lg={3} xl="auto"/>
-            <FooterList title="Tài khoản:" getDatas={getAccount} xs={12} sm={6} lg={3} xl="auto"/>
-            <FooterList title="Mạng xã hội:" getDatas={getSocial} xs={12} xl="auto"/>
+            <FooterHelps xs={12} sm={6} md={3} lg/>
+            <FooterBrands xs={12} sm={6} md={3} lg/>
+            <FooterCategories xs={12} sm={6} md={3} lg/>
+            <FooterAccount xs={12} sm={6} md={3} lg/>
+            <FooterSocial xs={12} md={3} lg/>
         </Grid> 
     </Container>
   </Box>
   )
 }
 export default memo(Footer);
+

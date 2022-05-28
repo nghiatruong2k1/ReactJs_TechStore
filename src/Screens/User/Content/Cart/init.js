@@ -1,12 +1,12 @@
 export const initData = {
 	voucher:null
 };
-export function reducer(prevState,{key,payload}) {
+export function reducer(prevState,[key,payload]) {
 	switch(key){
-		case 'set':{
+		case 'set_voucher':{
 			return {
 				...prevState,
-				...payload
+				voucher:payload
 			}
 		}
 		default:{

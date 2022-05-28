@@ -3,24 +3,20 @@ import clsx from 'clsx';
 import {Skeleton} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-import {formatNumber} from "../../../../../../../Config/Format/";
-import {DetailContext} from "../../provider";
-function DataSalePrice({...props}){
-  const {state} = useContext(DetailContext);
-  if(!state.isLoading && state.data){
+import {formatNumber} from "../../../../../../../../Config/Format/";
+function DataSalePrice({loading,price,salePrice,...props}){
+  if(!loading){
     let className = "";
-    let salePrice = "";
-    if(state.data.Price){
-      if(state.data.SalePrice){
+    let priceTxt = "";
+    if(price){
+      if(salePrice){
         className=styles.sale;
-        salePrice = formatNumber(state.data.SalePrice,3,0)+" đ";
-
+        priceTxt = formatNumber(salePrice,3,0)+" đ";
         return(
-          <span className={clsx(styles.price,className)}>{salePrice}</span>
+          <span className={clsx(styles.price,className)}>{priceTxt}</span>
         )
       }
     }
-
     return <></>
   }else {
     return(

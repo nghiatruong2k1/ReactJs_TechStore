@@ -1,17 +1,19 @@
 import {memo,useState,useEffect} from 'react';
-import clsx from 'clsx';
-import {Box,Container,Grid} from '@mui/material/';
-import styles from './styles.module.css';
-import HeaderLogo from "./Screens/Logo/";
-import HeaderSearch from "./Screens/Search/";
-import HeaderLogin from "./Screens/Login/";
-import HeaderCart from "./Screens/Cart/";
-import HeaderProfile from "./Screens/Profile/";
-import HeaderMessage from "./Screens/Message/";
-import HeaderOrder from "./Screens/Order/";
-import HeaderNavbar from "./Screens/Navbar/";     
+import {Box,Container,Paper} from '@mui/material/';
+    
+import NavContent from "./Screens/";
+import { makeStyles } from '@mui/styles';
+const useStyles = makeStyles((theme)=>{
+  return {
+    container:{
+      color:theme.palette.text.paper,
+      backgroundColor:theme.palette.background.paper
+    }
+  }}
+);
 function Header({...props}){
   const [isFixed,setFixed] = useState(false);
+  const styles = useStyles();
   useEffect(function(){
     document.addEventListener("scroll",function(event){
       let scrollTop = document.documentElement.scrollTop;
@@ -23,32 +25,18 @@ function Header({...props}){
     })
   },[])
   return(
-  <Box component="section" className={styles.section}>
-    <Container maxWidth="xxl" component="header" className={styles.container}>
-      <Grid container py={0.5} alignItems="center" className={clsx({[styles.fixed]:isFixed})}>
-        <HeaderLogo 
-          xs={isFixed && 3 || 3.5} 
-          sm={isFixed && 2.5 || 3} 
-          md={isFixed && 2 || 2.5} 
-          lg={isFixed && 1.5 || 2}
-          sx={{px:{lg:2,md:1.8,sm:1.5,xs:1.2}}}
-        />
-        <Grid item xs/>
-        <HeaderSearch fixed = {isFixed} xs={1.4} lg={isFixed && 5.5 || 5}/>
-        <HeaderLogin xs={1.4} lg={1}/>
-        <HeaderProfile xs={1.4} lg={1}/>
-        <HeaderMessage xs={1.4} lg={1}/> 
-        <HeaderCart xs={1.4} lg={1}/>
-        <HeaderOrder xs={1.4} lg={1}/>
-        <HeaderNavbar 
-          fixed = {isFixed}
-          xs={1.4}
-          lg={isFixed && 1 || 12}
-        />
-      </Grid> 
-    </Container>
+  <Box component="header"
+    sx={{
+      zIndex:10,
+      position:isFixed && "fixed" || "relative",
+      top:isFixed && 0 || 'unset',
+      left:0,right:0     
+    }}
+  >
+      <Container maxWidth="xxl" component={Paper} className={styles.container}>
+        <NavContent fixed={isFixed} />
+      </Container>
   </Box>
 )}
 export default memo(Header);
 
-//        className={clsx({[styles.fixed]:isFixed})}

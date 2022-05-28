@@ -2,17 +2,16 @@ import {useReducer,useContext,useEffect,useMemo} from 'react';
 import {reducer,initData} from "./init";
 import DialogResult from "../../../../Components/DialogResult/";
 import {LocalStorage} from "../../../../Config/LocalStorage"; 
+import { useSnackbar } from "notistack";
 function Cart(){
-  const {toast} = useContext(global.config.context);
+  const { enqueueSnackbar } = useSnackbar();
   const [state,dispath] = useReducer(reducer,{
     ...initData,
     datas:LocalStorage.get("cart",[])
   });
   useEffect(function(){
     const newCart = state.datas.filter(function(data){
-      if(data){
-        return data
-      }
+      if(data){ return data }
     })
     LocalStorage.set("cart",newCart)
   },[state.datas])
@@ -31,12 +30,12 @@ function Cart(){
         try {
           dispath(["add",data]);
           dispath(['set_data',{data}]);
-          toast.handle.add({message:"Thêm sản phẩm vào giỏ hàng thành công!",type:"success"})
+          enqueueSnackbar({message:"Thêm sản phẩm vào giỏ hàng thành công!",type:"success"})
           return setTimeout(function(){
             onEnd && onEnd()
           },500)
         } catch(e) {
-          toast.handle.add({message:"Thêm sản phẩm vào giỏ hàng không thành công!",type:"error"})
+          enqueueSnackbar({message:"Thêm sản phẩm vào giỏ hàng không thành công!",type:"error"})
           return setTimeout(function(){
             onEnd && onEnd()
           },500)
@@ -46,13 +45,13 @@ function Cart(){
           message:"Bạn có muốn xóa sản phẩm này khỏi giỏ hàng?", 
             onYes:()=>{
               try {
-                dispath({key:"delete",payload:index})
-                toast.handle.add({message:"Xóa sản phẩm khỏi giỏ hàng thành công!",type:"success"})
+                dispath(["delete",index])
+                enqueueSnackbar({message:"Xóa sản phẩm khỏi giỏ hàng thành công!",type:"success"})
                 return setTimeout(function(){
                   onEnd && onEnd()
                 },500)
               } catch(e) {
-                toast.handle.add({message:"Xóa sản phẩm khỏi giỏ hàng không thành công!",type:"error"})
+                enqueueSnackbar({message:"Xóa sản phẩm khỏi giỏ hàng không thành công!",type:"error"})
                 return setTimeout(function(){
                   onEnd && onEnd()
                 },500)

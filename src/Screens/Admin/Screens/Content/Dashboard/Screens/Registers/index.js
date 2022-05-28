@@ -1,17 +1,7 @@
 import {memo,useReducer} from 'react';
-import clsx from 'clsx';
 import {
-  Grid,
-  Stack,
-  Tooltip,
-  Button,
-  IconButton
+  Stack
 } from '@mui/material/';
-import {
-  PersonAddAlt
-} from '@mui/icons-material/';
-
-import styles from './styles.module.css';
 import {Accordion} from "../../../../../Components/"
 import OrdersChart from "./Chart/";
 import OrdersButton from "./Button/";
@@ -28,15 +18,11 @@ function News({...props}){
     <Accordion 
       title="Tài khoản"
       option={
-        <>
-          {
-          types.map(function(item,index){
+        <>{types.map(function(item,index){
             return(
               <OrdersButton key={index} active={index == state.inType} index={index}>{item.text}</OrdersButton>
             )
-          })
-          }
-        </>
+        })}</>
       }
       {...props}
     >

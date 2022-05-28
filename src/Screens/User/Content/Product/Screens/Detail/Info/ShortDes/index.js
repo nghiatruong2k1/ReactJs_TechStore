@@ -3,13 +3,10 @@ import clsx from 'clsx';
 import {Typography,Skeleton} from '@mui/material/';
 import styles from './styles.module.css';
 import {DetailContext} from "../../provider";
-function ShortDes({...props}){
-  const {state} = useContext(DetailContext);
-  if(!state.isLoading && state.data){
+function ShortDes({loading,shortDes,...props}){
+  if(!loading){
     return(
-      <div>
-        <Typography component="p">{state.data.ShortDes}</Typography>
-      </div>
+        <Typography>{shortDes}</Typography>
     )
   }else {
     return(

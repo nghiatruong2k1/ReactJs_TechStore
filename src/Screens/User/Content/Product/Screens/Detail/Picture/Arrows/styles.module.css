@@ -1,0 +1,12 @@
+.arrow{
+	position: absolute !important;
+	top: 50%;
+	color: var(--dark) !important;
+	transform: translateY(-50%);
+}
+.left{
+	left: 0;
+}
+.right{
+	right: 0;
+}

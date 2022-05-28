@@ -1,5 +1,6 @@
 export const initData = {
-	data:null,
+	data:{},
+	images:[],
 	quantity:1,
 	isLoading:false
 };
@@ -14,13 +15,19 @@ export function reducer(prevState,[key,payload]) {
 		case 'set_data':{
 			return {
 				...prevState,
-				data:(typeof(payload) === 'object') && payload || null
+				data:(typeof(payload) === 'object') && payload || {}
+			}
+		}
+		case 'set_images':{
+			return {
+				...prevState,
+				images:(Array.isArray(payload)) && payload || []
 			}
 		}
 		case 'set_quantity':{
 			return {
 				...prevState,
-				quantity:Number.isNaN(payload) && Number(payload) || 0
+				quantity:payload
 			}
 		}
 		case 'set_loading':{

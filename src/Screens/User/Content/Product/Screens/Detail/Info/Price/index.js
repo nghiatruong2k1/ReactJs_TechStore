@@ -2,28 +2,25 @@ import {memo,useContext} from 'react';
 import clsx from 'clsx';
 import {Skeleton} from '@mui/material/';
 import styles from './styles.module.css';
+import {formatNumber} from "../../../../../../../../Config/Format/";
 
-import {DetailContext} from "../../provider";
-import {formatNumber} from "../../../../../../../Config/Format/";
-
-function DataPrice({...props}){
-  const {state} = useContext(DetailContext);
-  if(!state.isLoading && state.data){
+function DataPrice({loading,price,salePrice,...props}){
+  if(!loading){
     let className = "";
-    let price = "";
-    if(state.data.Price){
-      if(state.data.SalePrice){
+    let priceTxt = "";
+    if(price){
+      if(salePrice){
         className=styles.root
       }else{
         className=styles.current
       }
-      price = formatNumber(state.data.Price,3,0)+" đ";
+      priceTxt = formatNumber(price,3,0)+" đ";
     }else{
-      price = "Liên hệ"
+      priceTxt = "Liên hệ"
       className=styles.current
     }
     return(
-      <span className={clsx(styles.price,className)}>{price}</span>
+      <span className={clsx(styles.price,className)}>{priceTxt}</span>
     )
   }else {
     return(

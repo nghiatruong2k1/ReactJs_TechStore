@@ -1,0 +1,42 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "detail": "Create the folder JS, HTML and CSS files for a component",
+            "label":"create Func Component",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "create folder",
+                "create js file",
+                "create css file"
+            ],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            },
+            "args": ["${input:componentName}"]
+        },{
+          "label": "create folder",
+          "type": "shell",
+          "command": "If (!(Test-Path ${fileDirname}\\${input:componentName})){md ${fileDirname}\\${input:componentName}}"
+        },{
+            "label": "create js file",
+            "type": "shell",
+            "command":"Out-File -FilePath ${fileDirname}\\${input:componentName}\\index.js -NoClobber"
+        },{
+            "label": "create css file",
+            "type": "shell",
+            "command":"Out-File -FilePath ${fileDirname}\\${input:componentName}\\styles.module.css -NoClobber"
+        }
+    ],"inputs": [
+        {
+          "id": "componentName",
+          "description": "Name your component",
+          "default": "new-component",
+          "type": "promptString"
+        }
+      ]
+}

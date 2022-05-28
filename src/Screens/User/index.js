@@ -7,7 +7,6 @@ import Footer from "./Footer/";
 import Subscribe from "./Subscribe/";
 import Cart from "./Cart/";
 function UserPage({...props}){
-
   return(
     <Provider>
       <Header /> 

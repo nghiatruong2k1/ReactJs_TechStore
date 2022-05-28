@@ -1,0 +1,19 @@
+.dots{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.dotButton{
+	box-shadow: 0 0 0 0 var(--dark) !important;
+	transition: box-shadow 0.25s;
+	cursor: pointer;
+}
+
+.dotButton:not(.dotActive):hover{
+	box-shadow: 0 0 1px 1px var(--dark) !important;
+}
+.dotActive{
+	box-shadow: 0 0 1px 1px var(--dark) !important;
+}

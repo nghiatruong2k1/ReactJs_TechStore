@@ -25,7 +25,8 @@ function AccordionContent({title,icon,option,className,children,...props}){
   return(
   <>
     <Grid item xs p={1} className={clsx(styles.col,{[className]:className})} {...props}>
-      <Accordion disableGutters 
+      <Accordion 
+          disableGutters 
           defaultExpanded
           className={styles.container} 
           sx={{height: isOpen && "100%" || "auto"}}

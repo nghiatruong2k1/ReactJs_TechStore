@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 import {getRoute} from "../../../../../../Config/Route/";
 function ViewData({data,controller,loading,...props}){
   return(
-    <Grid item xs={3}>
+    <Grid item xs={6} sm={4} md={3}>
       <Card>
         <CardActions>
           <Frame rectangle loading={loading}>

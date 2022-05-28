@@ -5,12 +5,10 @@ import "slick-carousel/slick/slick-theme.css";
 import Provider from "./AppProvider";
 import {getAreaName} from "./Config/Route/";
 import Auth from "./Screens/Auth/";
-import LoadingData from "./Screens/LoadingData/";
-import Toasts from "./Screens/Toasts/";
+import LoadingData from "./Screens/Loading/";
 import UploadImage from "./Screens/UploadImage/";
 import UserPage from "./Screens/User/";
 import AdminPage from "./Screens/Admin/";
-    
 
 function App({...props}){
 	const location = useLocation();
@@ -19,19 +17,22 @@ function App({...props}){
 	  document.documentElement.scrollTop = 0;
 	},[location]);
 
-
 	return(
 		<Provider>
 			<LoadingData />
-	        <Toasts />
-	        <Auth />
-	        <UploadImage />
-	        <Routes>
+			<Auth />
+			<Routes>
 	          <Route path={`${getAreaName("user")}/*`} element={<UserPage />} />  
 	          <Route path={`${getAreaName("admin")}*`} element={<AdminPage />} />          
-	        </Routes>  
+	        </Routes> 
 	    </Provider>
 	)
 }
 export default memo(App);
 	        
+/*
+
+	        
+	        <UploadImage />
+	         
+			*/
