@@ -71,9 +71,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-#root{
-  overflow: hidden;
-}
+
 ol, ul {
   list-style: none;
 }
@@ -191,7 +189,8 @@ small, .small{
 }
 [class*="fa-"],
 [class*="fa-"]::before,
-[class*="MuiSvgIcon-"]{
+[class*="MuiSvgIcon-"],
+[class*="MuiIcon-"]{
   width: 1em !important;
   height: 1em !important;
   display: inline-flex !important;

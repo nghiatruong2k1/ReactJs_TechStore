@@ -26,7 +26,7 @@ const DrawerNav = memo(function({open,onClose,children,...props}){
       <Card component={Stack} className={styles.card} sx={{overflowX:'hidden',height:"100%"}}>
         <HeadNav onClose={onClose}/>
         <CardContent  sx={{ flex:1,p:0.5,overflow:"hidden"}}>
-          <Paper variant={"outlined"} className={styles.paper} sx={{p:0.5,height:"100%",overflowX:"hidden"}}>
+          <Paper variant={"outlined"} className={styles.paper} sx={{height:"100%",overflowX:"hidden"}}>
             {children}
           </Paper>
         </CardContent>
@@ -57,6 +57,7 @@ function Navbar({fixed,...props}){
       >
         <Stack component="nav" 
           direction={isFixed && "column" || "row"} 
+          p={0.5}
           width={isFixed && "15em" || "100%"}
         >
           <LeftNav onClose={()=>(setOpen(false))} fixed={isFixed} justifyContent="flex-start"/>

@@ -17,11 +17,11 @@ return (
         <HeaderLogo 
           xs 
           sm={3} 
-          md={fixed && 1.8 || 2} 
-          lg={fixed && 1.2 || 1.5}
+          md={fixed && 1.5 || 2} 
+          lg={fixed && 1.2 || 1.7}
         />
         <Grid item xs sx={{display:{xs:"none",sm:"block"}}}/>
-        <HeaderSearch fixed = {fixed} xs sm={1.4} md={fixed && 5.5 || 5}/>
+        <HeaderSearch fixed = {fixed} xs sm={1.4} md={fixed && 6 || 5.5}/>
         <HeaderLogin xs sm={1.4} md={1}/>
         <HeaderProfile xs sm={1.4} md={1}/>
         <HeaderMessage xs sm={1.4} md={1}/> 

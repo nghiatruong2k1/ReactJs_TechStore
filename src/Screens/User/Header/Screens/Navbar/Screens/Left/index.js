@@ -1,6 +1,6 @@
 import {memo,useMemo} from 'react';
 import {getRoute} from "../../../../../../../Config/Route";
-import NavMenu from "../../Components/Menu/"
+import NavMenu from "../../Components/NavMenu/"
 function LeftNav({...props}){
   const datas = useMemo(function(){
     return [

@@ -29,8 +29,7 @@ function FormForget({...props}){
         />
         <SubmitButton> Gửi mã xác nhận </SubmitButton>
         <Typography>
-          Bạn chưa có tài khoản?
-          <LinkSetAction action="register"> Đăng ký </LinkSetAction>
+        <LinkSetAction action="register" beforeText="Bạn chưa có tài khoản?" text="Đăng ký"/>
         </Typography> 
         <Stack 
           direction="row" 

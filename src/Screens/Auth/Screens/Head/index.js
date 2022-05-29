@@ -17,8 +17,8 @@ function Head({...props}){
     auth.handle.close();
   }
   return(
-    <Stack direction="row" spacing={1} alignItems="center">
-      <Typography flex="1" variant="h4">
+    <Stack direction="row" alignItems="center">
+      <Typography flex="1" variant="h4" sx={{py:0,px:1}}>
         {auth.state.action == 1 && "Đăng nhập"}
         {auth.state.action == 2 && "Đăng ký"}
         {auth.state.action == 3 && "Quên mật khẩu"}

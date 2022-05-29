@@ -1,5 +1,5 @@
 import {memo} from 'react';
-import {Grid,Card} from '@mui/material/';
+import {Grid,Card,Divider} from '@mui/material/';
 
 import NavCategories from "./Categories";
 import NavBrands from "./Brands";
@@ -8,6 +8,7 @@ function Navbar({...props}){
     <Grid item {...props}>
       <Card sx={{height:"100%"}}>
         <NavCategories />
+        <Divider />
         <NavBrands />
       </Card>
     </Grid>

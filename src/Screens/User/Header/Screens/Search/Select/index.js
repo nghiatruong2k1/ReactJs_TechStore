@@ -1,7 +1,6 @@
 import {memo,useContext,useEffect,useState,useMemo} from 'react';
 import {InputAdornment,Select,MenuItem,FormControl} from '@mui/material/';
 import styles from './styles.module.css';
-import {SearchContext} from "../provider";
 
 function SearchSelect({value,onChange,...props}){
   const controllers = useMemo(function(){

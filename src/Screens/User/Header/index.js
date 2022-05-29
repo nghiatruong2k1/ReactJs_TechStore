@@ -1,4 +1,4 @@
-import {memo,useState,useEffect} from 'react';
+import {memo,useState,useEffect,useRef} from 'react';
 import {Box,Container,Paper} from '@mui/material/';
     
 import NavContent from "./Screens/";
@@ -14,18 +14,23 @@ const useStyles = makeStyles((theme)=>{
 function Header({...props}){
   const [isFixed,setFixed] = useState(false);
   const styles = useStyles();
+  const thisRef = useRef();
   useEffect(function(){
-    document.addEventListener("scroll",function(event){
+    function handleScroll(event){
       let scrollTop = document.documentElement.scrollTop;
       if(scrollTop > 0){
         setFixed(true)
       }else{
         setFixed(false)
       }
-    })
+    }
+    document.addEventListener("scroll",handleScroll)
+    return function(){
+      document.removeEventListener("scroll",handleScroll)
+    }
   },[])
   return(
-  <Box component="header">
+  <Box component="header" ref={thisRef}>
       <Container 
         maxWidth="xxl" 
         component={Paper} 

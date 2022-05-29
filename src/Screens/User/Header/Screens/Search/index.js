@@ -1,16 +1,11 @@
 import {memo,useReducer,useMemo} from 'react';
-import {Grid,Stack,FormControl,FormGroup,useMediaQuery} from '@mui/material/';
-import styles from './styles.module.css';
+import {Grid,useMediaQuery} from '@mui/material/';
 
 import {initData,reducer} from "./init";
 import Provider from "./provider";
 
 import SearchForm from "./Form/";
-import SearchInput from "./Input/";
-import SearchSelect from "./Select/";
-import SearchOption from "./Option/";
-import SearchToggle from "./Toggle/";
-
+import SearchModal from "./Modal/";
 
 
 function HeaderSearch({fixed,...props}){
@@ -24,18 +19,10 @@ function HeaderSearch({fixed,...props}){
   <Provider state={state} dispath={dispath}>
     <Grid item {...props}>
       <Grid container>
-        <SearchForm state={state} dispath={dispath}>
-              <SearchSelect 
-                value={state.controller}
-                onChange={(e,v)=>{dispath(['set_controller',v])}}
-              />
-              <SearchInput      
-                value={state.query ?? ""}
-                onChange={(e,v)=>{dispath(['set_query',v])}}
-              />
-              <SearchOption />
-        </SearchForm>
-        {isMd && <SearchToggle /> }
+        {
+          isMd && (<SearchModal />)
+          ||<SearchForm />
+        }
       </Grid>
     </Grid>
   </Provider>

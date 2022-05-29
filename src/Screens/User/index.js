@@ -12,7 +12,8 @@ function UserPage({...props}){
       <Header /> 
       <Cart />
       <Content />
-
+      <Subscribe />
+      <Footer /> 
     </Provider>
   )
 }
@@ -20,8 +21,6 @@ export default memo(UserPage);
 /*
 
     
-      
-      <Subscribe />
-      <Footer />  
+       
 
 */

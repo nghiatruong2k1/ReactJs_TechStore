@@ -8,8 +8,6 @@ import {
   DialogActions,
   Divider
 } from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
 
 import AuthHead from "./Screens/Head/";
 import AuthFormLogin from "./Screens/FormLogin/";
@@ -27,22 +25,21 @@ function Auth({...props}){
           fullWidth={true}
           scroll={'body'}
           PaperProps={{
-            className:styles.container,
             sx:{ 
               m:{
                 xs:0.5,
                 sm:1,
                 md:1.5,
                 lg:2
-              }
+              },p:1
             }
           }}
         >
-          <DialogTitle className={styles.head}>
+          <DialogTitle sx={{p:0.5}}>
             <AuthHead />
           </DialogTitle>
           <Divider />
-          <DialogContent className={styles.content}>
+          <DialogContent>
             {auth.state.action == 1 && <AuthFormLogin />}
             {auth.state.action == 2 && <AuthFormRegister />}
             {auth.state.action == 3 && <AuthFormForget />}

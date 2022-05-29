@@ -26,10 +26,6 @@ function ProfileNavbar({...props}){
         icon:(<Icon className="fas fa-user-circle"/>),
         url:getRoute("user","profile","index")
       },{
-        text:"Địa chỉ",
-        icon:(<Icon className="fas fa-map-marker"/>),
-        url:getRoute("user","profile","address")
-      },{
         text:"Đơn hàng",
         icon:(<Icon className="fas fa-store"/>),
         url:getRoute("user","profile","orders")

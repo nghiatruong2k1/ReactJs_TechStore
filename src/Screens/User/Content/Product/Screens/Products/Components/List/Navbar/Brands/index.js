@@ -17,7 +17,7 @@ function Categories({...props}){
   const location = useLocation();
   const [{data,isLoading}] = useGet([],function(){
     return{
-      api:"api/category"
+      api:"api/brand"
       ,onStart:(()=>{
         return Array(5).fill(undefined)
       })
@@ -32,7 +32,7 @@ function Categories({...props}){
         disablePadding
         subheader={
           <ListSubheader disableGutters disableSticky component="h6">
-            Danh mục
+            Thương hiệu
           </ListSubheader>
         }
       >
@@ -40,7 +40,7 @@ function Categories({...props}){
           data.map(function(item,index){
             let isActive = false;let url = "#";
             if(item){
-              url=`${getRoute("user","product","category",{alias:item.Alias})}`;
+              url=`${getRoute("user","product","brand",{alias:item.Alias})}`;
               if(location.pathname.toLowerCase().indexOf(url.toLowerCase()) !== -1){
                 isActive = true;
               }
