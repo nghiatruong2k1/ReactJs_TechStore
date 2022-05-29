@@ -1,4 +1,7 @@
 
+
+import { createContext } from "react";
+export const ProductsContext = createContext();
 export const initData = {
 	view:0,
 	limit:5,
@@ -68,3 +71,41 @@ export function reducer(prevState,[key,payload]) {
 };
 
 
+export async function handleGetDatas({getter,dispath,state,action,feild,onStart,onEnd}){
+	await getter({
+	  api:"api/product/"+action+"/"+feild,
+	  params:{
+		  offset:(state.page - 1) * state.limit,
+		  limit:state.limit,
+		  sort:state.sort,
+	  },onThen:(result => {
+		  dispath(['set_data',result.data])
+	  }),onError:(error=> {
+		  dispath(['set_data'])
+	  }),onStart,onEnd
+  });
+}
+export async function handleGetLength({getter,dispath,action,feild}){
+  await getter({
+	api:"api/product/"+action+"/count/"+feild
+	,onThen:(result => {
+		dispath(['set_total',result.data])
+	}),onError:(error=> {
+		dispath(['set_total'])
+	})
+})
+}
+export async function handleGetTitle({getter,action,feild}){
+  await getter({
+	api:`api/${action}/${feild}`
+	,onThen:(result => {
+	   if(result.data && result.data.Name){
+		   global.config.setTitleWebsite(result.data.Name)
+	   }else{
+		   global.config.setTitleWebsite("");
+	   }
+	}),onError:(error=> {
+		global.config.setTitleWebsite("");
+	})
+})
+}

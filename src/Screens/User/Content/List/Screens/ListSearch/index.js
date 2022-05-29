@@ -11,15 +11,15 @@ function ListGet({controller,param,...props}){
     const [state,dispath] = useReducer(reducer,initData)
     useEffect(function(){
         params[param] && global.config.setTitleWebsite("Tìm kiếm '"+(params[param] || "") +"'");
-	},[params[param]]);
+	  },[params[param]]);
 
-  useEffect(function() { 
-    controller &&  handleGetLength({
+    useEffect(function() { 
+      controller &&  handleGetLength({
         getter:Fetch.get,
         dispath,
         api:`api/${controller}/search/count/${params[param]}`
       });
-	},[controller],params[param]);
+	  },[controller],params[param]);
 
 	useEffect(function() {
 		document.documentElement.scrollTop = 0;

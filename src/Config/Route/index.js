@@ -22,12 +22,12 @@ class Area {
 const user = new Area("",{
 	home:new Controller("",{
 		index:new Action()
-	}),product:new Controller("san-pham",{
+	}),product:new Controller("",{
 		index:new Action(),
-		detail:new Action("chi-tiet/:alias"),
-		category:new Action("danh-muc/:alias"),
-		brand:new Action("thuong-hieu/:alias"),
-		search:new Action("tim-kiem/:query")
+		detail:new Action("chi-tiet-san-pham/:alias"),
+		category:new Action("danh-muc-san-pham/:alias"),
+		brand:new Action("thuong-hieu-san-pham/:alias"),
+		search:new Action("tim-kiem-san-pham/:query")
 	}),category:new Controller("",{
 		index:new Action("danh-sach-danh-muc"),
 		search:new Action("tim-kiem-danh-muc/:query")

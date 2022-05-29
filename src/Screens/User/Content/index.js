@@ -1,4 +1,4 @@
-import {memo,useMemo} from 'react';
+import {memo} from 'react';
 import {Box,Container} from '@mui/material/';
 import { makeStyles } from '@mui/styles';
 import {Routes,Route} from "react-router-dom";
@@ -9,9 +9,10 @@ import HomeContent from "./Home/";
 
 import ListGet from "./List/Screens/ListGet/";
 import ListSearch from "./List/Screens/ListSearch/";
-import ProductDetail from "./Product/Screens/Detail/";
 
-import ProductContent from "./Product/";
+import ProductDetail from "./Product/Screens/Detail/";
+import {ProductsSearch,ProductsGet} from "./Product/Screens/Products/";
+
 import CartContent from "./Cart/";
 import ProfileContent from "./Profile/";
 
@@ -47,14 +48,17 @@ function Content({...props}){
           <Route path={`${getControllerName("user","cart")}/*`} 
             element={<CartContent />} />
 
-          <Route path={`${getControllerName("user","product")}/*`} 
-            element={<ProductContent />} />
-
           <Route path={`${getControllerName("user","profile")}/*`} 
             element={<ProfileContent />} />
 
           <Route path={`${getRouteName("user","product","detail")}`}
  	            element={<ProductDetail />} />  
+          <Route path={`${getRouteName("user","product","search")}`}
+ 	            element={<ProductsSearch />} /> 
+          <Route path={`${getRouteName("user","product","brand")}`}
+ 	            element={<ProductsGet action={"brand"} />} />
+          <Route path={`${getRouteName("user","product","category")}`}
+ 	            element={<ProductsGet action={"category"} />} />  
         </Routes>
       </Container>
     </Box>

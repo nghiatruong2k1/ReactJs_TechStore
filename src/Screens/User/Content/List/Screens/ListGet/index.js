@@ -1,4 +1,4 @@
-import {memo,useEffect,useReducer} from 'react';
+import {memo,useEffect,useMemo,useReducer} from 'react';
 import {useFetch} from "../../../../../../Config/Fetch";
 import {reducer,initData,handleGetDatas,handleGetLength} from "../init";
 
