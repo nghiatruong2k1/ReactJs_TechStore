@@ -8,9 +8,9 @@ import Navbar from "./Navbar/";
 import Content from "./Content/";
 function ProfileContent({...props}){
   return(
-    <Grid container spacing={2}>
-      <Navbar xs={3}/>
-      <Content xs={9} />
+    <Grid container spacing={1}>
+      <Navbar xs={2} md={3}/>
+      <Content xs={10} md={9}/>
     </Grid>
   )
 }

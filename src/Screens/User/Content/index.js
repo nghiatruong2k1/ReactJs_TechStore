@@ -31,7 +31,7 @@ function Content({...props}){
   const styles = useStyles();
   return(
     <Box component="main" className={styles.section} py={2} >
-      <Container maxWidth="xxl">
+      <Container maxWidth="xxl" sx={{px:{xs:0,sm:1}}}>
         <Routes>
           <Route path="*" element={<HomeContent />} />
 
@@ -50,6 +50,7 @@ function Content({...props}){
 
           <Route path={`${getControllerName("user","profile")}/*`} 
             element={<ProfileContent />} />
+
 
           <Route path={`${getRouteName("user","product","detail")}`}
  	            element={<ProductDetail />} />  

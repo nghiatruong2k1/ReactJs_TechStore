@@ -68,6 +68,13 @@ function Populars({...props}){
           slidesToShow: 2
         }
       },{
+        breakpoint: 200,
+        settings:{
+          vertical:false,
+          verticalSwiping: false,
+          slidesToShow: 2
+        }
+      },{
         breakpoint: theme.breakpoints.values.xs,
         settings:{
           vertical:false,

@@ -150,7 +150,6 @@ small, .small{
 
 [class*="MuiListItemIcon-root"]{
   min-width: auto !important;
-  padding-right: 0.5em !important;
   justify-content: center;
   align-items: center;
   color: inherit !important;
@@ -185,11 +184,14 @@ small, .small{
 }
 
 
-
+[class*="fa-"]:not([class*="active"]),
+[class*="fa-"]:not([class*="active"])::before,
+[class*="MuiSvgIcon-"]:not([class*="active"]){
+  color: inherit !important;
+}
 [class*="fa-"],
 [class*="fa-"]::before,
 [class*="MuiSvgIcon-"]{
-  color: inherit !important;
   width: 1em !important;
   height: 1em !important;
   display: inline-flex !important;

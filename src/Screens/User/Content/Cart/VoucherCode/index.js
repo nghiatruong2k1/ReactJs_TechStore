@@ -59,10 +59,10 @@ function VoucherCode({...props}){
     setValid(newValid[0] || "")
   }
   return(
-  <Grid item xs {...props}>
+  <Grid item {...props}>
    <Paper sx={{p:1,height:"100%"}}>
     <FormControl component="form" onSubmit={handleSubmit} fullWidth>
-        <Typography>Mã giảm giá:*</Typography>
+        <Typography>Mã giảm giá:</Typography>
         <TextField 
           placeholder="Nhập mã giảm giá" 
           fullWidth

@@ -14,7 +14,7 @@ function Message(props){
           to={getRoute("user","profile","message")}
           icon = {(
             <Badge badgeContent="0" color="info" max={99}>
-              <span className={clsx("fa fa-comment-dots")}/>
+              <span className={clsx("fa fa-bell")}/>
             </Badge>
           )}
         />

@@ -6,7 +6,7 @@ function NavMenu({fixed,datas,loading,children,onClose,sx,...props}){
   return(
   <Stack component={List} 
     direction={fixed && "column" || "row"} 
-    sx={{flex:"auto",...sx}} 
+    sx={{flex:"auto",p:0,...sx}} 
     {...props}
   >
     {

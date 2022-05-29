@@ -31,6 +31,16 @@ const modes = {
         },
     }
 }
+const breakpoints = {
+    values:{
+        xs: 0,
+        ls: 400,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+        xl: 1536,
+    }
+}
 
 function CustomThemeProvider({children}){
     const [mode,setMode] = useState("light");
@@ -39,7 +49,7 @@ function CustomThemeProvider({children}){
             palette:{
                 mode,
             ...modes[mode]
-            }
+            },breakpoints
         });
     },[mode])
     return (

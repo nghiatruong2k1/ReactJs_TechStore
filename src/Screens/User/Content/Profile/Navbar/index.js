@@ -7,30 +7,39 @@ import {
   List,
   ListItem,
   ListItemButton,
-  ListItemText
+  ListItemText,
+  ListItemIcon,
+  Icon,
+  useMediaQuery
 } from '@mui/material/';
 import {NavLink,useLocation} from "react-router-dom"
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import { getRoute } from '../../../../../Config/Route/';
 function ProfileNavbar({...props}){
-  const location = useLocation()
+  const location = useLocation();
+  const isMd = useMediaQuery((theme)=>(theme.breakpoints.up("md")));
   const args = useMemo(function(){
     return [
       {
         text:"Tài khoản",
+        icon:(<Icon className="fas fa-user-circle"/>),
         url:getRoute("user","profile","index")
       },{
         text:"Địa chỉ",
+        icon:(<Icon className="fas fa-map-marker"/>),
         url:getRoute("user","profile","address")
       },{
         text:"Đơn hàng",
+        icon:(<Icon className="fas fa-store"/>),
         url:getRoute("user","profile","orders")
       },{
         text:"Thông báo",
+        icon:(<Icon className="fas fa-bell"/>),
         url:getRoute("user","profile","message")
       },{
         text:"Tùy chọn",
+        icon:(<Icon className="fas fa-cog"/>),
         url:getRoute("user","profile","settings")
       }
     ]
@@ -40,15 +49,16 @@ function ProfileNavbar({...props}){
       <Card sx={{height:"100%"}}>
         <CardContent sx={{p:1}}>
           <List>
-            {args.map(function(item,index){
+            {args.map(function({text,icon,url},index){
               let isActive = false;
-              if(location.pathname.toLowerCase().indexOf(item.url.toLowerCase()) !== -1){
+              if(location.pathname.toLowerCase().indexOf(url.toLowerCase()) !== -1){
                 isActive = true;
               }
               return(
                 <ListItem key={index} disablePadding divider>
-                  <ListItemButton className={clsx({[styles.active]:isActive})} component={NavLink} to={item.url}>
-                    <ListItemText>{item.text}</ListItemText>
+                  <ListItemButton className={clsx({[styles.active]:isActive})} component={NavLink} to={url}>
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    {isMd && <ListItemText>{text}</ListItemText>}
                   </ListItemButton> 
                 </ListItem> 
               )

@@ -1,13 +1,12 @@
 import {memo,useMemo} from 'react';
 import clsx from 'clsx';
 import {LoadingButton} from "@mui/lab/";
-import {Box,Grid,Card,CardContent,CardActions,Button,Typography,Skeleton} from '@mui/material/';
-import styles from './styles.module.css';
+import {Box,Grid,Card,CardContent,useMediaQuery,Typography,Skeleton} from '@mui/material/';
 import {NavLink} from "react-router-dom";
 import {Frame,Image} from "../../../../../../../Components/";
 import {getRoute} from "../../../../../../../Config/Route/";
-import {useGet} from "../../../../../../../Config/Fetch/";
 function PopularItem({data,loading,...props}){
+  const isMd = useMediaQuery((theme)=>(theme.breakpoints.down("ls")));
   const to = useMemo(function(){
     if(loading){
       if(data){
@@ -17,32 +16,32 @@ function PopularItem({data,loading,...props}){
     return "#"
   },[data,loading])
   return(
-    <Box p={0.5}>
+    <Box p={0.5} {...props}>
       <Card component={Grid} container 
-        sx={{ width:'100%',m:0}} 
-        columnSpacing={1}
+        sx={{ width:'100%',m:0,height:'100%'}}
         variant="outlined"
         alignItems="center"
       >
-        <CardContent component={Grid} item xs={7} sm={8}>
-          <Typography mb={1} className={styles.name}  >
-              {
-                !loading ? (<NavLink to={to}>{data.Name}</NavLink>) 
-                : (<Skeleton variant="text" className="skeleton"/>)
-              }
-          </Typography>
-          <LoadingButton 
-            variant="contained" 
-            loading={loading}
-            component={(loading) && NavLink || "button"} 
-            color="info"
-            className={styles.button}
-            to={to}
-            sx={{px:{xs:0.5,sm:1,md:1.5,lg:2},py:{xs:0.5,md:1}}}
-          >Xem ngay
-          </LoadingButton>
-        </CardContent> 
-        <CardContent component={Grid} item xs={5} sm={4}>
+        { !isMd &&(<>
+          <CardContent component={Grid} item xs={12} sm={8} md={7}>
+            <Typography mb={1} >
+                {
+                  !loading && (data.Name || "") 
+                  || (<Skeleton variant="text" className="skeleton"/>)
+                }
+            </Typography>
+            <LoadingButton 
+              variant="contained" 
+              loading={loading}
+              component={(loading) && NavLink || "button"} 
+              color="info"
+              to={to}
+              sx={{px:{xs:0.5,sm:1,md:1.5,lg:2},py:{xs:0.5,md:1}}}
+            >Xem ngay
+            </LoadingButton>
+          </CardContent> 
+        </>)}
+        <CardContent component={Grid} item xs={12} sm={4} md={5}>
           <Frame square loading={loading}>
             <Image contain src={data && data.ImageUrl}/>
           </Frame>

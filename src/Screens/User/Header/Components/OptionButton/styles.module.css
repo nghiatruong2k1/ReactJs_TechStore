@@ -1,8 +1,7 @@
 
 .option{
     width: 100%;
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
 .button{
 	display: inline-flex;

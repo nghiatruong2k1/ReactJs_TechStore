@@ -5,14 +5,16 @@ import styles from './styles.module.css';
 import {OptionButton} from "../../Components/";
 import {Frame,Image} from "../../../../../Components/";
 function HeaderLogo({fixed,...props}){
-  const isMd = useMediaQuery((theme)=>(theme.breakpoints.up("366")));
+  const isMd = useMediaQuery((theme)=>(theme.breakpoints.up("sm")));
   return(
     <Grid item {...props}>
       {
         isMd && (
-          <Frame component={NavLink} to="/" className={styles.button}>
-            <Image contain className={styles.logo} src="/images/logo.png" />
-          </Frame> 
+          <NavLink to="/" >
+            <Frame className={styles.button}>
+              <Image contain className={styles.logo} src="/images/logo.png" />
+            </Frame> 
+          </NavLink>
         ) ||(  
           <OptionButton
             to="/"

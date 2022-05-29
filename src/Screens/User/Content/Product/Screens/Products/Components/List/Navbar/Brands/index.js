@@ -14,7 +14,6 @@ import {NavLink,useLocation} from "react-router-dom";
 import { getRoute } from '../../../../../../../../../../Config/Route';
 import {useGet} from "../../../../../../../../../../Config/Fetch/";
 function Categories({...props}){
-
   const location = useLocation();
   const [{data,isLoading}] = useGet([],function(){
     return{

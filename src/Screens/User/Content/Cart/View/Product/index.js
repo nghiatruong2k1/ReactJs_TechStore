@@ -1,59 +1,72 @@
 import {memo,useReducer} from 'react';
-import clsx from 'clsx';
 import {
   Grid,
   ListItem,
-  Skeleton,
-  Typography,
   Tooltip,
   IconButton,
   Stack
 } from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
-import {NavLink} from "react-router-dom";
+
 import Provider from "./provider";
 
-import {formatNumber} from "../../../../../../Config/Format/";
-import {getRoute} from "../../../../../../Config/Route/";
-import {Frame,Image} from "../../../../../../Components/";
+
 import Quantity from "./Quantity/";
+import Price from "./Price/";
+import Name from "./Name/";
+import Image from "./Image/";
 import DeleteButton from "./DeleteButton/";
 
-function Product({data,index,...props}){
+function Product({data,loading,index,...props}){
   return(
   <Provider data={data} index={index}>
-  <ListItem divider>
-    <Grid container alignItems="center">
-      <Grid item xs={5}>
-        <Grid container spacing={1}>
-          <Grid item xs={2}>
-            <Frame square loading={!data}>
-              <Image contain src={data && data.ImageUrl}/>
-            </Frame>
-          </Grid>
-          <Grid item xs={8}>
-            <Typography component={data && NavLink || "p"} to={getRoute("user","product","detail",{alias:data && data.Alias})}>
-              {
-                data && (data.Name ?? "Đang cập nhật")
-                ||(<Skeleton className="skeleton" />)
-              }
-            </Typography>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid item xs={2}> 
-        <Quantity />
-      </Grid>
-      <Grid item xs={3}> 
-        <Typography>
-          {
-            data && (formatNumber(data.Price,3,0) + " đ")
-            ||(<Skeleton className="skeleton" />)
+  <ListItem divider disableGutters>
+    <Grid container display="grid" gap={1} sx={{
+      gridTemplateColumns:"repeat(11,1fr)"
+    }}>   
+      <Image url={data && data.ImageUrl}loading={loading}
+        sx={{
+          gridColumn:{
+            xs:"1 / 4",
+            md:"1 / 2"
+          },gridRow:{
+            xs:"1 / span 4",
+            md:"1 / span 1"
           }
-        </Typography>
-      </Grid>
-      <Grid item xs={2}>  
+        }}
+      />
+      <Name name={data && data.Name}alias={data && data.Alias} loading={loading}
+        sx={{
+          gridColumn:{
+            xs:"4 / 12",
+            sm:"4 / 9",
+            md:"2 / 5"
+          }
+        }}
+      />
+      <Price price={data && data.Price} loading={loading}
+        sx={{
+          gridColumn:{
+            xs:"4 / 12",
+            sm:"4 / 9",
+            md:"5 / 7"
+          }
+        }}
+      />
+      <Quantity loading={loading} 
+         sx={{
+          gridColumn:{
+            xs:"4 / 12",
+            sm:"4 / 9",
+            md:"7 / 9"
+          }
+        }}
+      />
+      <Grid item sx={{
+          gridColumn:{
+            xs:"4 / 12",
+            sm:"9 / 12"
+          }
+      }}>  
         <Stack direction="row">
           <Tooltip placement="top" title="Theo dõi sản phẩm">
             <IconButton>

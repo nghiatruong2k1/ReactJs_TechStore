@@ -25,15 +25,18 @@ function Header({...props}){
     })
   },[])
   return(
-  <Box component="header"
-    sx={{
-      zIndex:10,
-      position:isFixed && "fixed" || "relative",
-      top:isFixed && 0 || 'unset',
-      left:0,right:0     
-    }}
+  <Box component="header">
+      <Container 
+        maxWidth="xxl" 
+        component={Paper} 
+        className={styles.container}
+        sx={{
+          zIndex:10,
+          position:isFixed && "fixed" || "relative",
+          top:isFixed && 0 || 'unset',
+          left:0,right:0     
+        }}
   >
-      <Container maxWidth="xxl" component={Paper} className={styles.container}>
         <NavContent fixed={isFixed} />
       </Container>
   </Box>

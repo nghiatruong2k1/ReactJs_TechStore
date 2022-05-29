@@ -1,5 +1,5 @@
 import {memo,useContext,useState,useEffect} from 'react';
-import {TextField} from '@mui/material/';
+import {Grid,TextField} from '@mui/material/';
 import {ItemContext} from "../provider";
 function Quantity({...props}){
   const {data,index} = useContext(ItemContext);
@@ -22,6 +22,7 @@ function Quantity({...props}){
       setValue(data.Quantity)
   },[data.Quantity]);
   return(
+  <Grid item {...props}>
     <TextField 
         size="small" 
         type="number" 
@@ -30,6 +31,7 @@ function Quantity({...props}){
         onChange={handleChange}
         onBlur={handleBlur}
     /> 
+  </Grid>
   )
 }
 export default memo(Quantity);

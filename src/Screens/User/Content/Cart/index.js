@@ -1,8 +1,7 @@
 import {memo,useReducer} from 'react';
-import clsx from 'clsx';
-import {Grid,Stack} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
+
+import {Grid} from '@mui/material/';
+
 
 import VoucherCode from "./VoucherCode/";
 import Total from "./Total/";
@@ -16,27 +15,35 @@ function CartContent({...props}){
   const [state,dispath] = useReducer(reducer,initData);
   return(
   <Provider state={state} dispath={dispath}>
-    <Grid container display="grid">
+    <Grid container display="grid" sx={{
+      gridTemplateColumns:"repeat(11,1fr)"
+    }}>
       <View p={1} sx={{
         gridColumn:{
-          lg:"1 / 2"
+          xs:"1 / 12",
+          lg:"1 / 9"
         },gridRow:{
           lg:"1 / span 3"
         }
       }}/>
       <VoucherCode p={1} sx={{
         gridColumn:{
-          lg:"2 / 3"
+          xs:"1 / 12",
+          sm:"1 / 7",
+          lg:"9 / 12"
         }
       }}/>
       <Total p={1} sx={{
         gridColumn:{
-          lg:"2 / 3"
+          xs:"1 / 12",
+          sm:"7 / 12",
+          lg:"9 / 12"
         }
       }}/>
       <Buttons p={1} sx={{
         gridColumn:{
-          lg:"2 / 3"
+          xs:"1 / 12",
+          lg:"9 / 12"
         }
       }}/>
     </Grid>

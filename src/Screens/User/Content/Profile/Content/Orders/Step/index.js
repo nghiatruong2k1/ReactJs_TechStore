@@ -27,7 +27,6 @@ function OrdersStep({...props}){
             return (
               <Step key={index} >
                 <StepButton 
-
                   sx={{p:1,width:'fit-content'}}
                   onClick={()=>(dispath(['set_status_index',index]))}
                 >

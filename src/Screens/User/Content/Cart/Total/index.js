@@ -19,7 +19,7 @@ function Total({...props}){
     return cart.handle.getPrice();
   },[cart.state])
   return(
-  <Grid item xs {...props}>
+  <Grid item {...props}>
     <Paper sx={{p:1,height:"100%"}}>
       <Stack spacing={1}>
           <Stack direction="row">
@@ -36,7 +36,7 @@ function Total({...props}){
           </Stack>
           <Divider />
           <Stack direction="row" px={8}>
-            <Image contain src="images/misc/payments.png" height="26" />
+            <Image contain src="images/misc/payments.png" height="20" />
           </Stack>
       </Stack>
     </Paper>
