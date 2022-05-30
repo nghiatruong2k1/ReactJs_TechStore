@@ -20,9 +20,15 @@ import{ NavLink }from'react-router-dom';
 import styles from './styles.module.css';
 import {useGet} from "../../../../../../../../Config/Fetch/"
 function CardStatistic({api,title,to,cardProps,...props}){
-  const {data,isLoading,isError} = useGet({
-    api:api,
-    initData:0
+  const [{data,isLoading,isError}] = useGet(0,function(){
+    return {
+      api,
+      onStart:function(){
+        return 0
+      },onThen:function(result){
+        return result.data
+      }
+    }
   },[]);
   if(!cardProps){
     cardProps = {}

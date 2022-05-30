@@ -7,7 +7,7 @@ import{Routes,Route }from'react-router-dom';
 
 import Dashboard from "./Dashboard/";
 
-import CatalogProducts   from "./Catalogs/Screens/Products/";
+// import CatalogProducts   from "./Catalogs/Screens/Products/";
 import CatalogCategories from "./Catalogs/Screens/Categories/";
 import CatalogBrands     from "./Catalogs/Screens/Brands/";
 import CatalogOrders     from "./Catalogs/Screens/Orders/";
@@ -19,7 +19,7 @@ function Content({...props}){
       <Grid container display="grid">
         <Routes>
           <Route path={`${getControllerName("admin","dashboard")}/*`} element={<Dashboard />} />
-          <Route path={`${getControllerName("admin","product")}/*`} element={<CatalogProducts />} />
+          {/* <Route path={`${getControllerName("admin","product")}/*`} element={<CatalogProducts />} />*/}
           <Route path={`${getControllerName("admin","category")}/*`} element={<CatalogCategories />} />
           <Route path={`${getControllerName("admin","brand")}/*`} element={<CatalogBrands />} />
           <Route path={`${getControllerName("admin","order")}/*`} element={<CatalogOrders />} />

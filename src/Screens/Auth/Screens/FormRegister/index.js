@@ -35,8 +35,8 @@ function FormRegister({...props}){
       api:"api/auth/register",
       params:values,
       onThen:function(result){
-        if(result.data.value && result.data.token){
-          auth.handle.login(result.data.value,result.data.token);
+        if(result.data.token){
+          auth.handle.login(result.data.token);
           auth.handle.close(); 
         }
       },onError:function(error){

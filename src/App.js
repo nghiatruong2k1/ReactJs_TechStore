@@ -22,7 +22,7 @@ function App({...props}){
 			<LoadingData />
 			<Auth />
 			<Routes>
-	          <Route path={`${getAreaName("user")}/*`} element={<UserPage />} />   
+	          
 			  <Route path={`${getAreaName("admin")}*`} element={<AdminPage />} />   
 	        </Routes> 
 	    </Provider>
@@ -31,7 +31,7 @@ function App({...props}){
 export default memo(App);
 	        
 /*
-
+<Route path={`${getAreaName("user")}/*`} element={<UserPage />} />   
 	        
 	        <UploadImage />
 	     	              

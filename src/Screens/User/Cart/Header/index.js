@@ -28,7 +28,7 @@ function CartHeader({...props}){
 	      }
 	      action={
 	        <Tooltip placement="top" title="Đóng">
-	          <IconButton sx={{color:"#f00"}} onClick={()=>(cart.handle.close())}>
+	          <IconButton sx={{color:"#f00",fontSize:"2em !important"}} onClick={()=>(cart.handle.close())}>
 	            <Close />
 	          </IconButton>
 	        </Tooltip>

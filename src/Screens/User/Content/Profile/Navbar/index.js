@@ -54,7 +54,7 @@ function ProfileNavbar({...props}){
                 <ListItem key={index} disablePadding divider>
                   <ListItemButton className={clsx({[styles.active]:isActive})} component={NavLink} to={url}>
                     <ListItemIcon>{icon}</ListItemIcon>
-                    {isMd && <ListItemText>{text}</ListItemText>}
+                    {isMd && <ListItemText sx={{px:1}}>{text}</ListItemText>}
                   </ListItemButton> 
                 </ListItem> 
               )

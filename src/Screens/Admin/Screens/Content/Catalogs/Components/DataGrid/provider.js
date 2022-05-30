@@ -144,6 +144,8 @@ export function useGetData(callback,args = []){
           isTrash:state.inTrash,
           limit:state.limit,
           offset:(state.page - 1) * state.limit,
+          sort:state.sort,
+          filter:state.filter,
           ...params
         },onThen:(result => {
             dispath(['set_datas',result.data]);
@@ -183,7 +185,7 @@ export function useGetData(callback,args = []){
           dispath(['set_loading',false]);
       }
     });
-  },[state.page,state.limit,state.inTrash,controller,params]);
+  },[state.page,state.limit,state.sort,state.inTrash,controller,params]);
 
   useEffect(function(){
     handleGetLength();

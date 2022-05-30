@@ -3,6 +3,8 @@ export const initData = {
 	page:1,
 	datas:[],
 	total:0,
+	sort:null,
+	filter:{},
 	isLoading:false,
 	inTrash:false
 };
@@ -59,6 +61,23 @@ export function reducer(prevState,[key,payload]) {
 				isLoading:Boolean(payload)
 			}
 		}
+		case 'set_sort':{
+			const [name,desc] = payload;
+			const newSort = name + (desc && '_Desc' || "");
+			return {
+				...prevState,
+				sort: newSort != prevState.sort ? newSort : null
+			}
+		}
+		case 'change_filter':{
+			return {
+				...prevState,
+				filter:{
+					...prevState.filter,
+					...payload
+				}
+			}
+		}
 		case 'set_trash':{
 			return {
 				...prevState,
@@ -82,20 +101,12 @@ export function reducer(prevState,[key,payload]) {
 export function reducerDisplay(prevState,[key,payload]) {
 	switch(key){
 		case 'toggle_show':{
-			const index = Number(payload);
-			if(!Number.isNaN(index) && prevState[index]){
-				prevState[index] = {
-					...prevState[index],
-					hidden:!Boolean(prevState[index].hidden)
-				}
-			}
+			payload.hidden = !payload.hidden;
 			return[...prevState]
 		}
 		default:{
 		console.log(key,{prevState,"error":"Không tồn tại action"})
-			return{
-				...prevState
-			}
+			return [...prevState]
 		}
 	}
 };

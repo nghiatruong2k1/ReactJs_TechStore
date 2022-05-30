@@ -25,7 +25,6 @@ function ProductInfo({...props}){
           handle.changeValue("Name",v ?? "")
           handle.changeValue("Alias",formatAlias(v ?? ""))
         }}
-        valid={state.valids && state.valids["Name"]}
         label="Tên sản phẩm" 
         name="Name"/>
       <InputText 

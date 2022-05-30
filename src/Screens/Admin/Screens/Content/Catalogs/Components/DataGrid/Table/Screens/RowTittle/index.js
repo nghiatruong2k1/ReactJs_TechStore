@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 import {DataContext} from '../../../provider';
 
 import Cell from "../../Components/Cell/";
+import AfterOption from "./AfterOption/";
 
 
 function handleCheckChange(event){
@@ -18,6 +19,7 @@ function handleCheckChange(event){
     });
   }
 }
+
 function RowTittle({...props}){
   const {displays} = useContext(DataContext);
   return(
@@ -30,12 +32,13 @@ function RowTittle({...props}){
       {
         displays.map((display,index)=>{
           return(
-          <Cell 
-            title={true}
-            key={index+1}
-            display={display}
-            text={display.title}
-          />
+            <Cell 
+              title={true}
+              key={index+1}
+              display={display}
+              text={display.title}
+              afterChild={<AfterOption display={display}/>}
+            />
           )
         })
       }

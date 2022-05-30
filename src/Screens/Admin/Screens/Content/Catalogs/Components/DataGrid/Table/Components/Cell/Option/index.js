@@ -12,12 +12,12 @@ import styles from './styles.module.css';
 
 function CellOption({data,loading,sx,children,...props}){
   return(
-    <Stack direction="row" justifyContent = 'center'>
+    <>
       {
         !loading && (<>{children}</>) 
         || <Skeleton variant="text" width="100%" />
       }
-    </Stack>
+    </>
   )
 }
 export default memo(CellOption);

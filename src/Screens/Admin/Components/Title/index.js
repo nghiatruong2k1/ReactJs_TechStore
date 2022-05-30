@@ -14,7 +14,7 @@ function DashboardTitle({to,children,text,...props}){
   },[location,text])
   return(
     <Grid item xs {...props}>
-      <Stack direction="row" spacing={1}>
+      <Stack component={Typography} variant={"h3"} direction="row" spacing={1} alignItems="center">
         {
           to &&
           (<Tooltip title="Quay lại" placement="top" arrow>
@@ -24,7 +24,7 @@ function DashboardTitle({to,children,text,...props}){
           </Tooltip>
           )
         }
-        <Typography flex="1" display="flex" alignItems="center" variant="h4">{text}</Typography>
+        <span style={{flex:1}}>{text}</span>
         {children}
       </Stack>
     </Grid>

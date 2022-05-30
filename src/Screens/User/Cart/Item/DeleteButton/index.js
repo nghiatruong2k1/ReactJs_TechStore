@@ -9,7 +9,7 @@ function DeleteButton({...props}){
   const {cart} = useContext(global.config.UserContext);
   return(
     <Tooltip placement="top" title="Xóa khỏi giỏ hàng">
-      <IconButton onClick={()=>{cart.handle.delete(index)}}>
+      <IconButton sx={{fontSize:"1.4em !important"}} onClick={()=>{cart.handle.delete(index)}}>
         <DeleteForever />
       </IconButton>
     </Tooltip>

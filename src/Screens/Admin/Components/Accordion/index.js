@@ -33,11 +33,11 @@ function AccordionContent({title,icon,option,className,children,...props}){
           expanded={isOpen}
         >
           <AccordionSummary className={styles.sumary}>
-            <Stack direction = 'row' alignItems="center" width="100%" spacing={1}>
+            <Stack direction = 'row' alignItems="center" width="100%" component={Typography} variant="h5"  spacing={1}>
               <SvgIcon component={icon || Feed} className={styles.icon} />
-              <Typography variant="h5" flex="1" className={styles.title} >
+              <span style={{flex:1}} className={styles.title} >
                   {title}
-              </Typography>
+              </span>
               {isOpen && option}
               <Tooltip title={isOpen && "Đóng" ||  "Mở"} placement="top">
                 <IconButton 

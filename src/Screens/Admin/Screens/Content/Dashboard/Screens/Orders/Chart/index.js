@@ -103,12 +103,15 @@ function OrdersChart({...props}){
   };
 
   const thisRef = useRef();
+  const options = useMemo(function(){
+    return getOptions(`Biểu đồ đơn hàng (${types[state.inType] && types[state.inType].text || ""})`)
+  },[state.inType])
   return(
     <Line
       ref={thisRef}
       type='line'
       data={data}
-      options={getOptions(`Biểu đồ đơn hàng (${types[state.inType] && types[state.inType].text || ""})`)}
+      options={options}
     />
   )
 }

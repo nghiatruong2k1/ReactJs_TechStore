@@ -18,7 +18,7 @@ export const formatBase64 = (file)=>{
       reader.onload = (e) => resolve(e.target.result);
       reader.onerror = error => reject(error);
     });
-  }
+}
   export const formatByte =(x)=>{
     if(typeof(x) != 'number'){
         x = 0;

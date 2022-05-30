@@ -64,18 +64,17 @@ const getOptions = (function(){
   }
 })();
 
-function OrdersChart({...props}){
 
+
+function OrdersChart({...props}){
   const {state} = useContext(OrdersContext);
   const chars = useMemo(function(){
     return state.datas.reduce(function(result,item){     
       const lb = types[state.inType].getLabel(item.CreateDate);
-
       if(result[lb] === undefined){
         result[lb] = 0;
       }
       result[lb]+=item.Total;
-
       return result;
     },{});
   },[state.inType,state.datas]);
@@ -92,14 +91,16 @@ function OrdersChart({...props}){
       }
     ]
   };
-
   const thisRef = useRef();
+  const options = useMemo(function(){
+    return getOptions(`Biểu đồ đăng ký tài khoản (${types[state.inType] && types[state.inType].text || ""})`)
+  },[state.inType])
   return(
     <Line
       ref={thisRef}
       type='line'
       data={data}
-      options={getOptions(`Biểu đồ đăng ký tài khoản (${types[state.inType] && types[state.inType].text || ""})`)}
+      options={options}
     />
   )
 }

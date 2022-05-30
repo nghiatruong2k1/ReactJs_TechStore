@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import {Grid,Typography,FormControl,FormHelperText,Select,MenuItem} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-function InputSelect({left,right,name,nameValue,nameText,value,onChange,valid,onValid,values=[],label,placeholder,...props}){
+function InputSelect({left,right,name,nameValue,nameText,value,onChange,valid,onValid,values=[],label,placeholder,disabledEmpty,...props}){
   return(
   <>
     <Grid container alignItems="center"{...props}>
@@ -26,12 +26,16 @@ function InputSelect({left,right,name,nameValue,nameText,value,onChange,valid,on
             return "--"+(placeholder ?? label ?? "")+"--";
          }}
        >
-          <MenuItem
-             key={0}
-             value={0}
-           >
+         {
+           (disabledEmpty == false) && (
+            <MenuItem
+              key={0}
+              value={0}
+            >
             {"--"+(placeholder ?? label ?? "")+"--"}
           </MenuItem>
+           )
+         }
          {values.map((value,index) => (
            <MenuItem
              key={index+1}

@@ -1,8 +1,8 @@
-import {memo,useState,useEffect,useMemo} from 'react';
+import {memo,useState,useEffect,Fragment,useMemo} from 'react';
 import PropTypes from "prop-types";
 import clsx from 'clsx';
 import styles from "./styles.module.css";
-import {TableCell} from '@mui/material/';
+import {TableCell,Stack} from '@mui/material/';
 import CheckboxType from "./Checkbox/";
 import ImageType from "./Image/";
 import TextType from "./Text/";
@@ -10,7 +10,7 @@ import OptionType from "./Option/";
 import NumberType from "./Number/";
 import DatetimeType from "./Datetime/";
 
-function Cell({title,type,data,display,cellProps:{sx,className,...cellProps},...props}){
+function Cell({title,type,data,display,beforeChild,afterChild,cellProps:{sx,className,...cellProps},...props}){
   const Component = useMemo(function(){
     switch(type){
       case 'checkbox':{
@@ -44,7 +44,12 @@ function Cell({title,type,data,display,cellProps:{sx,className,...cellProps},...
         className={clsx(className,styles.cell,{[styles.title]:title})}
         {...cellProps}
       >
-        <Component data={data} {...display} {...props}/>
+        <Stack direction="row" justifyContent = 'space-between' alignItems="center">
+          {beforeChild}
+          <Component data={data} {...display} {...props}/>
+          {afterChild}
+        </Stack>
+        
       </TableCell>
     )
   }

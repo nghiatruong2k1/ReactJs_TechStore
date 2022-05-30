@@ -47,7 +47,7 @@ function ColumnButton({display,...props}){
               <ColumnItem 
                 key={index} 
                 display={display}
-                onClick={()=>(dispathDisplay(["toggle_show",index]))}
+                onClick={()=>(dispathDisplay(["toggle_show",display]))}
               />)
           })
         }
