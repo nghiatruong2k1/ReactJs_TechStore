@@ -8,22 +8,22 @@ import { useFetch } from '../../../../../Config/Fetch/';
 import {UploadImageContext} from "../../../provider";
 import {ListContext} from "../../provider";
 function ViewItem({data,loading,...props}){
-  const uploadImage = useContext(UploadImageContext);
+  const {select,setSelect} = useContext(UploadImageContext);
   const {image} = useContext(global.config.AppContext);
   const {handle} = useContext(ListContext);
   const Fetch = useFetch();
   const isActive = useMemo(function(){
     if(data){
-      if(uploadImage.state.select){
-        return uploadImage.state.select.Id  == data.Id
+      if(select){
+        return select.Id  == data.Id
       }else if(image.config.defaultData){
         return image.config.defaultData.Id == data.Id
       }
     }
     return false;
-  },[data,uploadImage.defaultData,uploadImage.state.select])
+  },[data,image.config.defaultData,select])
   function handleClick(){
-    data && uploadImage.handle.select(data)
+    data && setSelect(data)
   }
   function handleDelete(){
     data && Fetch.delete({
@@ -32,7 +32,7 @@ function ViewItem({data,loading,...props}){
       onEnd:function(){
         handle.get({});
         if(isActive){
-          uploadImage.handle.select(null)
+          setSelect(null)
         }
       }
     })

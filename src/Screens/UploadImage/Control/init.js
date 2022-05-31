@@ -1,18 +1,12 @@
 export const initData = {
 	isOpen:false
 };
-export function reducer(prevState,{key,payload}) {
+export function reducer(prevState,[key,payload]) {
 	switch(key){
-		case 'open':{
+		case 'set_open':{
 			return {
 				...prevState,
-				isOpen:true
-			}
-		}
-		case 'close':{
-			return{
-				...prevState,
-				isOpen:false
+				isOpen:Boolean(payload)
 			}
 		}
 		default:{

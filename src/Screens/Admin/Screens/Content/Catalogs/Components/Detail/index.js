@@ -116,7 +116,6 @@ const initEvent = function(){
           dispath(['set_loading',false])
           onEnd && onEnd();
           events.run("SubmitEnd",{error});
-
         }
       });
     }else{

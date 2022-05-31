@@ -4,13 +4,13 @@ export const ListContext = createContext();
 
 function ListProvider({state,dispath,children,...props}){
   const Fetch = useFetch();
-  function handleGetData({onStart,onEnd}){
-    Fetch.get({
+  async function handleGetData({onStart,onEnd}){
+    await Fetch.get({
       api:"api/admin/image/",
       params:{
         isTrash:false,
-        limit:state.view,
-        offset:(state.page - 1) * state.view
+        limit:state.limit,
+        offset:(state.page - 1) * state.limit
       },onThen:(result => {
           dispath(["datas",result.data]);
       }),onError:(error=> {
@@ -18,8 +18,8 @@ function ListProvider({state,dispath,children,...props}){
       }),onStart,onEnd
     })
   }
-  function handleGetLength(){
-    Fetch.get({
+  async function handleGetLength(){
+    await Fetch.get({
       api:"api/admin/image/count",
       params:{
         isTrash:false
@@ -39,15 +39,18 @@ function ListProvider({state,dispath,children,...props}){
     }
   }
   useEffect(function(){
-    handle.get({
+    handleGetData({
         onStart:function(){
-          dispath(['datas',Array(state.view ?? 1).fill(undefined)]);
+          dispath(['datas',Array(state.limit ?? 1).fill(undefined)]);
           dispath(['isLoading',true])
         },onEnd:function(){
           dispath(['isLoading',false])
         }
     });
-  },[state.page,state.view]);
+  },[state.page,state.limit]);
+  useEffect(function(){
+    handleGetLength();
+  },[state.limit]);
 	return(
 		<ListContext.Provider value={{state,handle}}>
 			{children}

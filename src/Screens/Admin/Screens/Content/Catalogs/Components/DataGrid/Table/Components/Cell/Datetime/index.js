@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 import {formatDate} from "../../../../../../../../../../../Config/Format/";
 function CellDatetime({name,format,data,sx,loading,text,...props}){
   return(
-      <Typography name={name} whiteSpace = 'nowrap' {...props}>
+      <Typography name={name} whiteSpace = 'nowrap'sx={{flex:1,...sx}} {...props}>
         {!loading ?
           (
             formatDate(data && data[name] || text || "",format)

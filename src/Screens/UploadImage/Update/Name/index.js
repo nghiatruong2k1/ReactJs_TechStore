@@ -1,6 +1,6 @@
 import {memo,useContext} from 'react';
 import {Grid,TextField,Typography} from '@mui/material/';
-import {DetailContext} from "../provider";
+import {DetailContext} from "../Detail/provider";
 function InfoName({left,right,...props}){
   const {data,handle} = useContext(DetailContext);
   function handleChange(event){

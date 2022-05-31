@@ -20,7 +20,7 @@ import DeleteButton from "./DeleteButton/";
 
 
 function RowData({data,loading,old,...props}){
-  const {displays} = useContext(DataContext);
+  const {displays,handle,state} = useContext(DataContext);
   const [isCheck,setCheck] = useState(false);
   useEffect(function(){
     setCheck(false)
@@ -39,7 +39,7 @@ function RowData({data,loading,old,...props}){
           loading={loading} 
         />
         {
-          displays.map(({type,...display},index)=>{
+          displays.map(({type,disabledEdit,...display},index)=>{
             return (
               <Cell  
                 type={type}
@@ -47,6 +47,8 @@ function RowData({data,loading,old,...props}){
                 data={data} 
                 display={display}  
                 loading={loading} 
+                enableEdit={disabledEdit ? false : state.enableEdit}
+                onChange={handle.change}
               />)
           })
         }
@@ -54,6 +56,7 @@ function RowData({data,loading,old,...props}){
           type="option"
           key={displays.length + 1} 
           loading={loading} 
+          cellProps={{sx:{fontSize:"1.2em !important"}}}
         >
           <PublicButton data={data} loading={loading}/>
           <TrashButton data={data} loading={loading}/>

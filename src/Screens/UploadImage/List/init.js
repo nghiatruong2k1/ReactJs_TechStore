@@ -1,5 +1,5 @@
 export const initData = {
-	view:12,
+	limit:12,
 	page:1,
 	datas:[],
 	total:0,

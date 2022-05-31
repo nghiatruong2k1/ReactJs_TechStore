@@ -1,28 +1,28 @@
-import {memo,useState} from 'react';
-import {DetailDataContext} from "../Detail/provider";
+import {createContext, memo,useState} from 'react';
 import {useFetch} from "../../../Config/Fetch/";
-function AddProvider({children,...props}){
-	const [data,setData] = useState({});
+export const AddImageContext = createContext();
+function AddImageProvider({state,dispath,children,...props}){
 	const Fetch = useFetch();
 	const handle = {
 		refetch:function(){
-			setData({});
-		},save:function(){
+			dispath(['clear'])
+		},save:function(data){
+			const {IsPubic,IsTrash,Name,Size,Url} = data;
 			Fetch.post({
 		      api:"api/admin/image/"
-		      ,params:{...data},
+		      ,params:{IsPubic,IsTrash,Name,Size,Url},
 		      onThen:function(result){
-		      	setData({})
+				dispath(['remove',data])
 		      }
 		    })
 		}
 	}
 	return(
-		<DetailDataContext.Provider value={{
-			data,handle,setData
+		<AddImageContext.Provider value={{
+			state,dispath,handle
 		}}>
 			{children}
-		</DetailDataContext.Provider>
+		</AddImageContext.Provider>
 	)
 }
-export default memo(AddProvider);
+export default memo(AddImageProvider);

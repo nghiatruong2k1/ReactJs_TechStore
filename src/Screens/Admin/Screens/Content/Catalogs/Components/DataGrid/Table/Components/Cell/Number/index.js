@@ -8,7 +8,7 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 function CellNumber({name,format,data,sx,loading,text,...props}){
   return(
-      <Typography name={name} whiteSpace = 'nowrap' {...props}>
+      <Typography name={name} whiteSpace = 'nowrap'sx={{flex:1,...sx}} {...props}>
         {!loading ?
           (
             formatNumber(data && data[name] || text || 0,[...format])

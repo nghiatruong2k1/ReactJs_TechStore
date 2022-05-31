@@ -2,7 +2,7 @@ import {memo,useContext,useState,useMemo,useEffect} from 'react';
 import clsx from "clsx";
 import {Stack,TextField,FormControl,FormHelperText,Typography,Slider} from '@mui/material/';
 import styles from './styles.module.css';
-import {DetailContext} from "../provider";
+import {DetailContext} from "../Detail/provider";
 import { formatByte } from '../../../../Config/Format';
 const MAX_SIZE = 1000000;
 

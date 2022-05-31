@@ -105,16 +105,7 @@ function ProductImages({useHandleImage,...props}){
         ...dataset,
         updateProps:function(data,setLoading){
           return{
-            onClick:function(){
-              image.handle.open({
-                onSubmit:function({value:{Name,Id,Url}}){
-                  data.ImageId  = Id;
-                  data.ImageUrl = Url;
-                  data.Alt = Name;
-                  handle.changeData && handle.changeData(data)
-                }
-              })
-            }
+            hidden:true
           }
         }
       }}

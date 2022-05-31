@@ -10,14 +10,18 @@ function TrashButton({data,loading,...props}){
   const attr = useMemo(function(){
     return dataset.trashProps && dataset.trashProps(data,setLoading) || {}
   },[data])
-  return(
-    <OptionButton 
-      title={data && data.IsTrash && "Khôi phục" || "Xóa tạm"} 
-      loading={loading || isLoading}
-      className={"trash-btn"}
-      icon={data && data.IsTrash && <RestoreFromTrash /> || <DeleteForeverRounded />}
-      {...attr}
-    />
-  )
+  if(attr.hidden){
+    return <></>
+  }else{
+    return(
+      <OptionButton 
+        title={data && data.IsTrash && "Khôi phục" || "Xóa tạm"} 
+        loading={loading || isLoading}
+        className={"trash-btn"}
+        icon={data && data.IsTrash && <RestoreFromTrash /> || <DeleteForeverRounded />}
+        {...attr}
+      />
+    )
+  }
 }
 export default memo(TrashButton);

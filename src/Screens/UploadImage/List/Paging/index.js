@@ -1,10 +1,7 @@
 import {memo,useContext,useMemo,useEffect} from 'react';
-import clsx from 'clsx';
 import {
-  Stack,Pagination,PaginationItem
+  Stack,Pagination
 } from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
 import {ListContext} from '../provider';
 function ViewPaging({...props}){
   const {state,handle} = useContext(ListContext);
@@ -21,7 +18,7 @@ function ViewPaging({...props}){
   }
   if(pageCount > 1){
     return(
-      <Stack spacing={2} className={styles.container}>
+      <Stack spacing={2} sx={{py:1}}>
         <Pagination 
           onChange={handleChange} 
           count={pageCount} 

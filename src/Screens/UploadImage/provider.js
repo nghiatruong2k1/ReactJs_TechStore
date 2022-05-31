@@ -1,22 +1,24 @@
-import {memo,createContext,useContext} from "react";
+import {memo,useState,createContext,useContext} from "react";
+
+import useAddImage from "./Add/Control";
 export const UploadImageContext = createContext();
-function UploadImageProvider({state,dispath,children}){
+function UploadImageProvider({children}){
   const {image} = useContext(global.config.AppContext);
+  const addImage = useAddImage();
+  const [select,setSelect] = useState(null);
   const handle = {
     close:function(){
       image.handle.close();
-      dispath(['clear']);
+      setSelect(null)
     },cancel:function(){
-      image.config.onCanel && image.config.onCancel({});
+      image.config.onCancel && image.config.onCancel({});
     },submit:function(){
-      image.config.onSubmit && image.config.onSubmit({value:state.select});
-    },select:function(item){
-      dispath(['set_select',item])
+      image.config.onSubmit && image.config.onSubmit({value:select});
     }
   }
   return (
   	<UploadImageContext.Provider 
-      value={{state,dispath,handle}}
+      value={{select,setSelect,handle,addImage}}
     >
 		  {children}
   	</UploadImageContext.Provider>

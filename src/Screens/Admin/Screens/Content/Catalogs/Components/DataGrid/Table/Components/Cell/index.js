@@ -10,7 +10,7 @@ import OptionType from "./Option/";
 import NumberType from "./Number/";
 import DatetimeType from "./Datetime/";
 
-function Cell({title,type,data,display,beforeChild,afterChild,cellProps:{sx,className,...cellProps},...props}){
+function Cell({title,type,data,display,beforeChild,afterChild,enableEdit,onChange,cellProps:{sx,className,...cellProps},...props}){
   const Component = useMemo(function(){
     switch(type){
       case 'checkbox':{
@@ -44,9 +44,9 @@ function Cell({title,type,data,display,beforeChild,afterChild,cellProps:{sx,clas
         className={clsx(className,styles.cell,{[styles.title]:title})}
         {...cellProps}
       >
-        <Stack direction="row" justifyContent = 'space-between' alignItems="center">
+        <Stack direction="row" justifyContent = 'center' alignItems="center">
           {beforeChild}
-          <Component data={data} {...display} {...props}/>
+            <Component onChange={onChange} enableEdit={enableEdit} data={data} {...display} {...props}/>
           {afterChild}
         </Stack>
         

@@ -6,6 +6,7 @@ export const initData = {
 	sort:null,
 	filter:{},
 	isLoading:false,
+	enableEdit:false,
 	inTrash:false
 };
 export function reducer(prevState,[key,payload]) {
@@ -59,6 +60,12 @@ export function reducer(prevState,[key,payload]) {
 			return {
 				...prevState,
 				isLoading:Boolean(payload)
+			}
+		}
+		case 'set_edit':{
+			return {
+				...prevState,
+				enableEditt:Boolean(payload)
 			}
 		}
 		case 'set_sort':{

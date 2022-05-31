@@ -69,7 +69,7 @@ const initEvent = function(){
   return {add,remove,run}
 }; 
 export function useInitData(callback,args = []){
-  const [state,dispath] = useReducer(reducer,initData);
+  const [state,dispath] = useReducer(reducer,{...initData,enableEdit:true});
   const Fetch = useFetch();
   useEffect(function(){
     dispath(['set_page',1])
@@ -79,7 +79,6 @@ export function useInitData(callback,args = []){
   useEffect(function(){
     dispath(['set_total',state.datas.length]);
   },[state.datas]);
-
   const handle = {
     refetch:function(){
       dispath(['set_datas',[]])

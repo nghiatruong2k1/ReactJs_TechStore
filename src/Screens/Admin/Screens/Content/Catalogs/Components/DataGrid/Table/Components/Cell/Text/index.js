@@ -1,11 +1,24 @@
 import {memo,useContext} from 'react';
 import clsx from 'clsx';
 import PropTypes from "prop-types";
-import {TableCell,Typography,Skeleton} from '@mui/material/';
+import {TableCell,Typography,Skeleton,TextField} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-function CellText({name,data,sx,loading,text,...props}){
-  return(
+function CellText({enableEdit,onChange,name,data,sx,loading,text,...props}){
+  if(enableEdit){
+    <TextField 
+      fullWidth
+      disabled={loading}
+      value={data && data[name] || text || ""}
+      onChange={(e)=>{
+        if(data){
+          data[name] = e.target.value
+          onChange && onChange(data);
+        }
+      }}
+    />
+  }else{
+    return(
       <Typography name={name} whiteSpace = 'nowrap' fontWeight = 'inherit'sx={{flex:1,...sx}} {...props}>
         {!loading ?
           (
@@ -15,6 +28,7 @@ function CellText({name,data,sx,loading,text,...props}){
         }
       </Typography>
     )
+  }
 }
 CellText.propTypes = {
   text:PropTypes.string

@@ -1,6 +1,6 @@
 import {memo,useContext} from 'react';
 import {Grid,Switch,Typography} from '@mui/material/';
-import {DetailContext} from "../provider";
+import {DetailContext} from "../Detail/provider";
 function InfoPublic({left,right,...props}){
   const {data,handle} = useContext(DetailContext);
   function handleChange(event){

@@ -1,13 +1,13 @@
 import {memo,useContext} from 'react';
-import {Box} from '@mui/material/';
+import {Paper} from '@mui/material/';
 import {Frame,Image} from "../../../../../../../../../../../Components/";
-function CellImage({name,nameAlt,loading,data,sx,...props}){
+function CellImage({enableEdit,name,nameAlt,loading,data,sx,...props}){
   return(
-    <Box sx={{...sx}} {...props}>
+    <Paper variant="outlined" sx={{mx:'auto',...sx}}  {...props}>
       <Frame rectangle loading={loading}>
         <Image contain name={name} alt={data && data[nameAlt]} src={data && data[name]}/>
       </Frame>
-    </Box>
+    </Paper>
   )
 }
 export default memo(CellImage);
