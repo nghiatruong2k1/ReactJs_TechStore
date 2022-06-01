@@ -17,17 +17,15 @@ function Auth(){
         },login:function(token){
           setCookies("token",token);
         },logout:function(){
+          removeCookies("token");
           dispath(['set_user',null]);
-          removeCookies("token")
         },goAction:function(action){
           dispath(['set_action',action])
         }
       }
   },[state]);
   useEffect(function(){
-    console.log(cookies['token'],Boolean(cookies['token']),typeof(cookies['token']))
-    if(Boolean(cookies['token']) 
-      && typeof(cookies['token']) == 'string' 
+    if(typeof(cookies['token']) == 'string' 
       && cookies['token'] != 'undefined'
       && cookies['token'] != 'null'
       && cookies['token'] != ''

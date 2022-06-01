@@ -1,23 +1,28 @@
-import {memo,useState,useEffect} from 'react';
+import {memo,useState,useEffect,useRef} from 'react';
 import clsx from 'clsx';
 import {
-  CardContent,
+  Menu,
+  MenuItem,
   List,
   ListSubheader,
   ListItem,
+  Divider,
   ListItemButton,
   ListItemText,
+  ListItemIcon,
   Skeleton
-
 } from '@mui/material/';
+import {KeyboardArrowDown} from '@mui/icons-material/';
 import {NavLink,useLocation} from "react-router-dom";
-import { getRoute } from '../../../../../../../../../../Config/Route';
+import {getRoute} from "../../../../../../../../../../Config/Route/";
 import {useGet} from "../../../../../../../../../../Config/Fetch/";
 function Categories({...props}){
   const location = useLocation();
+  const [isOpen,setOpen] = useState(false);
+  const thisRef = useRef();
   const [{data,isLoading}] = useGet([],function(){
     return{
-      api:"api/brand"
+      api:"api/category"
       ,onStart:(()=>{
         return Array(5).fill(undefined)
       })
@@ -27,26 +32,30 @@ function Categories({...props}){
     }
   },[])
   return(
-    <CardContent>
-      <List 
-        disablePadding
-        subheader={
-          <ListSubheader disableGutters disableSticky component="h6">
-            Thương hiệu
-          </ListSubheader>
-        }
+    <>
+      <ListItem ref={thisRef} sx={{width:'auto',p:0}}>
+       <ListItemButton onClick={()=>(setOpen(true))}>
+        <ListItemText>Danh mục</ListItemText>
+        <ListItemIcon><KeyboardArrowDown /></ListItemIcon>
+       </ListItemButton>
+      </ListItem>
+      <Menu
+        anchorEl={thisRef.current}
+        open={thisRef.current && isOpen}
+        onClose={()=>{setOpen(false)}}
+        MenuListProps={{sx:{p:1}}}
       >
-        {
+      {
           data.map(function(item,index){
             let isActive = false;let url = "#";
             if(item){
-              url=`${getRoute("user","product","brand",{alias:item.Alias})}`;
+              url=`${getRoute("user","product","category",{alias:item.Alias})}`;
               if(location.pathname.toLowerCase().indexOf(url.toLowerCase()) !== -1){
                 isActive = true;
               }
             }
             return(
-              <ListItem key={index} divider disablePadding> 
+              <MenuItem key={index} divider sx={{p:0}}> 
                 {
                   <ListItemButton 
                     component={(Boolean(item) && !isLoading) && NavLink || "button"} 
@@ -59,12 +68,16 @@ function Categories({...props}){
                   </ListItemButton>
                   
                 }
-              </ListItem>
+              </MenuItem>
             )
           })
         }
-      </List>
-    </CardContent>
+      </Menu>
+    </>
   )
 }
 export default memo(Categories);
+/*
+
+
+ */

@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Provider from "./AppProvider";
 import {getAreaName} from "./Config/Route/";
-import Auth from "./Screens/Auth/";
+import AuthDialog from "./Screens/Auth/Screens/";
 import Loading from "./Screens/Loading/";
 import UploadImage from "./Screens/UploadImage/";
 import UserPage from "./Screens/User/";
@@ -21,9 +21,9 @@ function App({...props}){
 		<Provider>
 			<Loading />
 			<UploadImage />
-			<Auth />
+			<AuthDialog />
 			<Routes>
-			<Route path={`${getAreaName("user")}/*`} element={<UserPage />} />  
+			  <Route path={`${getAreaName("user")}/*`} element={<UserPage />} />  
 			  <Route path={`${getAreaName("admin")}*`} element={<AdminPage />} />   
 	        </Routes> 
 	    </Provider>

@@ -25,7 +25,7 @@ function NavMenu({fixed,datas,loading,children,onClose,sx,...props}){
             }}
           >
             <ListItemIcon>{icon}</ListItemIcon>
-            <ListItemText>
+            <ListItemText primaryTypographyProps={{sx:{fontWeight:'bold'}}}>
               {
                 !loading && (text || "") || <Skeleton className="skeleton"/>
               }

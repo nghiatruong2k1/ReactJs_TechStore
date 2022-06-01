@@ -54,7 +54,7 @@ function Categories({...props}){
                     to={url}
                   >                    
                     {(Boolean(item) && !isLoading) 
-                      && <ListItemText>{item && item.Name}</ListItemText>
+                      && <ListItemText primaryTypographyProps={{sx:{fontWeight: isActive && 'bold' || "400"}}}>{item && item.Name}</ListItemText>
                       || <Skeleton variant="text" className="skeleton"/>
                     }
                   </ListItemButton>

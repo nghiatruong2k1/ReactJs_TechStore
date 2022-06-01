@@ -10,33 +10,22 @@ function SearchSelect({...props}){
       feild:"",
       text:"--Chọn sắp xếp--",
     },{
-      feild:"Name_desc",
+      feild:"Name_Desc",
       text:"Tên giảm dần",
     },{
       feild:"Name",
       text:"Tên tăng dần",
     },{
-      feild:"Price_desc",
+      feild:"Price_Desc",
       text:"Giá giảm dần",
     },{
       feild:"Price",
       text:"Giá tăng dần",
     }]
   },[]);
-  const selectIndex = useMemo(function(){
-    const index = argsType.findIndex(function(type){
-      return type.feild == state.sort
-    })
-    if(index >= 0){
-      return index
-    }else{
-      return 0
-    }
-  },[state.sort]);
 
   function handleChange(event,obj){
-    const newSort = argsType[Number(obj.props.value)];
-    dispath(["set_sort",newSort.value])
+    dispath(["set_sort",obj.props.value])
   }
   return(
     <FormControl className={styles.control}>
@@ -46,10 +35,12 @@ function SearchSelect({...props}){
           SelectDisplayProps={{
             className:styles.display
           }}
-          value={selectIndex}
+          value={state.sort}
           onChange = {handleChange}
           renderValue={(selected) => {
-            const select = argsType[selected];
+            const select = argsType.find((type)=>{
+              return type.feild == selected;
+            });
             if(select){
               return select.text;
             }else{
@@ -60,7 +51,7 @@ function SearchSelect({...props}){
           {
             argsType.map(function(type,index){
               return(
-                <MenuItem key={index+1} value={index}>{type.text}</MenuItem>
+                <MenuItem key={index+1} value={type.feild}>{type.text}</MenuItem>
               )
             })
           }

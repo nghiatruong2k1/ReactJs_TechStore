@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function Message({...props}){
   return(
   <Grid item {...props}>
-    <Tooltip title="Message" placement="top">
+    <Tooltip title="Message" placement="top" arrow>
       <IconButton className={styles.button}>
         <Badge badgeContent={4} color="primary">
           <NotificationsActive/>

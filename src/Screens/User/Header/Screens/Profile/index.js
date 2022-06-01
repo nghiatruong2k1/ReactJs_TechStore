@@ -13,8 +13,7 @@ function Profile(props){
   const buttonRef = useRef(null);
 
   if(Boolean(auth.state.user)){
-    let {FirstName,LastName,ImageUrl} = auth.state.user;
-    let avatar = ImageUrl; 
+    let {FirstName,LastName,ImageUrl,TypeId} = auth.state.user;
     let name = (FirstName || "") +" "+ (LastName || "");
     return(
       <Grid item {...props}>
@@ -23,11 +22,12 @@ function Profile(props){
           ref={buttonRef}
           onClick={()=>{setOpen(true)}}
           title={name}
-          icon={<Avatar alt={name} src={avatar} />}
+          icon={<Avatar alt={name} src={ImageUrl} />}
           state={isOpen}
           dispath={setOpen}
         >
           <Navbar 
+            isAdmin={TypeId == 4}
             open={buttonRef.current && isOpen} 
             onClose={()=>{setOpen(false)}} 
             anchorEl={buttonRef.current} 

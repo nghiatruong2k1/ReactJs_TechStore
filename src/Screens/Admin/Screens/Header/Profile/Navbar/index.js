@@ -52,13 +52,6 @@ function Navbar({anchorEl,isAdmin,open,onClose,...props}){
         }
       }}
     > 
-        {isAdmin && (
-          <ProfileLink 
-            to={`${getRoute("admin","dashboard","index")}`}
-            icon={<span className={clsx("fa fa-user-cog")}/>}
-            text={"Trang quản trị"}
-          />
-        )}
         <ProfileLink 
           to={`${getRoute("user","profile","index")}`}
           icon={<span className={clsx("fa fa-user")}/>}
