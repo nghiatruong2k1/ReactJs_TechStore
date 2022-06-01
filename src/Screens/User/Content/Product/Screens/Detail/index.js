@@ -13,8 +13,8 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme)=>{
   return {
     content:{
-      color:theme.palette.text.paper,
-      backgroundColor:theme.palette.background.paper
+      color:`${theme.palette.text.paper} !important`,
+      backgroundColor:`${theme.palette.background.paper} !important`
     }
   }}
 );
@@ -27,11 +27,11 @@ function ProductDetail({...props}){
   <Provider state={state} dispath={dispath}>
     <ViewContent loading={state.isLoading} empty="Không tìm thấy sản phẩm" length={state.data.Id}>
       <Grid container py={1} >
-        <DetailPicture xs={12} sm={5} md={4} px={2} py={1}/>
-        <DetailInfo xs={12} sm={7} md={8} px={2} py={1}/>
+        <DetailPicture xs={12} sm={5} md={4} px={1} py={1}/>
+        <DetailInfo xs={12} sm={7} md={8} px={1} py={1}/>
       </Grid>
       <Grid container py={1} >
-        <DetailDescription loading={state.isLoading} fullDes={state.data.FullDes} xs={12} px={2} py={1}/>
+        <DetailDescription loading={state.isLoading} fullDes={state.data.FullDes} xs={12} px={1} py={1}/>
       </Grid>
     </ViewContent>
   </Provider>

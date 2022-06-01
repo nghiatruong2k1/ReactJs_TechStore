@@ -21,8 +21,8 @@ import {getRouteName,getControllerName} from "../../../Config/Route/";
 const useStyles = makeStyles((theme)=>{
   return {
     section:{
-      color:theme.palette.text.default,
-      backgroundColor:theme.palette.background.default
+      color:`${theme.palette.text.default} !important`,
+      backgroundColor:`${theme.palette.background.default} !important`
     }
   }}
 );

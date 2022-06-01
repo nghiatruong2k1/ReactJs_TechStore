@@ -1,8 +1,17 @@
 import {memo,useContext,useEffect,useState,useMemo} from 'react';
 import {InputAdornment,Select,MenuItem,FormControl} from '@mui/material/';
-import styles from './styles.module.css';
+import { makeStyles } from '@mui/styles';
 
+const useStyles = makeStyles((theme)=>{
+  return {
+    menu:{
+      color:`${theme.palette.text.paper} !important`,
+      backgroundColor:`${theme.palette.background.paper} !important`
+    }
+  }}
+);
 function SearchSelect({value,onChange,...props}){
+  const styles = useStyles();
   const controllers = useMemo(function(){
     return [{
         value:"product",
@@ -22,16 +31,28 @@ function SearchSelect({value,onChange,...props}){
       }]
   },[])
   return(
-  <InputAdornment position="end">
-    <FormControl className={styles.control} fullWidth variant="standard">
+  <InputAdornment position="end" sx={{color:'inherit !important'}}>
+    <FormControl fullWidth variant="standard">
       <Select size="small"
+          sx={{color:'inherit !important'}}
           displayEmpty
           fullWidth
           disableUnderline
           value={value}
           onChange={(e,o)=>{onChange && onChange(e,o.props.value)}}
           SelectDisplayProps={{
-            className:styles.display
+            sx:{
+              textAlign:'center',
+              background:'transparent'
+            }
+          }}
+          MenuProps={{
+            MenuListProps:{
+              className:styles.menu,
+              sx:{
+                p:1
+              }
+            }
           }}
           renderValue={(selected) => {
             const controller = controllers.find((i)=>{
@@ -42,6 +63,7 @@ function SearchSelect({value,onChange,...props}){
             }else{
               onChange && onChange({},controllers[0].value)
             }
+          
          }}>
         {
           controllers.map(function(type,index){

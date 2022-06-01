@@ -69,7 +69,7 @@ const initEvent = function(){
   return {add,remove,run}
 }; 
 export function useInitData(callback,args = []){
-  const [state,dispath] = useReducer(reducer,{...initData,enableEdit:true});
+  const [state,dispath] = useReducer(reducer,{...initData});
   const Fetch = useFetch();
   useEffect(function(){
     dispath(['set_page',1])
@@ -89,6 +89,7 @@ export function useInitData(callback,args = []){
     },addData:function(data){
       dispath(['add_data',data])
     },changeData:function(data){
+      console.log(data)
       dispath(['change_data',data])
     }
   };

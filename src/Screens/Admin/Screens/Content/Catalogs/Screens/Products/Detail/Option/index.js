@@ -10,19 +10,19 @@ function ProductOption({...props}){
     <Stack spacing={1}>
       <InputSwitch 
         left={{xs:2}}right={{xs:10}} 
-        checked={state.product && state.product["IsPublic"]}
-        valid={state.validProduct && state.validProduct["IsPublic"]}
+        checked={state.values && state.values["IsPublic"]}
+        valid={state.valids && state.valids["IsPublic"]}
         onChange={(e,v)=>{
-          handle.changeProduct("IsPublic",v ?? "")
+          handle.changeValue("IsPublic",v ?? "")
         }}
         label="Chế độ công khai" 
         name="IsPublic"/>
       <InputSwitch 
         left={{xs:2}}right={{xs:10}} 
-        checked={state.product && state.product["IsTrash"]}
-        valid={state.validProduct && state.validProduct["IsTrash"]}
+        checked={state.values && state.values["IsTrash"]}
+        valid={state.valids && state.valids["IsTrash"]}
         onChange={(e,v)=>{
-          handle.changeProduct("IsTrash",v ?? "")
+          handle.changeValue("IsTrash",v ?? "")
         }}
         label="Xóa tạm thời" 
         name="IsTrash"/>

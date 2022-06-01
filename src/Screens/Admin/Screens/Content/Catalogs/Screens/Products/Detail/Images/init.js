@@ -1,7 +1,8 @@
 export const displays  = [
   {
     title      :"Hình ảnh",
-    name        :"ImageUrl",
+    name       :"ImageUrl",
+    nameId     :"ImageId",
     type       :"image",
     style      :{
       minWidth :"10em"

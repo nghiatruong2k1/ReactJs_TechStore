@@ -15,8 +15,8 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme)=>{
   return {
     card:{
-      color:theme.palette.text.paper,
-      backgroundColor:theme.palette.background.paper
+      color:`${theme.palette.text.paper} !important`,
+      backgroundColor:`${theme.palette.background.paper} !important`
     }
   }}
 );

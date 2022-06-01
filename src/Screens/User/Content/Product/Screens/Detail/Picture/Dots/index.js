@@ -1,6 +1,6 @@
 import {memo,useContext,useRef,useEffect,useState,useMemo} from 'react';
 import clsx from 'clsx';
-import {Box,Button} from '@mui/material/';
+import {Box,Paper} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 import {SliderContext} from "../provider";
@@ -29,24 +29,27 @@ function Dots({slider,images,...props}){
     thisRef.current && thisRef.current.slickGoTo(state.index / thisRef.current.innerSlider.state.slideCount)
   },[state.index])
   return(
-    <Box className={styles.dots} sx={{px:{xs:2,sm:4,md:8,lg:10}}}>
+    <Box className={styles.dots} sx={{px:{xs:4,sm:6,md:8,lg:8}}}>
       <Slider ref={thisRef} {...settings}>
       {
         images.map(function(item,index){
           return(
-            <Frame 
-              px={1} py={2} 
-              rectangle 
-              key={index} 
-              containerProps={{
-                className:clsx(styles.dotButton,{[styles.dotActive]:index == state.index}),
-                onClick:(e)=>{
-                  slider && slider.slickGoTo(index)
-                }
-              }}
-            >
-              <Image cover src={item.src}/>
-            </Frame>
+            <Box sx={{p:0.5}}>
+              <Paper variant="outlined" className={clsx(styles.dot,{[styles.dotActive]:index == state.index})}>
+                <Frame  
+                  rectangle  
+                  key={index} 
+                  containerProps={{
+                    className:clsx(styles.dotButton),
+                    onClick:(e)=>{
+                      slider && slider.slickGoTo(index)
+                    }
+                  }}
+                >
+                  <Image contain src={item.ImageUrl}/>
+                </Frame>
+              </Paper>
+            </Box>
           )
         })
       }

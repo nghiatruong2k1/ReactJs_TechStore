@@ -1,0 +1,31 @@
+import {useState,useMemo,useEffect} from 'react';
+import {LocalStorage} from "../../../Config/LocalStorage"; 
+const modes = {
+    light:{
+        divider: "#444",
+        text: {
+            default: "#444",
+            paper: "#666",
+        },background: {
+            default: "#f6f7f9",
+            paper: "#fefefe",
+        },
+    },dark:{
+        divider: "#fff",
+        text: {
+            default: "#fff",
+            paper: "#bbb",
+        },background: {
+            default: "#222222",
+            paper: "#010509",
+        },
+    }
+}
+function useTheme(){
+	const [mode,setMode] = useState(LocalStorage.get("mode","light"));
+    useEffect(function(){
+        LocalStorage.set("mode",mode)
+      },[mode])
+    return {mode,setMode,modes}
+}
+export default useTheme;

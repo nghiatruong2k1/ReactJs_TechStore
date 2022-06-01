@@ -103,6 +103,7 @@ function ProductImages({useHandleImage,...props}){
       }}
       dataset={{
         ...dataset,
+        enableEdit:true,
         updateProps:function(data,setLoading){
           return{
             hidden:true

@@ -3,11 +3,28 @@ import {memo} from 'react';
 import clsx from 'clsx';
 import PropTypes from "prop-types";
 import {formatNumber} from "../../../../../../../../../../../Config/Format/";
-import {Typography,Skeleton} from '@mui/material/';
+import {Typography,Skeleton,TextField} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-function CellNumber({name,format,data,sx,loading,text,...props}){
-  return(
+function CellNumber({name,format,data,sx,loading,text,enableEdit,onChange,...props}){
+  if(enableEdit){
+    return(
+      <TextField 
+        fullWidth
+        size="small"
+        type="number"
+        disabled={loading}
+        value={data && data[name] || text || ""}
+        onChange={(e)=>{
+          if(data){
+            data[name] = e.target.value
+            onChange && onChange(data);
+          }
+        }}
+      />
+    )
+  }else{
+    return(
       <Typography name={name} whiteSpace = 'nowrap'sx={{flex:1,...sx}} {...props}>
         {!loading ?
           (
@@ -17,6 +34,7 @@ function CellNumber({name,format,data,sx,loading,text,...props}){
         }
       </Typography>
     )
+  }
 }
 CellNumber.propTypes = {
   text:PropTypes.number,

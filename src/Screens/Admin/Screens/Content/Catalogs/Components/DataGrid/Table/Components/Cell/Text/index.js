@@ -6,17 +6,20 @@ import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
 function CellText({enableEdit,onChange,name,data,sx,loading,text,...props}){
   if(enableEdit){
-    <TextField 
-      fullWidth
-      disabled={loading}
-      value={data && data[name] || text || ""}
-      onChange={(e)=>{
-        if(data){
-          data[name] = e.target.value
-          onChange && onChange(data);
-        }
-      }}
-    />
+    return(
+      <TextField 
+        fullWidth
+        size="small"
+        disabled={loading}
+        value={data && data[name] || text || ""}
+        onChange={(e)=>{
+          if(data){
+            data[name] = e.target.value
+            onChange && onChange(data);
+          }
+        }}
+      />
+    )
   }else{
     return(
       <Typography name={name} whiteSpace = 'nowrap' fontWeight = 'inherit'sx={{flex:1,...sx}} {...props}>

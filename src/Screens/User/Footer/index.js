@@ -12,10 +12,10 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme)=>{
   return {
     section:{
-      background:theme.palette.background.default
+      background:`${theme.palette.background.default} !important`
     },container:{
-      color:"#fff",
-      backgroundColor:"var(--help)"
+      color:"#fff !important",
+      backgroundColor:"var(--help) !important"
     }
   }}
 );

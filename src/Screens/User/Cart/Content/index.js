@@ -11,8 +11,8 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme)=>{
   return {
     paper:{
-      color:theme.palette.text.default,
-      backgroundColor:theme.palette.background.default
+      color:`${theme.palette.text.default} !important`,
+      backgroundColor:`${theme.palette.background.default} !important`
     }
   }}
 );

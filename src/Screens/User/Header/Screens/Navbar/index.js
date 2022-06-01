@@ -10,11 +10,11 @@ import { makeStyles } from '@mui/styles';
 const useDrawStyles = makeStyles((theme)=>{
   return {
     card:{
-      color:theme.palette.text.default,
-      backgroundColor:theme.palette.background.default
+      color:`${theme.palette.text.default} !important`,
+      backgroundColor:`${theme.palette.background.default} !important`
     },paper:{
-      color:theme.palette.text.paper,
-      backgroundColor:theme.palette.background.paper
+      color:`${theme.palette.text.paper} !important`,
+      backgroundColor:`${theme.palette.background.paper} !important`
     }
   }}
 );
@@ -23,7 +23,7 @@ const DrawerNav = memo(function({open,onClose,children,...props}){
   const styles = useDrawStyles();
   return(
     <Drawer  anchor="right" open={open} onClose={onClose} {...props}>
-      <Card component={Stack} className={styles.card} sx={{overflowX:'hidden',height:"100%"}}>
+      <Card component={Stack} className={styles.card} sx={{overflowX:'hidden',height:"100%",p:0.5}}>
         <HeadNav onClose={onClose}/>
         <CardContent  sx={{ flex:1,p:0.5,overflow:"hidden"}}>
           <Paper variant={"outlined"} className={styles.paper} sx={{height:"100%",overflowX:"hidden"}}>
@@ -49,7 +49,7 @@ function Navbar({fixed,...props}){
   },[fixed,isMd])
   return(
     <Grid item {...props}>
-      {!isFixed && <Divider />}
+      {!isFixed && <Divider sx={{borderColor:'currentcolor !important'}}/>}
       <Box 
         component={isFixed && DrawerNav || BoxNav } 
         open={isOpen} 

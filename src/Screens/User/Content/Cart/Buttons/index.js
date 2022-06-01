@@ -2,17 +2,17 @@ import {memo,useContext} from 'react';
 import {useCookies} from 'react-cookie'
 import clsx from 'clsx';
 import {Grid,Button,Stack,Paper} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
+import {useSnackbar} from 'notistack';
 import DialogResult from "./DialogResult/";
 import {CartContext} from "../provider";
 import {useFetch} from "../../../../../Config/Fetch/";
+
 function Buttons({...props}){
   const {state,dispath} = useContext(CartContext);
   const [cookies,setCookies] = useCookies();
   const {cart} = useContext(global.config.UserContext);
   const {auth} = useContext(global.config.AppContext);
-  const {toast} = useContext(global.config.context);
+  const { enqueueSnackbar } = useSnackbar();
   
   const Fetch =useFetch();
   function handleOrderClick(){
@@ -41,10 +41,10 @@ function Buttons({...props}){
           }
         });
       }else{
-        toast.handle.add({message:"Vui lòng thêm sản phẩm vào giỏ hàng!",type:"warning"});
+        enqueueSnackbar({message:"Vui lòng thêm sản phẩm vào giỏ hàng!",type:"warning"});
       }
     }else{
-      toast.handle.add({message:"Vui lòng đăng nhập để thanh toán!",type:"warning"});
+      enqueueSnackbar({message:"Vui lòng đăng nhập để thanh toán!",type:"warning"});
       auth.handle.open();
     }
   }

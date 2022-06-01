@@ -9,8 +9,8 @@ const useStyles = makeStyles((theme)=>{
   console.log(theme)
   return {
     container:{
-      color:theme.palette.text.paper,
-      backgroundColor:theme.palette.background.paper
+      color:`${theme.palette.text.paper} !important`,
+      backgroundColor:`${theme.palette.background.paper} !important`
     }
   }}
 );

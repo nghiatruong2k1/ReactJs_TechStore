@@ -6,14 +6,12 @@
 }
 
 .dotButton{
-	box-shadow: 0 0 0 0 var(--dark) !important;
-	transition: box-shadow 0.25s;
 	cursor: pointer;
 }
 
-.dotButton:not(.dotActive):hover{
-	box-shadow: 0 0 1px 1px var(--dark) !important;
+.dot:not(.dotActive):hover{
+	border-color: var(--infoBg) !important;
 }
 .dotActive{
-	box-shadow: 0 0 1px 1px var(--dark) !important;
+	border-color: var(--info) !important;
 }

@@ -16,13 +16,13 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme)=>{
   return {
     section:{
-      background:theme.palette.background.default
+      background:`${theme.palette.background.default} !important`
     },container:{
-      color:"#000",
-      backgroundColor:"var(--infoBg)"
+      color:"#000 !important",
+      backgroundColor:"var(--infoBg) !important"
     },feild:{
-      color:theme.palette.text.paper,
-      backgroundColor:theme.palette.background.paper
+      color:`${theme.palette.text.paper} important`,
+      backgroundColor:`${theme.palette.background.paper} important`
     }
   }}
 );

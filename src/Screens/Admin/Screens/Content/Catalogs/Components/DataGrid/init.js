@@ -65,7 +65,7 @@ export function reducer(prevState,[key,payload]) {
 		case 'set_edit':{
 			return {
 				...prevState,
-				enableEditt:Boolean(payload)
+				enableEdit:Boolean(payload)
 			}
 		}
 		case 'set_sort':{

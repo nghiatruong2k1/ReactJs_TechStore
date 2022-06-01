@@ -1,6 +1,6 @@
 import {memo,useEffect,createContext,useContext,useMemo,useReducer,useRef} from 'react';
 import {useParams,useNavigate} from "react-router-dom";
-import styles from './styles.module.css';
+import { useSnackbar} from "notistack";
 import {checkObject} from "../../../../../../../Config/Validate/";
 import {useFetch} from "../../../../../../../Config/Fetch/";
 import {getRoute} from "../../../../../../../Config/Route/";
@@ -80,7 +80,7 @@ const initEvent = function(){
         dispath(['set_loading',false]);
       },onThen:function(result){
         if(id > 0 && result.status === 204){
-          toast.handle.add({message:"Không tìm thấy dữ liệu!",type:"warning"})
+          toast({message:"Không tìm thấy dữ liệu!",type:"warning"})
           navigator({
             pathname:getRoute("admin",controller,"index")
           })
@@ -119,7 +119,7 @@ const initEvent = function(){
         }
       });
     }else{
-      toast.handle.add({message:`Hiện đang có ${error} lỗi !!`,type:"error"})
+      toast({message:`Hiện đang có ${error} lỗi !!`,type:"error"})
     }
   }
 
@@ -129,7 +129,7 @@ export function handleDetail(){
 export function useAdd({
   rulers,controller
 }){
-  const {toast} = useContext(global.config.context);
+  const { enqueueSnackbar } = useSnackbar();
   const navigator = useNavigate();
   const Fetch = useFetch();
   const eventRef = useRef(initEvent());
@@ -137,18 +137,18 @@ export function useAdd({
 
   useEffect(function(){
     handleGet({
-      Fetch,toast,navigator,controller,dispath,id:0
+      Fetch,toast:enqueueSnackbar,navigator,controller,dispath,id:0
     });
   },[controller])
   const handle = {
     refetch:function(){
       handleGet({
-        Fetch,toast,navigator,controller,dispath,id:0
+        Fetch,toast:enqueueSnackbar,navigator,controller,dispath,id:0
       });
     },
     save:function({onEnd,onStart,onThen,onError}){
       handleSubmit({
-        Fetch,toast,controller,rulers,dispath,events:eventRef.current,
+        Fetch,toast:enqueueSnackbar,controller,rulers,dispath,events:eventRef.current,
         onEnd,onStart,onError,onThen,
         method:"post",values:state.values
       })
@@ -163,23 +163,23 @@ export function useUpdate({
   rulers,controller
 }){
   const navigator = useNavigate();
-  const {toast} = useContext(global.config.context);
+  const { enqueueSnackbar } = useSnackbar();
   const Fetch = useFetch();
   const eventRef = useRef(initEvent());
   const [state,dispath] = useReducer(reducer,initData);
   const {id} = useParams();
 
   useEffect(function(){
-    handleGet({Fetch,toast,navigator,controller,dispath,id});
+    handleGet({Fetch,toast:enqueueSnackbar,navigator,controller,dispath,id});
   },[controller,id]);
 
   const handle = {
     refetch:function(){
-      handleGet({Fetch,toast,navigator,controller,dispath,id});
+      handleGet({Fetch,toast:enqueueSnackbar,navigator,controller,dispath,id});
     },
     save:function({onEnd,onStart,onThen,onError}){
       handleSubmit({
-        Fetch,toast,controller,rulers,dispath,events:eventRef.current,
+        Fetch,toast:enqueueSnackbar,controller,rulers,dispath,events:eventRef.current,
         onEnd,onStart,onError,onThen,
         method:"put",values:state.values
       })

@@ -1,6 +1,4 @@
 import {memo,Fragment,useContext} from 'react';
-
-import styles from './styles.module.css';
 import {FormControl,FormGroup} from '@mui/material/';
 import SearchSelect from "../Select";
 import SearchInput from "../Input";
@@ -10,15 +8,17 @@ import {SearchContext} from "../provider";
 import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme)=>{
   return {
-    container:{
-      color:theme.palette.text.paper,
-      backgroundColor:theme.palette.background.paper
+    form:{
+      color:`${theme.palette.text.default} !important`,
+      backgroundColor:`${theme.palette.background.default} !important`,
+      borderColor:`var(--info)`
     }
   }}
 );
 
 function SearchForm({children,...props}){
     const {state,dispath,onSubmit} = useContext(SearchContext);
+    const styles = useStyles();
     return (
         <FormControl  
             component="form" 
@@ -30,7 +30,9 @@ function SearchForm({children,...props}){
         >
             <FormGroup row 
                 className={styles.form}
-                sx={{py:0.3,px:0.15,alignItems:'center'}}
+                sx={{py:0.4,px:0.15,alignItems:'center'
+                    ,borderRadius:1.5,borderWidth:0.25,borderStyle:"solid"
+                }}
             >
                 <SearchSelect 
                     value={state.controller}

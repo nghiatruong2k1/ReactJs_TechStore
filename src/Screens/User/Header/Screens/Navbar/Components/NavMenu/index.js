@@ -12,7 +12,7 @@ function NavMenu({fixed,datas,loading,children,onClose,sx,...props}){
   >
     {
        Array.isArray(datas) && 
-       datas.map(({to,text,style,children,onClick},index)=>{
+       datas.map(({to,text,icon,style,children,onClick},index)=>{
          return(
           <NavItem 
             key={index} 
@@ -24,12 +24,13 @@ function NavMenu({fixed,datas,loading,children,onClose,sx,...props}){
               !children && onClose && onClose(e); 
             }}
           >
-            <ListItemIcon></ListItemIcon>
+            <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText>
               {
                 !loading && (text || "") || <Skeleton className="skeleton"/>
               }
             </ListItemText>
+            {children}
           </NavItem>
          )
        })

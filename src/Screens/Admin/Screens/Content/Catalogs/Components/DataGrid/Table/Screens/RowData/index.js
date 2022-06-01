@@ -20,7 +20,7 @@ import DeleteButton from "./DeleteButton/";
 
 
 function RowData({data,loading,old,...props}){
-  const {displays,handle,state} = useContext(DataContext);
+  const {displays,handle,dataset} = useContext(DataContext);
   const [isCheck,setCheck] = useState(false);
   useEffect(function(){
     setCheck(false)
@@ -47,8 +47,8 @@ function RowData({data,loading,old,...props}){
                 data={data} 
                 display={display}  
                 loading={loading} 
-                enableEdit={disabledEdit ? false : state.enableEdit}
-                onChange={handle.change}
+                enableEdit={disabledEdit ? false : dataset.enableEdit}
+                onChange={handle.changeData}
               />)
           })
         }
