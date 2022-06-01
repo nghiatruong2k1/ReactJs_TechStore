@@ -2,7 +2,7 @@
 
 import {useReducer,useContext,useEffect,useMemo,useRef} from "react";
 import DialogResult from "../../Components/DialogResult";
-import { useSnackbar} from "notistack"
+import { useSnackbar} from "notistack";
 import axios from "axios";
 import {initState,reducer} from "./init";
 
@@ -15,26 +15,21 @@ axios.defaults.xsrfHeaderName = "token";
 
 const Base_Url_API = "https://localhost:44373/";
 
-async function showToast(toast,mes){
+async function showToast(toast,mes,status){
   switch(typeof(mes)){
     case 'string':
     case 'number':{
       break;
     }
     default:{
-      switch(mes.message){
-        case 'Network Error':{
-          toast({...mes,message:"Kiểm tra lại kết nối mạng!",type:"error"});
-          break;
-        }
-        case 'Request failed with status code 404':{
-          toast({...mes,message:"Yêu cầu bị lỗi!",type:"error"});
-          break;
-        }
-        default:{
-          toast(mes);
-          break;
-        }
+      if(mes.message.indexOf('Network Error') > -1){
+        await toast({message:`Kiểm tra lại kết nối mạng!, mã lỗi ${status}`,type:"error"});
+      }else if(mes.message.indexOf('Request failed') > -1){
+        await toast({message:`Yêu cầu bị lỗi, mã lỗi ${status}`,type:"error"})
+      }else if(mes.message.indexOf("A connection was successfully") > -1){
+        await toast({message:`Kết nối Database không thành công, mã lỗi ${status}`,type:"error"})
+      }else{
+        await toast(mes);
       }
       break;
     }
@@ -48,8 +43,7 @@ async function handleError(toast,error){
     }else{
       mes = error.message
     }
-    mes +=` (mã lỗi ${error.response.status})`;
-    showToast(toast,{message:mes,type:"error"})
+    showToast(toast,{message:mes,type:"error"},error.response.status)
   }else if(error.message){
     showToast(toast,{message:error.message,type:"error"})
   }
