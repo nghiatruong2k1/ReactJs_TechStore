@@ -24,8 +24,9 @@ function Screen({...props}){
 			<UploadImage />
 			<AuthDialog />
 			<Routes>
-			  <Route path={`${getAreaName("user")}/*`} element={<UserPage />} />  
-			  <Route path={`${getAreaName("admin")}*`} element={<AdminPage />} />   
+			  <Route path={`*`} element={<UserPage />} />  
+			  <Route path={`trang-quan-tri/*`} element={<AdminPage />} />
+			  <Route path={`${getAreaName("admin")}/*`} element={<AdminPage />} />   
 	        </Routes> 
 	    </Provider>
 	)
