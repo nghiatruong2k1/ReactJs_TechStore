@@ -5,8 +5,10 @@ import {Box,Grid,Card,CardContent,useMediaQuery,Typography,Skeleton} from '@mui/
 import {NavLink} from "react-router-dom";
 import {Frame,Image} from "../../../../../../../Components/";
 import {getRoute} from "../../../../../../../Config/Route/";
+import useStyles from './styles';
 function PopularItem({data,loading,...props}){
   const isMd = useMediaQuery((theme)=>(theme.breakpoints.down("ls")));
+  const styles = useStyles();
   const to = useMemo(function(){
     if(loading){
       if(data){
@@ -18,7 +20,7 @@ function PopularItem({data,loading,...props}){
   return(
     <Box p={0.5} {...props}>
       <Card component={Grid} container 
-        sx={{ width:'100%',m:0,height:'100%'}}
+        sx={styles.card}
         variant="outlined"
         alignItems="center"
       >
@@ -34,9 +36,8 @@ function PopularItem({data,loading,...props}){
               variant="contained" 
               loading={loading}
               component={(loading) && NavLink || "button"} 
-              color="info"
               to={to}
-              sx={{px:{xs:0.5,sm:1,md:1.5,lg:2},py:{xs:0.5,md:1}}}
+              sx={styles.button}
             >Xem ngay
             </LoadingButton>
           </CardContent> 

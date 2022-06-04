@@ -1,5 +1,4 @@
 import {memo,useReducer,useContext,useEffect,useMemo}            from 'react';
-import {useParams} from "react-router-dom";
 import DetailProvider    from "../../../Components/Detail/";
 import Head              from "../../../Components/Detail/Head/";
 import DetailInfo        from "./Info/";

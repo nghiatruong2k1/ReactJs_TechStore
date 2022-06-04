@@ -11,7 +11,6 @@ import {
 import {
   Star
 } from '@mui/icons-material/';
-import {RecommendContext} from "../provider";
 import {Frame,Image} from "../../../../../../Components/";
 
 import DataName from "./Name/";
@@ -19,10 +18,12 @@ import DataPrice from "./Price/";
 import DataSalePrice from "./SalePrice/";
 import DataBookmask from "./Bookmask/";
 
+import useStyles from './styles';
 function RecommendProduct({data,loading,...props}){
+  const styles = useStyles();
   return(
     <Grid item xs={6} sm={4} md={3} lg={2} xl={2}>
-      <Card style={{height:'100%'}}>
+      <Card sx={styles.card}>
         <CardActions>
           <Frame square loading={!Boolean(data) || loading}>
             <DataBookmask price={data && data.Price} salePrice={data && data.SalePrice}/>

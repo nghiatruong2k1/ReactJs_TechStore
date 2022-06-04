@@ -4,20 +4,19 @@ import {
   Box,
   Card,
   CardContent,
-  CardActions,
   CardHeader,
   Typography,
   Skeleton
 } from '@mui/material/';
 import {NavLink} from "react-router-dom";
 import {Frame,Image} from "../../../../../../Components/";
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
 import {getRoute} from "../../../../../../Config/Route/";
+import useStyles from './styles';
 function Item({data,loading,...props}){
+  const styles = useStyles();
   return(
     <Box sx={{p:1}}>
-      <Card sx={{height:"100%"}}>
+      <Card sx={styles.card}>
         <CardHeader 
           sx={{py:1}}
           title={

@@ -38,7 +38,7 @@ function SearchSelect({value,onChange,...props}){
           displayEmpty
           fullWidth
           disableUnderline
-          value={value}
+          value={value || ""}
           onChange={(e,o)=>{onChange && onChange(e,o.props.value)}}
           SelectDisplayProps={{
             sx:{

@@ -55,12 +55,14 @@ export const validates = (function(){
 			}
 			return message ?? "Vui lòng nhập trường này!"
 		},isEmail:function(value,props){
-			const [message,args] = props
+			const [message,args] = props;
+			let type = "example@example.com";
 			const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 			if(typeof(value) === 'string'){
 				if(regex.test(value)){
 					if(Array.isArray(args)){
 						const argsRegex = new RegExp("@("+args.join("|")+")$");
+						type = args.join(",");
 						if(argsRegex.test(value)){
 							return "";
 						}
@@ -69,7 +71,7 @@ export const validates = (function(){
 					}
 				}
 			}			
-			return message ?? "Định dạng Email không hợp lệ!";
+			return message.replaceAll("{1}",type) ?? `Định dạng Email không hợp lệ! (${type})`;
 		},isConfirm:function(value,props,values){
 			const [reKey,message] = props;
 			if(!Boolean(values) || typeof(values) !== 'object'){
@@ -90,7 +92,7 @@ export const validates = (function(){
 			const [regex,message] = props
 			if(typeof(regex) === "object" && typeof(regex.test) === "function"){
 				if(regex.test(value)){
-					return message ?? "Định dạng dữ liệu không hợp lệ!";
+					return message ?? `Định dạng dữ liệu không hợp lệ! (${regex})`;
 				}else{
 					return "";
 				}

@@ -15,7 +15,7 @@ function NavHead({onClose,...props}){
 	      titleTypographyProps={{
 	        component:"h6"
 	      }}
-	      title={"Menu"}
+	      title={"Tùy chọn"}
 	      action={
 	        <Tooltip placement="top" title="Đóng">
 	          <IconButton sx={{color:"#f00"}} onClick={onClose}>

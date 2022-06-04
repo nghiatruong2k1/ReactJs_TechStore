@@ -1,13 +1,9 @@
 import {memo}         from 'react';
-import clsx           from 'clsx';
-import {}             from '@mui/material/';
-import {}             from '@mui/icons-material/';
-import styles         from './styles.module.css';
+import {Grid}             from '@mui/material/';
 import DetailProvider from "../../../Components/Detail/";
 import DetailHead     from "../../../Components/Detail/Head/";
 import DetailInfo     from "./Info/";
 import DetailOption   from "./Option/";
-
 function OrderDetail({title,useHandleDetail,...props}){
   const detailProps = useHandleDetail({
     rulers:{},controller:"order"

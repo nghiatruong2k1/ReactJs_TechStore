@@ -1,13 +1,6 @@
 
 export const displays = [
 	{
-      title	:"Mã",
-      name	:"Id",
-      type	:"text",
-      style	:{
-        minWidth:"5em"
-      }
-    },{
       title	:"Email",
       name	:"Email",
       type	:"text",
@@ -34,21 +27,6 @@ export const displays = [
     	type:"text",
 	    style:{
 	        minWidth:"10em"
-	    }
-    },{
-    	title:"Trạng thái",
-    	name:"StatusName",
-    	type:"text",
-	    style:{
-	        minWidth:"5em"
-	    }
-    },{
-    	title:"Ngày đặt",
-    	name:"CreateDate",
-    	type:"datetime",
-    	format:"shortdate",
-	    style:{
-	      minWidth:"5em"
 	    }
     }
 ];

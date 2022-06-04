@@ -1,8 +1,6 @@
-import {memo,useContext,useRef,useEffect,forwardRef,useMemo} from 'react';
+import {memo,useContext,useEffect,forwardRef,useMemo} from 'react';
 import { useTheme } from '@mui/material/styles';
-import {Box,Grid,Paper} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
+import {Box,Grid} from '@mui/material/';
 import {DealContext} from "../provider";
 
 import {ViewContent} from "../../../../../../Components/"

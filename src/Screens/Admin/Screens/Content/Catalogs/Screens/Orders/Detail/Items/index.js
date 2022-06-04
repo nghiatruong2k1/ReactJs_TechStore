@@ -1,11 +1,19 @@
 import {memo} from 'react';
-import ListView  from "../../../Components/List";
+import DataGridView from "../../../../Components/DataGrid";
+import {useGetData} from "../../../../Components/DataGrid/provider";
+import Title     from "../../../../../../../Components/Title/";
+import { getRoute } from '../../../../../../../../../Config/Route/';
 import {displays} from "./init";
-function OrdersList({...props}){
+function Items({...props}){
+  const propsGet = useGetData({
+    controller:"orderdetail"
+  });
   return(
-    <>
-      <ListView displays={displays} title="Quản lý đơn hàng" controller="order"/>
-    </>
+    <DataGridView
+      displays={displays}
+      {...propsGet}
+      {...props}
+    />
   )
 }
-export default memo(OrdersList);
+export default memo(Items);

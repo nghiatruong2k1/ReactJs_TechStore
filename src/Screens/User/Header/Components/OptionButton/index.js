@@ -1,19 +1,20 @@
-import {memo,forwardRef,createContext,useImperativeHandle,useRef} from 'react';
+import {memo,useMemo,forwardRef,createContext,useImperativeHandle,useRef} from 'react';
 import {Box,Button,IconButton,Tooltip,Typography} from '@mui/material/';
 import clsx from 'clsx';
 import {NavLink} from "react-router-dom";
-import styles from './styles.module.css';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
+import useStyles from "./styles";
 
 export const OptionContext = createContext();
 const OptionButton = forwardRef((
-    {children,className,state,dispath,title,icon,loading,onClick,sx,boxProps,...props}
+    {children,state,dispath,title,icon,loading,sx,boxProps,...props}
 ,ref)=>{
+  const styles = useStyles();
   return(
       <OptionContext.Provider value={{state,dispath}}>
         <Box {...boxProps} 
-          className={clsx(boxProps.className,styles.option)}
+          sx={{...styles.option,...boxProps.sx}}
+          className={clsx(boxProps.className)}
         >
           <Tooltip 
             PopperProps={{sx:{display:{xs:'block', lg:'none'}}}} 
@@ -21,26 +22,17 @@ const OptionButton = forwardRef((
             title={title || ""}
             arrow
           >
-            <span>
-                 <Button 
-                    ref={ref} onClick={onClick} 
-                    component={props.to && NavLink || "button"}  
-                    className={clsx(className,styles.button)}
-                    sx={{
-                      borderWidth:{xs:"0.1em",lg:0},
-                      p:0.5
-                      ,fontSize:{xs:'0.6em',sm:'0.7em',md:'0.8em',lg:'0.9em',xl:'1em'}
-                      ,width:{xs:'3.5em',lg:'100%'}
-                      ,height:{xs:'3.5em',lg:'100%'}
-                      ,minWidth:{xs:'auto',lg:'5em'}
-                      ,...sx
-                    }} 
-                    {...props}
-                  >
-                    <span className={styles.icon}>{icon}</span>
-                    <Typography className={styles.text} sx={{display:{xs:"none","lg":"block"}}} >{title}</Typography>
-                  </Button>
-              </span>
+            <Box component="span">
+              <Button 
+                 ref={ref}
+                 component={props.to && NavLink || "button"}  
+                 sx={{...styles.button,...sx}} 
+                 {...props}
+               >
+                 <Box component="span" sx={{...styles.icon}}>{icon}</Box>
+                 <Typography sx={{...styles.text}} >{title}</Typography>
+               </Button>
+            </Box>
           </Tooltip>  
           {children}
         </Box>

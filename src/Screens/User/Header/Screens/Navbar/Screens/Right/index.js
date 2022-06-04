@@ -6,8 +6,8 @@ const useThemeButton = function(){
   const {theme:{mode,setMode}} = useContext(global.config.context);
   return useMemo(function(){
     return{
-      text:(mode === 'light' ? "Light Mode" : "Dark Mode"),
-      icon:(mode === 'light' ? <LightMode /> : <DarkMode />),
+      text:(mode === 'light' ?  "Giao diện tối" : "Giao diện sáng"),
+      icon:(mode === 'light' ?  <DarkMode /> : <LightMode />),
       onClick:function(){
         setMode(mode === 'light' ? "dark" : "light")
       }

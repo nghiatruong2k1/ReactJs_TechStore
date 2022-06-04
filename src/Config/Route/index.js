@@ -69,6 +69,8 @@ const admin = new Area("trang-quan-tri",{
 		shipment:new Action("giao-hang"),
 		request:new Action("phan-hoi"),
 		voucher:new Action("ma-giam-gia")
+	}),user:new Controller("nguoi-dung",{
+		index:new Action("")
 	})
 });
 

@@ -12,17 +12,16 @@ import {
 import {
   Star
 } from '@mui/icons-material/';
-import styles from './styles.module.css';
-import {DealContext} from "../provider";
 import {Frame,Image} from "../../../../../../Components/";
-
+import useStyles from './styles';
 import DataName from "./Name/";
 import DataBookmask from "./Bookmask/";
 
 function Product({data,loading,...props}){
+  const styles = useStyles();
   return(
     <Box px={0.5} py={1} sx={{cursor:"grab"}}>
-      <Card style={{height:'100%'}}>
+      <Card sx={styles.card}>
         <CardActions>
           <Frame square loading={loading}>
             <DataBookmask price={data && data.Price} salePrice={data && data.SalePrice}/>

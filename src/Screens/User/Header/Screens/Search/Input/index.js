@@ -11,7 +11,7 @@ function SearchInput({value,onChange,startAdornment,endAdornment,...props}){
       inputProps={{
         className:styles.input
       }}
-      value={value}
+      value={value || ""}
       onChange={(e)=>{onChange && onChange(e,e.target.value)}}
       autoComplete="on"
       variant="standard"

@@ -49,10 +49,10 @@ function Menu({...props}){
   const Customers = useMemo(function(){
     return[{
       text:"Danh sách",
-      to:getRoute("admin","customer","index")
+      to:getRoute("admin","user","index")
     },{
       text:"Phản hồi",
-      to:getRoute("admin","customer","vendors")
+      to:getRoute("admin","user","vendors")
     }]
   },[]);
   const Themes = useMemo(function(){

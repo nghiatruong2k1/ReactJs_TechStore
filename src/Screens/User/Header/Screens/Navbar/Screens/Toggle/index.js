@@ -6,7 +6,7 @@ function Toggle({onClick,...props}){
   return (
     <OptionButton
       onClick={onClick}
-      title={"Menu"}
+      title={"Tùy chọn"}
       icon={(<span className={clsx("fas fa-bars")}/>)}
       {...props}
     />

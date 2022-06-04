@@ -12,10 +12,9 @@ import {
   Icon,
   useMediaQuery
 } from '@mui/material/';
-import {NavLink,useLocation} from "react-router-dom"
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
+import {NavLink,useLocation} from "react-router-dom";
 import { getRoute } from '../../../../../Config/Route/';
+import useStyles from './styles';
 function ProfileNavbar({...props}){
   const location = useLocation();
   const isMd = useMediaQuery((theme)=>(theme.breakpoints.up("md")));
@@ -40,6 +39,7 @@ function ProfileNavbar({...props}){
       }
     ]
   },[]);
+  const styles = useStyles();
   return(
     <Grid item {...props}>
       <Card sx={{height:"100%"}}>
@@ -52,9 +52,9 @@ function ProfileNavbar({...props}){
               }
               return(
                 <ListItem key={index} disablePadding divider>
-                  <ListItemButton className={clsx({[styles.active]:isActive})} component={NavLink} to={url}>
+                  <ListItemButton component={NavLink} to={url}>
                     <ListItemIcon>{icon}</ListItemIcon>
-                    {isMd && <ListItemText sx={{px:1}}>{text}</ListItemText>}
+                    {isMd && <ListItemText primaryTypographyProps={{sx:{fontWeight: isActive && 'bold' || "initial"}}}>{text}</ListItemText>}
                   </ListItemButton> 
                 </ListItem> 
               )
