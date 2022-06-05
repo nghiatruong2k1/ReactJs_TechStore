@@ -39,7 +39,7 @@ function Header({...props}){
           zIndex:10,
           position:isFixed && "fixed" || "relative",
           top:{xs:'unset',sm:isFixed && 0 || 'unset'},
-          bottom:{xs:0,sm:'unset'},
+          bottom:{xs:isFixed && 0 || 'unset',sm:'unset'},
           left:0,right:0     
         }}
   >
