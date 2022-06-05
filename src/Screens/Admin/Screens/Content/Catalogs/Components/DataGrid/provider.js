@@ -89,8 +89,9 @@ export function useInitData(callback,args = []){
     },addData:function(data){
       dispath(['add_data',data])
     },changeData:function(data){
-      console.log(data)
       dispath(['change_data',data])
+    },saveData:function(data){
+      
     }
   };
   const option = {
@@ -200,6 +201,8 @@ export function useGetData(callback,args = []){
     },setTrash:function(trash){
       dispath(['set_trash',trash])
     },changeData:function(data){
+      dispath(['change_data',data])
+    },saveData:function(data){
       data && Fetch.put({
         api:"api/admin/"+controller
         ,params:{

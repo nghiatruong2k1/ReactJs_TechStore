@@ -38,7 +38,8 @@ function Header({...props}){
         sx={{
           zIndex:10,
           position:isFixed && "fixed" || "relative",
-          top:isFixed && 0 || 'unset',
+          top:{xs:'unset',sm:isFixed && 0 || 'unset'},
+          bottom:{xs:0,sm:'unset'},
           left:0,right:0     
         }}
   >

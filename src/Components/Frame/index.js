@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 import {Skeleton,Box} from '@mui/material/';
 
 function Frame({loading,children,className,containerProps,contentProps,rectangle,square,circle,...props}){
-		const [isLoaded,setLoad] = useState(false);
+		const [isLoading,setLoad] = useState(false);
 		const frameAttr = {
 			...props,
 			className:styles.frame
@@ -33,21 +33,11 @@ function Frame({loading,children,className,containerProps,contentProps,rectangle
 		const contentAttr = {
 			...contentProps
 		};
-		contentAttr.onLoad = useMemo(function(){
-			return function(event){
-				setLoad(true);
-			}
-		},[isLoaded]);
-		contentAttr.onLoadStart = useMemo(function(){
-			return function(event){
-				setLoad(false);
-			}
-		},[isLoaded])
 		if(styles.content){
 			contentAttr.className+=" "+styles.content;
 		};
-		if(isLoaded && !loading){
-			contentAttr.className+=" "+styles.loaded;
+		if(isLoading || loading){
+			contentAttr.className+=" "+styles.loading;
 		}
 
 		const skeletonAttr = {
@@ -61,7 +51,7 @@ function Frame({loading,children,className,containerProps,contentProps,rectangle
 						{children}
 					</Box>
 					{
-						(loading || !isLoaded) 
+						(loading || isLoading) 
 						&& <Skeleton {...skeletonAttr} variant="rectangular" />
 					}	
 				</Box>

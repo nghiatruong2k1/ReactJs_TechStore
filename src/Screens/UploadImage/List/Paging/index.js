@@ -6,8 +6,8 @@ import {ListContext} from '../provider';
 function ViewPaging({...props}){
   const {state,handle} = useContext(ListContext);
   const pageCount = useMemo(function(){
-    return Math.ceil(state.total / state.view);
-  },[state.total,state.view]);
+    return Math.ceil(state.total / state.limit);
+  },[state.total,state.limit]);
   useEffect(function(){
     if(state.page > 1 && pageCount >= 1 && state.page > pageCount){
       handle.set("page",state.page - 1);

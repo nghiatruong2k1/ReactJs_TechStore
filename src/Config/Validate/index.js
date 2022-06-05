@@ -1,4 +1,5 @@
 import {useMemo} from "react";
+import { types } from "../../Screens/Admin/Screens/Content/Dashboard/Screens/Registers/init";
 
 
 function validateLength(value,callback){
@@ -57,12 +58,18 @@ export const validates = (function(){
 		},isEmail:function(value,props){
 			const [message,args] = props;
 			let type = "example@example.com";
+			if(Array.isArray(args)){
+				let types = args.map((arg)=>{
+					return "example@"+arg;
+				});
+				type = types.join(",");
+
+			}
 			const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 			if(typeof(value) === 'string'){
 				if(regex.test(value)){
 					if(Array.isArray(args)){
 						const argsRegex = new RegExp("@("+args.join("|")+")$");
-						type = args.join(",");
 						if(argsRegex.test(value)){
 							return "";
 						}
@@ -71,7 +78,7 @@ export const validates = (function(){
 					}
 				}
 			}			
-			return message.replaceAll("{1}",type) ?? `Định dạng Email không hợp lệ! (${type})`;
+			return message && message.replaceAll("{1}",type) || `Định dạng Email không hợp lệ! (${type})`;
 		},isConfirm:function(value,props,values){
 			const [reKey,message] = props;
 			if(!Boolean(values) || typeof(values) !== 'object'){
