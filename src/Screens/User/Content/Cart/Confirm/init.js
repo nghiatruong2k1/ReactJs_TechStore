@@ -1,7 +1,8 @@
 export const initState = {
     isOpen:false,
     isLoading:false,
-    isError:false
+    isError:false,
+    isSuccess:false
 };
 export const initCase = {
 };
@@ -23,6 +24,12 @@ export function reducerState(prevState,[key,payload]){
             return {
                 ...prevState,
                 isError:Boolean(payload)
+            }
+        }
+        case 'set_success':{
+            return {
+                ...prevState,
+                isSuccess:Boolean(payload)
             }
         }
         default:{

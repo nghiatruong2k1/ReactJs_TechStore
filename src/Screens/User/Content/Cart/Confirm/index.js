@@ -7,7 +7,8 @@ import {
     DialogContent,
     Paper,
     DialogTitle,
-    Typography
+    Typography,
+    Stack
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { formatNumber } from '../../../../../Config/Format';
@@ -36,9 +37,19 @@ export default function DialogConfim({}){
             dispath(["set_open",true]);
             Fetch.put({
                 api:"api/order/confirm",
-                param:{id},
-                onThen:()=>(dispath(["set_open",false])),
-                onStart:()=>(dispath(["set_loading",true])),
+                params:{id},
+                onThen:({data})=>{
+                    if(data && data.value){
+                        dispath(["set_success",true]);
+                    }else{
+                        dispath(["set_error",true]);
+                    }
+                },
+                onStart:()=>{
+                    dispath(["set_loading",true]);
+                    dispath(["set_error",false]);
+                    dispath(["set_success",false]);
+                },
                 onEnd:()=>(dispath(["set_loading",false]))
             })
         }else{
@@ -48,9 +59,11 @@ export default function DialogConfim({}){
     return (
       <Dialog open={state.isOpen} PaperProps={{className:classNames.paper,sx:{p:0.5}}}>
         <DialogTitle component="h6" sx={{p:0.5}}>
-          <Icon className="fas fa-bell" sx={{pr:1}} />Xin chờ
+          <Icon className="fas fa-bell" sx={{pr:1}} />
+          <Typography sx={{flex:1}}>Xin chờ</Typography>
+          <IconButton disabled={!isEmpty || !isSuccess} onClick={()=>(dispath(["set_open",false]))}><Icon className="fas fa-times"/></IconButton>
         </DialogTitle>
-        <Paper component={DialogContent} variant="outlined" className={classNames.content} sx={{width:'30em',p:0.5}}>
+        <Paper component={DialogContent} variant="outlined" className={classNames.content} sx={{width:'30em',p:1}}>
             <Typography variant='h2'>
                 <Icon component={CircularProgress} />Vui lòng đợi đang kiểm tra
             </Typography>
