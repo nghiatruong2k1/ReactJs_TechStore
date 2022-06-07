@@ -5,10 +5,10 @@ import DealsOffers from "./DealsOffers/";
 import Brands from "./Brands/";
 import Recommend from "./Recommend/";
 
-function HomeContent({...props}){
+function HomeContent({title,...props}){
   useEffect(function(){
-    global.config.setTitleWebsite("");
-  },[])
+    global.config.setTitleWebsite(title);
+  },[title])
   return(
     <>
       <AsideTop />

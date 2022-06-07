@@ -33,7 +33,7 @@ function Content({...props}){
     <Box component="main" className={styles.section} py={2} >
       <Container maxWidth="xxl" sx={{px:{xs:0,sm:1}}}>
         <Routes>
-          <Route path="*" element={<HomeContent />} />
+          <Route path="*" element={<HomeContent title=""/>} />
 
           <Route path={`${getRouteName("user","category","index")}`} 
             element={<ListGet controller="category" title="danh mục"/>} />
