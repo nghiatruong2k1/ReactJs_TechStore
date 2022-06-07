@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {TableCell,Typography,Skeleton,TextField} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-function CellText({enableEdit,onChange,name,data,sx,loading,text,...props}){
+function CellText({enableEdit,onChange,onSave,name,data,sx,loading,text,...props}){
   if(enableEdit){
     return(
       <TextField 
@@ -16,6 +16,11 @@ function CellText({enableEdit,onChange,name,data,sx,loading,text,...props}){
           if(data){
             data[name] = e.target.value
             onChange && onChange(data);
+          }
+        }}
+        onBlur={(e)=>{
+          if(data){
+            onSave && onSave(data)
           }
         }}
       />

@@ -49,6 +49,7 @@ function RowData({data,loading,old,...props}){
                 loading={loading} 
                 enableEdit={disabledEdit ? false : dataset.enableEdit}
                 onChange={handle.changeData}
+                onSave={handle.saveData}
               />)
           })
         }
