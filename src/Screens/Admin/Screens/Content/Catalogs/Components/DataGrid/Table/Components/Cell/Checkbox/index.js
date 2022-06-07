@@ -1,7 +1,7 @@
 import {memo,useState,useEffect} from 'react';
 import clsx from 'clsx';
 import {TableCell,Checkbox} from '@mui/material/';
-function CellCheckbox({name,loading,data,enableEdit,onChange,onSave,onSave,...props}){
+function CellCheckbox({name,loading,data,enableEdit,onChange,onSave,...props}){
   return(
     <Checkbox 
       checked={Boolean(data && data[name])}
