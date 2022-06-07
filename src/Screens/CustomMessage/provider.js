@@ -10,7 +10,7 @@ function CustomMessage({children,...props}){
             ref={SnackRef}
             maxSnack={3}  
             anchorOrigin={{
-                vertical: 'bottom',
+                vertical: 'top',
                 horizontal: 'left',
             }}
             preventDuplicate

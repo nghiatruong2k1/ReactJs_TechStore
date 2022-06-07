@@ -23,11 +23,13 @@ async function showToast(toast,mes,status){
     }
     default:{
       if(mes.message.indexOf('Network Error') > -1){
-        await toast({message:`Kiểm tra lại kết nối mạng!${status && (" (Mã lỗi "+status+")") || ""}`,type:"error"});
+        toast({message:`Kiểm tra lại kết nối mạng!${(status && (" (Mã lỗi "+status+")")) || ""}`,type:"error"});
       }else if(mes.message.indexOf('Request failed') > -1){
-        await toast({message:`Yêu cầu bị lỗi!${status && (" (Mã lỗi "+status+")") || ""}`,type:"error"})
+        toast({message:`Yêu cầu bị lỗi!${(status && (" (Mã lỗi "+status+")")) || ""}`,type:"error"})
       }else if(mes.message.indexOf("A connection was successfully") > -1){
-        await toast({message:`Kết nối Database không thành công!${status && (" (Mã lỗi "+status+")") || ""}`,type:"error"})
+        toast({message:`Kết nối Database không thành công!${(status && (" (Mã lỗi "+status+")")) || ""}`,type:"error"})
+      }else if(mes.message.indexOf("The remote certificate was rejected") > -1){
+        toast({message:`Kết nối Database bị từ chối!${(status && (" (Mã lỗi "+status+")")) || ""}`,type:"error"})
       }else{
         await toast(mes);
       }

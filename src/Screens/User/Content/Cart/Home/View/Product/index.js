@@ -10,11 +10,11 @@ import {
 import Provider from "./provider";
 
 
-import Quantity from "./Quantity/";
-import Price from "./Price/";
-import Name from "./Name/";
-import Image from "./Image/";
-import DeleteButton from "./DeleteButton/";
+import Quantity from "./Quantity";
+import Price from "./Price";
+import Name from "./Name";
+import Image from "./Image";
+import DeleteButton from "./DeleteButton";
 
 function Product({data,loading,index,...props}){
   return(

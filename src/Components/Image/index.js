@@ -14,7 +14,7 @@ const Image = (function(){
 			type:"image",
 			className:styles.image,
 			loading:"lazy",
-			alt:'description of image'
+			alt:'hình ảnh'
 		};
 		if(className){
 			Attr.className +=" "+className;

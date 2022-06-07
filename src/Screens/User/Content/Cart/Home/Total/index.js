@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import {Grid,Paper,Stack,Typography,Divider} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
-import {Image} from "../../../../../Components/"
+import {Image} from "../../../../../../Components"
 import {CartContext} from "../provider";
-import {formatNumber} from "../../../../../Config/Format/";
+import {formatNumber} from "../../../../../../Config/Format";
 function Total({...props}){
   const {cart} = useContext(global.config.UserContext);
   const {state,dispath} = useContext(CartContext);

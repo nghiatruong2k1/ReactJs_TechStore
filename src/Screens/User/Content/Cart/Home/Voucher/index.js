@@ -1,10 +1,8 @@
 import {memo,useState,useContext,useEffect} from 'react';
-import clsx from 'clsx';
-import {Grid,Paper,FormControl,TextField,Typography,Tooltip,InputAdornment,IconButton,Checkbox} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import { useFetch } from '../../../../../Config/Fetch/';
+import {Grid,Paper,FormControl,TextField,Typography,Tooltip,InputAdornment,IconButton} from '@mui/material/';
+import { useFetch } from '../../../../../../Config/Fetch';
 import {CartContext} from "../provider";
-import {checkValue} from "../../../../../Config/Validate/";
+import {checkValue} from "../../../../../../Config/Validate";
 const ruler = {
   isRequired:["Vui lòng nhập mã giảm giá"],
   isRegex:[/[^a-zA-Z0-9]/g,"Mã giảm giá chỉ bao gồm a-z,A-Z,0-9"],
@@ -28,7 +26,6 @@ function VoucherCode({...props}){
       setValid(valids[0] || "");
       return valids.length > 0 ? 1 : 0;
     });
-    console.log(check)
     if(check === 0){
       Fetch.get({
         api:"api/ordervoucher",

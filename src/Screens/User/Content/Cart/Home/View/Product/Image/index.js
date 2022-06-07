@@ -1,6 +1,6 @@
 import {memo,Fragment} from 'react';
 import {Grid} from '@mui/material/';
-import {Frame,Image} from "../../../../../../../Components/";
+import {Frame,Image} from "../../../../../../../../Components";
 function ImageComponent({loading,url,alt,...props}){
     return (
     <Grid item {...props}>

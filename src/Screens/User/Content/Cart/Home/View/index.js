@@ -3,8 +3,8 @@ import {
   Grid,Card,CardContent,List
 } from '@mui/material/';
 
-import {ViewContent} from "../../../../../Components/"
-import Product from "./Product/";
+import {ViewContent} from "../../../../../../Components"
+import Product from "./Product";
 function View({...props}){
   const {cart} = useContext(global.config.UserContext);
   return(

@@ -1,5 +1,5 @@
 import {memo,Fragment} from 'react';
-import {formatNumber} from "../../../../../../../Config/Format/";
+import {formatNumber} from "../../../../../../../../Config/Format";
 import {Grid,Typography,Skeleton} from '@mui/material/';
 function PriceComponent({loading,price,...props}){
     return (

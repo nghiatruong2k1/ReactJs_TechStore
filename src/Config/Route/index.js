@@ -40,7 +40,8 @@ const user = new Area("",{
 		settings:new Action("tuy-chon"),
 		message:new Action("thong-bao")
 	}),cart:new Controller("gio-hang",{
-		index:new Action("")
+		index:new Action(""),
+		confirm:new Action("xac-nhan-don-hang/:id")
 	}),post:new Controller("tin-tuc",{
 		index:new Action("moi-nhat"),
 		topic:new Action("chu-de/:alias")
