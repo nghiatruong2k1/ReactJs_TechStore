@@ -33,7 +33,7 @@ function FormRegister({...props}){
   function handleSubmit({IsAgree,RePassword,...values},handle){
     Fetch.post({
       api:"api/auth/register",
-      params:values,
+      params:{...values,Id:0},
       onThen:function(result){
         if(result.data.token){
           auth.handle.login(result.data.token);
