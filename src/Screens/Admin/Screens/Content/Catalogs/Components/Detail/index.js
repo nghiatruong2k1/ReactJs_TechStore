@@ -150,7 +150,7 @@ export function useAdd({
       handleSubmit({
         Fetch,toast:enqueueSnackbar,controller,rulers,dispath,events:eventRef.current,
         onEnd,onStart,onError,onThen,
-        method:"post",values:{Id:0,...state.values}
+        method:"post",values:{...state.values,Id:0}
       })
     },
     changeValue:function(name,value){
