@@ -7,10 +7,10 @@ function AddImageProvider({state,dispath,children,...props}){
 		refetch:function(){
 			dispath(['clear'])
 		},save:function(data){
-			const {IsPubic,IsTrash,Name,Size,Url} = data;
+			const {IsPublic,IsTrash,Name,Size,Url} = data;
 			Fetch.post({
 		      api:"api/admin/image/"
-		      ,params:{Id:0,IsPubic,IsTrash,Name,Size,Url},
+		      ,params:{Id:0,IsPublic,IsTrash,Name,Size,Url},
 		      onThen:function(result){
 				dispath(['remove',data])
 		      }
