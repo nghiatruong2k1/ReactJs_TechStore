@@ -1,4 +1,4 @@
-import {useImperativeHandle,useRef,forwardRef,memo,useMemo,useEffect} from 'react';
+import {useImperativeHandle,useRef,forwardRef,memo,useMemo} from 'react';
 import styles from './styles.module.css';
 
 const Image = (function(){

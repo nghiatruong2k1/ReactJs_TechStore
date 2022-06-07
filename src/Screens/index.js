@@ -21,11 +21,11 @@ function Screen({...props}){
 	return(
 		<Provider>
 			<Loading />
-			{/* <UploadImage /> */}
+			<UploadImage />
 			<AuthDialog />
 			<Routes>
 			  <Route path={`${getAreaName("user")}/*`} element={<UserPage />} /> 
-			  {/* <Route path={`${getAreaName("admin")}/*`} element={<AdminPage />} />    */}
+			  <Route path={`${getAreaName("admin")}/*`} element={<AdminPage />} />
 	        </Routes> 
 	    </Provider>
 	)

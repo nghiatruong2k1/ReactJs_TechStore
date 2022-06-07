@@ -8,7 +8,7 @@ import Recommend from "./Recommend/";
 function HomeContent({title,...props}){
   useEffect(function(){
     global.config.setTitleWebsite(title);
-  },[title])
+  })
   return(
     <>
       <AsideTop />

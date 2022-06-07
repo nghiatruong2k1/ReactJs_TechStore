@@ -6,6 +6,9 @@ import {getActionName} from "../../../../Config/Route/";
 import HomeCart from './Home/';
 import ConfirmCart from './Confirm/';
 function Component(props){
+    useEffect(function(){
+        global.config.setTitleWebsite("Giỏ hàng");
+    })
     return (
         <Fragment>
             <HomeCart />
