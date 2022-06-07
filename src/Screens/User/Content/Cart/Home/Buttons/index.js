@@ -53,7 +53,7 @@ function Buttons({...props}){
                   },
                   onThen:function({data}){
                     if(data && data.value){
-                      cart.handle.clear();
+                      cart.handle.reset();
                       const mes = MailMes({auth:auth.state.user ?? {},id:data.value});
                       Fetch.post({
                         api:"api/email",
