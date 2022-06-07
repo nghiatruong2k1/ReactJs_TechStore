@@ -61,7 +61,7 @@ export default function DialogConfim({}){
         <DialogTitle component="h6" sx={{p:0.5}}>
           <Icon className="fas fa-bell" sx={{pr:1}} />
           <Typography sx={{flex:1}}>Xin chờ</Typography>
-          <IconButton disabled={!isEmpty || !isSuccess} onClick={()=>(dispath(["set_open",false]))}><Icon className="fas fa-times"/></IconButton>
+          <IconButton disabled={!state.isEmpty && !state.isSuccess} onClick={()=>(dispath(["set_open",false]))}><Icon className="fas fa-times"/></IconButton>
         </DialogTitle>
         <Paper component={DialogContent} variant="outlined" className={classNames.content} sx={{width:'30em',p:1}}>
             <Typography variant='h2'>
