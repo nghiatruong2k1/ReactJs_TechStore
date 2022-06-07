@@ -36,8 +36,7 @@ export default function DialogConfim({}){
         if(id){
             dispath(["set_open",true]);
             Fetch.put({
-                api:"api/order/confirm",
-                params:{Id:id},
+                api:"api/order/confirm/"+id,
                 onThen:({data})=>{
                     if(data && data.value){
                         dispath(["set_success",true]);
