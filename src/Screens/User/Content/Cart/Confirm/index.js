@@ -10,7 +10,7 @@ import {
     Typography,
     Stack
 } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useParams ,useNavigate} from 'react-router-dom';
 import { formatNumber } from '../../../../../Config/Format';
 import {useFetch} from "../../../../../Config/Fetch";
 import { reducerState,initState } from './init';
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme)=>{
 export default function DialogConfim({}){
     const [state,dispath] = useReducer(reducerState,initState);
     const Fetch =useFetch();
+    const navigator = useNavigate();
     const {id} = useParams();
     const classNames = useStyles();
     useEffect(() => {
@@ -70,7 +71,12 @@ export default function DialogConfim({}){
         <DialogTitle component={Stack} direction="row" alignItems="center" sx={{p:0.5}}>
           <Icon className="fas fa-bell" sx={{pr:1}} />
           <Typography sx={{flex:1}}>Xin chờ</Typography>
-          <IconButton disabled={isDisabled} onClick={()=>(dispath(["set_open",false]))}><Icon className="fas fa-times"/></IconButton>
+          <IconButton disabled={isDisabled} onClick={()=>{
+              dispath(["set_open",false]);
+              navigator({
+                  pathname:"/"
+              })
+          }}><Icon className="fas fa-times"/></IconButton>
         </DialogTitle>
         <Paper component={DialogContent} variant="outlined" className={classNames.content} sx={{width:'30em'}}>
             <Typography variant='h2' sx={{p:1}}>
