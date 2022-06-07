@@ -63,8 +63,8 @@ export default function DialogConfim({}){
           <Typography sx={{flex:1}}>Xin chờ</Typography>
           <IconButton disabled={!state.isEmpty && !state.isSuccess} onClick={()=>(dispath(["set_open",false]))}><Icon className="fas fa-times"/></IconButton>
         </DialogTitle>
-        <Paper component={DialogContent} variant="outlined" className={classNames.content} sx={{width:'30em',p:1}}>
-            <Typography variant='h2'>
+        <Paper component={DialogContent} variant="outlined" className={classNames.content} sx={{width:'30em'}}>
+            <Typography variant='h2' sx={{p:1}}>
                 {
                     (state.isSuccess && (<><Icon sx={{color:'var(--success)'}} component={CheckCircle}/>Xác nhận thành công</>))
                     ||(state.isError && (<><Icon sx={{color:'var(--warning)'}} component={Warning}/>Xác nhận không thành công</>))
