@@ -1,5 +1,4 @@
 import {useMemo} from "react";
-import { types } from "../../Screens/Admin/Screens/Content/Dashboard/Screens/Registers/init";
 
 
 function validateLength(value,callback){
@@ -111,8 +110,7 @@ export const validates = (function(){
 			const [length,message] = props;
 			return validateLength(value,function(value){
 				if(value.length != length){
-					return 
-					(message && message.replaceAll("{1}",length).replaceAll("{2}",value.length)) 
+					return (message && message.replaceAll("{1}",length).replaceAll("{2}",value.length)) 
 						|| `Vui lòng nhập ${length} kí tự!`;
 				}
 			})
@@ -121,8 +119,7 @@ export const validates = (function(){
 			const [length,message] = props;
 			return validateLength(value,function(value){
 				if(value.length < length){
-					return 
-					(message && message.replaceAll("{1}",length).replaceAll("{2}",value.length)) 
+					return (message && message.replaceAll("{1}",length).replaceAll("{2}",value.length)) 
 						|| `Vui lòng nhập lớn hơn ${length} kí tự!`;
 				}
 			})
@@ -130,8 +127,7 @@ export const validates = (function(){
 			const [length,message] = props;
 			return validateLength(value,function(value){
 				if(value.length > length){
-					return 
-					(message && message.replaceAll("{1}",length).replaceAll("{2}",value.length))
+					return (message && message.replaceAll("{1}",length).replaceAll("{2}",value.length))
 						|| `Vui lòng nhập nhỏ hơn ${length} kí tự!`;
 				}
 			})
@@ -139,8 +135,7 @@ export const validates = (function(){
 			const [minL,maxL,message] = props;
 			return validateLength(value,function(value){
 				if((value.length < minL) || (value.length > maxL)){
-					return 
-					(message && message.replaceAll("{1}",minL).replaceAll("{2}",maxL).replaceAll("{3}",value.length))
+					return (message && message.replaceAll("{1}",minL).replaceAll("{2}",maxL).replaceAll("{3}",value.length))
 						|| `Vui lòng nhập từ ${minL} đên ${maxL} kí tự!`
 				}
 			})
@@ -149,8 +144,7 @@ export const validates = (function(){
 			const [num,message] = props
 			return validateNumber(value,function(value){
 				if(value < num){
-					return 
-					(message && message.replaceAll("{1}",num)) 
+					return (message && message.replaceAll("{1}",num)) 
 					|| `Vui lòng nhập lớn hơn ${num}!`
 				}
 			})
@@ -159,8 +153,7 @@ export const validates = (function(){
 			const [num,message] = props;
 			return validateNumber(value,function(value){
 				if(value > num){
-					return 
-					(message && message.replaceAll("{1}",num)) 
+					return (message && message.replaceAll("{1}",num)) 
 					|| `Vui lòng nhập nhỏ hơn ${num}!`
 				}
 			})
@@ -168,8 +161,7 @@ export const validates = (function(){
 			const [minN,maxN,message] = props;
 			return validateNumber(value,function(value){
 				if((value < minN) || (value > maxN)){
-					return 
-					(message && message.replaceAll("{1}",minN).replaceAll("{2}",maxN))
+					return (message && message.replaceAll("{1}",minN).replaceAll("{2}",maxN))
 					|| `Vui lòng nhập trong khoảng ${minN} đến ${maxN}!`
 				}
 			})	
