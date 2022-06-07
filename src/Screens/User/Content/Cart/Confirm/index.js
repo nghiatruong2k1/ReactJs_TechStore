@@ -15,7 +15,7 @@ import { formatNumber } from '../../../../../Config/Format';
 import {useFetch} from "../../../../../Config/Fetch";
 import { reducerState,initState } from './init';
 import { makeStyles } from '@mui/styles';
-    
+import {Error,CheckCircle,Warning,Notifications,Help} from '@mui/icons-material/';
 const useStyles = makeStyles((theme)=>{
     return {
         paper:{
@@ -65,7 +65,11 @@ export default function DialogConfim({}){
         </DialogTitle>
         <Paper component={DialogContent} variant="outlined" className={classNames.content} sx={{width:'30em',p:1}}>
             <Typography variant='h2'>
-                <Icon component={CircularProgress} />Vui lòng đợi đang kiểm tra
+                {
+                    (state.isSuccess && (<><Icon sx={{color:'var(--success)'}} component={CheckCircle}/>Xác nhận thành công</>))
+                    ||(state.isError && (<><Icon sx={{color:'var(--warning)'}} component={Warning}/>Xác nhận không thành công</>))
+                    ||(<><Icon component={CircularProgress} />Vui lòng đợi đang kiểm tra</>)
+                }
             </Typography>
         </Paper>
       </Dialog>
