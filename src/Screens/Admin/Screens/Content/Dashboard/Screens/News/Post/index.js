@@ -20,16 +20,13 @@ function Post({...props}){
               to="/" 
               className={styles.title}
           >
-            "Powered by nopCommerce" link
+            Ghi chú
           </Typography>
         </CardContent>
         <Divider />
         <CardContent>
-          <Typography 
-              to="/" 
-              className={styles.text}
-          >
-            Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer? Click here for more info.
+          <Typography className={styles.text}>
+            Nội dung ghi chú
           </Typography>
         </CardContent>
       </Card>
