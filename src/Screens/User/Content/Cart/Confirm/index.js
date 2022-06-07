@@ -37,7 +37,7 @@ export default function DialogConfim({}){
             dispath(["set_open",true]);
             Fetch.put({
                 api:"api/order/confirm",
-                params:{id},
+                params:{Id:id},
                 onThen:({data})=>{
                     if(data && data.value){
                         dispath(["set_success",true]);
@@ -57,19 +57,28 @@ export default function DialogConfim({}){
             dispath(["set_open",false]);
         }
     }, [id]);
+    const isDisabled = useMemo(function(){
+        if(state.isError){
+            return false;
+        }
+        if(state.isSuccess){
+            return false;
+        }
+        return true;
+    },[state.isError,state.isSuccess])
     return (
       <Dialog open={state.isOpen} PaperProps={{className:classNames.paper,sx:{p:0.5}}}>
         <DialogTitle component={Stack} direction="row" alignItems="center" sx={{p:0.5}}>
           <Icon className="fas fa-bell" sx={{pr:1}} />
           <Typography sx={{flex:1}}>Xin chờ</Typography>
-          <IconButton disabled={!state.isEmpty && !state.isSuccess} onClick={()=>(dispath(["set_open",false]))}><Icon className="fas fa-times"/></IconButton>
+          <IconButton disabled={isDisabled} onClick={()=>(dispath(["set_open",false]))}><Icon className="fas fa-times"/></IconButton>
         </DialogTitle>
         <Paper component={DialogContent} variant="outlined" className={classNames.content} sx={{width:'30em'}}>
             <Typography variant='h2' sx={{p:1}}>
                 {
-                    (state.isSuccess && (<><Icon sx={{color:'var(--success)'}} component={CheckCircle}/>Xác nhận thành công</>))
+                    isDisabled && (<><Icon component={CircularProgress} />Vui lòng đợi đang kiểm tra</>)
+                    ||(state.isSuccess && (<><Icon sx={{color:'var(--success)'}} component={CheckCircle}/>Xác nhận thành công</>))
                     ||(state.isError && (<><Icon sx={{color:'var(--warning)'}} component={Warning}/>Xác nhận không thành công</>))
-                    ||(<><Icon component={CircularProgress} />Vui lòng đợi đang kiểm tra</>)
                 }
             </Typography>
         </Paper>

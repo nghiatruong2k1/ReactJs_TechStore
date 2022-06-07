@@ -31,7 +31,8 @@ export function useAddImages({controller}){
           params:propsGet.state.datas.map(function(data){
             return {
               ...data,
-              ProductId:target.data.value.Id
+              ProductId:target.data.value.Id,
+              Id:0
             }
           })
       })
