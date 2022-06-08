@@ -1,36 +1,12 @@
 import {useParams} from "react-router-dom";
 import {memo,useEffect,useMemo} from 'react';
 import {useFetch} from "../../../../../../../Config/Fetch/";
-import {ProductsContext,handleGetDatas,handleGetLength } from "../init";
+import {ProductsContext} from "../init";
 
 
 
 function ProductsProvider({state,dispath,action,feild,handle,children,...props}){
 	const Fetch = useFetch("product list");
-  	useEffect(function() { 
-	    action && feild && handleGetLength({getter:Fetch.get,dispath,action,feild});
-	},[action,feild,state.sort])
-	useEffect(function() {
-		console.log("action,feild,state.page,state.sort change")
-		document.documentElement.scrollTop = 0;
-	    !state.isLoading && action && feild && handleGetDatas({	    	
-	    	getter:Fetch.get,dispath,action,feild,state,
-	    	onStart:(()=>{
-	    		dispath(['set_data',Array(state.limit ?? 1).fill(undefined)])
-	    		dispath(['set_loading',true])
-	        }),onEnd:(()=>{
-	        	dispath(['set_loading',false])
-	        })
-	    })
-	},[action,feild,state.page,state.sort]);
-	useEffect(function() {
-	    !state.isLoading && action && feild && handleGetDatas({getter:Fetch.get,dispath,action,feild,state})
-	},[state.limit]);
-
-	useEffect(function(){
-		dispath(["set_page",1]);
-	},[action,feild,state.view]);
-
 	useEffect(function(){
 		if(state.view == 0){
 			dispath(["set_limit",5]);
@@ -38,6 +14,54 @@ function ProductsProvider({state,dispath,action,feild,handle,children,...props})
 			dispath(["set_limit",8]);
 		}
 	},[state.view]);
+
+	useEffect(function(){
+		dispath(["set_page",1]);
+		dispath(["set_total",0]);
+	},[action,feild,state.view]);
+
+	async function handleGetDatas({onStart,onEnd}){
+		return await Fetch.get({
+		  api:"api/product/"+action+"/"+feild,
+		  params:{
+			  offset:(state.page - 1) * state.limit,
+			  limit:state.limit,
+			  sort:state.sort,
+		  },onThen:(result => {
+			  dispath(['set_data',result.data])
+		  }),onError:(error=> {
+			  dispath(['set_data'])
+		  }),onStart,onEnd
+	  });
+	}
+	async function handleGetLength(){
+		return await Fetch.get({
+			api:"api/product/"+action+"/count/"+feild
+			,onThen:(result => {
+				dispath(['set_total',result.data])
+			}),onError:(error=> {
+				dispath(['set_total'])
+			})
+		})
+	}
+
+  	useEffect(function() { 
+	    if(Boolean(action) && Boolean(feild)){
+			return handleGetLength();
+		};
+	},[action,feild,state.sort]);
+
+	useEffect(function() {
+		document.documentElement.scrollTop = 0;
+	    action && feild && handleGetDatas({	  
+	    	onStart:(()=>{
+	    		dispath(['set_data',Array(state.limit ?? 1).fill(undefined)])
+	    		dispath(['set_loading',true])
+	        }),onEnd:(()=>{
+	        	dispath(['set_loading',false])
+	        })
+	    })
+	},[action,feild,state.page,state.sort,state.limit]);
 	return(
 		<ProductsContext.Provider value={{state,dispath}}>
 			{children}

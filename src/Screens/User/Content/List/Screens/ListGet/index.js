@@ -47,7 +47,7 @@ function ListGet({controller,title,...props}){
 
 	useEffect(function(){
 		dispath(["set_page",1]);
-	},[controller,state.view]);
+	},[controller]);
   return(
     <ViewList state={state} dispath={dispath} controller={controller}/>
   )

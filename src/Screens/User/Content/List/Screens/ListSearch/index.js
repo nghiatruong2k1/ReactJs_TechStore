@@ -19,7 +19,7 @@ function ListGet({controller,param,...props}){
         dispath,
         api:`api/${controller}/search/count/${params[param]}`
       });
-	  },[controller],params[param]);
+	  },[controller,params[param]]);
 
 	useEffect(function() {
 		document.documentElement.scrollTop = 0;
@@ -49,7 +49,7 @@ function ListGet({controller,param,...props}){
 
 	useEffect(function(){
 		dispath(["set_page",1]);
-	},[controller,state.view]);
+	},[controller,params[param]]);
     return(
         <ViewList state={state} dispath={dispath} controller={controller}/>
     )

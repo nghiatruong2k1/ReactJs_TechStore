@@ -22,7 +22,7 @@ export function reducer(prevState,[key,payload]) {
 		case 'set_data':{
 			return {
 				...prevState,
-				datas:Array.isArray(payload) && payload || []
+				datas:(Array.isArray(payload) && payload) || []
 			}
 		}
 		case 'set_loading':{
@@ -32,21 +32,24 @@ export function reducer(prevState,[key,payload]) {
 			}
 		}
 		case 'set_total':{
+			payload = Number(payload);
 			return {
 				...prevState,
-				total:!Number.isNaN(payload) && Number(payload) || 0
+				total:(!Number.isNaN(payload) && payload) || 0
 			}
 		}
 		case 'set_page':{
+			payload = Number(payload)
 			return {
 				...prevState,
-				page:!Number.isNaN(payload) && Number(payload) || 1
+				page:(!Number.isNaN(payload) && payload) || 1
 			}
 		}
 		case 'set_limit':{
+			payload = Number(payload)
 			return {
 				...prevState,
-				limit:!Number.isNaN(payload) && Number(payload) || 0
+				limit:(!Number.isNaN(payload) && payload) || 0
 			}
 		}
 		case 'set_sort':{
@@ -56,9 +59,10 @@ export function reducer(prevState,[key,payload]) {
 			}
 		}
 		case 'set_view':{
+			payload = Number(payload)
 			return {
 				...prevState,
-				view:!Number.isNaN(payload) && Number(payload) || 0
+				view:(!Number.isNaN(payload) && payload) || 0
 			}
 		}
 		default:{
@@ -68,44 +72,5 @@ export function reducer(prevState,[key,payload]) {
 			}
 		}
 	}
+	return prevState;
 };
-
-
-export async function handleGetDatas({getter,dispath,state,action,feild,onStart,onEnd}){
-	await getter({
-	  api:"api/product/"+action+"/"+feild,
-	  params:{
-		  offset:(state.page - 1) * state.limit,
-		  limit:state.limit,
-		  sort:state.sort,
-	  },onThen:(result => {
-		  dispath(['set_data',result.data])
-	  }),onError:(error=> {
-		  dispath(['set_data'])
-	  }),onStart,onEnd
-  });
-}
-export async function handleGetLength({getter,dispath,action,feild}){
-  await getter({
-	api:"api/product/"+action+"/count/"+feild
-	,onThen:(result => {
-		dispath(['set_total',result.data])
-	}),onError:(error=> {
-		dispath(['set_total'])
-	})
-})
-}
-export async function handleGetTitle({getter,action,feild}){
-  await getter({
-	api:`api/${action}/${feild}`
-	,onThen:(result => {
-	   if(result.data && result.data.Name){
-		   global.config.setTitleWebsite(result.data.Name)
-	   }else{
-		   global.config.setTitleWebsite("");
-	   }
-	}),onError:(error=> {
-		global.config.setTitleWebsite("");
-	})
-})
-}

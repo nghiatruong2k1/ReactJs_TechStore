@@ -1,6 +1,6 @@
 import {memo,useEffect,useRef,useReducer} from 'react';
 import {useFetch} from "../../../../../../Config/Fetch";
-import {reducer,initData,handleGetTitle} from "./init";
+import {reducer,initData} from "./init";
 import { useParams } from 'react-router-dom';
 import ViewList from './Screens/';
 
@@ -10,7 +10,18 @@ export const ProductsGet = memo(function ({action,...props}){
     const handleRef = useRef({});
     const [state,dispath] = useReducer(reducer,initData)
     useEffect(function() { 
-        handleGetTitle({getter:Fetch.get,action,feild:alias})
+      action && alias && Fetch.get({
+        api:`api/${action}/${alias}`
+        ,onThen:(result => {
+          if(result.data && result.data.Name){
+            global.config.setTitleWebsite(result.data.Name)
+          }else{
+            global.config.setTitleWebsite("");
+          }
+        }),onError:(error=> {
+          global.config.setTitleWebsite("");
+        })
+      })
 	},[action,alias]);
   return(
     <ViewList state={state} dispath={dispath} 
