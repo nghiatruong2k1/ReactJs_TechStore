@@ -1,16 +1,17 @@
-import {useImperativeHandle,useRef,forwardRef,memo,useMemo} from 'react';
+import {useImperativeHandle,useRef,forwardRef,memo,useMemo,useState,useEffect} from 'react';
 import styles from './styles.module.css';
 
 const Image = (function(){
 	return function({src,srcDefault,alt,className,cover,contain,...props},ref){
 		const thisRef = useRef();
+		const [isLoading,setLoad] = useState(false);
 		useImperativeHandle(ref,()=>({
 				...thisRef.current
 			})
 		);
+		
 		let Attr = {
 			...props,
-			ref:thisRef,
 			type:"image",
 			className:styles.image,
 			loading:"lazy",
@@ -29,16 +30,16 @@ const Image = (function(){
 			Attr.className +=" "+styles.contain;
 		}
 		Attr.src = useMemo(function(){
-			let _src = "";
 			if(src && src !=""){
-				_src = src;
+				return src;
 			}else if(srcDefault){
-				_src = srcDefault;
-			};
-			return _src;	
+				return srcDefault;
+			}else{
+				return '/images/default-no-img.jpg';
+			};	
 		},[src,srcDefault])
 		return(
-			<img {...Attr}/>
+			<img ref={thisRef} {...Attr}/>
 		);
 	};	
 })();

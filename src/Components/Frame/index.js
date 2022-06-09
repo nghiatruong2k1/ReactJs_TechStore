@@ -1,11 +1,10 @@
-import {forwardRef,memo,useState,useMemo} from 'react';
+import {forwardRef,memo} from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
 import {Skeleton,Box} from '@mui/material/';
 
 function Frame({loading,children,className,containerProps,contentProps,rectangle,square,circle,...props}){
-		const [isLoading,setLoad] = useState(false);
 		const frameAttr = {
 			...props,
 			className:styles.frame
@@ -36,7 +35,7 @@ function Frame({loading,children,className,containerProps,contentProps,rectangle
 		if(styles.content){
 			contentAttr.className+=" "+styles.content;
 		};
-		if(isLoading || loading){
+		if(loading){
 			contentAttr.className+=" "+styles.loading;
 		}
 
@@ -51,7 +50,7 @@ function Frame({loading,children,className,containerProps,contentProps,rectangle
 						{children}
 					</Box>
 					{
-						(loading || isLoading) 
+						(loading) 
 						&& <Skeleton {...skeletonAttr} variant="rectangular" />
 					}	
 				</Box>
