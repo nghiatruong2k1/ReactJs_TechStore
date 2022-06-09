@@ -7,6 +7,7 @@ import useCustomTheme from "./Screens/CustomTheme/Control/";
 import useLoading from "./Screens/Loading/Control/";
 import AppScreen from "./Screens/";
 const GlobalContext = global.config.context;
+console.log(process.env)
 function App(){
 	const loading = useLoading();
 	const theme = useCustomTheme();

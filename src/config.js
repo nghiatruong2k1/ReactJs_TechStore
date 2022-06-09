@@ -6,7 +6,7 @@ const AppContext = createContext({});
 const UserContext = createContext({});
 const AdminContext = createContext({});
 
-const WebsiteName = process.env.WEBSITE_NAME;
+const WebsiteName = "TechStore";
 
 const handleTitle = (function(){
 	document.title = WebsiteName;

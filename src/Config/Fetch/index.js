@@ -9,10 +9,11 @@ import {initState,reducer} from "./init";
 
 
 axios.defaults.withCredentials = true;
+axios.defaults.insecureHTTPParser = true;
 axios.defaults.credentials = "include";
 axios.defaults.xsrfCookieName = "token";
 axios.defaults.xsrfHeaderName = "token";
-axios.defaults.https = true;
+const Base_Url_API = "https://localhost:44373/";
 
 async function showToast(toast,mes,status){
   switch(typeof(mes)){
@@ -70,7 +71,7 @@ async function handleFetch(props,promise,location){
     const ourRequest = axios.CancelToken.source();
     let url;
     if(api){
-      url = (baseUrl ?? process.env.BASE_API)+api;
+      url = (baseUrl ?? Base_Url_API)+api;
       loading.handle.add();
       typeof(onStart)==="function" && onStart();
       const pro = promise(url,params,{
