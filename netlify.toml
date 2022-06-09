@@ -1,11 +1,3 @@
-[build]
-    command = "sed -i \"s|HEADER_PLACEHOLDER|${PROD_API_LOCATION}|g\" netlify.toml && CI = '' npm run build"
-    base = "/"
-[[plugins]]
-  package = "netlify-plugin-inline-functions-env"
-    [plugins.inputs]
-    buildEvent = "onBuild"
-    exclude = ["BASE_API","WEBSITE_NAME"]
 [[redirects]]
     from = "/*"
     to = "/index.html"
