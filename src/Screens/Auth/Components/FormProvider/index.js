@@ -25,7 +25,6 @@ function FormProvider({values,valids,rules,onSubmit,children,...props}){
     const check = checkObject(state.values,rules,function(name,valids){
       handle.setValid(name,valids);
     })
-    console.log(check)
     if(check === 0){
       onSubmit(state.values,handle);
     }else{

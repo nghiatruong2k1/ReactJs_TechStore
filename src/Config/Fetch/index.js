@@ -12,8 +12,7 @@ axios.defaults.withCredentials = true;
 axios.defaults.credentials = "include";
 axios.defaults.xsrfCookieName = "token";
 axios.defaults.xsrfHeaderName = "token";
-
-const Base_Url_API = "https://localhost:44373/";
+axios.defaults.https = true;
 
 async function showToast(toast,mes,status){
   switch(typeof(mes)){
@@ -68,16 +67,17 @@ async function handleFetch(props,promise,location){
     const {baseUrl,api,params,method} = props;
     const {onStart,onEnd,onThen,onError} = props;
     const {navigator,loading,toast} = props;
-    const ourRequest = axios.CancelToken.source() 
+    const ourRequest = axios.CancelToken.source();
+    let url;
     if(api){
-      const url = (baseUrl ?? Base_Url_API)+api;
-      console.log(`[Start ${method}]`,{location,url,params}); 
+      url = (baseUrl ?? process.env.BASE_API)+api;
       loading.handle.add();
       typeof(onStart)==="function" && onStart();
-      await promise(url,params,{
+      const pro = promise(url,params,{
         cancelToken: ourRequest.token
-      })
-        .then(result => {
+      });
+      console.log(`[Start ${method}]`,{location,promise:await pro}); 
+      pro.then(result => {
             console.log(`[Success ${method}]`,{location,url,result});         
             handleResult(toast,result)
             typeof(onThen)==="function" && onThen(result);
@@ -92,9 +92,9 @@ async function handleFetch(props,promise,location){
           typeof(onEnd)==="function" && onEnd();
         });
     }  
-    return function(){
-      console.log("Cancel request");
-      ourRequest.cancel();
+    return await function(){
+      console.log(`[Cancel ${method}]`,{location,url,params}); 
+      ourRequest && ourRequest.cancel();
     }
 }
 

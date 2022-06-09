@@ -13,7 +13,7 @@ function UserPage({...props}){
       <Cart />
       <Content />
       <Subscribe />
-      <Footer /> 
+      <Footer />
     </Provider>
   )
 }

@@ -22,11 +22,10 @@ function AdminPage({...props}){
         })
       }
     }else{
-      enqueueSnackbar({message:"Bạn cần đăng nhập tài khoản quản trị viên để tiếp tục!",type:"warning"})
       auth.handle.open();
     }
   },[auth.state.user]);
-  if(Boolean(auth.state.user) && auth.state.user.TypeId == 4){
+  if(auth.state.user && auth.state.user.TypeId == 4){
     return(
       <Container component="section" className={styles.container} maxWidth="false" disableGutters>
         <Grid component="div" container className={styles.body}>

@@ -1,6 +1,4 @@
 import {memo,useContext} from 'react';
-
-import {useCookies} from 'react-cookie'
 import {useSnackbar} from 'notistack';
 import {Grid,Paper,Stack,Button} from '@mui/material';
 import DialogResult from "./DialogResult";
@@ -25,16 +23,15 @@ const useStyles = makeStyles((theme)=>{
 
 function Buttons({...props}){
   const {state} = useContext(CartContext);
-  const [cookies] = useCookies();
-  const {cart} = useContext(global.config.UserContext);
-  const {auth} = useContext(global.config.AppContext);
+  const {cart:{handle:{reset:resetCart},state:{datas:carts}}} = useContext(global.config.UserContext);
+  const {auth:{handle:{open:openAuth},state:{user}}} = useContext(global.config.AppContext);
   const { enqueueSnackbar } = useSnackbar();
   const Fetch =useFetch();
   const confimClass = useStyles();
 
   function handleOrderClick(){
-    if(Boolean(cookies['token'])){
-      const newCart = cart.state.datas.filter((data)=>(data))
+    if(user){
+      const newCart = carts.filter((data)=>(data))
       if(newCart.length > 0){
         confirmAlert({
           customUI: ({onClose}) => (
@@ -42,7 +39,7 @@ function Buttons({...props}){
               classNames={confimClass}
               onClose={onClose} 
               cart={newCart}
-              auth={auth.state.user ?? {}}
+              auth={user ?? {}}
               state={state}
               onYes={function(){
                 Fetch.post({
@@ -53,8 +50,8 @@ function Buttons({...props}){
                   },
                   onThen:function({data}){
                     if(data && data.value){
-                      cart.handle.reset();
-                      const mes = MailMes({auth:auth.state.user ?? {},id:data.value});
+                      resetCart && resetCart();
+                      const mes = MailMes({auth:user ?? {},id:data.value});
                       Fetch.post({
                         api:"api/email",
                         params:mes,
@@ -74,7 +71,7 @@ function Buttons({...props}){
       }
     }else{
       enqueueSnackbar({message:"Vui lòng đăng nhập để thanh toán!",type:"warning"});
-      auth.handle.open();
+      openAuth && openAuth();
     }
   }
   return(

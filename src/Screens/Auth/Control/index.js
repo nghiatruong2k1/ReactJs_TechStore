@@ -4,8 +4,8 @@ import {initData,reducer} from "./init";
 import {useFetch} from "../../../Config/Fetch/";
 function Auth(){
   const [state,dispath] = useReducer(reducer,initData);
+  const [cookies,setCookies,deleteCookies] = useCookies(["token"])
   const Fetch = useFetch();
-  const [cookies,setCookies,removeCookies] = useCookies();
   const handle = useMemo(function(){
     return {
         set:(key,value)=>{
@@ -14,30 +14,25 @@ function Auth(){
           dispath(['open',action])
         },close:function(){
           dispath(['close'])
-        },login:function(token){
+        },login:function(token){    
           setCookies("token",token);
         },logout:function(){
-          removeCookies("token");
-          dispath(['set_user',null]);
+          deleteCookies("token");
         },goAction:function(action){
           dispath(['set_action',action])
         }
       }
   },[state]);
-  useEffect(function(){
-    if(typeof(cookies['token']) == 'string' 
-      && cookies['token'] != 'undefined'
-      && cookies['token'] != 'null'
-      && cookies['token'] != ''
-    ){
-      Fetch.get({
+  useEffect(async function(){
+    if(cookies['token']){
+      return await Fetch.get({
         api:"api/user",
-        onThen:function(result){
-          if(typeof(result.data) === 'object'){
-            dispath(['set_user',result.data]);
+        onThen:function({data}){
+          if(typeof(data) === 'object'){
+            dispath(['set_user',data]);
           }else{
+            deleteCookies("token");
             dispath(['set_user',null]);
-            removeCookies('token')
           }
         },onError:function(){
           dispath(['set_user',null])
@@ -46,9 +41,9 @@ function Auth(){
         },onEnd:function(){
           dispath(['set_loading',false])
         }
-      })
+      });
     }else{
-      dispath(['set_user',null]);
+      dispath(['set_user',null])
     }
   },[cookies['token']])
   return {state,handle}
