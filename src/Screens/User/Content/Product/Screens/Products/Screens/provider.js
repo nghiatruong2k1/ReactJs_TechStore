@@ -45,22 +45,24 @@ function ProductsProvider({state,dispath,action,feild,handle,children,...props})
 		})
 	}
 
-  	useEffect(function() { 
+  	useEffect(async function() { 
 	    if(Boolean(action) && Boolean(feild)){
-			return handleGetLength();
+			return await handleGetLength();
 		};
 	},[action,feild,state.sort]);
 
-	useEffect(function() {
-		document.documentElement.scrollTop = 0;
-	    action && feild && handleGetDatas({	  
-	    	onStart:(()=>{
-	    		dispath(['set_data',Array(state.limit ?? 1).fill(undefined)])
-	    		dispath(['set_loading',true])
-	        }),onEnd:(()=>{
-	        	dispath(['set_loading',false])
-	        })
-	    })
+	useEffect(async function() {
+		if(Boolean(action) && Boolean(feild)){
+			return await handleGetDatas({	  
+				onStart:(()=>{
+					dispath(['set_data',Array(state.limit ?? 1).fill(undefined)])
+					dispath(['set_loading',true])
+				}),onEnd:(()=>{
+					dispath(['set_loading',false])
+				})
+			})
+		};
+		
 	},[action,feild,state.page,state.sort,state.limit]);
 	return(
 		<ProductsContext.Provider value={{state,dispath}}>

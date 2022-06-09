@@ -50,7 +50,7 @@ function OrdersProvider({state,dispath,children,...props}){
 	      	dispath(["set_datas",[]])
 	    }
 	},[auth.state.user,state.page,state.statusIndex])
-	useEffect(function(){
+	useEffect(async function(){
 	    if(auth.state.user){
 			return await handleGetTotal(
 		        function(){
