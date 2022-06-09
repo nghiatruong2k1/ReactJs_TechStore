@@ -20,14 +20,14 @@ function VoucherCode({...props}){
       setValue(state.voucher.Code ?? "")
     }
   },[state.voucher])
-  function handleSubmit(e){
+  async function handleSubmit(e){
     e.preventDefault();
     let check = checkValue(value,ruler,{},function(valids){
       setValid(valids[0] || "");
       return valids.length > 0 ? 1 : 0;
     });
     if(check === 0){
-      Fetch.get({
+      return await Fetch.get({
         api:"api/ordervoucher",
         params:{code:value},
         onThen:function(result){
@@ -49,7 +49,7 @@ function VoucherCode({...props}){
     setValue(e.target.value)
   }
   function handleFocus(e){
-    //setValid("");
+    setValid("");
   }
   function handleBlur(e){
     let newValid = checkValue(value,ruler);

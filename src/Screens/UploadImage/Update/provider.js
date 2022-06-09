@@ -3,8 +3,8 @@ import {useParams} from 'react-router-dom';
 import {DetailDataContext} from "../Detail/provider";
 import { useGet } from '../../../Config/Fetch/';
 function UpdateProvider({id,children,...props}){
-	function handleGetData(){
-		Fetch.get({
+	async function handleGetData(){
+		return await Fetch.get({
 	      api:"api/admin/image/"+params.id
 	      ,onThen:(result => {
 	          dispath(['set_data',result.data])
@@ -13,8 +13,8 @@ function UpdateProvider({id,children,...props}){
 	      }),onS
 	    })
 	}
-	function handlePutData(){
-		Fetch.put({
+	async function handlePutData(){
+		return await Fetch.put({
 	      api:"api/admin/image/"
 	      ,params:{...data}
 	    })
@@ -23,8 +23,8 @@ function UpdateProvider({id,children,...props}){
 		get:handleGetData,
 		save:handlePutData
 	}
-	useEffect(function(){
-	    handle.get();
+	useEffect(async function(){
+	    return await handleGetData();
 	},[params.id]);
 	return(
 		<DetailDataContext.Provider value={{

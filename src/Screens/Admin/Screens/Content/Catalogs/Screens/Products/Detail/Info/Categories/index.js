@@ -3,8 +3,8 @@ import { useFetch } from '../../../../../../../../../../Config/Fetch/';
 function Component(){
   const [values,setValues] = useState([]);
   const Fetch = useFetch();
-  function handleGetData(){
-      Fetch.get({
+  async function handleGetData(){
+      return await Fetch.get({
           api:"api/admin/category/",
           params:{
             isTrash:false,
@@ -16,8 +16,8 @@ function Component(){
           })
       })
   }
-  useEffect(function(){
-      handleGetData();
+  useEffect(async function(){
+      return await handleGetData();
   },[]);
   return [values]
 }

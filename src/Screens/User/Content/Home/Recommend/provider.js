@@ -8,8 +8,8 @@ function RecommendProvider({state,dispath,children,...props}){
 		}
 	}
   	const Fetch = useFetch();
-	useEffect(function() {
-	    Fetch.get({
+	useEffect(async function() {
+	    return await Fetch.get({
 	        api:"api/product/type/2",
 	        params:{
 	        	limit:state.limit ?? 1,

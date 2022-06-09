@@ -10,8 +10,8 @@ export const OrdersContext = createContext();
 
 function OrdersProvider({state,dispath,children,...props}){
 	const Fetch = useFetch();
-	useEffect(function(){
-		Fetch.get({
+	useEffect(async function(){
+		const gstatic = await Fetch.get({
 			api:"api/admin/order/statistic",
 			onThen:function({data}){
 				dispath(['set_datas',data])
@@ -19,7 +19,7 @@ function OrdersProvider({state,dispath,children,...props}){
 				dispath(['set_datas'])
 			}
 		});
-		Fetch.get({
+		const gstatus = await Fetch.get({
 			api:"api/orderstatus",
 			onThen:function({data}){
 				dispath(['set_status',data])
@@ -27,6 +27,10 @@ function OrdersProvider({state,dispath,children,...props}){
 				dispath(['set_status'])
 			}
 		});
+		return function(){
+			gstatus();
+			gstatic();
+		}
 	},[])
 	return(
 		<OrdersContext.Provider value={{

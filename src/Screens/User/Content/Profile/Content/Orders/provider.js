@@ -5,37 +5,41 @@ export const OrdersContext = createContext();
 function OrdersProvider({state,dispath,children,...props}){
 	const Fetch = useFetch();
 	const {auth} = useContext(global.config.AppContext);
-	function handleGetData(onStart, onEnd){
+	async function handleGetData(onStart, onEnd){
 		const status = state.status[state.statusIndex];
-		status && Fetch.get({
-	        api:"api/order",
-	        params:{
-	        	statusId:status.Id,
-	        	limit:state.limit,
-        		offset:(state.page - 1) * state.limit
-	        },onThen:function({data}){
-	         	dispath(["set_datas",data])
-	        },onError:function(){
-	        	dispath(["set_datas",[]])
-	        },onStart,onEnd
-	    });
+		if(status){
+			return await Fetch.get({
+				api:"api/order",
+				params:{
+					statusId:status.Id,
+					limit:state.limit,
+					offset:(state.page - 1) * state.limit
+				},onThen:function({data}){
+					 dispath(["set_datas",data])
+				},onError:function(){
+					dispath(["set_datas",[]])
+				},onStart,onEnd
+			});
+		}
 	}
-	function handleGetTotal(onStart, onEnd){
+	async function handleGetTotal(onStart, onEnd){
 		const status = state.status[state.statusIndex];
-		status && Fetch.get({
-	        api:"api/order/count"
-	        ,params:{
-	        	statusId:status.Id
-	        }
-	        ,onThen:function({data}){
-	         	dispath(["set_total",data])
-	        },onStart,onEnd
-	    });
+		if(status){
+			return await Fetch.get({
+				api:"api/order/count"
+				,params:{
+					statusId:status.Id
+				}
+				,onThen:function({data}){
+					 dispath(["set_total",data])
+				},onStart,onEnd
+			});
+		}
 	}
-	useEffect(function(){
+	useEffect(async function(){
 		document.documentElement.scrollTop = 0;
-	    if(Boolean(auth.state.user)){
-		    handleGetData(
+	    if(auth.state.user){
+		    return await handleGetData(
 		      	function(){
 		        	dispath(["set_datas",[undefined]])
 		        	dispath(["set_loading",true])
@@ -47,8 +51,8 @@ function OrdersProvider({state,dispath,children,...props}){
 	    }
 	},[auth.state.user,state.page,state.statusIndex])
 	useEffect(function(){
-	    if(Boolean(auth.state.user)){
-	      	handleGetTotal(
+	    if(auth.state.user){
+			return await handleGetTotal(
 		        function(){
 		        	dispath(["set_total",0])
 		        });      

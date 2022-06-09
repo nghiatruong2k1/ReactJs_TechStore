@@ -9,21 +9,23 @@ function DetailProvider({state,dispath,children,...props}){
 	const { enqueueSnackbar } = useSnackbar();
 	const {alias} = useParams();
   	const Fetch = useFetch();
-	useEffect(function() {
-	    alias && Fetch.get({
-	        api:"api/product/"+alias
-	        ,onThen:(result => {
-				dispath(["set_data",result.data]);
-	        }),onError:(error=> {
-				dispath(["set_data"]);
-	        }),onStart:(()=>{
-	        	dispath(["set_data"]);
-	        	dispath(["set_quantity",1]);
-	        	dispath(["set_loading",true]);
-	        }),onEnd:(()=>{
-	        	dispath(["set_loading",false]);
-	        })
-	    })
+	useEffect(async function() {
+	    if(alias){
+			return await Fetch.get({
+				api:"api/product/"+alias
+				,onThen:(result => {
+					dispath(["set_data",result.data]);
+				}),onError:(error=> {
+					dispath(["set_data"]);
+				}),onStart:(()=>{
+					dispath(["set_data"]);
+					dispath(["set_quantity",1]);
+					dispath(["set_loading",true]);
+				}),onEnd:(()=>{
+					dispath(["set_loading",false]);
+				})
+			})
+		}
 	},[alias])
 	useEffect(function(){
 	    global.config.setTitleWebsite(state.data.Name || "");

@@ -3,8 +3,8 @@ import { useFetch } from '../../../../../../../../Config/Fetch/';
 export const OrderProductsContext = createContext();
 function OrderProductsProvider({state,dispath,orderId,children,...props}){
 	const Fetch = useFetch();
-	function handleGetData(onStart, onEnd){
-		Fetch.get({
+	async function handleGetData(onStart, onEnd){
+		return await Fetch.get({
 	        api:"api/orderdetail/"+orderId,
 	        params:{
 	        	limit:state.limit,
@@ -16,17 +16,17 @@ function OrderProductsProvider({state,dispath,orderId,children,...props}){
 	        },onStart,onEnd
 	    });
 	}
-	function handleGetTotal(onStart, onEnd){
-		Fetch.get({
+	async function handleGetTotal(onStart, onEnd){
+		return await Fetch.get({
 	        api:"api/orderdetail/count/"+orderId,
 	        onThen:function({data}){
 	         	dispath(["set_total",data])
 	        },onStart,onEnd
 	    });
 	}
-	useEffect(function(){
+	useEffect(async function(){
 	    if(orderId){
-		    handleGetData(
+		    return await handleGetData(
 		      	function(){
 		        	dispath(["set_datas",[undefined,undefined]])
 		        	dispath(["set_loading",true])
@@ -37,9 +37,9 @@ function OrderProductsProvider({state,dispath,orderId,children,...props}){
 	      	dispath(["set_datas",[]])
 	    }
 	},[orderId,state.page])
-	useEffect(function(){
+	useEffect(async function(){
 	    if(orderId){
-	      	handleGetTotal(
+			return await handleGetTotal(
 		        function(){
 		        	dispath(["set_total",0])
 		        });      

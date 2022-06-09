@@ -6,8 +6,8 @@ export const OrdersContext = createContext();
 
 function OrdersProvider({state,dispath,children,...props}){
 	const Fetch = useFetch();
-	useEffect(function(){
-		Fetch.get({
+	useEffect(async function(){
+		return await Fetch.get({
 			api:"api/admin/user/statistic",
 			onThen:function({data}){
 				dispath(['set_datas',data])

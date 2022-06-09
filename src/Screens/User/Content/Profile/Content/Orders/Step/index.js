@@ -8,8 +8,8 @@ import { useFetch } from '../../../../../../../Config/Fetch/';
 function OrdersStep({...props}){
   const {state,dispath} = useContext(OrdersContext);
   const Fetch = useFetch();
-  useEffect(function(){
-    Fetch.get({
+  useEffect(async function(){
+    return await Fetch.get({
         api:"api/orderstatus"
         ,onThen:function({data}){
           dispath(["set_status",data])

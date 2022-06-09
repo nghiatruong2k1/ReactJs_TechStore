@@ -3,8 +3,8 @@ import {useFetch} from "../../../../../Config/Fetch/";
 export const BrandsContext = createContext({});
 function BrandsProvider({state,dispath,slider,children,...props}){
   	const Fetch = useFetch();
-	useEffect(function() {
-	    Fetch.get({
+	useEffect(async function() {
+	   	return await Fetch.get({
 	        api:"api/brand"
 	        ,onThen:(result => {
 	            dispath(['set_data',result.data])

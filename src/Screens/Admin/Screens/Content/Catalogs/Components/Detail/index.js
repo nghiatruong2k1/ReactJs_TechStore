@@ -71,7 +71,7 @@ const initEvent = function(){
   async function handleGet({
     Fetch,toast,controller,id,dispath,navigator
   }){
-    await Fetch.get({
+    return await Fetch.get({
       api:"api/admin/"+controller+"/"+id,
       onStart:function(){
         dispath(['set_values',{}]);
