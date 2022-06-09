@@ -1,5 +1,5 @@
 [build]
-    command = "sed -i \"s|HEADER_PLACEHOLDER|${PROD_API_LOCATION}|g\" netlify.toml && npm run build"
+    command = "sed -i \"s|HEADER_PLACEHOLDER|${PROD_API_LOCATION}|g\" netlify.toml && CI = '' npm run build"
     base = "/"
 [[plugins]]
   package = "netlify-plugin-inline-functions-env"
