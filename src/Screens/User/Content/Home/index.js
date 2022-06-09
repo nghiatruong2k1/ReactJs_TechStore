@@ -8,6 +8,7 @@ import Recommend from "./Recommend/";
 function HomeContent({title,...props}){
   const location = useLocation();
   useEffect(function(){
+    console.log(location)
     global.config.setTitleWebsite("");
   },[location])
   return(
