@@ -4,6 +4,7 @@
 [[plugins]]
   package = "netlify-plugin-inline-functions-env"
     [plugins.inputs]
+    buildEvent = "onBuild"
     exclude = ["BASE_API","WEBSITE_NAME"]
 [[redirects]]
     from = "/*"
