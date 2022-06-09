@@ -14,7 +14,7 @@ const handleTitle = (function(){
 		if(title && title !== ""){
 			document.title = WebsiteName+"|"+title;
 		}else{
-			
+			document.title = WebsiteName;
 		}
 	}
 })();
