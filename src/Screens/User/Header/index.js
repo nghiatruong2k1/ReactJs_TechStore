@@ -17,7 +17,7 @@ function Header({...props}){
   const thisRef = useRef();
   useEffect(function(){
     function handleScroll(event){
-      let scrollTop = document.documentElement.scrollTop;
+      let scrollTop = document.getElementById("root").scrollTop;
       if(scrollTop > 0){
         setFixed(true)
       }else{

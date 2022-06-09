@@ -10,7 +10,7 @@ import {Accordion} from "../../../../../Components/"
 function News({...props}){
   return(
     <Accordion
-      title="NopCommerce News"
+      title="Ghi chú"
       {...props}
     >
       <Grid container columnSpacing={2} rowSpacing={2}>

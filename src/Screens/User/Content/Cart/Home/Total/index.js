@@ -1,8 +1,5 @@
 import {memo,useContext,useMemo} from 'react';
-import clsx from 'clsx';
 import {Grid,Paper,Stack,Typography,Divider} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
 import {Image} from "../../../../../../Components"
 import {CartContext} from "../provider";
 import {formatNumber} from "../../../../../../Config/Format";
@@ -36,7 +33,7 @@ function Total({...props}){
           </Stack>
           <Divider />
           <Stack direction="row" px={8}>
-            <Image contain src="images/misc/payments.png" height="20" />
+            
           </Stack>
       </Stack>
     </Paper>

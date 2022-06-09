@@ -20,8 +20,8 @@ function Dashboard({...props}){
       <Statistics gridColumn="1 / span 2"/>
       <Orders gridColumn="1 / span 2"/>
       <Registers gridColumn="1 / span 2"/>
-      <IncompleteOrders gridColumn="1 / 2"/>
-      <SearchKeywords gridColumn="2 / 3" />
+      {/* <IncompleteOrders gridColumn="1 / 2"/>
+      <SearchKeywords gridColumn="2 / 3" /> */}
     </>
   )
 }
