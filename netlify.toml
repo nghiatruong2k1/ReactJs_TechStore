@@ -1,0 +1,11 @@
+[build]
+    command = "CI = '' npm run build"
+    base = "/"
+[[plugins]]
+package = "netlify-plugin-inline-functions-env"
+  [plugins.inputs]
+  exclude = ["BASE_API"]
+[[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
