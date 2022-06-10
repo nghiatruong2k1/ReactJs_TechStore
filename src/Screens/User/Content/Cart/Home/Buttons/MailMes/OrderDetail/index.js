@@ -16,57 +16,62 @@ function OrderDetail({cart,auth,state,...props}){
     let name = (auth.FirstName || "") +" "+ (auth.LastName || "");
     return (
     <>
-        <ul>
-            <li style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between'}}>
-                <span>Tên khách hàng:</span>
-                <span>{name}</span>
-            </li>
-            <li style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between'}}>
-                <span>Email:</span>
-                <span>{auth.Email}</span>
-            </li>
-            <li style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between'}}>
-                <span>Điện thoại:</span>
-                <span>{auth.Phone}</span>
-            </li>
-            <li style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between'}}>
-                <span>Địa chỉ:</span>
-                <span>{auth.Location}</span>
-            </li>
-        </ul>
+        <table>
+            <tr>
+                <td>Tên khách hàng:</td>
+                <td>{name}</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>{auth.Email}</td>
+            </tr>
+            <tr>
+                <td>Điện thoại:</td>
+                <td>{auth.Phone}</td>
+            </tr>
+            <tr>
+                <td>Địa chỉ:</td>
+                <td>{auth.Location}</td>
+            </tr>
+        </table>
         <hr/>
-        <ul>
+        <table>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+            </tr>
             {
                 cart.map(function(product,index){
                     return(
-                        <li  key={index} style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between'}}>
-                            <span>{product.Name}</span>
-                            <span>{formatNumber(product.Price) +" đ"}</span>
-                            <span>{"x"+formatNumber(product.Quantity,3,0)}</span>
-                        </li>
+                        <tr  key={index}>
+                            <td>{product.Name}</td>
+                            <td>{formatNumber(product.Price) +" đ"}</td>
+                            <td>{"x"+formatNumber(product.Quantity,3,0)}</td>
+                        </tr>
                     )
                 })
             }
-        </ul>
+        </table>
         <hr />
-        <ul>
-            <li style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between'}}>
-                <span>Tổng số lượng:</span>
-                <span>{formatNumber(count,3,0)}</span>
-            </li>
-            <li style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between'}}>
-                <span>Tổng giá:</span>
-                <span>{formatNumber(price,3,0)+" đ"}</span>
-            </li>
-            <li style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between'}}>
-                <span>Giảm giá:</span>
-                <span>{formatNumber(salePrice,3,0)+" đ"}</span>
-            </li>
-            <li style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between'}}>
-                <span>Tổng thanh toán:</span>
-                <span>{formatNumber(price-salePrice,3,0)+" đ"}</span>
-            </li>
-        </ul>
+        <table>
+            <tr>
+                <td>Tổng số lượng:</td>
+                <td>{formatNumber(count,3,0)}</td>
+            </tr>
+            <tr>
+                <td>Tổng giá:</td>
+                <td>{formatNumber(price,3,0)+" đ"}</td>
+            </tr>
+            <tr>
+                <td>Giảm giá:</td>
+                <td>{formatNumber(salePrice,3,0)+" đ"}</td>
+            </tr>
+            <tr>
+                <td>Tổng thanh toán:</td>
+                <td>{formatNumber(price-salePrice,3,0)+" đ"}</td>
+            </tr>
+        </table>
     </>
     )
 };export default memo(OrderDetail)
