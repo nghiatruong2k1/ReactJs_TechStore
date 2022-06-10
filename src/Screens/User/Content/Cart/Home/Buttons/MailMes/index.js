@@ -10,7 +10,7 @@ function Component ({auth,id,children}){
         <div>
             <div>
                 <p style={{fontWeight:'bold'}}>Xin chào {name}</p>
-                <p style={{fontWeight:'bold'}}>Bạn có 1 đơn hàng đang chờ xác nhận</ơ>
+                <p style={{fontWeight:'bold'}}>Bạn có 1 đơn hàng đang chờ xác nhận</p>
             </div>
             <div>
                 {children}
