@@ -1,5 +1,5 @@
 import {memo,Fragment} from 'react';
-import { formatNumber } from '../../../../../../../Config/Format';
+import { formatNumber } from '../../../../../../../../Config/Format';
 
 function OrderDetail({cart,auth,state,...props}){
     const {count,price} = cart.reduce(function(result,product){
