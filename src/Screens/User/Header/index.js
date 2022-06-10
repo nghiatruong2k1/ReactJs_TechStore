@@ -3,7 +3,7 @@ import {Box,Container,Paper} from '@mui/material/';
     
 import NavContent from "./Screens/";
 import { makeStyles } from '@mui/styles';
-
+const bodyRoot = document.getElementById("root");
 const useStyles = makeStyles((theme)=>{
   return {
     container:{
@@ -17,7 +17,6 @@ function Header({...props}){
   const styles = useStyles();
   const thisRef = useRef();
   useEffect(function(){
-    const bodyRoot = document.getElementById("root");
     function handleScroll(event){
       let scrollTop = bodyRoot.scrollTop;
       if(scrollTop > 0){

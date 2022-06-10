@@ -11,11 +11,11 @@ import Loading from "./Loading/";
 import UploadImage from "./UploadImage/";
 import UserPage from "./User/";
 import AdminPage from "./Admin/";
-
+const bodyRoot = document.getElementById("root");
 function Screen({...props}){
 	const location = useLocation();
 	useEffect(function(){
-	  document.documentElement.scrollTop = 0;
+		bodyRoot.scrollTop = 0;
 	},[location]);
 
 	return(
