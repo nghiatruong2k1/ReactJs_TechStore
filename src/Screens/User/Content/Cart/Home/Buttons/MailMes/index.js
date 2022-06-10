@@ -1,8 +1,9 @@
 import {memo,Fragment} from 'react';
-
+import {render} from 'react-dom/';
 import {Card,CardHeader,CardContent,Typography,Link} from '@mui/material/';
 import {getRoute} from "../../../../../../../Config/Route";
-import {render} from 'react-dom/';
+
+import OrderDetail from '../OrderDetail';
 function Component ({auth,id,children}){
     let name = (auth.FirstName || "") +" "+ (auth.LastName || "");
     const url = `${window.location.origin}${getRoute("user","cart","confirm",{id})}`;

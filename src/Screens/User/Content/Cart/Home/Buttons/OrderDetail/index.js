@@ -1,7 +1,7 @@
 import {memo,Fragment} from 'react';
 import { formatNumber } from '../../../../../../../Config/Format';
 import {List,ListItem,ListItemText,Divider} from '@mui/material/';
-import OrderDetail from '../OrderDetail';
+
 function OrderDetail({cart,auth,state,...props}){
     const {count,price} = cart.reduce(function(result,product){
         if(product){
