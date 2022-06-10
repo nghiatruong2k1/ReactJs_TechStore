@@ -53,7 +53,7 @@ function Buttons({...props}){
                   onThen:function({data}){
                     if(data && data.value){
                       resetCart && resetCart();
-                      const mes = MailMes({auth:user ?? {},cart:newCart,id:data.value});
+                      const mes = MailMes({auth:user ?? {},cart:newCart,state,id:data.value});
                       Fetch.post({
                         api:"api/email",
                         params:mes,
