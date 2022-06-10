@@ -1,6 +1,6 @@
 const {LocalStorage} = require('./Config/LocalStorage');
 const {createContext} = require('react');
-const {NetlifyENV} = require('./Netlify/ENV');
+const {handler:NetlifyENV} = require('./Netlify/ENV');
 
 const Context = createContext({});
 const AppContext = createContext({});
