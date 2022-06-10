@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import {Container,Grid,Stack,Typography} from '@mui/material/';
 import {} from '@mui/icons-material/';
 import styles from './styles.module.css';
+import {formatDate} from "../../../../Config/Format/";
 function Footer({...props}){
   return(
     <Container
@@ -15,21 +16,23 @@ function Footer({...props}){
           <Typography className={styles.title}
               variant="h5"
               align="left"
-          >Powered by nopCommerce
+          >
           </Typography>
         </Grid>
         <Grid item xs>
           <Typography className={styles.title}
               variant="h5"
               align="center"
-          >Tuesday, March 08, 2022 1:38 AM
+          >
+            
           </Typography>
         </Grid>
         <Grid item xs>
           <Typography className={styles.title}
               variant="h5"
               align="right"
-          >nopCommerce version 4.50.0
+          >
+            
           </Typography>
         </Grid>
       </Grid>

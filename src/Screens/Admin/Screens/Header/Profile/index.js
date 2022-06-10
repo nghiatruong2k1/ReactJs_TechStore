@@ -10,14 +10,12 @@ function Profile({...props}){
   const buttonRef = useRef(null);
   return(
   <Grid item {...props}>
-    <Tooltip title="Profile" placement="top" arrow>
-      <IconButton 
+    <IconButton 
           ref={buttonRef}
           onClick={()=>{setOpen(true)}}     
           className={styles.button}>
         <Avatar variant="outlined" src={auth.state.user && auth.state.user.ImageUrl} className={styles.avatar}/>
-      </IconButton>
-    </Tooltip>
+    </IconButton>
     <Navbar 
       open={buttonRef.current && isOpen} 
       onClose={()=>{setOpen(false)}} 

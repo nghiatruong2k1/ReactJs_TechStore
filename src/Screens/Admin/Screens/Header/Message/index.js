@@ -6,9 +6,9 @@ import styles from './styles.module.css';
 function Message({...props}){
   return(
   <Grid item {...props}>
-    <Tooltip title="Message" placement="top" arrow>
+    <Tooltip title="Thông báo" placement="top" arrow>
       <IconButton className={styles.button}>
-        <Badge badgeContent={4} color="primary">
+        <Badge badgeContent={0} color="primary">
           <NotificationsActive/>
         </Badge>
       </IconButton>

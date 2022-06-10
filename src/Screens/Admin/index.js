@@ -7,7 +7,6 @@ import { useSnackbar} from "notistack";
 import Header from "./Screens/Header/";
 import Content from "./Screens/Content/";
 import Menu from "./Screens/Menu/";
-import Logo from "./Screens/Logo/";
 import Footer from "./Screens/Footer/";
 function AdminPage({...props}){
   const {auth} = useContext(global.config.AppContext);
@@ -28,6 +27,31 @@ function AdminPage({...props}){
   if(auth.state.user && auth.state.user.TypeId == 4){
     return(
       <Container component="section" className={styles.container} maxWidth="false" disableGutters>
+        <Header className={styles.header}/>
+        <Grid component="div" container className={styles.body}>
+          <Grid item xs={2} className={clsx(styles.col,styles.left)}>
+            <Stack className={styles.content}>        
+              <Menu />
+            </Stack>
+          </Grid>
+          <Grid item xs={10} className={styles.col}>
+            <Stack className={styles.content}>        
+              <Content />
+              <Footer />
+            </Stack>
+          </Grid>
+        </Grid>
+      </Container>
+    )
+  }else{
+    return <></>
+  }
+}
+export default memo(AdminPage);
+
+
+/**
+ * <Container component="section" className={styles.container} maxWidth="false" disableGutters>
         <Grid component="div" container className={styles.body}>
           <Grid item xs={2} className={clsx(styles.col,styles.left)}>
             <Logo />
@@ -42,9 +66,4 @@ function AdminPage({...props}){
           </Grid>
         </Grid>
       </Container>
-    )
-  }else{
-    return <></>
-  }
-}
-export default memo(AdminPage);
+ */

@@ -3,6 +3,26 @@
 	width: 100vw;
 	overflow: hidden;
 }
+
+.header{
+	flex-shrink: 0;
+}
+.body{
+	flex:1 1 auto;
+	overflow: hidden;
+}
+.col{
+	height: 100%;
+	overflow: hidden;
+}
+.content{
+	overflow-x: hidden;
+}
+
+
+
+
+/*
 .body{
 	height: 100%;
 }
@@ -22,3 +42,4 @@
 	overflow-x: hidden;
 	height: 100%;
 }
+*/

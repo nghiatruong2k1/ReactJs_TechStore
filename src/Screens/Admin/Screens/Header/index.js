@@ -9,11 +9,11 @@ import styles from './styles.module.css';
 import ProfileButton from "./Profile/";
 import MessageButton from "./Message/";
 
-function AdminHeader({...props}){
+function AdminHeader({className,...props}){
   return(
     <Container
         component="header" 
-        className={styles.header}
+        className={clsx(className,styles.header)}
     >
       <Grid container 
         alignItems="center"

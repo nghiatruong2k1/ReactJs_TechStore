@@ -21,7 +21,7 @@ import {
 import {types} from "../init";
 import {OrdersContext} from "../provider";
 
-const colors = ["#0ff","#f00","#00f","#ff0","#f0f","#0f0"]
+const colors = ["#ff0","#0ff","#00f","#f00","#f0f","#0f0"]
 
 Chart.register(
     Decimation,
