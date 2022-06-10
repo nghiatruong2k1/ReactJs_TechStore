@@ -1,9 +1,9 @@
 function handler(event, context) {
-    console.log(`\nHere is the context info:}`,event,context,process.env);
+    console.log(`\nHere is the context info:}`,process.env);
     return {
       statusCode: 200,
       body: JSON.stringify({
-        CONTEXT: process.env.CONTEXT
+        ENV: process.env
       })
     };
   };
