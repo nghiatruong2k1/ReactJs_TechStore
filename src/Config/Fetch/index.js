@@ -74,7 +74,7 @@ async function handleFetch(props,promise,location){
       url = (baseUrl ?? Base_Url_API)+api;
       loading.handle.add();
       typeof(onStart)==="function" && onStart();
-      const pro = promise(url,params,{
+      const pro = await promise(url,params,{
         cancelToken: ourRequest.token
       });
       console.log(`[Start ${method}]`,{location,promise:await pro}); 
@@ -152,9 +152,9 @@ export const useGet = function(initData,callback,args = [],location){
   useEffect(function(){
     propsRef.current = callback && callback();
   },[callback])
-  useEffect(function(){
+  useEffect(async function(){
     const {onStart,onEnd,onThen,onError,...props} = propsRef.current;
-      handleGet({
+    return await handleGet({
         onStart:function(){
           dispath(["set_loading",true])
           if(onStart){
@@ -180,9 +180,6 @@ export const useGet = function(initData,callback,args = [],location){
         },...props,toast:enqueueSnackbar,loading
       },location
     );
-    return function(){
-      
-    }
   },[...args])
 
   return [state,dispath]
