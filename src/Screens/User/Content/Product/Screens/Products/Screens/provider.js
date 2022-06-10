@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import {memo,useEffect,useMemo} from 'react';
 import {useFetch} from "../../../../../../../Config/Fetch/";
 import {ProductsContext} from "../init";
-
+const bodyRoot = document.getElementById("root");
 
 
 function ProductsProvider({state,dispath,action,feild,handle,children,...props}){
@@ -53,6 +53,7 @@ function ProductsProvider({state,dispath,action,feild,handle,children,...props})
 
 	useEffect(async function() {
 		if(Boolean(action) && Boolean(feild)){
+			bodyRoot.scrollTop = 0;
 			return await handleGetDatas({	  
 				onStart:(()=>{
 					dispath(['set_data',Array(state.limit ?? 1).fill(undefined)])

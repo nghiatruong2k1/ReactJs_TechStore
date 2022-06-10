@@ -2,6 +2,8 @@ import {memo,createContext,useContext,useEffect} from 'react';
 import {useCookies} from "react-cookie";
 import { useFetch } from '../../../../../../Config/Fetch/';
 export const OrdersContext = createContext();
+
+const bodyRoot = document.getElementById("root");
 function OrdersProvider({state,dispath,children,...props}){
 	const Fetch = useFetch();
 	const {auth} = useContext(global.config.AppContext);
@@ -37,7 +39,7 @@ function OrdersProvider({state,dispath,children,...props}){
 		}
 	}
 	useEffect(async function(){
-		document.documentElement.scrollTop = 0;
+		bodyRoot.scrollTop = 0;
 	    if(auth.state.user){
 		    return await handleGetData(
 		      	function(){

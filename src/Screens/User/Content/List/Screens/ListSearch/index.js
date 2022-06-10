@@ -4,7 +4,7 @@ import {useFetch} from "../../../../../../Config/Fetch";
 import {reducer,initData,handleGetDatas,handleGetLength} from "../init";
 
 import ViewList from '../../Components/ViewList';
-
+const bodyRoot = document.getElementById("root");
 function ListGet({controller,param,...props}){
     const Fetch = useFetch("list search");
     const params = useParams();
@@ -22,7 +22,7 @@ function ListGet({controller,param,...props}){
 	  },[controller,params[param]]);
 
 	useEffect(function() {
-		document.documentElement.scrollTop = 0;
+		bodyRoot.scrollTop = 0;
 	  controller && handleGetDatas({
         getter:Fetch.get,
         dispath,
@@ -38,7 +38,7 @@ function ListGet({controller,param,...props}){
 	},[controller,params[param],state.page,state.sort]);
 
 	useEffect(function() {
-    document.documentElement.scrollTop = 0;
+    bodyRoot.scrollTop = 0;
     controller &&  handleGetDatas({
       getter:Fetch.get,
       dispath,
