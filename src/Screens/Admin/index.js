@@ -55,20 +55,3 @@ function AdminPage({...props}){
 export default memo(AdminPage);
 
 
-/**
- * <Container component="section" className={styles.container} maxWidth="false" disableGutters>
-        <Grid component="div" container className={styles.body}>
-          <Grid item xs={2} className={clsx(styles.col,styles.left)}>
-            <Logo />
-            <Menu />
-          </Grid>
-          <Grid item xs={10} className={styles.col}>
-            <Stack className={styles.right}>
-              <Header />
-              <Content />
-              <Footer />
-            </Stack>
-          </Grid>
-        </Grid>
-      </Container>
- */

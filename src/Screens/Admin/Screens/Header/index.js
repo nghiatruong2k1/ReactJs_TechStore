@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 
 
-
+import Logo from "./Logo/";
 import ProfileButton from "./Profile/";
 import MessageButton from "./Message/";
 
@@ -22,6 +22,7 @@ function AdminHeader({className,...props}){
         alignItems="center"
         columnSpacing={1}
       >
+        <Logo xs={2}/>
         <Grid item xs></Grid>
         <MessageButton />
         <ProfileButton />
