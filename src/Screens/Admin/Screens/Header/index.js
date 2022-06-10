@@ -22,7 +22,7 @@ function AdminHeader({className,...props}){
         alignItems="center"
         columnSpacing={1}
       >
-        <Logo xs={2}/>
+        <Logo xs={1.5}/>
         <Grid item xs></Grid>
         <MessageButton />
         <ProfileButton />
