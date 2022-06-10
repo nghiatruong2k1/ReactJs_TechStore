@@ -1,12 +1,14 @@
 import {memo,useContext} from 'react';
 import {useSnackbar} from 'notistack';
 import {Grid,Paper,Stack,Button} from '@mui/material';
-import DialogResult from "./DialogResult";
-import MailMes from './MailMes';
+
 import {CartContext} from "../provider";
 import {useFetch} from "../../../../../../Config/Fetch";
 import { confirmAlert } from 'react-confirm-alert';
 import { makeStyles } from '@mui/styles';
+
+import DialogResult from "./DialogResult";
+import MailMes from './MailMes';
 
 
 const useStyles = makeStyles((theme)=>{
@@ -51,7 +53,7 @@ function Buttons({...props}){
                   onThen:function({data}){
                     if(data && data.value){
                       resetCart && resetCart();
-                      const mes = MailMes({auth:user ?? {},id:data.value});
+                      const mes = MailMes({auth:user ?? {},cart:newCart,id:data.value});
                       Fetch.post({
                         api:"api/email",
                         params:mes,
