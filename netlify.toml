@@ -1,5 +1,5 @@
 [functions]
-  directory = "/js/netlify"
+  directory = "/src/Netlify"
 [[redirects]]
     from = "/*"
     to = "/index.html"
