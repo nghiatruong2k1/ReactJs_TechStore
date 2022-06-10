@@ -13,7 +13,10 @@ function AdminHeader({className,...props}){
   return(
     <Container
         component="header" 
+        maxWidth="100%"
+        disableGutters
         className={clsx(className,styles.header)}
+        sx={{px:2,py:1}}
     >
       <Grid container 
         alignItems="center"
