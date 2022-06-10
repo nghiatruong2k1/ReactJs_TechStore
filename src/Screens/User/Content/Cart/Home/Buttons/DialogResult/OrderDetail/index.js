@@ -1,5 +1,5 @@
 import {memo,Fragment} from 'react';
-import { formatNumber } from '../../../../../../../Config/Format';
+import { formatNumber } from '../../../../../../../../Config/Format';
 import {List,ListItem,ListItemText,Divider} from '@mui/material/';
 
 function OrderDetail({cart,auth,state,...props}){

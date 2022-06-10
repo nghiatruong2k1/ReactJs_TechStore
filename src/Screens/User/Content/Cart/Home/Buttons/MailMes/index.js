@@ -1,28 +1,27 @@
 import {memo,Fragment} from 'react';
 import {render} from 'react-dom/';
-import {Card,CardHeader,CardContent,Typography,Link} from '@mui/material/';
 import {getRoute} from "../../../../../../../Config/Route";
 
-import OrderDetail from '../OrderDetail';
+import OrderDetail from './OrderDetail';
 function Component ({auth,id,children}){
     let name = (auth.FirstName || "") +" "+ (auth.LastName || "");
     const url = `${window.location.origin}${getRoute("user","cart","confirm",{id})}`;
     return (
-        <Card variant="outlined">
-            <CardContent>
-                <Typography>Xin chào {name}</Typography>
-                <Typography>Bạn có 1 đơn hàng đang chờ xác nhận</Typography>
-            </CardContent>
-            <CardContent>
+        <div>
+            <div>
+                <p style={{fontWeight:'bold'}}>Xin chào {name}</p>
+                <p style={{fontWeight:'bold'}}>Bạn có 1 đơn hàng đang chờ xác nhận</ơ>
+            </div>
+            <div>
                 {children}
-            </CardContent>
-            <CardContent>
-                <Typography>Vui lòng xác nhận</Typography>
-                <Typography> 
+            </div>
+            <div>
+                <p>Vui lòng xác nhận:</p>
+                <p> 
                     <a href={url}>{url}</a>
-                </Typography>
-            </CardContent>
-        </Card>
+                </p>
+            </div>
+        </div>
     )
 }
 function Mailer({auth,cart,state,children,...props}){
