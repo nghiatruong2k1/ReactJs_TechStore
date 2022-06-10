@@ -1,10 +1,14 @@
 const {LocalStorage} = require('./Config/LocalStorage');
 const {createContext} = require('react');
+const {NetlifyENV} = require('./Netlify/ENV');
+
 const Context = createContext({});
 const AppContext = createContext({});
-
 const UserContext = createContext({});
 const AdminContext = createContext({});
+
+
+const ENV = NetlifyENV();
 
 const WebsiteName = "TechStore";
 
@@ -18,6 +22,7 @@ const handleTitle = (function(){
 		}
 	}
 })();
+
 module.exports = global.config ={
 	WebsiteName:WebsiteName,
 	setTitleWebsite:handleTitle,
