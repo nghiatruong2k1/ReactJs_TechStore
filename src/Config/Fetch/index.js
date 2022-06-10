@@ -73,11 +73,11 @@ async function handleFetch(props,promise,location){
     if(api){
       url = (baseUrl ?? Base_Url_API)+api;
       loading.handle.add();
-      typeof(onStart)==="function" && onStart();
-      const pro = await promise(url,params,{
+      typeof(onStart)==="function" && onStart(); 
+      const pro = promise(url,params,{
         cancelToken: ourRequest.token
       });
-      console.log(`[Start ${method}]`,{location,promise:await pro}); 
+      console.log(`[Start ${method}]`,{location,promise:await pro});
       pro.then(result => {
             console.log(`[Success ${method}]`,{location,url,result});         
             handleResult(toast,result)
