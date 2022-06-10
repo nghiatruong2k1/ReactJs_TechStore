@@ -2,3 +2,7 @@
     from = "/*"
     to = "/index.html"
     status = 200
+[[plugins]]
+package = "netlify-plugin-inline-functions-env"
+  [plugins.inputs]
+  include = ["BASE_API","WEBSITE_NAME"]
