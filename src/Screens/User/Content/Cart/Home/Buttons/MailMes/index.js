@@ -17,8 +17,7 @@ function Component ({auth,id,children}){
                 {children}
             </CardContent>
             <CardContent>
-                <Typography>Xin chào {name}</Typography>
-                <Typography>Bạn có 1 đơn hàng đang chờ xác nhận</Typography>
+                <Typography>Vui lòng xác nhận</Typography>
                 <Typography> 
                     <a href={url}>{url}</a>
                 </Typography>

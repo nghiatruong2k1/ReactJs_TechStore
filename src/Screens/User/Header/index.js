@@ -3,6 +3,7 @@ import {Box,Container,Paper} from '@mui/material/';
     
 import NavContent from "./Screens/";
 import { makeStyles } from '@mui/styles';
+
 const useStyles = makeStyles((theme)=>{
   return {
     container:{
@@ -16,17 +17,20 @@ function Header({...props}){
   const styles = useStyles();
   const thisRef = useRef();
   useEffect(function(){
+    const bodyRoot = document.getElementById("root");
     function handleScroll(event){
-      let scrollTop = document.getElementById("root").scrollTop;
+      let scrollTop = bodyRoot.scrollTop;
       if(scrollTop > 0){
-        setFixed(true)
+        thisRef.current.style.height=thisRef.current.offsetHeight;
+        setFixed(true);
       }else{
-        setFixed(false)
+        setFixed(false);
+        thisRef.current.style.height="auto";
       }
     }
-    document.addEventListener("scroll",handleScroll)
+    bodyRoot.addEventListener("scroll",handleScroll)
     return function(){
-      document.removeEventListener("scroll",handleScroll)
+      bodyRoot.removeEventListener("scroll",handleScroll)
     }
   },[])
   return(
