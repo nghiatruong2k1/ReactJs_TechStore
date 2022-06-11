@@ -1,16 +1,12 @@
 const {LocalStorage} = require('./Config/LocalStorage');
 const {createContext} = require('react');
-const {handler:NetlifyENV} = require('./Netlify/ENV');
 
 const Context = createContext({});
 const AppContext = createContext({});
 const UserContext = createContext({});
 const AdminContext = createContext({});
 
-
-const ENV = NetlifyENV();
-
-const WebsiteName = "TechStore";
+const WebsiteName = process.env.REACT_APP_WEBSITE_NAME || "TechStore";
 
 const handleTitle = (function(){
 	document.title = WebsiteName;

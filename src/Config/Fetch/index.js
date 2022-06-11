@@ -13,7 +13,7 @@ axios.defaults.insecureHTTPParser = true;
 axios.defaults.credentials = "include";
 axios.defaults.xsrfCookieName = "token";
 axios.defaults.xsrfHeaderName = "token";
-const Base_Url_API = "https://localhost:44373/";
+const Base_Url_API = process.env.REACT_APP_BASE_API || "https://localhost:44373/";
 
 async function showToast(toast,mes,status){
   switch(typeof(mes)){
