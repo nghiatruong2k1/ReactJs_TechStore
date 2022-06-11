@@ -17,11 +17,12 @@ function Header({...props}){
   const styles = useStyles();
   const thisRef = useRef();
   useEffect(function(){
+    const heightTop = thisRef.current.offsetHeight;
     function handleScroll(event){
       let scrollTop = bodyRoot.scrollTop;
       if(scrollTop > 0){
-        thisRef.current.style.height=thisRef.current.offsetHeight;
         setFixed(true);
+        thisRef.current.style.height = heightTop+"px";
       }else{
         setFixed(false);
         thisRef.current.style.height="auto";
