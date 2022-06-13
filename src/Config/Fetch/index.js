@@ -77,7 +77,7 @@ async function handleFetch(props,promise,location){
       const pro = promise(url,params,{
         cancelToken: ourRequest.token
       });
-      console.log(`[Start ${method}]`,{location,promise:await pro});
+      console.log(`[Start ${method}]`,{location,promise:pro});
       pro.then(result => {
             console.log(`[Success ${method}]`,{location,url,result});         
             handleResult(toast,result)
@@ -100,26 +100,26 @@ async function handleFetch(props,promise,location){
 }
 
 const handleGet = async function(props,location){
-  const promise = async function(url,params,option){
-    return await axios.get(url,{params},option)
+  const promise = function(url,params,option){
+    return axios.get(url,{params},option)
   };
   return await handleFetch({...props,method:"GET"},promise,location);
 }
 const handlePut = async function(props,location){
-  const promise = async function(url,params,option){
-    return await axios.put(url,params,option)
+  const promise = function(url,params,option){
+    return axios.put(url,params,option)
   };
   return await handleFetch({...props,method:"PUT"},promise,location)
 }
 const handlePost = async function(props,location){
-  const promise = async function(url,params,option){
-    return await axios.post(url,params,option)
+  const promise = function(url,params,option){
+    return axios.post(url,params,option)
   };
   return await handleFetch({...props,method:"POST"},promise,location)
 }
 const handleDelete =async function(props,location){
-  const promise =async function(url,params,option){
-    return await axios.delete(url,params,option)
+  const promise = function(url,params,option){
+    return axios.delete(url,params,option)
   }; 
   return await handleFetch({...props,method:"DELETE"},promise,location)  
 }

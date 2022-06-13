@@ -5,7 +5,6 @@ const Context = createContext({});
 const AppContext = createContext({});
 const UserContext = createContext({});
 const AdminContext = createContext({});
-
 const WebsiteName = process.env.REACT_APP_WEBSITE_NAME || "TechStore";
 
 const handleTitle = (function(){
@@ -19,6 +18,7 @@ const handleTitle = (function(){
 	}
 })();
 
+console.log(process.env)
 module.exports = global.config ={
 	WebsiteName:WebsiteName,
 	setTitleWebsite:handleTitle,
