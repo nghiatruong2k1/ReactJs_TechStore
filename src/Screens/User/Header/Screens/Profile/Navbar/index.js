@@ -2,7 +2,6 @@ import {memo,useContext} from 'react';
 import clsx from 'clsx';
 import {Menu,MenuItem,ListItemButton,ListItemIcon,ListItemText} from '@mui/material/';
 import {NavLink} from "react-router-dom";
-import {useCookies} from 'react-cookie';
 import {getRoute} from "../../../../../../Config/Route/";
 
 
@@ -21,7 +20,6 @@ function ProfileLink({to,icon,text,...props}){
 }
 
 function LogoutButton(){
-  const {toast} = useContext(global.config.context);
   const {auth} = useContext(global.config.AppContext);
   function handleClick(){
     auth.handle.logout();

@@ -41,8 +41,8 @@ function Header({...props}){
         className={styles.container}
         sx={{
           zIndex:10,
-          position:{xs:"fixed",sm:isFixed && "fixed" || "relative"},
-          top:{xs:'unset',sm:isFixed && 0 || 'unset'},
+          position:{xs:"fixed",sm:(isFixed && "fixed" ) || "relative"},
+          top:{xs:'unset',sm:(isFixed && 0) || 'unset'},
           bottom:{xs:0,sm:'unset'},
           left:0,right:0     
         }}

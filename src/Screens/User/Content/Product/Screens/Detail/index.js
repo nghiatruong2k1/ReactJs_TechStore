@@ -1,7 +1,5 @@
 import {memo,useReducer} from 'react';
-import clsx from 'clsx';
-import {Grid,Paper} from '@mui/material/';
-import {} from '@mui/icons-material/';
+import {Grid} from '@mui/material/';
 
 import {initData,reducer} from "./init";
 import Provider from "./provider";

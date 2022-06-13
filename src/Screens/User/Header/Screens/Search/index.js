@@ -11,10 +11,6 @@ import SearchModal from "./Modal/";
 function HeaderSearch({fixed,...props}){
   const [state,dispath] = useReducer(reducer,initData);
   const isMd = useMediaQuery((theme)=>(theme.breakpoints.down("md")));
-  const isFixed = useMemo(function(){
-    return fixed || isMd
-  },[fixed,isMd])
-
   return(
   <Provider state={state} dispath={dispath}>
     <Grid item {...props}>

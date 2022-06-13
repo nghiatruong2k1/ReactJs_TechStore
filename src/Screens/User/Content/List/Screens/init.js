@@ -18,7 +18,7 @@ export function reducer(prevState,[key,payload]) {
 		case 'set_data':{
 			return {
 				...prevState,
-				datas:Array.isArray(payload) && payload || []
+				datas:(Array.isArray(payload) && payload) || []
 			}
 		}
 		case 'set_loading':{
@@ -28,21 +28,24 @@ export function reducer(prevState,[key,payload]) {
 			}
 		}
 		case 'set_total':{
+			payload =  Number(payload);
 			return {
 				...prevState,
-				total:!Number.isNaN(payload) && Number(payload) || 0
+				total:(!Number.isNaN(payload) && payload) || 0
 			}
 		}
 		case 'set_page':{
+			payload =  Number(payload);
 			return {
 				...prevState,
-				page:!Number.isNaN(payload) && Number(payload) || 1
+				page:(!Number.isNaN(payload) && payload) || 1
 			}
 		}
 		case 'set_limit':{
+			payload =  Number(payload);
 			return {
 				...prevState,
-				limit:!Number.isNaN(payload) && Number(payload) || 0
+				limit:(!Number.isNaN(payload) && payload) || 0
 			}
 		}
 		case 'set_sort':{
@@ -52,9 +55,10 @@ export function reducer(prevState,[key,payload]) {
 			}
 		}
 		case 'set_view':{
+			payload =  Number(payload);
 			return {
 				...prevState,
-				view:!Number.isNaN(payload) && Number(payload) || 0
+				view:(!Number.isNaN(payload) && payload) || 0
 			}
 		}
 		default:{

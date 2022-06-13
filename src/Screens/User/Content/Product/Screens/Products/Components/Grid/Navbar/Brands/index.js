@@ -1,12 +1,9 @@
-import {memo,useState,useEffect,useRef} from 'react';
+import {memo,useState,useRef} from 'react';
 import clsx from 'clsx';
 import {
   Menu,
   MenuItem,
-  List,
-  ListSubheader,
   ListItem,
-  Divider,
   ListItemButton,
   ListItemText,
   ListItemIcon,
@@ -27,7 +24,7 @@ function Brands({...props}){
         return Array(5).fill(undefined)
       })
       ,onThen:(result => {
-        return Array.isArray(result.data) && result.data || [] 
+        return (Array.isArray(result.data) && result.data) || [] 
       })
     }
   },[])

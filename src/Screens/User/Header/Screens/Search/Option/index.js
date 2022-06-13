@@ -1,7 +1,5 @@
 import {memo} from 'react';
-import clsx from 'clsx';
-import {InputAdornment,Tooltip,IconButton,Divider} from '@mui/material/';
-import {} from '@mui/icons-material/';
+import {InputAdornment,Tooltip,IconButton} from '@mui/material/';
 function SearchOption({...props}){
 	return(
 		<InputAdornment position="start"sx={{color:'inherit !important'}}>

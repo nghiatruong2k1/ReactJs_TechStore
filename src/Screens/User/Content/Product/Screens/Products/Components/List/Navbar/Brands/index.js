@@ -1,5 +1,4 @@
-import {memo,useState,useEffect} from 'react';
-import clsx from 'clsx';
+import {memo} from 'react';
 import {
   CardContent,
   List,
@@ -22,7 +21,7 @@ function Categories({...props}){
         return Array(5).fill(undefined)
       })
       ,onThen:(result => {
-        return Array.isArray(result.data) && result.data || [] 
+        return (Array.isArray(result.data) && result.data) || [] 
       })
     }
   },[])
@@ -49,7 +48,7 @@ function Categories({...props}){
               <ListItem key={index} divider disablePadding> 
                 {
                   <ListItemButton 
-                    component={(Boolean(item) && !isLoading) && NavLink || "button"} 
+                    component={((Boolean(item) && !isLoading) && NavLink) || "button"} 
                     to={url}
                   >                    
                     {(Boolean(item) && !isLoading) 

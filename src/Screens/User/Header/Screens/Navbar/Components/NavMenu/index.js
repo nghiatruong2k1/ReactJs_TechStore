@@ -17,7 +17,7 @@ function NavMenu({fixed,datas,loading,children,onClose,sx,...props}){
           <NavItem 
             key={index} 
             fixed={fixed} 
-            component={to && !loading && NavLink || "button"} 
+            component={(to && !loading && NavLink) || "button"} 
             to={to || "#"}
             onClick={(e)=>{
               onClick && onClick(e);
@@ -27,7 +27,7 @@ function NavMenu({fixed,datas,loading,children,onClose,sx,...props}){
             <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText primaryTypographyProps={{sx:{fontWeight:'bold'}}}>
               {
-                !loading && (text || "") || <Skeleton className="skeleton"/>
+                (!loading && (text || "")) || <Skeleton className="skeleton"/>
               }
             </ListItemText>
             {children}
