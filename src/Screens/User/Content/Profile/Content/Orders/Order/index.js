@@ -1,15 +1,11 @@
 import {memo} from 'react';
-import clsx from 'clsx';
-import {Stack,Grid,Card,CardActions,Typography,CardContent,Divider,Skeleton} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
+import {Grid,Card,CardContent,Divider} from '@mui/material/';
 import Provider from "./provider";
 
 import InfoContent from "./Info/";
 import HeadContent from "./Head/";
 import DetailContent from "./Detail/";
 import ProductsContent from "./Products/";
-import { formatDate } from '../../../../../../../Config/Format';
 function Order({loading,data,status,index,...props}){
   return(
     <Provider loading={loading} data={data} status={status}>
