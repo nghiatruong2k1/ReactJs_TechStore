@@ -1,5 +1,5 @@
 import {memo,useContext,useEffect} from 'react';
-import {Stack,sStepper,Step,StepButton} from '@mui/material/';
+import {Stack,Stepper,Step,StepButton} from '@mui/material/';
 import {OrdersContext} from '../provider';
 import styles from './styles.module.css';
 

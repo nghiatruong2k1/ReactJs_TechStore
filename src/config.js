@@ -17,7 +17,6 @@ const handleTitle = (function(){
 		}
 	}
 })();
-
 console.log(process.env)
 module.exports = global.config ={
 	WebsiteName:WebsiteName,

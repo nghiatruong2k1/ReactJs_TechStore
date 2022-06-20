@@ -23,7 +23,7 @@ function Categories({...props}){
         return Array(5).fill(undefined)
       })
       ,onThen:(result => {
-        return Array.isArray(result.data) && result.data || [] 
+        return (Array.isArray(result.data) && result.data) || [] 
       })
     }
   },[])
