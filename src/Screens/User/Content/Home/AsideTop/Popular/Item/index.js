@@ -10,7 +10,7 @@ function PopularItem({data,loading,...props}){
   const isMd = useMediaQuery((theme)=>(theme.breakpoints.down("ls")));
   const styles = useStyles();
   const to = useMemo(function(){
-    if(loading){
+    if(!loading){
       if(data){
         return `${getRoute("user","product","category",{alias:data.Alias})}`
       }
@@ -35,7 +35,7 @@ function PopularItem({data,loading,...props}){
             <LoadingButton 
               variant="contained" 
               loading={loading}
-              component={(loading) && NavLink || "button"} 
+              component={(!loading && NavLink) || "button"} 
               to={to}
               sx={styles.button}
             >Xem ngay
