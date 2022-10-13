@@ -1,0 +1,10 @@
+.content{
+    max-height: 20em !important;
+    overflow: hidden;
+}
+.full{
+    max-height: fit-content !important;
+}
+.fulldes *{
+ max-width: 100%;
+}

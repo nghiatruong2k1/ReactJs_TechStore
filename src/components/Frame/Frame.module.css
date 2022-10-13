@@ -1,0 +1,44 @@
+.frame{
+	display: flex;
+	width: 100%;
+	position: relative;
+}
+.container{
+	width: 100%;
+	position: relative;
+	border-radius: 0.5em;
+	overflow: hidden;
+}
+.square{
+	padding-top: 100%;
+}
+.rectangle{
+	padding-top: 50%;
+}
+.circle{
+	padding-top: 100%;
+	border-radius: 100%;
+}
+.content{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 1;
+}
+.skeleton{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 2;
+	height: 100% !important;
+	width: 100% !important;
+	transform:none !important;
+}
+.loading{
+	transition: opacity 0.3s;
+	opacity: 0;
+}

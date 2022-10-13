@@ -1,0 +1,6 @@
+.svg{
+	fill: var(--info) !important;
+}
+.text{
+	color: var(--info) !important;
+}

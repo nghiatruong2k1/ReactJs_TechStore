@@ -1,0 +1,28 @@
+.root{
+   margin-top: 0.5em;
+}
+.button{
+    min-width: auto !important;
+    width: 6em;
+    height: 3em;
+    padding: 0.2em !important;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.icon{
+    font-size:1.6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.text{
+    font-size:0.8em !important;
+    line-height: 1.4em !important;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}

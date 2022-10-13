@@ -1,0 +1,6 @@
+svg[class*='-music'] path{
+    transform: translate(-0.15em,0);
+}
+svg[class*='-play'] path{
+    transform: translate(0.2em,0);
+}

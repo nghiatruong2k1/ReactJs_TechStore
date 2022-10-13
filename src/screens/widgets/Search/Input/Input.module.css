@@ -1,0 +1,10 @@
+.container{
+	color:inherit !important;
+}
+.input{
+	border-width: 0 0.1em !important;
+	padding: 0.1em 0.2em !important;
+	margin: 0 0.1em !important;
+	border-color: currentColor !important;
+	border-style: solid !important;
+}

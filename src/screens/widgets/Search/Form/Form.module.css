@@ -1,0 +1,4 @@
+.form{
+	border: 0.15em solid var(--info) !important;
+    border-radius: 0.55rem !important;
+}

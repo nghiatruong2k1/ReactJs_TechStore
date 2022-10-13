@@ -1,0 +1,12 @@
+.content{
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+.icon{
+	font-size: 5em !important;
+}
+.item{
+	background-color: #eee !important;
+}

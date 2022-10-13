@@ -1,0 +1,9 @@
+.paper{
+    background-color: var(--primary-bg) !important;
+    color:var(--text-primary) !important;
+    padding: 0.2em;
+}
+
+.text{
+    text-align: left !important;
+}

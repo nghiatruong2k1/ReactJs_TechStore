@@ -1,0 +1,26 @@
+
+.number{
+	font-weight: bolder !important;
+	font-size: 10em !important;
+	line-height: 1em !important;
+	text-shadow: 0.02em 0.02em 0 var(--alpha-layout-bg);
+}
+.title{
+	font-weight: bolder !important;
+	font-size: 2em !important;
+}
+.description{
+	
+}
+.error-button{
+	font-weight: bolder;
+	font-size: 1.4em;
+	padding: 0.1em 0.5em;
+	margin: 0.5em 0.2em;
+}
+.error-button .icon{
+	margin: 0 0.2em;
+}
+.error-button .text{
+	margin: 0 0.2em;
+}

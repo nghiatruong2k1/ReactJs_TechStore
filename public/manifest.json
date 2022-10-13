@@ -1,0 +1,6 @@
+{
+  "short_name": "TechStore",
+  "name": "TechStore",
+  "start_url": ".",
+  "display": "standalone"
+}

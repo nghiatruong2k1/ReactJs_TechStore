@@ -1,0 +1,29 @@
+
+
+
+
+.item{
+	cursor: grab !important;
+    padding: 0 1em !important;
+}
+
+.dots{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.dotButton{
+	border-width: 0 !important;
+    border-color: var(--info) !important;
+	transition: border 0.5s;
+	cursor: pointer;
+}
+
+.dotButton:not(.dotActive):hover{
+	border-width: 2px !important;
+}
+.dotActive{
+	border-width: 2px !important;
+}

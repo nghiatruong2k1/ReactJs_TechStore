@@ -1,0 +1,11 @@
+[functions]
+  directory = "/src/Netlify"
+[[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
+[[plugins]]
+package = "netlify-plugin-inline-functions-env"
+  [plugins.inputs]
+  buildEvent = "onBuild"
+  include = ["REACT_APP_BASE_API","REACT_APP_WEBSITE_NAME"]

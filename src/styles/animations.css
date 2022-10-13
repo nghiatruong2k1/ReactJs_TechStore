@@ -1,0 +1,31 @@
+.a-running{
+    animation-play-state: running !important;
+}
+.a-paused{
+    animation-play-state: paused !important;
+}
+.a-translate-left{
+    animation-name: translate-left;
+}
+@keyframes translate-left {
+    100%{
+        transform: translateX(-100%);
+    }
+}
+.a-fade-hidden{
+    animation-name: fade-hidden;
+}
+@keyframes fade-hidden {
+    100%{
+        opacity: 0;
+    }
+}
+
+.a-rotate-circle{
+    animation-name: rotate-circle;
+}
+@keyframes rotate-circle {
+    100%{
+        transform: rotate(360deg);
+    }
+}

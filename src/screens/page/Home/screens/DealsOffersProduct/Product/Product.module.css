@@ -1,0 +1,42 @@
+.name{
+	line-height: 1.2em !important;
+	height: 2.4em !important;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    text-decoration-line: none;
+}
+.price{
+	display: block;
+	margin: 0.2em 0 !important;
+}
+.current{
+	color: var(--info);
+}
+.root{
+	opacity: 0.8;
+	font-size: 0.8em !important;
+	text-decoration: line-through;
+}
+
+.sale{
+	color: #f00;
+}
+.hidden{
+	visibility: hidden;
+}
+
+.bookmask{
+	position: absolute !important;
+	right: 3%;
+	top: 3%;
+}
+.badge{
+	position: relative !important;
+	transform: unset !important;
+	font-size: 0.8em !important;
+	padding: 0.35em 0.6em !important;
+	border-radius: 0.4em !important;
+	background-color: #f00 !important;
+	color: #fff !important;
+}
