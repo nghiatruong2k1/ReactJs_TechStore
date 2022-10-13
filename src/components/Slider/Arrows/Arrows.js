@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import clsx from 'clsx';
 import { IconButton } from '@mui/material/';
-import styles from './Arrows.module.css';
+import styles from '../Slider.module.css';
 import { useGetSliderContext } from '../provider';
 function Arrows({ ...props }) {
   const { slider } = useGetSliderContext();

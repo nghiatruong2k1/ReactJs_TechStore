@@ -11,7 +11,7 @@ function PictureComponent({ id, loading, ...props }) {
       <Card sx={{ height: '100%' }}>
         <CardContent sx={{ position: 'relative' }}>
           <Provider value={{state, dispath}} id={id}>
-            <Slider data={state.data} loading={state.isLoading} variant='square'/>
+            <Slider data={state.data} loading={state.isLoading} fit='contain' variant='square'/>
           </Provider>
         </CardContent>
       </Card>

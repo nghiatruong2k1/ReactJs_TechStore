@@ -1,5 +1,5 @@
 import { memo, useState, useEffect, useRef } from 'react';
-import { Box, Container, Grid, Paper, Stack } from '@mui/material/';
+import { Box, Container, Grid, Paper} from '@mui/material/';
 import styles from './Header.module.css';
 import {
   AuthWidget,

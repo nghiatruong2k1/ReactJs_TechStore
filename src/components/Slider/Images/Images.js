@@ -31,7 +31,7 @@ import {
       };
     }, []);
     return (
-      <Slider ref={ref} {...settings}>
+      <Slider  className='slider-root'  ref={ref}  {...settings}>
         {data.map(function (item, index) {
           return (
             <Frame

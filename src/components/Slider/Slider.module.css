@@ -4,7 +4,7 @@
 
 .item{
 	cursor: grab !important;
-    padding: 0 1em !important;
+    padding: 0 2em !important;
 }
 
 .dots{
@@ -12,6 +12,7 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
+	z-index: 5;
 }
 
 .dotButton{
@@ -26,4 +27,18 @@
 }
 .dotActive{
 	border-width: 2px !important;
+}
+
+.arrow{
+	position: absolute !important;
+	top: 50%;
+	color: var(--dark) !important;
+	transform: translateY(-50%);
+	z-index: 5;
+}
+.left{
+	left: 0;
+}
+.right{
+	right: 0;
 }

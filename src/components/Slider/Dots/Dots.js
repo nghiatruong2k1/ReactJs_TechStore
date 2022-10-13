@@ -1,6 +1,6 @@
 import { memo, useRef, useEffect, useMemo } from 'react';
 import clsx from 'clsx';
-import { Box, Button, Paper } from '@mui/material/';
+import { Box, Paper } from '@mui/material/';
 
 import { Frame, Image } from '~/components';
 import Slider from 'react-slick';
@@ -15,8 +15,6 @@ function Dots({ fit}) {
       dots: false,
       infinite: false,
       speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
       rows: 1,
       slidesToShow: 4,
       slidesToScroll: 1
@@ -42,7 +40,7 @@ function Dots({ fit}) {
                   component: Paper,
                   variant: 'outlined',
                   className: clsx(styles.dotButton,'-containedInfo', {
-                    [styles.dotActive]: index == state.index,
+                    [styles.dotActive]: index === state.index,
                   }),
                   onClick: (e) => {
                     slider && slider.slickGoTo(index);
