@@ -21,10 +21,10 @@ function HeaderComponent() {
       let scrollTop = bodyRoot.scrollTop;
       if (scrollTop > 0) {
         setFixed(true);
-        //thisRef.current.style.height = heightTop + 'px';
+        thisRef.current.style.height = heightTop + 'px';
       } else {
         setFixed(false);
-        //thisRef.current.style.height = 'auto';
+        thisRef.current.style.height = 'auto';
       }
     }
     bodyRoot.addEventListener('scroll', handleScroll);
