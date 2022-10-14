@@ -8,7 +8,7 @@ import CartFooter from './Footer';
 import CartEmpty from './Empty';
 import CartContent from './Content';
 import { ViewContent } from '~/components';
-function CartComponent({ isToggle, toggleComponent, ...props }) {
+function CartComponent({ isToggle, toggleComponent }) {
   const { state, dispath, initCase } = useGetCart();
   const handleTitle = useGetTitle();
   useEffect(() => {
@@ -16,19 +16,6 @@ function CartComponent({ isToggle, toggleComponent, ...props }) {
       return handleTitle('Giỏ hàng');
     }
   }, [state.isOpen]);
-  const total = useMemo(() => {
-    if(Array.isArray(state.data)){
-      return state.data.reduce((rs, i) => {
-        if(i){
-          return rs + i.Quantity;
-        }else{
-          return rs
-        }
-      }, 0);
-    }else{
-      return 0
-    }
-  }, [state.data]);
   const open=useCallback(()=>{
     dispath([initCase.TOGGLE_OPEN,true])
   },[])
@@ -41,11 +28,10 @@ function CartComponent({ isToggle, toggleComponent, ...props }) {
         open={state.isOpen}
         onOpen={open}
         onClose={close}
-        total={total}
+        total={state.total}
         toggleComponent={toggleComponent}
         header={CartHeader}
         footer={CartFooter}
-        {...props}
       >
         <ViewContent loading={state.isLoading} length={state.data?.length} empty={<CartEmpty />}>
             <CartContent data={state.data}/>

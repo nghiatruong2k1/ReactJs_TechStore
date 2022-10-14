@@ -2,7 +2,7 @@ import { memo, useContext } from 'react';
 import { IconButton, Tooltip } from '@mui/material/';
 import { useGetCart } from '~/hooks/Cart';
 function RemoveButton({ index, loading }) {
-  const { dispath, initCase } = useGetCart();
+  const { handle} = useGetCart();
   return (
     <Tooltip placement="top" title="Xóa khỏi giỏ hàng" arrow>
       <span>
@@ -10,7 +10,7 @@ function RemoveButton({ index, loading }) {
           disabled={loading}
           color="error"
           onClick={() => {
-            dispath([initCase.REMOVE, index]);
+            handle.remove(index)
           }}
         >
           <span className="fas fa-times" />

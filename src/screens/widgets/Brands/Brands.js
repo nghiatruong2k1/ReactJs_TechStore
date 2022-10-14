@@ -13,7 +13,6 @@ function FooterBrands(props) {
       const newdata = data.map((item) => ({
         text: item.Name,
         to: getAction(routers.product.brand, { alias: item.Alias }),
-        icon: <span className="fas fa-chevron-right" />,
       }));
       setData(newdata);
       setLoading(false);
@@ -23,6 +22,7 @@ function FooterBrands(props) {
   return (
     <Fragment>
       <ListNav
+        icon={<span className="fas fa-chevron-right" />}
         datas={data}
         loading={isLoading}
         title="Thương hiệu"

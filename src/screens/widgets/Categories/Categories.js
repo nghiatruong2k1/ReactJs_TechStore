@@ -12,8 +12,7 @@ function FooterCategories(props) {
     const ourRequest = categoryServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
-        to: getAction(routers.product.category, { alias: item.Alias }),
-        icon: <span className="fas fa-chevron-right" />,
+        to: getAction(routers.product.category, { alias: item.Alias })
       }));
       setData(newdata);
       setLoading(false);
@@ -23,6 +22,7 @@ function FooterCategories(props) {
   return (
     <Fragment>
       <ListNav
+        icon={<span className="fas fa-chevron-right" />}
         datas={data}
         loading={isLoading}
         title="Danh mục"

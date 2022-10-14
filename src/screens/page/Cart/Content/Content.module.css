@@ -1,0 +1,60 @@
+.cell{
+    padding: 0.1em 0.25em;
+}
+
+.row{
+    border-color: var(--primary);
+    border-style: solid;
+    border-bottom-width: 1px;
+}
+.title{
+    font-weight: bold !important;
+}
+.row:last-child{
+    border-bottom-width: 0;
+}
+.row:not(.title):nth-child(odd){
+}
+
+.name{
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    text-decoration-line: none;
+    text-align: start !important;
+}
+.price{
+	display: block;
+	margin-bottom: 0.2em !important;
+	flex:1;
+}
+.current{
+	color: var(--primary);
+}
+.old{
+	opacity: 0.8;
+	font-size: 0.8em !important;
+	text-decoration: line-through;
+}
+
+.sale{
+	color: #f00;
+}
+.hidden{
+	visibility: hidden;
+}
+
+.bookmask{
+	position: absolute !important;
+	right: 3%;
+	top: 3%;
+}
+.badge{
+	position: relative !important;
+	transform: unset !important;
+	font-size: 0.8em !important;
+	padding: 0.35em 0.6em !important;
+	border-radius: 0.4em !important;
+	background-color: #f00 !important;
+	color: #fff !important;
+}

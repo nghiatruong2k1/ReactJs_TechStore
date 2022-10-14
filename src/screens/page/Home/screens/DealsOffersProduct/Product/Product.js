@@ -1,30 +1,21 @@
-import { memo, useContext } from 'react';
-import clsx from 'clsx';
-import {
-  Box,
-  Divider,
-  Card,
-  CardActions,
-  CardContent,
-  Badge,
-  Rating,
-} from '@mui/material/';
-import { Star } from '@mui/icons-material/';
+import { memo } from 'react';
+import { Box, Divider, Card, CardActions, CardContent } from '@mui/material/';
 import { Frame, Image } from '~/components';
 import DataName from './Name';
 import DataBookmask from './Bookmask';
+import DataRating from './Rating';
 import styles from './Product.module.css';
 function Product({ data, loading, ...props }) {
   return (
     <Box px={0.5} py={1} sx={{ cursor: 'grab' }}>
       <Card className={styles.card}>
         <CardActions>
-          <Frame variant='rectangle' loading={loading}>
+          <Frame variant="rectangle" loading={loading}>
             <DataBookmask
               price={data && data.Price}
               salePrice={data && data.SalePrice}
             />
-            <Image fit='contain' src={data && data.ImageUrl} />
+            <Image fit="contain" src={data && data.ImageUrl} />
           </Frame>
         </CardActions>
         <Divider />
@@ -34,14 +25,7 @@ function Product({ data, loading, ...props }) {
             name={data && data.Name}
             alias={data && data.Alias}
           />
-          <Rating
-            value={(data && data.Rating) || 0}
-            readOnly
-            size="small"
-            precision={0.1}
-            max={5}
-            emptyIcon={<span className="fas fa-star" />}
-          />
+          <DataRating rating={(data && data.Rating) || 0} loading={loading} />
         </CardContent>
       </Card>
     </Box>

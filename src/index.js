@@ -3,22 +3,25 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 
-import { BrowserRouter }from'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 import FontsGlobal from '~/fonts';
 import StylesGlobal from '~/styles';
 import StateGlobal from '~/states';
 import MessageProvider from '~/screens/Message';
+import LoadingProvider from '~/screens/Loading';
 ReactDOM.render(
   <BrowserRouter>
     <CookiesProvider>
       <FontsGlobal>
         <StylesGlobal>
-          <MessageProvider>
-            <StateGlobal>
-               <App/>
-            </StateGlobal>
-          </MessageProvider>
+          <LoadingProvider>
+            <MessageProvider>
+              <StateGlobal>
+                <App />
+              </StateGlobal>
+            </MessageProvider>
+          </LoadingProvider>
         </StylesGlobal>
       </FontsGlobal>
     </CookiesProvider>

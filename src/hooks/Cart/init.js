@@ -16,7 +16,6 @@ export const initCase = {
 };
 export function initReducerState(toast) {
   return (prevState, [key, payload, callback]) => {
-    console.log(prevState, [key, payload, callback]);
     switch (key) {
       case initCase.TOGGLE_LOADING: {
         if (payload !== prevState.isLoading) {
@@ -62,7 +61,7 @@ export function initReducerState(toast) {
         if (typeof payload === 'object') {
           try {
             const carts = [...prevState.data];
-            const { Id, Quantity } = payload;
+            const { Id, Quantity, Name, Alias, Price, SalePrice,ImageUrl } = payload;
             const oldIndex = carts.findIndex(function (data) {
               return data && data.Id == Id;
             });
@@ -72,10 +71,18 @@ export function initReducerState(toast) {
               carts.push({
                 Id,
                 Quantity,
+                Name,
+                Alias,
+                Price,
+                SalePrice,
+                ImageUrl
               });
             }
             setTimeout(() => {
-              toast({ message: 'Thêm sản phẩm thành công' });
+              toast({
+                message: 'Thêm sản phẩm vào giỏ hàng thành công',
+                type: 'success',
+              });
               callback && callback();
             }, 500);
             return {
@@ -83,8 +90,11 @@ export function initReducerState(toast) {
               data: carts,
             };
           } catch (error) {
-            console.log(error)
-            toast({ message: 'Có lỗi khi thêm sản phẩm' });
+            console.log(error);
+            toast({
+              message: 'Có lỗi khi thêm sản phẩm vào giỏ hàng',
+              type: 'error',
+            });
           }
         }
         break;
@@ -92,6 +102,10 @@ export function initReducerState(toast) {
       case initCase.REMOVE: {
         const data = [...prevState.data];
         data.splice(payload, 1);
+        toast({
+          message: 'Xóa sản phẩm khỏi giỏ hàng thành công',
+          type: 'success',
+        });
         return {
           ...prevState,
           data,

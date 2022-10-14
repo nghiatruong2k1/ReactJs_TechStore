@@ -11,7 +11,7 @@ function DataPrice({ loading, price, salePrice }) {
     if (price) {
       if (salePrice) {
         _className = styles.sale;
-        _priceText = formatNumber('#,###.# đ', salePrice);
+        _priceText = formatNumber('#,##0.# đ', salePrice);
       } else {
         _className = styles.hidden;
       }

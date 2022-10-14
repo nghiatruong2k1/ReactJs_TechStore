@@ -1,16 +1,14 @@
-import { memo, useEffect, useRef, useMemo } from 'react';
-import { useTheme } from '@mui/material/styles';
-import { Box, Grid } from '@mui/material/';
+import { memo, useRef, useMemo } from 'react';
+import { Box} from '@mui/material/';
 
 import { ViewContent } from '~/components';
 import Slider from 'react-slick';
 
 import ProductItem from '../Product';
 import { useGetDealsOffersContext } from '../provider';
-import { initCase } from '../init';
 
 function Content({ children }) {
-  const { state, dispath } = useGetDealsOffersContext();
+  const { state } = useGetDealsOffersContext();
   const ref = useRef();
   const settings = useMemo(function () {
     return {
@@ -25,17 +23,6 @@ function Content({ children }) {
       slidesToShow: 4,
     };
   }, []);
-
-  // useEffect( () => {
-  //     if(ref.current){
-  //       console.log(ref.current)
-  //       ref.current.slickGoTo(
-  //         state.index / ref.current.innerSlider.state.slideCount,
-  //       );
-  //     }
-  //   },
-  //   [state.index],
-  // );
 
   return (
     <Box sx={{p:1}}>

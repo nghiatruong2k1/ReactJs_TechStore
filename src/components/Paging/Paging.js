@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect,  useState } from 'react';
 import { Stack, Pagination } from '@mui/material/';
 import { useSearchParams } from 'react-router-dom';
-function PagingComponent({ total,limit,page,onChange, ...props }) {
+function PagingComponent({ total,limit,page,onChange}) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -17,7 +17,7 @@ function PagingComponent({ total,limit,page,onChange, ...props }) {
   }, []);
   if (count > 1) {
     return (
-      <Stack {...props}>
+      <Stack py={1}>
         <Pagination onChange={handleChange} count={count} page={page} />
       </Stack>
     );

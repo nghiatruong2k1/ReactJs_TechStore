@@ -1,5 +1,4 @@
-import { memo, useState } from 'react';
-import clsx from 'clsx';
+import { memo } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import {
   Box,
@@ -13,11 +12,15 @@ import {
 } from '@mui/material';
 import styles from './DrawerNav.module.css';
 import { ScrollArea } from '~/components';
-function DwawerNavComponent({ children, toggleComponent, ...props }) {
+function DwawerNavComponent({ children, toggleComponent }) {
   const [isOpen, { close, open }] = useDisclosure(false);
   return (
     <>
-      <Box component={toggleComponent ?? 'div'} onClick={open} />
+      <Box
+        component={toggleComponent ?? 'div'}
+        icon={<span className={'fas fa-bars'} />}
+        onClick={open}
+      />
       <Drawer
         anchor="right"
         open={isOpen}

@@ -40,7 +40,7 @@ export default function useServices(location) {
                 location,
               ]);
               handleError(enqueueSnackbar, error);
-              onCatch && onCatch();
+              onCatch && onCatch(error);
             })
             .finally(() => {
               onEnd && onEnd();

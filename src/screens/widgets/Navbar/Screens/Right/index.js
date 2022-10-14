@@ -1,7 +1,7 @@
 
-import {memo,useMemo,useContext} from 'react';
+import {memo,useMemo} from 'react';
 import NavMenu from "../../components/NavMenu";
-import {LightMode,DarkMode} from '@mui/icons-material/';
+// import {LightMode,DarkMode} from '@mui/icons-material/';
 // const useThemeButton = function(){
 //   const {theme:{mode,setMode}} = useContext(global.config.context);
 //   return useMemo(function(){
@@ -18,7 +18,6 @@ function RightNav(props){
   const datas = useMemo(function(){
     return [
       {
-        to:"#",
         text:"Tải ứng dụng"
       }
     ]

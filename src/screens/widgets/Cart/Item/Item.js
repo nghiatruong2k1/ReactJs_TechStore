@@ -4,8 +4,10 @@ import { Card, CardHeader, Typography } from '@mui/material';
 import { Frame, Image } from '~/components';
 import styles from './Item.module.css';
 import ItemName from './Name';
+import ItemPrice from './Price';
+import ItemSalePrice from './SalePrice';
 import RemoveButton from './Remove';
-function CartItemComponent({ loading, ImageUrl, Name, Alias, Quantity ,Price,index}) {
+function CartItemComponent({ loading, ImageUrl, Name, Alias, Quantity ,Price,SalePrice,index}) {
   return (
     <Card>
       <CardHeader
@@ -22,7 +24,8 @@ function CartItemComponent({ loading, ImageUrl, Name, Alias, Quantity ,Price,ind
         subheader={
           <>
             <Typography>{`Số lượng: ${Quantity ?? 0}`}</Typography>
-            <Typography>{`Giá: ${Price ?? 0}`}</Typography>
+            <ItemPrice text="Giá" price={Price} salePrice={SalePrice}/>
+            <ItemSalePrice text="Giảm giá" price={Price} salePrice={SalePrice}/>
           </>
         }
         action={

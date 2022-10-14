@@ -2,7 +2,7 @@ import { memo, useState, useCallback } from 'react';
 import { LoadingButton } from '@mui/lab/';
 import { useGetCart } from '~/hooks/Cart';
 
-function AddToCartButton({ loading, Id, ...props }) {
+function AddToCartButton({ loading, data, ...props }) {
   const [isLoading, setLoading] = useState(false);
   const { dispath, initCase } = useGetCart();
   const handleClick = useCallback(() => {
@@ -10,13 +10,13 @@ function AddToCartButton({ loading, Id, ...props }) {
       setLoading(true);
       dispath([
         initCase.ADD,
-        { Id, Quantity: 1 },
+        { ...data, Quantity: 1 },
         () => {
           setLoading(false);
         },
       ]);
     }
-  }, [Id, isLoading]);
+  }, [data, isLoading]);
   return (
     <>
       <span>

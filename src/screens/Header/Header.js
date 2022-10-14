@@ -1,12 +1,12 @@
 import { memo, useState, useEffect, useRef } from 'react';
-import { Box, Container, Grid, Paper} from '@mui/material/';
+import { Box, Container, Grid, Paper } from '@mui/material/';
 import styles from './Header.module.css';
 import {
   AuthWidget,
   LogoWidget,
   NavbarWidget,
   SearchWidget,
-  CartWidget
+  CartWidget,
 } from '~/screens/widgets';
 import { controllers } from './init';
 import HeaderOption from './HeaderOption';
@@ -37,7 +37,7 @@ function HeaderComponent() {
       <Container
         maxWidth="xxl"
         component={Paper}
-        className={clsx(styles.container,{popup:isFixed})}
+        className={clsx(styles.container, { popup: isFixed })}
         sx={{
           zIndex: 10,
           position: { xs: 'fixed', sm: (isFixed && 'fixed') || 'relative' },
@@ -61,12 +61,7 @@ function HeaderComponent() {
             item
             xs={12}
             isToggle={isFixed}
-            toggleComponent={(props) => (
-              <HeaderOption
-                icon={<span className={'fas fa-bars'} />}
-                {...props}
-              />
-            )}
+            toggleComponent={HeaderOption}
           />
         </Grid>
       </Container>

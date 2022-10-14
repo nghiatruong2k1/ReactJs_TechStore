@@ -246,7 +246,9 @@ a:not(.disabled):not(:disabled) {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
+small,.small{
+  font-size: 0.875rem !important;
+}
 h6,
 .h6 {
   font-size: 1.2rem !important;
@@ -287,7 +289,10 @@ i,.i {
 u,.u {
  text-decoration-line: underline !important;
 }
-input:-internal-autofill-selected{
+*:-internal-autofill-selected {
   background-color: transparent !important;
+  background-image: none !important;
+  color: inherit !important;
+  -webkit-box-shadow: transparent !important;
 }
 

@@ -8,12 +8,11 @@ export const useGetGlobalStateContext = () => {
   return useContext(GlobalStateContext);
 };
 function GlobalStateProvider({ children }) {
-  const loading = useInitLoading();
   const auth = useInitAuth();
   const title = useInitTitle();
   const cart = useInitCart();
   return (
-    <GlobalStateContext.Provider value={{ loading, auth, title, cart }}>
+    <GlobalStateContext.Provider value={{ auth, title, cart }}>
       {children}
     </GlobalStateContext.Provider>
   );

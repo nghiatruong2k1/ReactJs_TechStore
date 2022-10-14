@@ -7,7 +7,7 @@ function CartFooter({ onClose }) {
     <CardActions sx={{ justifyContent: 'center',p:0.5 }}>
       <Button
         variant="contained"
-        startIcon={<span className="fas fa-credit-card" />}
+        startIcon={<span className="fas fa-shopping-cart" />}
         component={NavLink}
         onClick={onClose}
         color='success'

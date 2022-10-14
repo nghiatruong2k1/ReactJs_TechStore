@@ -1,9 +1,11 @@
 import { memo, Fragment, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { publicRouters } from '~/routers/Public';
+import { relativeRouters } from '~/routers/Private';
 import { DefaultLayout } from '~/screens/layout';
-import Loading from '~/screens/Loading';
+
 const bodyRoot = document.getElementById('root');
+
 function App() {
   const location = useLocation();
   useEffect(() => {
@@ -11,24 +13,43 @@ function App() {
   }, [location]);
   return (
     <>
-      <Loading />
-        <Routes>
-          {publicRouters.map(({ layout, path, page, title }, index) => {
-            const Layout = layout === null ? Fragment : layout ?? DefaultLayout;
-            const Page = page ?? Fragment;
-            return (
-              <Route
-                key={index}
-                path={path.split('?')[0]}
-                element={
-                  <Layout>
-                    <Page />
-                  </Layout>
-                }
-              />
-            );
-          })}
-        </Routes>
+      <Routes>
+        {publicRouters.map(({ layout, path, page, title }, index) => {
+          const Layout = layout === null ? Fragment : layout ?? DefaultLayout;
+          const Page = page ?? Fragment;
+          return (
+            <Route
+              key={`public-route-${index}`}
+              path={path.split('?')[0]}
+              element={
+                <Layout>
+                  <Page />
+                </Layout>
+              }
+            />
+          );
+        })}
+        <Route element={<relativeRouters.element />}>
+          {relativeRouters.routers.map(
+            ({ layout, path, page, title }, index) => {
+              const Layout =
+                layout === null ? Fragment : layout ?? DefaultLayout;
+              const Page = page ?? Fragment;
+              return (
+                <Route
+                  key={`prelative-route-${index}`}
+                  path={path.split('?')[0]}
+                  element={
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  }
+                />
+              );
+            },
+          )}
+        </Route>
+      </Routes>
     </>
   );
 }

@@ -144,13 +144,13 @@ a:not([type='button']):hover{
 a:not([type='button']).active{
   color:var(--link-text-hover);
 }
-*.MuiListSubheader-root:not(h5):not(h4):not(h3):not(h2):not(h1),
+*.MuiListSubheader-root:not(h5):not(h4):not(h3):not(h2):not(h1):not(small),
 *.MuiTooltip-root {
-  font-size: 0.8em ;
+  font-size: 0.875em ;
 }
 
 *.MuiAutocomplete-root,
-*.MuiTypography-root,
+*.MuiTypography-root:not(h5):not(h4):not(h3):not(h2):not(h1):not(small),
 *.MuiLink-root,
 *.MuiButton-root,
 *.MuiInputBase-root {
@@ -301,6 +301,13 @@ a:not([type='button']).active{
 }
 
 .MuiSkeleton-root{
-  width: 100%;
+  max-width: 100%;
+  flex: 1 1 auto;
   height: 100%;
+}
+.MuiInputAdornment-root{
+  color: inherit !important;
+}
+.MuiStepConnector-horizontal{
+  margin: 0 0.4em !important;
 }

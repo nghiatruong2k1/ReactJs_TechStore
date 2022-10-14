@@ -15,7 +15,7 @@ import { registerAuthModel } from '~/models/auth';
 import { getRulers } from '~/models';
 
 const rules = getRulers(registerAuthModel);
-function FormRegister({onClose, ...props }) {
+function FormRegister({ onClose, ...props }) {
   const authServices = AuthServices('form login');
   const handleSubmit = useCallback(({ Email, Password }) => {
     authServices.register({ Email, Password }, (data) => {
@@ -33,16 +33,20 @@ function FormRegister({onClose, ...props }) {
           py: 1,
         }}
       >
-        <InputText name="Email" title="Email" placeholder="Nhập Email" />
+        <InputText
+          name="Email"
+          title={registerAuthModel.Password.displayName}
+          placeholder={`Nhập ${registerAuthModel.Password.displayName}`}
+        />
         <InputPassword
           name="Password"
-          title="Mật khẩu"
-          placeholder="Nhập mật khẩu"
+          title={registerAuthModel.Password.displayName}
+          placeholder={`Nhập ${registerAuthModel.Password.displayName}`}
         />
         <InputPassword
           name="RePassword"
-          title="Xác thực mật khẩu"
-          placeholder="Nhập xác thực mật khẩu"
+          title={registerAuthModel.Password.displayName}
+          placeholder={`Nhập ${registerAuthModel.Password.displayName}`}
         />
         <InputCheckbox
           name="IsAgree"

@@ -194,8 +194,3 @@ export function checkObject(values,rulerValues,callback){
 	}
 	return 0;
 }
-export const useValidate = function(){
-	return useMemo(function(){	
-		return {checkObject,validates}		
-	},[])
-}

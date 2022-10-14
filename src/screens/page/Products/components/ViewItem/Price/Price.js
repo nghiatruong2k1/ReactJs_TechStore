@@ -13,7 +13,7 @@ function DataPrice({loading,price,salePrice}){
       }else{
         _className=styles.current
       }
-      _priceText = formatNumber("#,###.# đ",price);
+      _priceText = formatNumber("#,##0.# đ",price);
     }else{
       _priceText = "Liên hệ"
       _className=styles.current

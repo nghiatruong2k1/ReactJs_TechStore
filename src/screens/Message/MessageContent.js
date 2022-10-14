@@ -1,4 +1,4 @@
-import { memo,  useMemo,  forwardRef } from 'react';
+import { memo, useMemo, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
@@ -9,76 +9,39 @@ import {
   AccordionSummary,
   AccordionDetails,
   Typography,
-  SvgIcon
+  SvgIcon,
 } from '@mui/material/';
 
 import { ExpandMore, Close } from '@mui/icons-material/';
 import { SnackbarContent } from 'notistack';
-import {
-  Error,
-  CheckCircle,
-  Warning,
-  Notifications,
-  Help,
-} from '@mui/icons-material/';
+
 import { useDisclosure } from '@mantine/hooks';
 import styles from './Message.module.css';
-const TYPES = {
-  error: {
-    title: 'Có lỗi',
-    icon: Error,
-  },
-  help: {
-    title: 'Thông báo',
-    icon: Help,
-  },
-  success: {
-    title: 'Thông báo',
-    icon: CheckCircle,
-  },
-  warning: {
-    title: 'Cảnh báo',
-    icon: Warning,
-  },
-  bell : {
-    title: 'Thông báo',
-    icon: Notifications,
-  },
-};
-function capitalize(s)
-{
-    return s[0].toUpperCase() + s.slice(1);
-}
+import { typeToast } from '~/config/TypeToast';
 const MessageContent = forwardRef(function (
   { title, type, message, onClose },
   ref,
 ) {
-  const [isOpen, {  toggle }] = useDisclosure(true);
-  const { Title, Icon, Type } = useMemo(
-    function () {
-      const Type = `Type-contained${capitalize(TYPES[type] ? type : 'bell')}`
-      return {
-        Title: title || (TYPES[type] ?? TYPES['bell']).title,
-        Icon: (TYPES[type] ?? TYPES['bell']).icon,
-        Type,
-      };
-    },
-    [title, type],
-  );
-//   console.log(Title, Icon, Type)
+  const [isOpen, { toggle }] = useDisclosure(true);
+  const { Title, Icon, Type } = useMemo(() => {
+    return {
+      Title: title || (typeToast[type] ?? typeToast['bell']).title,
+      Icon: (typeToast[type] ?? typeToast['bell']).icon,
+      Type: (typeToast[type] ?? typeToast['bell']).className,
+    };
+  }, [title, type]);
   return (
     <SnackbarContent ref={ref} className={styles.root}>
       <Accordion
         disableGutters
         defaultExpanded
         expanded={isOpen}
-        className={clsx(styles.body,Type)}
-
+        className={clsx(styles.body, Type)}
       >
-        <AccordionSummary classes={{content:styles.content}}>
+        <AccordionSummary classes={{ content: styles.content }}>
           <Stack direction="row" alignItems="center" width="100%" spacing={1}>
-            <SvgIcon className={styles.icon} component={Icon} />
             <Typography variant="h6" flex="1" className={styles.title}>
+              {Icon}
               {Title}
             </Typography>
             <IconButton onClick={toggle}>
@@ -95,7 +58,7 @@ const MessageContent = forwardRef(function (
             </IconButton>
           </Stack>
         </AccordionSummary>
-        <AccordionDetails sx={{ p: 0.5}}>
+        <AccordionDetails sx={{ p: 0.5 }}>
           <Paper sx={{ p: 0.5 }} variant="outlined">
             {message}
           </Paper>
@@ -107,6 +70,6 @@ const MessageContent = forwardRef(function (
 
 MessageContent.displayName = 'MessageContent';
 MessageContent.propTypes = {
-  type: PropTypes.oneOf(Object.keys(TYPES)),
+  type: PropTypes.oneOf(Object.keys(typeToast)),
 };
 export default memo(MessageContent);

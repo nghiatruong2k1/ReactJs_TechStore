@@ -28,6 +28,7 @@ function CartLayout({
       <Drawer
         anchor="right"
         open={open}
+        disablePortal
         PaperProps={{
           sx: {
             p: 1,

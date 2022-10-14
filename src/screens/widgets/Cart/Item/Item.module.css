@@ -1,6 +1,29 @@
-.avatar{
-    width: 20%;
+.avatar {
+  width: 20%;
 }
-.action{
-    align-self: center !important;
+.action {
+  align-self: center !important;
+}
+
+.price {
+  display: block;
+  margin: 0 0.2em !important;
+  flex: 1;
+}
+.old {
+  opacity: 0.8;
+  font-size: 0.8em !important;
+  text-decoration: line-through;
+}
+.current {
+}
+.root {
+
+}
+
+.sale {
+  color: #f00;
+}
+.hidden {
+  visibility: hidden;
 }

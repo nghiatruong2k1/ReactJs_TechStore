@@ -14,7 +14,7 @@ import { initCase, initState, reducerState } from './init';
 function InfoComponent({ data, loading, ...props }) {
   const [state, dispath] = useReducer(reducerState, initState);
   useEffect(() => {
-    dispath([initCase.SET_ID, data.Id]);
+    dispath([initCase.SET_QUANTITY, 1]);
   }, [data]);
   return (
     <Grid item {...props}>
@@ -47,7 +47,7 @@ function InfoComponent({ data, loading, ...props }) {
           >
             <InfoQuantity loading={loading}/>
             <InfoContactButton loading={loading} />
-            <AddToCartButton loading={loading} />
+            <AddToCartButton loading={loading} data={data} Quantity={state.quantity}/>
           </CardContent>
           <div></div>
         </Card>

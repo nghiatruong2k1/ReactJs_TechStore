@@ -1,24 +1,14 @@
+import { userEntity } from "~/entities/user";
+
 export const loginAuthModel = {
-  Email: {
-    displayName: '',
-    rulers: {
-      isRequired: ['Vui lòng nhập Email!'],
-      isEmail: [null, ['gmail.com']],
-    },
-  },
-  Password: {
-    displayName: '',
-    rulers: {
-      isRequired: ['Vui lòng nhập mật khẩu!'],
-      minLength: [5],
-    },
-  }
+  Email: userEntity.Email,
+  Password: userEntity.Password
 };
 export const registerAuthModel = {
-    Email: {...loginAuthModel.Email},
-    Password: {...loginAuthModel.Password},
+    Email: userEntity.Email,
+    Password: userEntity.Password,
     RePassword: {
-      displayName: '',
+      displayName: 'Xác thực mật khẩu',
       rulers: {
         isRequired: ['Vui lòng nhập xác thực mật khẩu!'],
         isConfirm: ['Password', 'Xác thực mật khẩu không hợp lệ!'],
@@ -32,5 +22,5 @@ export const registerAuthModel = {
     },
   };
   export const forgetAuthModel = {
-    Email: {...loginAuthModel.Email}
+    Email: userEntity.Email
   };

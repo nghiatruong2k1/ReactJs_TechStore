@@ -1,0 +1,12 @@
+.root {
+}
+.title {
+  padding: 0 !important;
+}
+.head {
+  justify-content: flex-start !important;
+  padding: 0.2em !important;
+}
+.foot {
+    padding: 0.2em !important;
+}

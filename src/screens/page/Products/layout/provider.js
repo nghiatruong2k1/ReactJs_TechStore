@@ -9,14 +9,14 @@ export const useGetProductsContext = () => {
 
 function ProductsProvider({
   children,
-  value: {  handleGetTitle, handleGetData, handleGetTotal, state, dispath }
+  value: { handleGetTitle, handleGetData, handleGetTotal, state, dispath },
 }) {
   const { alias } = useParams();
   const handleTitle = useGetTitle();
   useEffect(() => {
     dispath([initCase.SET_PAGE]);
     let ourTitle;
-    const ourRequestTitle = handleGetTitle(alias,(data) => {
+    const ourRequestTitle = handleGetTitle(alias, (data) => {
       ourTitle = handleTitle(data.Name);
     });
     const ourRequestTotal = handleGetTotal(alias, (data) => {
@@ -30,6 +30,7 @@ function ProductsProvider({
   }, [alias]);
   useEffect(() => {
     dispath([initCase.SET_DATA]);
+    dispath([initCase.SET_LOADING, true]);
     return handleGetData(
       alias,
       {
@@ -38,6 +39,7 @@ function ProductsProvider({
       },
       (data) => {
         dispath([initCase.SET_DATA, data]);
+        dispath([initCase.SET_LOADING, false]);
       },
     );
   }, [alias, state.limit, state.page]);

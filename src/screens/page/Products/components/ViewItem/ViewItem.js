@@ -1,10 +1,5 @@
 import { memo } from 'react';
-import {
-  Grid,
-  Card,
-  CardContent,
-  Divider,
-} from '@mui/material/';
+import { Grid, Card, CardContent, Divider } from '@mui/material/';
 import { Frame, Image } from '~/components';
 import ItemName from './Name';
 import ItemPrice from './Price';
@@ -34,7 +29,7 @@ function ViewItem({
           </Frame>
         </CardContent>
         <Divider />
-        <CardContent sx={{textAlign:'center',flex:1}}>
+        <CardContent sx={{ textAlign: 'center', flex: 1 }}>
           <ItemName loading={loading} name={Name} alias={Alias} />
           <ItemRating rating={Rating || 0} loading={loading} />
           <ItemSalePrice
@@ -45,8 +40,11 @@ function ViewItem({
           <ItemPrice loading={loading} price={Price} salePrice={SalePrice} />
         </CardContent>
         <Divider />
-        <CardContent sx={{textAlign:'center'}}>
-            <ItemAddToCart loading={loading} Id={Id}/>
+        <CardContent sx={{ textAlign: 'center' }}>
+          <ItemAddToCart
+            loading={loading}
+            data={{ Id, Alias, Name, ImageUrl, Price, SalePrice }}
+          />
         </CardContent>
         <div></div>
       </Card>

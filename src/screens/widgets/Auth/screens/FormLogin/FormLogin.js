@@ -32,11 +32,15 @@ function FormLogin({ onClose, ...props }) {
           py: 1,
         }}
       >
-        <InputText name="Email" title="Email" placeholder="Nhập Email" />
+        <InputText
+          name="Email"
+          title={loginAuthModel.Email.displayName}
+          placeholder={`Nhập ${loginAuthModel.Email.displayName}`}
+        />
         <InputPassword
           name="Password"
-          title="Mật khẩu"
-          placeholder="Nhập mật khẩu"
+          title={loginAuthModel.Password.displayName}
+          placeholder={`Nhập ${loginAuthModel.Password.displayName}`}
         />
         <Stack
           direction="row"

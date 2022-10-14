@@ -1,4 +1,4 @@
-import { memo, Fragment } from 'react';
+import { memo } from 'react';
 import { Box, Container, Paper, Grid } from '@mui/material/';
 import styles from './Footer.module.css';
 import FooterSocial from '../widgets/Social';
@@ -16,11 +16,11 @@ function FooterComponent({ ...props }) {
         className={styles.container}
       >
         <Grid container>
-          <FooterHelps xs={12} sm={6} md={3} lg />
-          <FooterBrands xs={12} sm={6} md={3} lg />
-          <FooterCategories xs={12} sm={6} md={3} lg />
-          <FooterAccount xs={12} sm={6} md={3} lg />
-          <FooterSocial xs={12} sm={6} md={3} lg />
+          <FooterHelps item  xs={12} sm={6} md={3} lg />
+          <FooterBrands item  xs={12} sm={6} md={3} lg />
+          <FooterCategories item  xs={12} sm={6} md={3} lg />
+          <FooterAccount item  xs={12} sm={6} md={3} lg />
+          <FooterSocial item  xs={12} sm={6} md={3} lg />
         </Grid>
       </Container>
     </Box>

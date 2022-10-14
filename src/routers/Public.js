@@ -1,14 +1,14 @@
 import { routers } from '~/config/Router';
 import {
   HomePage,
-  NotfoundPage,
-  CategorysPage,
-  BrandsPage,
   ProductDetailPage,
   ProductsBrandPage,
   ProductsCategoryPage,
+  CategorysPage,
+  BrandsPage,
+  NotfoundPage,
 } from '~/screens/page';
-import { ProductsLayout } from '~/screens/layout';
+import { ProductsLayout, ProfileLayout } from '~/screens/layout';
 export const publicRouters = [
   {
     path: routers.home,
@@ -52,26 +52,6 @@ export const publicRouters = [
   },
   {
     path: routers.brand.search,
-    title: '',
-  },
-  {
-    path: routers.profile.index,
-    title: '',
-  },
-  {
-    path: routers.profile.cart,
-    title: '',
-  },
-  {
-    path: routers.profile.message,
-    title: '',
-  },
-  {
-    path: routers.profile.orders,
-    title: '',
-  },
-  {
-    path: routers.profile.settings,
     title: '',
   },
   {

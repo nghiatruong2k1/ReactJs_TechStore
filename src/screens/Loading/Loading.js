@@ -1,13 +1,14 @@
-import { memo } from 'react';
+import { memo ,useReducer} from 'react';
 import { Button, CircularProgress} from '@mui/material/';
 import styles from './Loading.module.css';
-import { useGetGlobalStateContext } from '~/states';
 import clsx from 'clsx';
+import { initState, reducerState,initCase } from "./init";
+import Provider from './provider';
 function LoadingComponent({ children }) {
-  const { loading } = useGetGlobalStateContext();
+  const [state,dispath] = useReducer(reducerState,initState);
   return (
-    <>
-      {loading.state > 0 && (
+    <Provider value={{state,dispath,initCase}}>
+      {state > 0 && (
         <div className={clsx(styles.root)}>
           <Button variant="outlined" color="info" className={styles.button}>
             <CircularProgress color="info" className={styles.svg} />
@@ -15,7 +16,7 @@ function LoadingComponent({ children }) {
         </div>
       )}
       {children}
-    </>
+    </Provider>
   );
 }
 export default memo(LoadingComponent);
