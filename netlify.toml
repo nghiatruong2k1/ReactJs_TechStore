@@ -8,4 +8,13 @@
 package = "netlify-plugin-inline-functions-env"
   [plugins.inputs]
   buildEvent = "onBuild"
-  include = ["REACT_APP_BASE_API","REACT_APP_WEBSITE_NAME","REACT_APP_WEBSITE_LOGO","REACT_APP_WEBSITE_ICON"]
+  include = [
+    "REACT_APP_BASE_API",
+    "REACT_APP_WEBSITE_NAME",
+    "REACT_APP_WEBSITE_LOGO",
+    "REACT_APP_WEBSITE_ICON",
+    "REACT_APP_MESSAGE",
+    "REACT_APP_MESSAGE_TITLE",
+    "REACT_APP_MESSAGE_CONTENT",
+    "REACT_APP_MESSAGE_TYPE"
+  ]
