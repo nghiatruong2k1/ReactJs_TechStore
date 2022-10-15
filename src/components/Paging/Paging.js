@@ -8,7 +8,7 @@ function PagingComponent({ total,limit,page,onChange}) {
     setCount(Math.ceil(total / limit));
   }, [total, limit]);
   useEffect(()=>{
-    if (page > 1 && count >= 1 && page > count) {
+    if (page < 1 || (page > 1 && count >= 1 && page > count)) {
         onChange && onChange(1)
     }
   },[page,count])

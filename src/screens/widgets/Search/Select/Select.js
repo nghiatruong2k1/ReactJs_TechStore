@@ -1,12 +1,11 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import { InputAdornment, Select, MenuItem, FormControl } from '@mui/material/';
-import styles from './Select.module.css';
-import { useGetSearchContext } from '../provider';
-import { initCase } from '../init';
-function SearchSelect({ data }) {
-  const {state:{ controller }, dispath} = useGetSearchContext();
+function SearchSelect({ value, onChange, data }) {
   return (
-    <InputAdornment position="end" sx={{ color: 'inherit !important',width:'6em' }}>
+    <InputAdornment
+      position="end"
+      sx={{ color: 'inherit !important', width: '6em' }}
+    >
       <FormControl fullWidth variant="standard">
         <Select
           size="small"
@@ -14,9 +13,9 @@ function SearchSelect({ data }) {
           displayEmpty
           fullWidth
           disableUnderline
-          value={controller || ''}
+          value={value || ''}
           onChange={(e, o) => {
-            dispath([initCase.SET_CONTROLLER, o.props.value]);
+            onChange && onChange(o.props.value);
           }}
           SelectDisplayProps={{
             sx: {
@@ -26,20 +25,19 @@ function SearchSelect({ data }) {
           }}
           MenuProps={{
             MenuListProps: {
-              className: styles.menu,
               sx: {
                 p: 1,
               },
             },
           }}
-          renderValue={(selected) => {
+          renderValue={() => {
             const cont = data.find((i) => {
-              return i.value == controller;
+              return i.value === value;
             });
             if (cont) {
               return cont.text;
             } else {
-              dispath([initCase.SET_CONTROLLER, data[0].value]);
+              onChange && onChange(data[0].value);
             }
           }}
         >

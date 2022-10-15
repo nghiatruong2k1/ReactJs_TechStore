@@ -1,10 +1,7 @@
 import { memo } from 'react';
 import { Input } from '@mui/material/';
 import styles from './Input.module.css';
-import { useGetSearchContext } from '../provider';
-import { initCase } from '../init';
-function SearchInput() {
-  const {state:{ query }, dispath} = useGetSearchContext();
+function SearchInput({value,onChange}) {
   return (
     <Input
       className={styles.container}
@@ -14,9 +11,9 @@ function SearchInput() {
       inputProps={{
         className: styles.input,
       }}
-      value={query ?? ''}
+      value={value ?? ''}
       onChange={(e) => {
-        dispath([initCase.SET_QUERY, e.target.value]);
+        onChange && onChange(e.target.value)
       }}
       autoComplete="off"
       variant="standard"

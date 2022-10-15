@@ -16,7 +16,6 @@ function NavMenu({ datas, loading, children,vertical, onClose }) {
       {Array.isArray(datas) &&
         datas.map(
           ({ to, text, icon, disabled, children, onClick }, index) => {
-            console.log(to)
             return (
               <ListItem
                 key={index}

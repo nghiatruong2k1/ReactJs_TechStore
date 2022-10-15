@@ -11,7 +11,7 @@ import { forgetAuthModel } from '~/models/auth';
 import { getRulers } from '~/models';
 
 const rules = getRulers(forgetAuthModel);
-function FormForget({ ...props }) {
+function FormForget() {
   return (
     <FormProvider rules={rules}>
       <Stack

@@ -1,19 +1,28 @@
 import { useDocumentTitle } from '@mantine/hooks';
-import {  useReducer } from 'react';
+import {  useCallback, useEffect, useReducer } from 'react';
 import { useGetGlobalStateContext } from '~/states';
-import { initState, reducerState,initCase } from './init';
+import { initState, reducerState } from './init';
 
 export function useInitTitle() {
   const [titles, dispath] = useReducer(reducerState, initState);
   useDocumentTitle(`${titles.length > 0 ? titles[0]+"|" :""}${process.env.REACT_APP_WEBSITE_NAME}`);
   return dispath;
 }
-export function useGetTitle() {
+export function useHandleTitle() {
   const { title: dispath } = useGetGlobalStateContext();
-  return (str)=>{
-    dispath([initCase.ADD,str]);
+  return useCallback((string)=>{
+    dispath(string);
     return ()=>{
-        dispath([initCase.REMOVE]);
+        dispath();
     }
-  };
+  },[])
+}
+export function useSetTitle(string,params) {
+  const { title: dispath } = useGetGlobalStateContext();
+  useEffect((str)=>{
+    dispath(string);
+    return ()=>{
+        dispath();
+    }
+  },params)
 }

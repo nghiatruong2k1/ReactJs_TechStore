@@ -3,9 +3,13 @@ import { useGetGlobalStateContext } from '~/states';
 import { useCookies } from 'react-cookie';
 import { UserServices } from '~/services';
 import { initState, reducerState, initCase } from './init';
-
+import { LocalStore } from '~/config/LocalStore';
+const KEY_STORE = process.env.REACT_APP_WEBSITE_NAME+'-user';
 export function useInitAuth() {
-  const [state, dispath] = useReducer(reducerState, initState);
+  const [state, dispath] = useReducer(reducerState, {
+    ...initState,
+    user:LocalStore.get(KEY_STORE,{})
+  });
   const [cookies] = useCookies(['token']);
   const useServices = UserServices();
   useEffect(() => {
@@ -13,9 +17,10 @@ export function useInitAuth() {
       dispath([initCase.TO_LOGIN]);
     }
   }, [state.isOpen]);
-
+  useEffect(()=>{
+    LocalStore.set(KEY_STORE, state.user);
+  },[state.user])
   useEffect(() => {
-    dispath([initCase.SET_USER]);
     dispath([initCase.TOGGLE_LOADING, true]);
     if (cookies['token']) {
       const ourRequest = useServices.get({}, (data) => {
@@ -24,6 +29,7 @@ export function useInitAuth() {
       });
       return ourRequest;
     } else {
+      dispath([initCase.SET_USER,null]);
       dispath([initCase.TOGGLE_LOADING, false]);
     }
   }, [cookies['token']]);

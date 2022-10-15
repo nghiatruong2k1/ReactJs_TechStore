@@ -3,7 +3,7 @@ export const initState = {
 	query:""
 };
 export const initCase = {
-	SET_CONTROLLER:'[set_controller,?num]',
+	SET_CONTROLLER:'[set_controller,?string]',
 	SET_QUERY:'[set_query,?string]'
 };
 export function reducerState(prevState,[key,payload]){

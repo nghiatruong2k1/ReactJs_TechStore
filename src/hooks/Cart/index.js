@@ -1,32 +1,26 @@
-import { useLocalStorage } from '@mantine/hooks';
 import { useSnackbar } from 'notistack';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer } from 'react';
 import { useGetGlobalStateContext } from '~/states';
 import { LocalStore } from '~/config/LocalStore';
 import { initState, initReducerState, initCase } from './init';
-import useSetReducer from '../SetReducer';
 import useDialogResult from '../DialogResult';
 
-const KEY_STORE = 'cart';
+const KEY_STORE = process.env.REACT_APP_WEBSITE_NAME+'-cart';
 export function useInitCart() {
   const { enqueueSnackbar } = useSnackbar();
-  const [state, setState] = useState({
+  const [state, dispath] = useReducer(initReducerState(enqueueSnackbar), {
     ...initState,
     data: LocalStore.get(KEY_STORE, []),
   });
-  const dispath = useSetReducer(setState, initReducerState(enqueueSnackbar));
-  useEffect(
-    function () {
-      let newCart = [];
-      if (Array.isArray(state.data)) {
-        newCart = state.data.filter(function (data) {
-          return data;
-        });
-      }
-      LocalStore.set(KEY_STORE, newCart);
-    },
-    [state.data],
-  );
+  useEffect(() => {
+    let newCart = [];
+    if (Array.isArray(state.data)) {
+      newCart = state.data.filter(function (data) {
+        return data;
+      });
+    }
+    LocalStore.set(KEY_STORE, newCart);
+  }, [state.data]);
 
   return { state, dispath };
 }
@@ -84,7 +78,7 @@ export function useGetCart() {
   }, [state]);
   return {
     state: { ...state, totalPrice, total },
-    handle: { remove ,reset},
+    handle: { remove, reset },
     dispath,
     initCase,
   };

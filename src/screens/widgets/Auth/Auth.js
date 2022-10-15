@@ -4,24 +4,17 @@ import { routerActions } from './router';
 import AuthLayoutComponent from './layout';
 import UserProfile from './screens/UserProfile';
 function AuthComponent({ toggleComponent, ...props }) {
-  const { state, dispath, initCase } = useGetAuth();
+  const { state } = useGetAuth();
   const Content = useMemo(() => {
     return routerActions[state.action].content ?? Fragment;
   }, [state.action]);
-  if (state.user) {
-    return (
-      <UserProfile
-        toggleComponent={toggleComponent}
-        onOpen={()=>{dispath([initCase.TOGGLE_OPEN,true])}}
-        {...state.user}
-      />
-    );
+  if (Boolean(state.user)) {
+    return <UserProfile toggleComponent={toggleComponent} {...state.user} />;
   } else {
     return (
       <AuthLayoutComponent
         toggleComponent={toggleComponent}
         title={routerActions[state.action].title}
-        onClose={()=>{dispath([initCase.TOGGLE_OPEN,false])}}
       >
         <Content />
       </AuthLayoutComponent>

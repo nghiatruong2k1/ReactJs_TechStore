@@ -17,6 +17,7 @@ function SubscribeCompoent({ ...props }) {
     <Box
       component={Paper}
       py={2}
+      my={2}
       className={styles.section}
     >
       <Stack align="center" className={styles.container} sx={{ py: 2 }}>

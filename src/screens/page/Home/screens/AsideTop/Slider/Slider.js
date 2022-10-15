@@ -2,7 +2,7 @@ import { memo, useRef, useReducer } from 'react';
 import { Grid, Box } from '@mui/material/';
 import { initState, reducerState } from './init';
 import Provider from './provider';
-import Slider from '~/components/Slider';
+import {Slider} from '~/components';
 function SliderComponent({ ...props }) {
   const [state, dispath] = useReducer(reducerState, initState);
   const thisRef = useRef(null);

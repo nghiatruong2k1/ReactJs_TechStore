@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useMemo } from 'react';
 import { Box } from '@mui/material';
 import CartLayout from './layout';
-import { useGetTitle } from '~/hooks/Title';
+import { useHandleTitle } from '~/hooks/Title';
 import { useGetCart } from '~/hooks/Cart';
 import CartHeader from './Header';
 import CartFooter from './Footer';
@@ -10,7 +10,7 @@ import CartContent from './Content';
 import { ViewContent } from '~/components';
 function CartComponent({ isToggle, toggleComponent }) {
   const { state, dispath, initCase } = useGetCart();
-  const handleTitle = useGetTitle();
+  const handleTitle = useHandleTitle();
   useEffect(() => {
     if (state.isOpen) {
       return handleTitle('Giỏ hàng');

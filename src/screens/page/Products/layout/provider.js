@@ -1,6 +1,6 @@
 import { memo, createContext, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetTitle } from '~/hooks/Title';
+import { useHandleTitle } from '~/hooks/Title';
 import { initCase } from './init';
 export const ProductsContext = createContext();
 export const useGetProductsContext = () => {
@@ -12,7 +12,7 @@ function ProductsProvider({
   value: { handleGetTitle, handleGetData, handleGetTotal, state, dispath },
 }) {
   const { alias } = useParams();
-  const handleTitle = useGetTitle();
+  const handleTitle = useHandleTitle();
   useEffect(() => {
     dispath([initCase.SET_PAGE]);
     let ourTitle;

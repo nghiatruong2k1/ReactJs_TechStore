@@ -6,7 +6,6 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
     text-decoration-line: none;
-	text-align: start !important;
 	font-weight: bolder !important;
 }
 .price{

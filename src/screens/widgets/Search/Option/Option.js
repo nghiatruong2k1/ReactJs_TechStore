@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { InputAdornment, Tooltip, IconButton } from '@mui/material/';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-function SearchOption({ ...props }) {
+function SearchOption() {
   return (
     <InputAdornment position="start" sx={{ color: 'inherit !important' }}>
       <Tooltip

@@ -1,16 +1,17 @@
-import { memo, Fragment } from 'react';
+import { memo } from 'react';
 import RecommendProduct from './screens/RecommendProduct';
 import DealsOffersProduct from './screens/DealsOffersProduct';
 import Brands from './screens/Brands';
 import AsideTop from './screens/AsideTop';
-function HomePageComponent(props) {
+import { Stack } from '@mui/material';
+function HomePageComponent() {
   return (
-    <Fragment>
+    <Stack spacing={2} py={2}>
       <AsideTop />
       <Brands />
       <DealsOffersProduct />
       <RecommendProduct />
-    </Fragment>
+    </Stack>
   );
 }
 export default memo(HomePageComponent);

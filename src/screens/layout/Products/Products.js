@@ -9,18 +9,18 @@ function ProductsLayoutComponent({ children }) {
   return (
     <Fragment>
       <Header />
-      <Container maxWidth="lg" component={'main'}>
+      <Container maxWidth="lg">
         <Grid container spacing={2} py={2}>
-          <Grid item xs={3}>
+          <Grid item xs={3} component={'aside'}>
             <Stack spacing={1}>
               <CategoriesWidget divider={true} />
               <BrandsWidget divider={true} />
             </Stack>
           </Grid>
-          <Grid item xs={9}>
-            {children}
+          <Grid item xs={9} component={'main'}>
+            <>{children}</>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12}  component={'aside'}>
             <Subscribe />
           </Grid>
         </Grid>

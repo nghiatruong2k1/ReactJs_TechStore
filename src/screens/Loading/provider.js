@@ -1,9 +1,12 @@
-import {memo,createContext} from 'react';
-export const LoadingContext = createContext();
-function LoadingProvider({children,value}){
+import {memo,createContext,useContext} from 'react';
+export const GlobalLoadingContext = createContext();
+export const useGetGlobalLoadingContext = ()=>{
+    return useContext(GlobalLoadingContext);
+}
+function GlobalLoadingProvider({children,value}){
     return (
-        <LoadingContext.Provider value={value}>
+        <GlobalLoadingContext.Provider value={value}>
             {children}
-        </LoadingContext.Provider>
+        </GlobalLoadingContext.Provider>
     )
-};export default memo(LoadingProvider)
+};export default memo(GlobalLoadingProvider)

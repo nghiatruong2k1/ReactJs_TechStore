@@ -1,13 +1,13 @@
-import { memo ,useReducer} from 'react';
+import {memo} from 'react';
 import { Button, CircularProgress} from '@mui/material/';
-import styles from './Loading.module.css';
 import clsx from 'clsx';
-import { initState, reducerState,initCase } from "./init";
+import styles from './Loading.module.css';
+import { useInitLoading } from '~/hooks/Loading';
 import Provider from './provider';
-function LoadingComponent({ children }) {
-  const [state,dispath] = useReducer(reducerState,initState);
+function GlobalLoadingComponent({ children }) {
+  const [state,handle] = useInitLoading('Global Loading');
   return (
-    <Provider value={{state,dispath,initCase}}>
+    <Provider value={handle}>
       {state > 0 && (
         <div className={clsx(styles.root)}>
           <Button variant="outlined" color="info" className={styles.button}>
@@ -19,4 +19,4 @@ function LoadingComponent({ children }) {
     </Provider>
   );
 }
-export default memo(LoadingComponent);
+export default memo(GlobalLoadingComponent);

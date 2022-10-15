@@ -15,13 +15,14 @@ import { registerAuthModel } from '~/models/auth';
 import { getRulers } from '~/models';
 
 const rules = getRulers(registerAuthModel);
-function FormRegister({ onClose, ...props }) {
+function FormRegister({ onClose }) {
   const authServices = AuthServices('form login');
-  const handleSubmit = useCallback(({ Email, Password }) => {
+  const handleSubmit = useCallback(({ Email, Password },onEnd) => {
     authServices.register({ Email, Password }, (data) => {
       if (data) {
         onClose && onClose();
       }
+      onEnd && onEnd();
     });
   }, []);
   return (

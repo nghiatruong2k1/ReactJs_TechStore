@@ -1,14 +1,14 @@
-import {memo,useContext} from 'react';
-import clsx from 'clsx';
+import {memo} from 'react';
 import {LoadingButton} from '@mui/lab/';
-import {} from '@mui/icons-material/';
 import styles from './SubmitButton.module.css';
+import { useGetFormContext } from '../FormProvider/provider';
   
 function SubmitButton({children,...props}){
+  const {isLoading} = useGetFormContext();
   return(
     <LoadingButton
-      disabled={false}
-      loading={false}
+      disabled={isLoading}
+      loading={isLoading}
       loadingPosition="start"
       startIcon={(<></>)}
       className={styles.button}

@@ -15,10 +15,10 @@ import styles from './layout.module.css';
 import { HighlightOff } from '@mui/icons-material';
 
 import { useGetAuth } from '~/hooks/Auth';
-import { useGetTitle } from '~/hooks/Title';
+import { useHandleTitle } from '~/hooks/Title';
 function AuthLayoutComponent({ toggleComponent, children, title }) {
   const { state, dispath, initCase } = useGetAuth();
-  const handleTitle = useGetTitle();
+  const handleTitle = useHandleTitle();
   useEffect(() => {
     if (state.isOpen) {
       return handleTitle(title);

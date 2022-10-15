@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect } from 'react';
 import { Grid, Stack } from '@mui/material';
 
-import { useGetTitle } from '~/hooks/Title';
+import { useHandleTitle } from '~/hooks/Title';
 import { useGetCart } from '~/hooks/Cart';
 
 import Provider from './provider';
@@ -17,7 +17,7 @@ function CartComponent() {
     handle:{reset}
   } = useGetCart();
   const [state, dispath] = useReducer(reducerState, initState);
-  const handleTitle = useGetTitle();
+  const handleTitle = useHandleTitle();
   useEffect(() => {
     return handleTitle('Giỏ hàng');
   }, []);

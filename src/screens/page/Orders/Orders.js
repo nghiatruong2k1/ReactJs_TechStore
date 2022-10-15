@@ -8,7 +8,7 @@ import ViewStep from './Step';
 import ViewItem from './Item';
 import { Paging, ViewContent } from '~/components';
 
-import { useGetTitle } from '~/hooks/Title';
+import { useHandleTitle } from '~/hooks/Title';
 import { useSearchParams } from 'react-router-dom';
 function OrdersComponent(props) {
   const [params, setSearchParams] = useSearchParams();
@@ -16,7 +16,7 @@ function OrdersComponent(props) {
     ...initState,
     page: Number(params.get('page')) || 1,
   });
-  const handleTitle = useGetTitle();
+  const handleTitle = useHandleTitle();
   useEffect(() => {
     return handleTitle('Danh sách đơn hàng');
   }, []);

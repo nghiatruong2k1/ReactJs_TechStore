@@ -3,7 +3,7 @@ import { SnackbarProvider } from 'notistack';
 import { Slide } from '@material-ui/core/';
 import CustomMessageContent from './MessageContent';
 import styles from './Message.module.css';
-function CustomMessage({ children }) {
+function CustomMessageProvider({ children }) {
   const SnackRef = useRef();
   const renderContent = useCallback(
     (key, mes) => {
@@ -37,6 +37,6 @@ function CustomMessage({ children }) {
     </SnackbarProvider>
   );
 }
-export default memo(CustomMessage);
+export default memo(CustomMessageProvider);
 
 /** */

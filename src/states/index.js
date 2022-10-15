@@ -1,5 +1,4 @@
 import { memo, createContext, useContext } from 'react';
-import { useInitLoading } from '~/hooks/Loading';
 import { useInitAuth } from '~/hooks/Auth';
 import { useInitTitle } from '~/hooks/Title';
 import { useInitCart } from '~/hooks/Cart';

@@ -1,6 +1,6 @@
 import { memo, createContext, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetTitle } from '~/hooks/Title';
+import { useHandleTitle } from '~/hooks/Title';
 import { ProductServices } from '~/services';
 import { initCase } from './init';
 export const ProductDetailContext = createContext();
@@ -8,7 +8,7 @@ export const useGetProductDetailContext = () => {
   return useContext(ProductDetailContext);
 };
 function ProductDetailProvider({ children, value }) {
-  const handleTitle = useGetTitle();
+  const handleTitle = useHandleTitle();
   const { alias } = useParams();
   const productServices = ProductServices('detail product');
   useEffect(() => {

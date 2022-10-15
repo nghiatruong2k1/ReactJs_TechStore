@@ -10,7 +10,6 @@ function InfoName({ loading, alias, name}) {
       component={(!loading && Link) || 'span'}
       className={styles.name}
       to={getAction(routers.product.detail, { alias })}
-      align="center"
     >
       {(loading && <Skeleton variant="text" className="skeleton" />) || name}
     </Typography>

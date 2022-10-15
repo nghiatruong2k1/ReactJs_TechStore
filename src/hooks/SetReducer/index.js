@@ -1,9 +1,7 @@
-import {memo,Fragment, useCallback} from 'react';
-import clsx from 'clsx';
+import { useCallback} from 'react';
 function useSetReducer(setState,reducer){
     return useCallback((action)=>{
         setState((pre)=>{
-            console.log(action)
             return reducer(pre,action)
         })
     },[])

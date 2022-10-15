@@ -41,7 +41,7 @@ export default function AuthServices(location) {
   }, []);
   const logout = useCallback(()=>{
     console.log('logout')
-    setCookies("token",null);
+    deleteCookies("token");
   },[])
   return { login,register,logout };
 }

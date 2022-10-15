@@ -11,8 +11,7 @@ function UserProfileComponent({
   ImageUrl,
   FirstName,
   LastName,
-  TypeId,
-  onOpen
+  TypeId
 }) {
   const fullName = useMemo(() => {
     return (FirstName ? FirstName : '') + (LastName ? ' ' + LastName : '');
@@ -30,7 +29,6 @@ function UserProfileComponent({
         text:'Đăng xuất',
         onClick:()=>{
           authServices.logout();
-          onOpen && onOpen();
         },
         icon:<span className="fas fa-sign-out-alt"/>
       }

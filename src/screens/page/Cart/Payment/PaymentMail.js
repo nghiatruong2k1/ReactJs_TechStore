@@ -4,8 +4,15 @@ import { userModel } from '~/models/user';
 import { voucherModel } from '~/models/voucher';
 let idmailer = `body-mailer-${process.env.REACT_APP_WEBSITE_NAME}`;
 function PaymentMail({ user, voucher, data, total = 0, totalPrice = 0 }) {
-  let name = (user.FirstName || '') + ' ' + (user.LastName || '');
-  let url = 'confirm';
+  const fullName = useMemo(() => {
+    return (
+      (user.FirstName ? user.FirstName : '') +
+      (user.LastName ? ' ' + user.LastName : '')
+    );
+  }, [user.FirstName, user.LastName]);
+  const url = useMemo(() => {
+    return 'confirm';
+  }, []);
   const [salePrice, outPrice] = useMemo(() => {
     const s = Math.round((totalPrice * (voucher?.Value || 0)) / 100);
     return [s, Math.round(totalPrice - s)];
@@ -13,7 +20,7 @@ function PaymentMail({ user, voucher, data, total = 0, totalPrice = 0 }) {
   return (
     <div id={idmailer}>
       <div>
-        <h5>Xin chào {name}</h5>
+        <h5>Xin chào {fullName}</h5>
         <h6>Bạn có 1 đơn hàng đang chờ xác nhận</h6>
       </div>
       <hr style={{ border: '1px solid black', opacity: 0.8 }} />
@@ -21,7 +28,7 @@ function PaymentMail({ user, voucher, data, total = 0, totalPrice = 0 }) {
         <table style={{ width: '100%' }}>
           <tr>
             <td>Tên khách hàng:</td>
-            <td>{name}</td>
+            <td>{fullName}</td>
           </tr>
           <tr>
             <td>{userModel.Email.displayName}:</td>

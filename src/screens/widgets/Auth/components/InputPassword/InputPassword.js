@@ -3,7 +3,7 @@ import {TextField,InputAdornment,Tooltip,IconButton} from '@mui/material/';
 import { useGetFormContext } from '../FormProvider/provider';
 import { initCase } from '../FormProvider/init';
 import { useDisclosure } from '@mantine/hooks';
-function InputPassword({name,placeholder,title,...props}){
+function InputPassword({name,placeholder,title}){
   const {values,valids,dispath} = useGetFormContext();
   const handleChange = useCallback((e)=>{
     dispath([initCase.CHANGE_VALUE,{[name]:e.target.value}]);

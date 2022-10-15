@@ -5,8 +5,8 @@ import {
   OrdersPage,
 } from '~/screens/page';
 import {  ProfileLayout } from '~/screens/layout';
-import { CheckLoginPrivate } from '~/screens/private';
-export const relativeRouters = {
+import CheckLoginPrivate from '~/private';
+export const privateRouters = {
   element: CheckLoginPrivate,
   routers: [
     {

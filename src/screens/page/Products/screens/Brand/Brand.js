@@ -1,7 +1,7 @@
 import { memo, useCallback } from 'react';
 import ViewLayout from '../../layout';
 import { BrandServices, ProductServices } from '~/services';
-function BrandComponent(props) {
+function BrandComponent() {
   const brandServices = BrandServices('products Brand');
   const productServices = ProductServices('products Brand');
   const handleGetTitle = useCallback((alias,callback) => {

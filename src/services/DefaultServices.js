@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { useSnackbar } from 'notistack';
 import { Get, CancelToken } from '~/utils/HttpRequest';
-import { useGetLoading } from '~/hooks/Loading';
+import { useGetGlobalLoadingContext } from '~/screens/Loading';
 
 export default function useServices(location) {
-  const { dispath, initCase } = useGetLoading();
+  const handleLoading = useGetGlobalLoadingContext();
   const { enqueueSnackbar } = useSnackbar();
   return useMemo(() => {
     return {
@@ -17,15 +17,15 @@ export default function useServices(location) {
         onThen,
         onCatch,
       }) => {
-        const ourRequest = CancelToken.source();
-        const controller = new AbortController();
+        // const ourRequest = CancelToken.source();
+        // const controller = new AbortController();
         async function handleMethod() {
           console.log(`[start]  service`, [method.name, api, location]);
-          dispath(initCase.INCREASE);
+          const ourLoading = handleLoading(location);
           onStart && onStart();
           await method(api, params, {
-            cancelToken: ourRequest.token,
-            signal: controller.signal,
+            // cancelToken: ourRequest.token,
+            // signal: controller.signal,
           })
             .then((res) => {
               console.log(`[end]  service`, [method.name, api, res, location]);
@@ -44,14 +44,14 @@ export default function useServices(location) {
             })
             .finally(() => {
               onEnd && onEnd();
-              dispath(initCase.DECREASE);
+              ourLoading && ourLoading();
             });
         }
         handleMethod();
         return () => {
           console.log(`[cancel] service`, [method.name, api, location]);
-          ourRequest && ourRequest.cancel();
-          controller && controller.abort();
+          // ourRequest && ourRequest.cancel();
+          // controller && controller.abort();
         };
       },
     };

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Card, CardContent, Grid } from '@mui/material';
 import Provider from './provider';
 import { initState, reducerState } from './init';
-import Slider from '~/components/Slider';
+import {Slider} from '~/components';
 function PictureComponent({ id, loading, ...props }) {
   const [state, dispath] = useReducer(reducerState, initState);
   return (
