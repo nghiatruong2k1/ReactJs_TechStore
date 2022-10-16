@@ -1,0 +1,17 @@
+.card{
+	height: 100%;
+}
+
+
+.header{
+	
+}
+.title{
+	text-decoration: none;
+	word-break: break-word;
+	font-weight: bold !important;
+}
+
+.text{
+	word-break: break-word;
+}

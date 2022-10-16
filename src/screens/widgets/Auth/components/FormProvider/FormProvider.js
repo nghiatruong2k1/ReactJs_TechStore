@@ -19,7 +19,7 @@ function FormProvider({ initValues, rules, onSubmit, children }) {
       if (rs === 0) {
         onSubmit &&
           onSubmit(state.values, () => {
-            dispath([initCase.SET_LOADING, true]);
+            dispath([initCase.SET_LOADING,false]);
           });
       } else {
         dispath([initCase.SET_LOADING, false]);

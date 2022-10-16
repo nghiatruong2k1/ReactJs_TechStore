@@ -11,21 +11,25 @@ import StateGlobal from '~/states';
 import MessageProvider from '~/screens/Message';
 import LoadingProvider from '~/screens/Loading';
 ReactDOM.render(
-  <BrowserRouter>
-    <CookiesProvider>
+  <>
+    <>
       <FontsGlobal>
         <StylesGlobal>
           <LoadingProvider>
             <MessageProvider>
-              <StateGlobal>
-                <App />
-              </StateGlobal>
+              <CookiesProvider>
+                <StateGlobal>
+                  <BrowserRouter>
+                    <App />
+                  </BrowserRouter>
+                </StateGlobal>
+              </CookiesProvider>
             </MessageProvider>
           </LoadingProvider>
         </StylesGlobal>
       </FontsGlobal>
-    </CookiesProvider>
-  </BrowserRouter>,
+    </>
+  </>,
   document.getElementById('root'),
 );
 // If you want to start measuring performance in your app, pass a function

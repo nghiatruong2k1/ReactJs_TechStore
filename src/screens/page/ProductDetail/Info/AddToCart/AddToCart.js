@@ -7,7 +7,7 @@ import { useGetCart } from '~/hooks/Cart';
 
 const min = 1;
 const max = 100;
-function AddToCartButton({ loading,data,Quantity, ...props }) {
+function AddToCartButton({ loading,data,Quantity }) {
   const [isLoading, setLoading] = useState(false);
   const { dispath, initCase } = useGetCart();
   const handleClick = useCallback(() => {
@@ -21,7 +21,7 @@ function AddToCartButton({ loading,data,Quantity, ...props }) {
         },
       ]);
     }
-  }, [data,Quantity,isLoading]);
+  }, [data,Quantity,isLoading,Quantity]);
   return (
     <Tooltip arrow title={`Số lượng từ ${min} đến ${max}`}>
       <span>

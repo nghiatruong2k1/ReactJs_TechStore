@@ -1,0 +1,12 @@
+.cell{
+	min-width: max-content !important;
+	background: transparent !important;
+	padding: 0.2em !important;
+}
+.old{
+	/* background-color: rgba(0, 0, 0, 0.05) !important; */
+}
+
+.head{
+	font-weight: bold !important;
+}

@@ -17,7 +17,7 @@ import { SnackbarContent } from 'notistack';
 
 import { useDisclosure } from '@mantine/hooks';
 import styles from './Message.module.css';
-import { typeToast } from '~/config/TypeToast';
+import { typeToast } from '~/config/Type';
 const MessageContent = forwardRef(function (
   { title, type, message, onClose },
   ref,

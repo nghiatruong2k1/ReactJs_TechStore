@@ -1,1 +1,1 @@
-export {default as CheckLoginPrivate} from './CheckLogin'
+export {default as CheckAdminPrivate} from './private'

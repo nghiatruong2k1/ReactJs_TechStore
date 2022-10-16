@@ -61,21 +61,23 @@ export function initReducerState(toast) {
         if (typeof payload === 'object') {
           try {
             const carts = [...prevState.data];
-            const { Id, Quantity, Name, Alias, Price, SalePrice,ImageUrl } = payload;
+            const { Id, Quantity, Name, Alias, Price, SalePrice, ImageUrl } =
+              payload;
             const oldIndex = carts.findIndex(function (data) {
               return data && data.Id == Id;
             });
+            let quantity = Quantity > 0 ? Number(Quantity) : 0;
             if (carts[oldIndex]) {
-              carts[oldIndex].Quantity += Number(Quantity) ?? 0;
+              carts[oldIndex].Quantity += quantity;
             } else {
               carts.push({
                 Id,
-                Quantity,
                 Name,
                 Alias,
                 Price,
                 SalePrice,
-                ImageUrl
+                ImageUrl,
+                Quantity: quantity,
               });
             }
             setTimeout(() => {

@@ -311,3 +311,30 @@ a:not([type='button']).active{
 .MuiStepConnector-horizontal{
   margin: 0 0.4em !important;
 }
+.MuiAccordionSummary-content{
+  margin: 0 !important;
+}
+
+.MuiTableContainer-root{
+  border-radius: 0.2em;
+  padding: 0.2em;
+  color: var(--text-primary) !important;
+  border:1px solid var(--border-box) !important;
+}
+.MuiTable-root{
+  
+}
+.MuiTableCell-root{
+  border-color: inherit !important;
+  border-right:1px solid !important;
+  border-bottom:1px solid !important;
+  color: inherit !important;
+}
+.MuiTableCell-root:last-child{
+  border-right: 0 !important;
+}
+
+
+.MuiSkeleton-root{
+  background-color: var(--alpha-bg) !important;
+}

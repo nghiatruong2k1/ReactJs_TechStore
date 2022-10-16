@@ -2,10 +2,12 @@ import { memo, Fragment, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { publicRouters } from '~/routers/Public';
 import { privateRouters } from '~/routers/Private';
+import { adminRouters } from '~/area/Admin/router';
 import { DefaultLayout } from '~/screens/layout';
 const bodyRoot = document.getElementById('root');
-const renderRoute = ({ layout, path, page, title }, id) => {
-  const Layout = layout === null ? Fragment : layout ?? DefaultLayout;
+const renderRoute = ({ layout, path, page }, id, defaultLayout) => {
+  const Layout =
+    layout === null ? Fragment : layout ?? defaultLayout ?? DefaultLayout;
   const Page = page ?? Fragment;
   return (
     <Route
@@ -24,22 +26,28 @@ function App() {
   useEffect(() => {
     bodyRoot.scrollTop = 0;
   }, [location]);
-
+  useEffect(()=>{
+    console.log(process.env)
+  },[])
   return (
     <>
       <Routes>
-        {publicRouters.map(({ layout, path, page, title }, index) => {
-          return renderRoute({ layout, path, page, title }, `public-${index}`);
+        {publicRouters.map(({ layout, path, page }, index) => {
+          return renderRoute({ layout, path:"/"+path, page }, `public-${index}`);
         })}
         <Route element={<privateRouters.element />}>
-          {privateRouters.routers.map(
-            ({ layout, path, page, title }, index) => {
+          {privateRouters.routes.map(({ layout, path, page }, index) => {
+            return renderRoute({ layout, path:"/"+path, page }, `private-${index}`);
+          })}
+          <Route path={'/'+adminRouters.path} element={<adminRouters.element />}>
+            {adminRouters.routes.map(({ layout, path, page }, index) => {
               return renderRoute(
-                { layout, path, page, title },
-                `private-${index}`,
+                { layout, path, page },
+                `admin-${index}`,
+                adminRouters.defaultLayout,
               );
-            },
-          )}
+            })}
+          </Route>
         </Route>
       </Routes>
     </>

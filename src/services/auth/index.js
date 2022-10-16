@@ -16,6 +16,8 @@ export default function AuthServices(location) {
         if(data.token){
           setCookies("token",data.token);
           onThen && onThen(data.token);
+        }else{
+          onThen && onThen(null);
         }
       },
       onCatch: () => {
@@ -32,6 +34,8 @@ export default function AuthServices(location) {
         if(data.token){
           setCookies("token",data.token);
           onThen && onThen(data.token);
+        }else{
+          onThen && onThen(null);
         }
       },
       onCatch: () => {

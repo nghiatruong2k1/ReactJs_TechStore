@@ -1,0 +1,14 @@
+.cell{
+	min-width: max-content !important;
+	border-left: 1px solid rgba(0, 0, 0, 0.02) !important;
+	border-right: 1px solid rgba(0, 0, 0, 0.02) !important;
+	background: transparent !important;
+	padding: 0.2em !important;
+}
+.old{
+	background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.title{
+	font-weight: bold !important;
+}

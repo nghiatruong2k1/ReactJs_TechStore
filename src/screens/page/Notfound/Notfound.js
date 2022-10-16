@@ -1,10 +1,13 @@
 import { useCallback, memo } from 'react';
 import { Button, Container, Stack, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Notfound.module.css';
 import { AnimationText } from '~/components';
 function NotfoundComponent() {
-  const handleClickBackButton = useCallback(function () {}, []);
+  const navigator = useNavigate();
+  const handleClickBackButton = useCallback(function () {
+    navigator(-1)
+  }, []);
   return (
     <Container maxWidth={'100%'} >
       <Stack alignItems={'center'} justifyContent={'center'} spacing={1} mb={5}>

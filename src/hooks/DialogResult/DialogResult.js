@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import styles from './DialogResult.module.css';
 import { useDisclosure } from '@mantine/hooks';
-import { typeToast } from '~/config/TypeToast';
+import { typeToast } from '~/config/Type';
 import PropTypes from 'prop-types';
 function DialogResultComponent({
   onSuccess,

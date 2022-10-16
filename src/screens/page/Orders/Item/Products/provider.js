@@ -1,24 +1,3 @@
-// 	async function handleGetData(onStart, onEnd){
-// 		return await Fetch.get({
-// 	        api:"api/orderdetail/"+orderId,
-// 	        params:{
-// 	        	limit:state.limit,
-//         		offset:(state.page - 1) * state.limit
-// 	        },onThen:function({data}){
-// 	         	dispath(["set_datas",data])
-// 	        },onError:function(){
-// 	        	dispath(["set_datas",[]])
-// 	        },onStart,onEnd
-// 	    });
-// 	}
-// 	async function handleGetTotal(onStart, onEnd){
-// 		return await Fetch.get({
-// 	        api:"api/orderdetail/count/"+orderId,
-// 	        onThen:function({data}){
-// 	         	dispath(["set_total",data])
-// 	        },onStart,onEnd
-// 	    });
-// 	}
 
 import { memo, createContext, useContext, useEffect } from 'react';
 import { initCase } from './init';

@@ -1,0 +1,17 @@
+
+.title{
+	font-weight: bold !important;
+}
+
+.old{
+	background-color: rgba(0, 0, 0, 0.05) !important;
+}
+.cell{
+	padding: 0.5em !important;
+}
+
+
+.view{
+	color: inherit !important;
+	border-color: currentColor !important;
+}

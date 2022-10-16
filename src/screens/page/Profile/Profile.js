@@ -9,7 +9,7 @@ function ProfileComponent(props){
       return handleTitle('Thông tin tài khoản');
     }, []);
     return (
-        <Stack spacing={2} py={2}>
+        <Stack spacing={2}>
             <ProfileInfo />
         </Stack>
     )

@@ -1,11 +1,10 @@
-import { memo, Fragment, useMemo, useEffect } from 'react';
+import { memo,  useMemo } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useGetAuth } from '~/hooks/Auth';
 import { useSnackbar } from 'notistack';
-function PrivateComponent(props) {
+function CheckLoginPrivate() {
   const {
     state: { user, isLoading },
-    dispath,
   } = useGetAuth();
   const { enqueueSnackbar } = useSnackbar();
   return useMemo(() => {
@@ -19,4 +18,4 @@ function PrivateComponent(props) {
     return <Outlet />;
   }, [user, isLoading]);
 }
-export default memo(PrivateComponent);
+export default memo(CheckLoginPrivate);

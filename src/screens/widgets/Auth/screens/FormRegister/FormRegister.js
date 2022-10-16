@@ -22,6 +22,7 @@ function FormRegister({ onClose }) {
       if (data) {
         onClose && onClose();
       }
+      console.log(data)
       onEnd && onEnd();
     });
   }, []);

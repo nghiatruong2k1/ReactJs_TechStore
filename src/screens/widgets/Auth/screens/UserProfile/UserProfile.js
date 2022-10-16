@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Avatar, Box } from '@mui/material';
 import { Dropdown } from '~/components';
 import { useDisclosure } from '@mantine/hooks';
-import { routers, getAction } from '~/config/Router';
+import { routers, getAction, routersAdmin } from '~/config/Router';
 import { AuthServices } from '~/services';
 
 function UserProfileComponent({
@@ -35,7 +35,7 @@ function UserProfileComponent({
     ];
     if (TypeId === 4) {
       newData.unshift({
-        to: getAction(routers.profile.index),
+        to: getAction(routersAdmin.area),
         icon: <span className={'fa fa-user-cog'} />,
         text: 'Trang quản trị',
       });

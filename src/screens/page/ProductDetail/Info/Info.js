@@ -47,7 +47,7 @@ function InfoComponent({ data, loading, ...props }) {
           >
             <InfoQuantity loading={loading}/>
             <InfoContactButton loading={loading} />
-            <AddToCartButton loading={loading} data={data} Quantity={state.quantity}/>
+            <AddToCartButton loading={loading} data={data} Quantity={state.Quantity}/>
           </CardContent>
           <div></div>
         </Card>

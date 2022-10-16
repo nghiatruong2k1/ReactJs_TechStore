@@ -7,7 +7,7 @@
 .view{
     position: absolute;
     inset: 0;
-    padding: 0.1em;
+    padding: 0.2em;
     scroll-behavior: smooth;
     overflow: auto;
 }

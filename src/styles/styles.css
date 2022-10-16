@@ -13,8 +13,8 @@
   --gray: #e5e7ea;
   --gray-dark: #343a40;
 
-  --primary: #020100;
-  --primaryBg:#fffaf7;
+  --primary: --text-primary;
+  --primaryBg:--primary-bg;
 
   --secondary: #12225b;
 
@@ -172,8 +172,10 @@ table {
 
 [class*='MuiCircularProgress-root'],
 [class*='MuiAvatar-root'],
+[class*='MuiSvgIcon-root'],
 [class*='fa-'],
 [class*='icon_root'] {
+  font-size: 1em !important;
   width: 1em !important;
   height: 1em !important;
   color: inherit !important;

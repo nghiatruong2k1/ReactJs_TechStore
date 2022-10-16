@@ -1,17 +1,19 @@
 import { useSnackbar } from 'notistack';
-import { useCallback, useEffect, useMemo, useReducer } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useGetGlobalStateContext } from '~/states';
 import { LocalStore } from '~/config/LocalStore';
 import { initState, initReducerState, initCase } from './init';
 import useDialogResult from '../DialogResult';
+import useSetReducer from '../SetReducer';
 
 const KEY_STORE = process.env.REACT_APP_WEBSITE_NAME+'-cart';
 export function useInitCart() {
   const { enqueueSnackbar } = useSnackbar();
-  const [state, dispath] = useReducer(initReducerState(enqueueSnackbar), {
+  const [state, setState] = useState({
     ...initState,
     data: LocalStore.get(KEY_STORE, []),
   });
+  const dispath = useSetReducer(setState,initReducerState(enqueueSnackbar))
   useEffect(() => {
     let newCart = [];
     if (Array.isArray(state.data)) {

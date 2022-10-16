@@ -13,7 +13,7 @@ function LayoutComponent({ handleGetData, title, controller }) {
   }, [title]);
   return (
     <Provider value={{ state, dispath, handleGetData, controller }}>
-      <Grid container spacing={2} sx={{ py: 2 }}>
+      <Grid container spacing={2}>
         <ViewList
           controller={controller}
           loading={state.isLoading || !Boolean(state.data)}

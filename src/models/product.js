@@ -8,7 +8,10 @@ export const productModel = {
   ...productEntity,
   CategoryName: categoryEntity.Name,
   BrandName: brandEntity.Name,
-  ImageUrl: imageEntity.Url,
+  ImageUrl: {
+    ...imageEntity.Url,
+    displayName:'Hình ảnh'
+  },
   Rating: productRatingEntity.Rating,
   TypeName: productTypeEntity.Name,
 };

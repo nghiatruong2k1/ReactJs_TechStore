@@ -6,7 +6,7 @@ import ViewItem from '../ViewItem';
 
 function ViewListComponent({loading,data}) {
   return (
-      <Grid container spacing={2} sx={{py:2}}>
+      <Grid container spacing={2}>
         <ViewContent loading={loading} length={data.length}>
           {Array.isArray(data) &&
             data.map(function (item, index) {
