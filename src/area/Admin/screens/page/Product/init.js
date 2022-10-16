@@ -12,6 +12,7 @@ export const initState = {
 export const initCase = {
     SET_DATA:'[SET_DATA,?array]',
     TOGGLE_LOADING:'[TOGGLE_LOADING,?bool]',
+    TOGGLE_TRASH:'[TOGGLE_TRASH,?bool]',
     SET_TOTAL:'[SET_TOTAL,?num]',
     SET_PAGE:'[SET_PAGE,?num]',
     RESET:'[RESET,?object]'
@@ -33,6 +34,15 @@ export function reducerState(prevState,[key,payload]){
                 return {
                   ...prevState,
                   isLoading: typeof payload === 'boolean' ? payload : !prevState.isLoading,
+                };
+              }
+            break;
+        }
+        case initCase.TOGGLE_TRASH:{
+            if (payload !== prevState.inTrash) {
+                return {
+                  ...prevState,
+                  inTrash: typeof payload === 'boolean' ? payload : !prevState.inTrash,
                 };
               }
             break;

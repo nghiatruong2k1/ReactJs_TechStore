@@ -338,3 +338,11 @@ a:not([type='button']).active{
 .MuiSkeleton-root{
   background-color: var(--alpha-bg) !important;
 }
+
+
+.MuiPaginationItem-root{
+  color: inherit !important;
+}
+.MuiPaginationItem-root.Mui-selected{
+  background-color: var(--alpha-bg) !important;
+}

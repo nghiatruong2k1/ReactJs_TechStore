@@ -4,15 +4,9 @@ import { TableRow } from '@mui/material/';
 import styles from '../../Table.module.css';
 import Cell from '../../components/Cell';
 
-// import PublicButton from "./PublicButton";
-// import TrashButton from "./TrashButton";
-// import EditButton from "./EditButton";
-// import DeleteButton from "./DeleteButton";
-
-function RowData({ data, loading, displays }) {
+function RowData({ data, loading, displays, optionData }) {
   const [isCheck, setCheck] = useState(false);
-  useEffect(
-    function () {
+  useEffect(()=>{
       setCheck(false);
     },
     [data],
@@ -44,17 +38,11 @@ function RowData({ data, loading, displays }) {
             />
           );
         })}
-        {/* <Cell 
-          type="option"
-          key={displays.length + 1} 
-          loading={loading} 
-          cellProps={{sx:{fontSize:"1.2em !important"}}}
-        >
-          <PublicButton data={data} loading={loading}/>
-          <TrashButton data={data} loading={loading}/>
-          <DeleteButton data={data} loading={loading}/>
-          <EditButton data={data}loading={loading}/>
-        </Cell> */}
+        {optionData && (
+          <Cell key={displays.length + 1} loading={loading}>
+            {optionData.content && optionData.content(data)}
+          </Cell>
+        )}
       </TableRow>
     </>
   );

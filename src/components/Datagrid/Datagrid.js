@@ -6,7 +6,7 @@ import { Card, CardActions, CardContent} from '@mui/material';
 import DatagridTitle from './Title';
 import DatagridOption from './Option';
 import DataTable from './Table';
-function DatagridComponent({ enableEdit,loading, datasets,displays, title, option, footer }) {
+function DatagridComponent({ enableEdit,loading, datasets,displays, title, option,optionData, footer }) {
   const [state, dispath] = useReducer(reducerState, initState);
   return (
     <Provider value={state} dispath={dispath}>
@@ -16,7 +16,7 @@ function DatagridComponent({ enableEdit,loading, datasets,displays, title, optio
           <DatagridOption>{option}</DatagridOption>
         </CardActions>
         <CardContent>
-          <DataTable datasets={datasets} displays={displays} loading={loading}/>
+          <DataTable datasets={datasets} displays={displays} loading={loading} optionData={optionData}/>
         </CardContent>
         <CardContent>{footer}</CardContent>
         <div></div>

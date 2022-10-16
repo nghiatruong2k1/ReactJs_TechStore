@@ -51,17 +51,17 @@ export const routersAdmin = {
     product: {
       index: 'danh-sach-san-pham',
       add: 'them-san-pham',
-      update: 'cap-nhat-san-pham:id',
+      update: 'cap-nhat-san-pham/:id',
     },
     brand: {
       index: 'danh-sach-thuong-hieu',
       add: 'them-thuong-hieu',
-      update: 'cap-nhat-thuong-hieu:id',
+      update: 'cap-nhat-thuong-hieu/:id',
     },
     category: {
       index: 'danh-sach-danh-muc',
       add: 'them-danh-muc',
-      update: 'cap-nhat-danh-muc:id',
+      update: 'cap-nhat-danh-muc/:id',
     },
     order: {
       index: 'danh-sach-don-hang',

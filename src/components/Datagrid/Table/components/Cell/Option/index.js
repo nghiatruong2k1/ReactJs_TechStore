@@ -1,18 +1,6 @@
-import {memo} from 'react';
-import clsx from 'clsx';
-import {
-  Skeleton
-} from '@mui/material/';
-import styles from './styles.module.css';
-
-function CellOption({data,loading,sx,children,...props}){
-  return(
-    <>
-      {
-        !loading && (<>{children}</>) 
-        || <Skeleton variant="text" width="100%" />
-      }
-    </>
-  )
+import { Skeleton } from '@mui/material';
+import { memo, Fragment } from 'react';
+function CellOption({loading, children}) {
+  return <Fragment>{loading ? <Skeleton /> : children}</Fragment>;
 }
 export default memo(CellOption);

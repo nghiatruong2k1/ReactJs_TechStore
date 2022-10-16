@@ -10,7 +10,7 @@ export default function ProductAdminServices(location) {
       params,
       onThen,
       onCatch: () => {
-        onThen && onThen(0);
+        onThen && onThen([]);
       },
       location,
     });
