@@ -13,15 +13,26 @@ export default function UserAdminServices(location) {
       },location
     });
   }, []);
-  const getCount = useCallback((onThen) => {
+  const getCount = useCallback((params,onThen) => {
     return services.getServices({
       api: `${API}/count`,
+      params,
       onThen,
       onCatch: () => {
         onThen && onThen(0);
       },location
     });
   }, []);
-  return { getStatistic,getCount };
+  const getAll = useCallback((params,onThen) => {
+    return services.getServices({
+      api: `${API}`,
+      params,
+      onThen,
+      onCatch: () => {
+        onThen && onThen(0);
+      },location
+    });
+  }, []);
+  return { getStatistic,getCount,getAll };
 }
 

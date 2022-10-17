@@ -6,19 +6,17 @@ import {
   useReducer,
   useState,
 } from 'react';
-import BrandAdminServices from '~/area/Admin/services/brandAdmin';
-import { brandModel } from '~/models/brand';
-import { formatDate } from '~/config/Format';
-import { Link } from 'react-router-dom';
-import { getAction, routersAdmin } from '~/config/Router';
+import ImageAdminServices from '~/area/Admin/services/imageAdmin';
+import { imageModel } from '~/models/image';
 import { Grid } from '@mui/material';
 import { useInitLoading } from '~/hooks/Loading';
 import { useHandleTitle } from '~/hooks/Title';
 import CatalogLayout from '../../layout';
 
 import { reducerState, initState, initCase } from '../../init';
-function CatalogBrandComponent(props) {
-  const services = BrandAdminServices('CatalogBrandComponent');
+import { formatByte, formatDate } from '~/config/Format';
+function CatalogImageComponent(props) {
+  const services = ImageAdminServices('CatalogImageComponent');
   const [state, dispath] = useReducer(reducerState, initState);
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
@@ -51,43 +49,34 @@ function CatalogBrandComponent(props) {
   const displays = useMemo(() => {
     return [
       {
-        title: brandModel.ImageUrl.displayName,
-        name: 'ImageUrl',
+        title: imageModel.Url.displayName,
+        name: 'Url',
         nameAlt: 'Name',
         type: 'image',
         width: '10em',
       },
       {
-        title: brandModel.Name.displayName,
+        title: imageModel.Name.displayName,
         name: 'Name',
         type: 'text',
         width: '5em',
-        format: (v, data) => (
-          <Link
-            to={getAction(
-              routersAdmin.routers.brand.update,
-              { id: data.Id },
-              routersAdmin.area,
-            )}
-          >
-            {v}
-          </Link>
-        ),
-      },{
-        title:brandModel.IsPopular.displayName,
-        name:'IsPopular',
-        type:'checkbox',
-        width:'2em'
       },
       {
-        title: brandModel.CreateDate.displayName,
+        title:imageModel.Size.displayName,
+        name:'Size',
+        type:'number',
+        width:'5em',
+        format:(v)=>formatByte(v)
+      },
+      {
+        title: imageModel.CreateDate.displayName,
         name: 'CreateDate',
         type: 'datetime',
         width: '5em',
         format: (v) => formatDate(v),
       },
       {
-        title: brandModel.UpdateDate.displayName,
+        title: imageModel.UpdateDate.displayName,
         name: 'UpdateDate',
         type: 'datetime',
         width: '5em',
@@ -117,4 +106,4 @@ function CatalogBrandComponent(props) {
     </Grid>
   );
 }
-export default memo(CatalogBrandComponent);
+export default memo(CatalogImageComponent);

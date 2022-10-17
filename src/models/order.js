@@ -9,12 +9,15 @@ import { userEntity } from '~/entities/user';
 
 export const orderModel = {
   ...orderEntity,
-  FirtName: userEntity.FirstName,
+  FirstName: userEntity.FirstName,
   LastName: userEntity.LastName,
   Email: userEntity.Email,
   Phone: userEntity.Phone,
   Location: userEntity.Location,
-  StatusName: orderStatusEntity.Name,
+  StatusName: {
+    ...orderStatusEntity.Name,
+    displayName:'Trạng thái'
+  },
   TotalPrice: {
     displayName: 'Tổng thanh toán',
   },
@@ -25,7 +28,10 @@ export const orderDetailModel = {
   Alias: productEntity.Alias,
   TypeName: productTypeEntity.Name,
   Rating: productRatingEntity.Rating,
-  ImageUrl: imageEntity.Url,
+  ImageUrl: {
+    ...imageEntity.Url,
+    displayName:'Hình ảnh'
+  },
   CategoryName: categoryEntity.Name,
   BrandName: brandEntity.Name,
 };

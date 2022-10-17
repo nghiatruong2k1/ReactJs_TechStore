@@ -1,4 +1,4 @@
-import { defaultEntity } from "./default";
+import { defaultEntity } from './default';
 
 export let imageEntity = {
   Id: {
@@ -18,4 +18,6 @@ export let imageEntity = {
   },
   IsPublic: defaultEntity.IsPublic,
   IsTrash: defaultEntity.IsTrash,
+  CreateDate: defaultEntity.CreateDate,
+  UpdateDate: defaultEntity.UpdateDate,
 };

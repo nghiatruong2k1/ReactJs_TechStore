@@ -110,6 +110,9 @@ function CatalogCategoryComponent(props) {
         total={total}
         loading={loading}
         displays={displays}
+        component={Grid}
+        item
+        xs={12}
       />
     </Grid>
   );

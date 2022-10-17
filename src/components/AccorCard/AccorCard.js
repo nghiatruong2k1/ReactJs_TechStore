@@ -40,7 +40,7 @@ function AccordionContent({ title, icon, option, children, open,color,...props }
             </Stack>
           </AccordionSummary>
           <Divider />
-          <AccordionDetails>{children}</AccordionDetails>
+          <AccordionDetails className={styles.body}>{children}</AccordionDetails>
         </Accordion>
       </Box>
     </>

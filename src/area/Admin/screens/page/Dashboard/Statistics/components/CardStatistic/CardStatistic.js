@@ -19,7 +19,7 @@ function CardStatistic({ title, to,icon, handleGetData, ...props }) {
     if (handleGetData) {
       dispath([initCase.SET_DATA]);
       dispath([initCase.SET_LOADING, true]);
-      return handleGetData((data) => {
+      return handleGetData({},(data) => {
         dispath([initCase.SET_DATA, data]);
         dispath([initCase.SET_LOADING, false]);
       });

@@ -18,5 +18,8 @@ export const productModel = {
 
 export const productImageModel = {
   ...productImageEntity,
-  ImageUrl: imageEntity.Url,
+  ImageUrl: {
+    ...imageEntity.Url,
+    displayName:'Hình ảnh'
+  },
 };

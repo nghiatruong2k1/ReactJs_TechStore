@@ -38,6 +38,10 @@ function Navbar() {
         text: 'Thương hiệu',
         to: getAction(routersAdmin.routers.brand.index, {}, routersAdmin.area),
       },
+      {
+        text: 'Hình ảnh',
+        to: getAction(routersAdmin.routers.image.index, {}, routersAdmin.area),
+      },
     ];
   }, []);
   const Orders = useMemo(function () {
@@ -76,7 +80,7 @@ function Navbar() {
     return [
       {
         text: 'Danh sách',
-        to:getAction(routersAdmin.routers.user.index,{},routersAdmin.area)
+        to: getAction(routersAdmin.routers.user.index, {}, routersAdmin.area),
       },
     ];
   }, []);

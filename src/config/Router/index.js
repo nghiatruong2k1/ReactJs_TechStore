@@ -65,6 +65,7 @@ export const routersAdmin = {
     },
     order: {
       index: 'danh-sach-don-hang',
+      detail: 'chi-tiet-don-hang/:id',
       update: 'cap-nhat-don-hang/:id',
       add: 'them-don-hang',
       shipment: 'giao-hang',
@@ -73,6 +74,8 @@ export const routersAdmin = {
     },
     user: {
       index: 'danh-sach-nguoi-dung',
-    },
+    },image:{
+      index:'danh-sach-hinh-anh'
+    }
   },
 };

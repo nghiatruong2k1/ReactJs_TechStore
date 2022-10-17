@@ -6,20 +6,23 @@ import {
   useReducer,
   useState,
 } from 'react';
-import ProductAdminServices from '~/area/Admin/services/productAdmin';
-import { productModel } from '~/models/product';
-import formatNumber from 'number-format.js';
-import { formatDate } from '~/config/Format';
 import { Link } from 'react-router-dom';
-import { getAction, routersAdmin } from '~/config/Router';
 import { Grid } from '@mui/material';
+import formatNumber from 'number-format.js';
+import OrderAdminServices from '~/area/Admin/services/orderAdmin';
+import { orderModel } from '~/models/order';
+
+import { formatDate } from '~/config/Format';
+
 import { useInitLoading } from '~/hooks/Loading';
 import { useHandleTitle } from '~/hooks/Title';
-import CatalogLayout from '../../layout';
+import { getAction, routersAdmin } from '~/config/Router';
 
+import CatalogLayout from '../../layout';
 import { reducerState, initState, initCase } from '../../init';
-function CatalogProductComponent(props) {
-  const services = ProductAdminServices('CatalogProductComponent');
+
+function CatalogOrderComponent(props) {
+  const services = OrderAdminServices('CatalogOrderComponent');
   const [state, dispath] = useReducer(reducerState, initState);
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
@@ -52,92 +55,83 @@ function CatalogProductComponent(props) {
   const displays = useMemo(() => {
     return [
       {
-        title: productModel.ImageUrl.displayName,
-        name: 'ImageUrl',
-        nameAlt: 'Name',
-        type: 'image',
-        width: '10em',
-      },
-      {
-        title: productModel.Name.displayName,
-        name: 'Name',
+        title: orderModel.Id.displayName,
+        name: 'Id',
         type: 'text',
         width: '5em',
-        format: (v, data) => (
-          <Link
-            to={getAction(
-              routersAdmin.routers.product.update,
-              { id: data.Id },
-              routersAdmin.area,
-            )}
-          >
-            {v}
-          </Link>
-        ),
+        format: (v, data) => <Link to={getAction(routersAdmin.routers.order.detail,{id:v},routersAdmin.area)}>{v}</Link>,
       },
       {
-        title: productModel.CategoryName.displayName,
-        name: 'CategoryName',
+        title: orderModel.Email.displayName,
+        name: 'Email',
         type: 'text',
-        width: '10em',
-        format: (v, data) => (
-          <Link
-            to={getAction(
-              routersAdmin.routers.category.update,
-              { id: data.CategoryId },
-              routersAdmin.area,
-            )}
-          >
-            {v}
-          </Link>
-        ),
+        width: '5em',
+        format: (v, data) => <a href={`mailto:${v}`}>{v}</a>,
       },
       {
-        title: productModel.BrandName.displayName,
-        name: 'BrandName',
+        title: orderModel.FirstName.displayName,
+        name: 'FirstName',
         type: 'text',
-        width: '10em',
-        format: (v, data) => (
-          <Link
-            to={getAction(
-              routersAdmin.routers.brand.update,
-              { id: data.BrandId },
-              routersAdmin.area,
-            )}
-          >
-            {v}
-          </Link>
-        ),
+        width: '5em',
       },
       {
-        title: productModel.TypeName.displayName,
-        name: 'TypeName',
+        title: orderModel.LastName.displayName,
+        name: 'LastName',
         type: 'text',
-        width: '10em',
+        width: '5em',
       },
       {
-        title: productModel.Price.displayName,
-        name: 'Price',
+        title: orderModel.Location.displayName,
+        name: 'Location',
+        type: 'text',
+        width: '5em',
+      },
+      {
+        title: orderModel.Phone.displayName,
+        name: 'Phone',
+        type: 'text',
+        width: '5em',
+      },
+      {
+        title: orderModel.TotalPrice.displayName,
+        name: 'TotalPrice',
         type: 'number',
         format: (v) => formatNumber('#,##0.# đ', v),
         width: '8em',
       },
       {
-        title: productModel.SalePrice.displayName,
-        name: 'SalePrice',
+        title: orderModel.VoucherSale.displayName,
+        name: 'VoucherSale',
         type: 'number',
-        format: (v) => formatNumber('#,##0.# đ', v),
+        format: (v) => formatNumber('#,##0.# %', v),
+        width: '5em',
+      },
+      {
+        title: orderModel.StatusName.displayName,
+        name: 'StatusName',
+        type: 'text',
+        format: (v, data) => {
+          let color = '--info';
+          if (data.StatusId === 4) {
+            color = '--error';
+          } else if (data.StatusId === 3) {
+            color = '--success';
+          } else if (data.StatusId === 2) {
+            color = '--warning';
+          }
+          return <span style={{ color: `var(${color})` }}>{v}</span>;
+        },
         width: '8em',
       },
       {
-        title: productModel.CreateDate.displayName,
+        title: orderModel.CreateDate.displayName,
         name: 'CreateDate',
         type: 'datetime',
         width: '5em',
         format: (v) => formatDate(v),
       },
       {
-        title: productModel.UpdateDate.displayName,
+        title: orderModel.UpdateDate.displayName,
         name: 'UpdateDate',
         type: 'datetime',
         width: '5em',
@@ -167,4 +161,4 @@ function CatalogProductComponent(props) {
     </Grid>
   );
 }
-export default memo(CatalogProductComponent);
+export default memo(CatalogOrderComponent);

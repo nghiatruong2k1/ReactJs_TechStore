@@ -9,7 +9,10 @@ export const userModel = {
   ...imageEntity.Url,
   displayName:'Hình đại diện'
 },
- TypeName:userTypeEntity.Name
+ TypeName:{
+  ...userTypeEntity.Name,
+  displayName:'Cấp bậc'
+ }
 };
 
 export const userStatisModel = {
