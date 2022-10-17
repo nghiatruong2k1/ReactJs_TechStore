@@ -233,6 +233,11 @@ button:not(.disabled):not(:disabled),
 a:not(.disabled):not(:disabled) {
   cursor: pointer !important;
 }
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
 
 ::-webkit-scrollbar {
   width: 0.5rem;

@@ -308,6 +308,12 @@ a:not([type='button']).active{
 .MuiInputAdornment-root{
   color: inherit !important;
 }
+
+
+
+.MuiStepIcon-root.Mui-active{
+  color: var(--link-text-hover) !important;
+}
 .MuiStepConnector-horizontal{
   margin: 0 0.4em !important;
 }

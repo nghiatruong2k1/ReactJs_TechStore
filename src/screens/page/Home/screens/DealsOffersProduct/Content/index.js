@@ -8,7 +8,7 @@ import ProductItem from '../Product';
 import { useGetDealsOffersContext } from '../provider';
 
 function Content({ children }) {
-  const { state } = useGetDealsOffersContext();
+  const { data,loading,state } = useGetDealsOffersContext();
   const ref = useRef();
   const settings = useMemo(function () {
     return {
@@ -27,17 +27,17 @@ function Content({ children }) {
   return (
     <Box sx={{p:1}}>
       <Box position="relative">
-        <ViewContent loading={state.isLoading} length={state.data.length}>
+        <ViewContent loading={loading} length={data.length}>
           <Slider
             ref={ref}
             {...settings}
           >
-            {state.data.map(function (data, index) {
+            {data.map((item, index)=>{
               return (
                 <div key={index}>
                   <ProductItem
-                    loading={state.isLoading || !Boolean(data)}
-                    data={data}
+                    loading={loading || !Boolean(item)}
+                    data={item}
                   />
                 </div>
               );

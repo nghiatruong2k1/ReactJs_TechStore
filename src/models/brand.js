@@ -3,5 +3,8 @@ import { imageEntity } from "~/entities/image";
 
 export const brandModel = {
   ...brandEntity,
-  ImageUrl: imageEntity.Url,
+  ImageUrl: {
+    ...imageEntity.Url,
+    displayName:'Hình ảnh'
+  },
 };

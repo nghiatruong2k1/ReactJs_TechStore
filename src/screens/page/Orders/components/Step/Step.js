@@ -6,7 +6,7 @@ function StepComponent({ status, statusIndex, onChange }) {
     <Stack spacing={1} my={1} className={styles.container}>
       <Stepper nonLinear activeStep={statusIndex}>
         {Array.isArray(status) &&
-          status.map(function (status, index) {
+          status.map((status, index)=>{
             return (
               <Step key={index}>
                 <StepButton

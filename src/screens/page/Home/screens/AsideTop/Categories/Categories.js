@@ -1,4 +1,4 @@
-import { memo, useEffect, useReducer, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import {
   Grid,
   List,
@@ -10,21 +10,22 @@ import {
 } from '@mui/material/';
 import { NavLink } from 'react-router-dom';
 import CategoryServices from '~/services/category';
-import {routers, getAction } from '~/config/Router';
+import { routers, getAction } from '~/config/Router';
+import { useInitLoading } from '~/hooks/Loading';
 function Categories({ ...props }) {
-  const [data, setData] = useState([]);
-  const [isLoading, setLoading] = useState(false);
   const categoryServices = CategoryServices('home categories');
+  const [loading, handleLoading] = useInitLoading();
+  const [data, setData] = useState([]);
   useEffect(() => {
     setData(Array(5).fill(null));
-    setLoading(true);
+    const ourLoading = handleLoading();
     const ourRequest = categoryServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
-        to: getAction(routers.product.category, { alias: item.Alias })
+        to: getAction(routers.product.category, { alias: item.Alias }),
       }));
       setData(newdata);
-      setLoading(false);
+      ourLoading();
     });
     return ourRequest;
   }, []);
@@ -45,18 +46,18 @@ function Categories({ ...props }) {
             </ListSubheader>
           }
         >
-          {data.map(function (data, index) {
+          {data.map((item, index) => {
             return (
               <ListItem divider key={index} disablePadding>
                 {
                   <ListItemButton
-                    sx={{py:0.2}}
-                    component={(data && !isLoading && NavLink) || 'button'}
-                    to={(data && data.to) || '#'}
+                    sx={{ py: 0.2 }}
+                    component={(item && !loading && NavLink) || 'button'}
+                    to={(item && item.to) || '#'}
                   >
-                    {(data && !isLoading && (
-                      <ListItemText>{data && data.text}</ListItemText>
-                    )) || <Skeleton  className='fullview'/>}
+                    {(item && !loading && (
+                      <ListItemText>{item && item.text}</ListItemText>
+                    )) || <Skeleton className="fullview" />}
                   </ListItemButton>
                 }
               </ListItem>

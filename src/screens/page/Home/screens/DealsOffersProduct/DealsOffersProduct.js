@@ -1,4 +1,4 @@
-import { memo, useReducer } from 'react';
+import { memo, useEffect, useReducer, useState } from 'react';
 import { Paper, Grid, Stack, Typography } from '@mui/material/';
 
 import styles from './DealsOffersProduct.module.css';
@@ -6,10 +6,30 @@ import { initState, reducerState } from './init';
 import Provider from './provider';
 import TimerContent from './Timer';
 import ViewContent from './Content';
+import { useInitLoading } from '~/hooks/Loading';
+import { ProductServices } from '~/services';
 function DealsOffersProduct({ ...props }) {
+  const productServices = ProductServices('home Deals Offers Product');
   const [state, dispath] = useReducer(reducerState, initState);
+  const [loading, handleLoading] = useInitLoading();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData(Array(state.limit).fill(null));
+    const ourLoading = handleLoading();
+    const ourRequest = productServices.getsDealsOffers(
+      {
+        limit: state.limit ?? 1,
+        offset: 0,
+      },
+      (data) => {
+        setData(data);
+        ourLoading();
+      },
+    );
+    return ourRequest;
+  }, [state.limit]);
   return (
-    <Provider value={{ state, dispath }}>
+    <Provider value={{ state, dispath, loading, data }}>
       <Grid container component={Paper} sx={styles.container}>
         <Grid item xs={12} lg={3}>
           <Stack p={3}>

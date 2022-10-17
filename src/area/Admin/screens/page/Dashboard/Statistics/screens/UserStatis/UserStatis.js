@@ -4,6 +4,6 @@ import CardStatistic from '../../components/CardStatistic';
 function UserStatisComponent(props){
     const services = UserAdminServices('UserStatisComponent');
     return (
-        <CardStatistic title="Tài khoản" icon={<span class="fas fa-user" />} handleGetData={services.getCount} {...props}/>
+        <CardStatistic title="Tài khoản" icon={<span className="fas fa-user" />} handleGetData={services.getCount} {...props}/>
     )
 };export default memo(UserStatisComponent)

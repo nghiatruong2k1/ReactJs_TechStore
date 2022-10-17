@@ -5,7 +5,10 @@ import { userEntity, userTypeEntity } from '~/entities/user';
 
 export const userModel = {
  ...userEntity,
- ImageUrl:imageEntity.Url,
+ ImageUrl: {
+  ...imageEntity.Url,
+  displayName:'Hình đại diện'
+},
  TypeName:userTypeEntity.Name
 };
 

@@ -30,6 +30,7 @@ export function useInitAuth() {
       return ourRequest;
     } else {
       dispath([initCase.SET_USER,null]);
+      LocalStore.set(KEY_STORE, null);
       dispath([initCase.TOGGLE_LOADING, false]);
     }
   }, [cookies['token']]);

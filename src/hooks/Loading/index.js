@@ -10,5 +10,5 @@ export const useInitLoading = (name)=>{
             dispath(false)
         }
     })
-    return [state,handleLoading]
+    return [Boolean(state > 0),handleLoading]
 }

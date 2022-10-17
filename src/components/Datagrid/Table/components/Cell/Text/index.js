@@ -30,10 +30,10 @@ function CellText({
     return (
       <Typography whiteSpace="nowrap" fontWeight="inherit" sx={{ flex: 1 }}>
         {loading ? (
-          <Skeleton  />
+          <Skeleton />
         ) : (
           (data &&
-            ((typeof format === 'function' && format(data[name],data)) ||
+            ((typeof format === 'function' && format(data[name], data)) ||
               data[name])) ||
           text ||
           ''

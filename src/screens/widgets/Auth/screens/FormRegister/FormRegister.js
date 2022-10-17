@@ -56,8 +56,6 @@ function FormRegister({ onClose }) {
             <LinkTo
               beforeText="Bạn đồng ý với"
               text="điều khoản và chính sách sử dụng"
-              underline="none"
-              to={'#'}
             />
           }
         />

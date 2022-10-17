@@ -1,14 +1,27 @@
-import { memo, useReducer } from 'react';
+import { memo, useEffect, useReducer, useState } from 'react';
 import { Box, Grid, Divider } from '@mui/material/';
-
+import BrandServices from '~/services/brand';
 import BrandsDescription from './Description';
-import BrandsContent from "./Content";
+import BrandsContent from './Content';
 import { initState, reducerState } from './init';
 import Provider from './provider';
-function BrandsComponent({ ...props }) {
+import { useInitLoading } from '~/hooks/Loading';
+function BrandsComponent() {
+  const brandServices = BrandServices('home brands');
   const [state, dispath] = useReducer(reducerState, initState);
+  const [loading, handleLoading] = useInitLoading();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData(Array(state.limit).fill(null));
+    const ourLoading = handleLoading();
+    const ourRequest = brandServices.getAll({}, (data) => {
+      setData(data);
+      ourLoading();
+    });
+    return ourRequest;
+  }, [state.limit]);
   return (
-    <Provider value={{ state, dispath }}>
+    <Provider value={{ state, dispath, data, loading }}>
       <Box>
         <Divider textAlign="left" component="h3">
           Thương hiêụ:

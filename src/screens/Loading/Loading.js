@@ -5,10 +5,10 @@ import styles from './Loading.module.css';
 import { useInitLoading } from '~/hooks/Loading';
 import Provider from './provider';
 function GlobalLoadingComponent({ children }) {
-  const [state,handle] = useInitLoading('Global Loading');
+  const [isLoading,handle] = useInitLoading('Global Loading');
   return (
     <Provider value={handle}>
-      {state > 0 && (
+      {isLoading && (
         <div className={clsx(styles.root)}>
           <Button variant="outlined" color="info" className={styles.button}>
             <CircularProgress color="info" className={styles.svg} />

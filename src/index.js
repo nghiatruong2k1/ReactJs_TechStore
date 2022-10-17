@@ -10,10 +10,11 @@ import StylesGlobal from '~/styles';
 import StateGlobal from '~/states';
 import MessageProvider from '~/screens/Message';
 import LoadingProvider from '~/screens/Loading';
+
+
 ReactDOM.render(
   <>
-    <>
-      <FontsGlobal>
+    <FontsGlobal>
         <StylesGlobal>
           <LoadingProvider>
             <MessageProvider>
@@ -28,7 +29,6 @@ ReactDOM.render(
           </LoadingProvider>
         </StylesGlobal>
       </FontsGlobal>
-    </>
   </>,
   document.getElementById('root'),
 );

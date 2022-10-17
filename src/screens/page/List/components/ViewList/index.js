@@ -1,1 +1,1 @@
-export { default } from '../../layout/ViewList';
+export { default } from './ViewList';

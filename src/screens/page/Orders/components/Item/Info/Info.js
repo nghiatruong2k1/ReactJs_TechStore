@@ -43,6 +43,7 @@ function OrderInfo({
           value={
             <Link
               underline="hover"
+              color="inherit"
               href={(Email && `mailto: ${Email}`) ?? '/404'}
             >
               {Email}

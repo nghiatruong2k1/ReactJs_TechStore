@@ -1,64 +1,28 @@
-export const initState = {
-  data: [],
-  status: [],
-  statusIndex: 0,
-  limit: 3,
-  limitStatus: 4,
-  page: 1,
-  total: 0,
-  isLoading: false,
-};
+export function getPage(payload) {
+  payload = Number(payload);
+  return payload > 1 ? payload : 1;
+}
+export function getStatusIndex(payload) {
+  payload = Number(payload);
+  return payload > 0 ? payload : 0;
+}
+export function getLimit(payload) {
+	payload = Number(payload);
+	return payload > 0 ? payload : 12;
+  }
+export const initState = ({limit,page,statusIndex})=>{
+  return{
+    limit:getLimit(limit),
+    page:getPage(page),
+    statusIndex:getStatusIndex(statusIndex)
+  }
+}
 export const initCase = {
-  SET_DATA: '[SET_DATA,?array]',
-  SET_STATUS: '[SET_STATUS,?array]',
   SET_STATUS_INDEX: '[SET_STATUS_INDEX,?array]',
-  SET_LOADING: '[SET_LOADING,?bool]',
-  SET_TOTAL: '[SET_TOTAL,?num]',
   SET_PAGE: '[SET_PAGE,?num]',
 };
 export function reducerState(prevState, [key, payload]) {
   switch (key) {
-    case initCase.SET_DATA: {
-      if (payload !== prevState.data) {
-        return {
-          ...prevState,
-          data:
-            (Array.isArray(payload) && payload) ||
-            Array(prevState.limit).fill({}),
-        };
-      }
-      break;
-    }
-    case initCase.SET_STATUS: {
-      if (payload !== prevState.status) {
-        return {
-          ...prevState,
-          status:
-            (Array.isArray(payload) && payload) ||
-            Array(prevState.limitStatus).fill({}),
-        };
-      }
-      break;
-    }
-    case initCase.SET_LOADING: {
-      if (payload !== prevState.isLoading) {
-        return {
-          ...prevState,
-          isLoading:
-            typeof payload === 'boolean' ? payload : !prevState.isLoading,
-        };
-      }
-      break;
-    }
-    case initCase.SET_TOTAL: {
-      if (payload !== prevState.total) {
-        return {
-          ...prevState,
-          total: payload > 0 ? payload : 0,
-        };
-      }
-      break;
-    }
     case initCase.SET_STATUS_INDEX: {
       if (payload !== prevState.statusIndex) {
         return {

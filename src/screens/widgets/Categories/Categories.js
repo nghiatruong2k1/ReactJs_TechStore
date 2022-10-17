@@ -1,18 +1,18 @@
-import { memo, useEffect, Fragment, useState } from 'react';
+import { memo, Fragment, useState, useEffect } from 'react';
 import { ListNav } from '~/components';
 import CategoryServices from '~/services/category';
 import { routers, getAction } from '~/config/Router';
 function FooterCategories(props) {
-  const [data, setData] = useState([]);
-  const [isLoading, setLoading] = useState(false);
   const categoryServices = CategoryServices('footer categories');
+  const [isLoading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
   useEffect(() => {
     setData(Array(5).fill(null));
     setLoading(true);
     const ourRequest = categoryServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
-        to: getAction(routers.product.category, { alias: item.Alias })
+        to: getAction(routers.product.category, { alias: item.Alias }),
       }));
       setData(newdata);
       setLoading(false);

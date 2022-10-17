@@ -1,4 +1,4 @@
-import { memo, useMemo, useEffect, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import { Box, Grid, Typography } from '@mui/material/';
 import Slider from 'react-slick';
 import CategoryServices from '~/services/category';
@@ -6,24 +6,24 @@ import { routers, getAction } from '~/config/Router';
 
 import { ViewContent } from '~/components';
 import styles from './Popular.module.css';
-
+import { useInitLoading } from '~/hooks/Loading';
 import PopularItem from './Item';
 
 function Populars({ ...props }) {
-  const [data, setData] = useState([]);
-  const [isLoading, setLoading] = useState(false);
   const categoryServices = CategoryServices('home categories popular');
+  const [loading, handleLoading] = useInitLoading();
+  const [data, setData] = useState([]);
   useEffect(() => {
     setData(Array(5).fill(null));
-    setLoading(true);
-    const ourRequest = categoryServices.getPopular({}, (data) => {
+    const ourLoading = handleLoading();
+    const ourRequest = categoryServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
         imgUrl: item.ImageUrl,
         to: getAction(routers.product.category, { alias: item.Alias }),
       }));
       setData(newdata);
-      setLoading(false);
+      ourLoading();
     });
     return ourRequest;
   }, []);
@@ -48,13 +48,13 @@ function Populars({ ...props }) {
         Danh mục nỗi bật
       </Typography>
       <Box position="relative">
-        <ViewContent loading={isLoading} length={data.length}>
+        <ViewContent loading={loading} length={data.length}>
           <Slider {...settings}>
-            {data.map(function (item, index) {
+            {data.map((item, index) => {
               return (
                 <PopularItem
                   key={index}
-                  loading={isLoading || !Boolean(item)}
+                  loading={loading || !Boolean(item)}
                   data={item}
                 />
               );

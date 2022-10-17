@@ -1,16 +1,30 @@
-import { memo, useRef, useReducer } from 'react';
+import { memo, useRef, useReducer, useState, useEffect } from 'react';
 import { Grid, Box } from '@mui/material/';
 import { initState, reducerState } from './init';
 import Provider from './provider';
-import {Slider} from '~/components';
+import SliderServices from '~/services/slider';
+import { useInitLoading } from '~/hooks/Loading';
+import { Slider } from '~/components';
 function SliderComponent({ ...props }) {
-  const [state, dispath] = useReducer(reducerState, initState);
   const thisRef = useRef(null);
+  const sliderServices = SliderServices('home sliders');
+  const [state, dispath] = useReducer(reducerState, initState);
+  const [loading, handleLoading] = useInitLoading();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData(Array(5).fill(null));
+    const ourLoading = handleLoading();
+    const ourRequest = sliderServices.getAll({}, (data) => {
+      setData(data);
+      ourLoading();
+    });
+    return ourRequest;
+  }, []);
   return (
     <>
       <Grid item p={0.5} {...props}>
         <Provider value={{ state, dispath, slider: thisRef.current }}>
-          <Slider data={state.data} loading={state.isLoading} />
+          <Slider data={data} loading={loading} />
         </Provider>
       </Grid>
     </>

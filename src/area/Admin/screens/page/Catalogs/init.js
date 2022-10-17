@@ -1,57 +1,24 @@
 export const initState = {
 	limit:5,
 	page:1,
-	data:[],
-	total:0,
 	sort:null,
 	filter:{},
-	isLoading:false,
 	enableEdit:false,
 	inTrash:false
 };
 export const initCase = {
-    SET_DATA:'[SET_DATA,?array]',
-    TOGGLE_LOADING:'[TOGGLE_LOADING,?bool]',
     TOGGLE_TRASH:'[TOGGLE_TRASH,?bool]',
-    SET_TOTAL:'[SET_TOTAL,?num]',
     SET_PAGE:'[SET_PAGE,?num]',
     RESET:'[RESET,?object]'
 
 };
 export function reducerState(prevState,[key,payload]){
     switch(key){
-        case initCase.SET_DATA:{
-            if(payload !== prevState.data){
-                return {
-                    ...prevState,
-                    data:(Array.isArray(payload) && payload) || Array(prevState.limit).fill({})
-                }; 
-            }
-            break;
-        }
-        case initCase.TOGGLE_LOADING:{
-            if (payload !== prevState.isLoading) {
-                return {
-                  ...prevState,
-                  isLoading: typeof payload === 'boolean' ? payload : !prevState.isLoading,
-                };
-              }
-            break;
-        }
         case initCase.TOGGLE_TRASH:{
             if (payload !== prevState.inTrash) {
                 return {
                   ...prevState,
                   inTrash: typeof payload === 'boolean' ? payload : !prevState.inTrash,
-                };
-              }
-            break;
-        }
-        case initCase.SET_TOTAL:{
-            if (payload !== prevState.total) {
-                return {
-                  ...prevState,
-                  total:payload > 0 ? payload : 0,
                 };
               }
             break;
@@ -64,13 +31,6 @@ export function reducerState(prevState,[key,payload]){
                 };
               }
             break;
-        }
-        case initCase.RESET:{
-            if(payload){
-                return {...prevState,...payload}
-            }else{
-                return {...prevState}
-            }
         }
         default:{
             console.log(`không tôn tại case`,key,initCase)

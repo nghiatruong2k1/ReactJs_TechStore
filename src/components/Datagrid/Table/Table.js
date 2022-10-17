@@ -23,7 +23,7 @@ function TableComponent({ loading, datasets, displays,optionData }) {
               datasets.map(function (data, index) {
                 return (
                   <RowData
-                    loading={!Boolean(data.Id) && loading}
+                    loading={!Boolean(data) && loading}
                     data={data}
                     displays={displays}
                     optionData={optionData}

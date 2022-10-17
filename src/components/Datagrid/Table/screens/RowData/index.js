@@ -1,7 +1,5 @@
-import { memo, useCallback, useContext, useEffect, useState } from 'react';
-import clsx from 'clsx';
+import { memo, useCallback,  useEffect, useState } from 'react';
 import { TableRow } from '@mui/material/';
-import styles from '../../Table.module.css';
 import Cell from '../../components/Cell';
 
 function RowData({ data, loading, displays, optionData }) {
@@ -40,7 +38,7 @@ function RowData({ data, loading, displays, optionData }) {
         })}
         {optionData && (
           <Cell key={displays.length + 1} loading={loading}>
-            {optionData.content && optionData.content(data)}
+            {data && optionData.content && optionData.content(data)}
           </Cell>
         )}
       </TableRow>

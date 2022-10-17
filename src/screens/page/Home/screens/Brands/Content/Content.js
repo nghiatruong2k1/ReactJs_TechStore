@@ -8,7 +8,7 @@ import Slider from 'react-slick';
 import BrandsItem from '../Item';
 
 function Content({ children, ...props }) {
-  const { state, dispath } = useGetBrandsContext();
+  const { state, data,loading } = useGetBrandsContext();
   const settings = useMemo(function () {
     return {
       arrows: false,
@@ -27,14 +27,14 @@ function Content({ children, ...props }) {
   return (
     <Grid item {...props}>
       <Box position="relative">
-        <ViewContent loading={state.isLoading} length={state.data.length}>
+        <ViewContent loading={loading} length={data.length}>
           <Slider {...settings}>
-            {state.data.map(function (data, index) {
+            {data.map((item, index)=>{
               return (
                 <div key={index}>
                   <BrandsItem
-                    loading={state.isLoading || !Boolean(data)}
-                    data={data}
+                    loading={loading || !Boolean(item)}
+                    data={item}
                   />
                 </div>
               );
