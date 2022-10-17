@@ -5,7 +5,7 @@ import { initCase } from './init';
 import Provider from './provider';
 import ViewHead from './components/Head';
 import ViewStep from './components/Step';
-import ViewItem from './Item';
+import ViewItem from './components/Item';
 import { Paging, ViewContent } from '~/components';
 
 import { useHandleTitle } from '~/hooks/Title';
