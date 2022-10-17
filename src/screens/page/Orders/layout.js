@@ -1,7 +1,7 @@
-import { memo, useReducer, useEffect, useCallback } from 'react';
+import { memo, useEffect, useCallback } from 'react';
 
 import { Stack } from '@mui/material';
-import { initCase, initState, reducerState } from './init';
+import { initCase } from './init';
 import Provider from './provider';
 import ViewHead from './components/Head';
 import ViewStep from './components/Step';

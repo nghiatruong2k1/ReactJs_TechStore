@@ -1,4 +1,4 @@
-import { memo, useReducer, useEffect, useCallback, useState } from 'react';
+import { memo, useReducer, useEffect, useMemo, useState } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 import { OrderServices } from '~/services';
@@ -15,7 +15,7 @@ function OrdersComponent(props) {
       statusIndex: searchs.get('statusIndex'),
     }),
   );
-  // const orderServices = OrderServices('Orders page');
+  const orderServices = OrderServices('Orders page');
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [status, setStatus] = useState([]);
