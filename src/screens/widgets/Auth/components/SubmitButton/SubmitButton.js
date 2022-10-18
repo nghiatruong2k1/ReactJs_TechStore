@@ -2,9 +2,10 @@ import {memo} from 'react';
 import {LoadingButton} from '@mui/lab/';
 import styles from './SubmitButton.module.css';
 import { useGetFormContext } from '../FormProvider/provider';
+import { useGetAuth } from '~/hooks/Auth';
   
 function SubmitButton({children,...props}){
-  const {isLoading} = useGetFormContext();
+  const {state:{isLoading}} = useGetAuth()
   return(
     <LoadingButton
       disabled={isLoading}

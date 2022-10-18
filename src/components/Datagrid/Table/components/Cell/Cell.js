@@ -7,7 +7,6 @@ import ImageType from './Image';
 import NumberType from './Number';
 import DatetimeType from './Datetime';
 import OptionType from './Option';
-
 import TextType from './Text';
 
 function CellComponent({
@@ -33,6 +32,8 @@ function CellComponent({
       }
       case 'datetime': {
         return DatetimeType;
+      }case 'option': {
+        return OptionType;
       }
       default: {
         return TextType;
@@ -45,8 +46,8 @@ function CellComponent({
     return (
       <TableCell
         align="center"
-        // data-type={type}
-        // data-name={display.name}
+        data-type={type}
+        data-name={display.name}
         sx={{ whiteSpace: 'nowrap' }}
         className={clsx(styles.cell)}
       >
@@ -56,20 +57,14 @@ function CellComponent({
           alignItems="center"
           sx={{ minWidth: display?.width ?? 'auto' }}
         >
-          {(children && (
-            <OptionType loading={loading}>{children}</OptionType>
-          )) || (
-            <>
-              {beforeChild}
-              <Component
-                text={text}
-                data={data}
-                display={display}
-                loading={loading}
-              />
-              {afterChild}
-            </>
-          )}
+          {beforeChild}
+          <Component
+            text={text}
+            data={data}
+            display={display}
+            loading={loading}
+          />
+          {afterChild}
         </Stack>
       </TableCell>
     );
@@ -78,6 +73,6 @@ function CellComponent({
 
 CellComponent.propTypes = {};
 CellComponent.defaultProps = {
-  display:{}
+  display: {},
 };
 export default memo(CellComponent);

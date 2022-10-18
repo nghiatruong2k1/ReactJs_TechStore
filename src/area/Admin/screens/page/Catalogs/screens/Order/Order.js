@@ -15,7 +15,6 @@ import { orderModel } from '~/models/order';
 import { formatDate } from '~/config/Format';
 
 import { useInitLoading } from '~/hooks/Loading';
-import { useHandleTitle } from '~/hooks/Title';
 import { getAction, routersAdmin } from '~/config/Router';
 
 import CatalogLayout from '../../layout';
@@ -27,7 +26,6 @@ function CatalogOrderComponent(props) {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, handleLoading] = useInitLoading();
-  const handleTitle = useHandleTitle();
   useEffect(() => {
     setData(Array(state.limit).fill(null));
     const ourLoading = handleLoading();
@@ -148,6 +146,7 @@ function CatalogOrderComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
+        title={'Quản lí đơn hàng'+ (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

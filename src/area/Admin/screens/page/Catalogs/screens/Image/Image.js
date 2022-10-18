@@ -10,7 +10,6 @@ import ImageAdminServices from '~/area/Admin/services/imageAdmin';
 import { imageModel } from '~/models/image';
 import { Grid } from '@mui/material';
 import { useInitLoading } from '~/hooks/Loading';
-import { useHandleTitle } from '~/hooks/Title';
 import CatalogLayout from '../../layout';
 
 import { reducerState, initState, initCase } from '../../init';
@@ -21,7 +20,6 @@ function CatalogImageComponent(props) {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, handleLoading] = useInitLoading();
-  const handleTitle = useHandleTitle();
   useEffect(() => {
     setData(Array(state.limit).fill(null));
     const ourLoading = handleLoading();
@@ -93,6 +91,7 @@ function CatalogImageComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
+        title={'Quản lí hình ảnh'+ (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

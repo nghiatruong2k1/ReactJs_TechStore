@@ -1,12 +1,10 @@
 export const initState = {
   isOpen: false,
   user: null,
-  isLoading: false,
   action: 'login',
 };
 export const initCase = {
   TOGGLE_OPEN: '[toggle_open,?bool]',
-  TOGGLE_LOADING: '[toggle_loading,?bool]',
   SET_USER: '[set_user,?user]',
   TO_LOGIN: '[to_login]',
   TO_REGISTER: '[to_register]',
@@ -14,16 +12,6 @@ export const initCase = {
 };
 export function reducerState(prevState, [key, payload]) {
   switch (key) {
-    case initCase.TOGGLE_LOADING: {
-      if (payload !== prevState.isLoading) {
-        return {
-          ...prevState,
-          isLoading:
-            typeof payload === 'boolean' ? payload : !prevState.isLoading,
-        };
-      }
-      break;
-    }
     case initCase.TOGGLE_OPEN: {
       if (payload !== prevState.isOpen) {
         return {

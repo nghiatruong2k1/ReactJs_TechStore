@@ -17,7 +17,7 @@ function handleCheckChange(event) {
   }
 }
 
-function RowTitle({ displays, optionData }) {
+function RowTitle({ displays }) {
   return (
     <TableRow className={clsx(styles.head)}>
       <Cell key={0} text={''} display={{ width: '2em' }} />
@@ -32,12 +32,6 @@ function RowTitle({ displays, optionData }) {
           />
         );
       })}
-      {
-        optionData && (
-          <Cell key={displays.length + 1} text={optionData.title} />
-        )
-      }
-
     </TableRow>
   );
 }

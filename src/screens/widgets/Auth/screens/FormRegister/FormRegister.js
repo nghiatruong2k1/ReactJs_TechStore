@@ -1,7 +1,7 @@
 import { memo, useCallback } from 'react';
 import { Stack, Typography } from '@mui/material/';
 import { initCase } from '~/hooks/Auth/init';
-import { AuthServices } from '~/services';
+import { AuthServices, MailerServices } from '~/services';
 import LinkTo from '../../components/LinkTo';
 import FormProvider from '../../components/FormProvider';
 import InputText from '../../components/InputText';
@@ -13,16 +13,34 @@ import FacebookButton from '../../components/FacebookButton';
 import GoogleButton from '../../components/GoogleButton';
 import { registerAuthModel } from '~/models/auth';
 import { getRulers } from '~/models';
+import { useSnackbar } from 'notistack';
+import FormRegisterMail from './FormRegisterMail';
 
 const rules = getRulers(registerAuthModel);
 function FormRegister({ onClose }) {
-  const authServices = AuthServices('form login');
-  const handleSubmit = useCallback(({ Email, Password },onEnd) => {
+  const authServices = AuthServices('form register');
+  const mailerServices = MailerServices('form register');
+  const { enqueueSnackbar } = useSnackbar();
+  const handleSubmit = useCallback(({ Email, Password }, onEnd) => {
     authServices.register({ Email, Password }, (data) => {
       if (data) {
         onClose && onClose();
+        const Content = <FormRegisterMail Email={Email} Password={Password} />;
+        mailerServices.send(
+          {
+            content: Content,
+            subject: 'Bạn có 1 tài khoản cần xác nhận',
+            user:{Email},
+          },
+          () => {
+            enqueueSnackbar({
+              message: 'Đã gửi xác thực tài khoản đến Email của bạn!',
+              type: 'success',
+            });
+          },
+          () => {},
+        );
       }
-      console.log(data)
       onEnd && onEnd();
     });
   }, []);
@@ -37,8 +55,8 @@ function FormRegister({ onClose }) {
       >
         <InputText
           name="Email"
-          title={registerAuthModel.Password.displayName}
-          placeholder={`Nhập ${registerAuthModel.Password.displayName}`}
+          title={registerAuthModel.Email.displayName}
+          placeholder={`Nhập ${registerAuthModel.Email.displayName}`}
         />
         <InputPassword
           name="Password"
@@ -47,8 +65,8 @@ function FormRegister({ onClose }) {
         />
         <InputPassword
           name="RePassword"
-          title={registerAuthModel.Password.displayName}
-          placeholder={`Nhập ${registerAuthModel.Password.displayName}`}
+          title={registerAuthModel.RePassword.displayName}
+          placeholder={`Nhập ${registerAuthModel.RePassword.displayName}`}
         />
         <InputCheckbox
           name="IsAgree"

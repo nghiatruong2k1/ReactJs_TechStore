@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  Divider,
   IconButton,
   Paper,
   Stack,
@@ -17,7 +16,7 @@ import { HighlightOff } from '@mui/icons-material';
 import { useGetAuth } from '~/hooks/Auth';
 import { useHandleTitle } from '~/hooks/Title';
 function AuthLayoutComponent({ toggleComponent, children, title }) {
-  const { state, dispath, initCase } = useGetAuth();
+  const { state, handle:{handleClose,handleOpen} } = useGetAuth();
   const handleTitle = useHandleTitle();
   useEffect(() => {
     if (state.isOpen) {
@@ -30,11 +29,11 @@ function AuthLayoutComponent({ toggleComponent, children, title }) {
         component={toggleComponent ?? 'div'}
         icon={<span className={'fas fa-sign-in-alt'} />}
         title={'Đăng nhập'}
-        onClick={() => dispath([initCase.TOGGLE_OPEN, true])}
+        onClick={handleOpen}
       />
       <Dialog
         open={state.isOpen}
-        onClose={() => dispath([initCase.TOGGLE_OPEN, false])}
+        onClose={handleClose}
         fullWidth={true}
         disablePortal
         scroll={'body'}
@@ -62,7 +61,7 @@ function AuthLayoutComponent({ toggleComponent, children, title }) {
             </Typography>
             <Tooltip title="Đóng" placement="top" arrow>
               <IconButton
-                onClick={() => dispath([initCase.TOGGLE_OPEN, false])}
+                onClick={handleClose}
                 color="error"
               >
                 <HighlightOff className={styles.close} />

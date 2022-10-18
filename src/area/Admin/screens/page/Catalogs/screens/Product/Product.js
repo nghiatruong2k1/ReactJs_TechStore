@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 import { getAction, routersAdmin } from '~/config/Router';
 import { Grid } from '@mui/material';
 import { useInitLoading } from '~/hooks/Loading';
-import { useHandleTitle } from '~/hooks/Title';
 import CatalogLayout from '../../layout';
 
 import { reducerState, initState, initCase } from '../../init';
@@ -24,7 +23,6 @@ function CatalogProductComponent(props) {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, handleLoading] = useInitLoading();
-  const handleTitle = useHandleTitle();
   useEffect(() => {
     setData(Array(state.limit).fill(null));
     const ourLoading = handleLoading();
@@ -154,6 +152,7 @@ function CatalogProductComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
+      title={'Quản lí sản phẩm'+ (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

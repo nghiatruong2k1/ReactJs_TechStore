@@ -1,19 +1,26 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import { AccorCard, Datagrid, Paging } from '~/components';
 import { initCase } from './init';
+import { useHandleTitle } from '~/hooks/Title';
 import AddButton from './components/AddButton';
 import TrashButton from './components/TrashButton';
-import PublicButton from './components/PublicButton';
-import DeleteButton from './components/DeleteButton';
+// import PublicButton from './components/PublicButton';
+// import DeleteButton from './components/DeleteButton';
 function CatalogLayout({
   state,
   dispath,
   displays,
   total,
   data,
+  title,
   loading,
   ...props
 }) {
+
+  const handleTitle = useHandleTitle();
+  useEffect(()=>{
+    return handleTitle(title)
+  },[title])
   const handleChangePage = useCallback((index) => {
     dispath([initCase.SET_PAGE, index]);
   }, []);
@@ -37,15 +44,6 @@ function CatalogLayout({
           loading={loading}
           datasets={data}
           displays={displays}
-          optionData={{
-            title: 'Tùy chọn',
-            content: (data) => (
-              <>
-                <PublicButton isPublic={data.IsPublic} />
-                <DeleteButton isTrash={data.IsTrash} />
-              </>
-            ),
-          }}
           footer={
             <Paging
               total={total}

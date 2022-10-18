@@ -6,12 +6,12 @@ import { ViewContent } from '~/components';
 import RowTitle from './screens/RowTitle';
 import RowData from './screens/RowData';
 import RowEmpty from './screens/RowEmpty';
-function TableComponent({ loading, datasets, displays,optionData }) {
+function TableComponent({ loading, datasets, displays }) {
   return (
     <TableContainer className={clsx(styles.container)}>
       <Table stickyHeader className={styles.table}>
         <TableHead>
-          <RowTitle displays={displays} optionData={optionData}/>
+          <RowTitle displays={displays}/>
         </TableHead>
         <TableBody>
           <ViewContent
@@ -26,7 +26,6 @@ function TableComponent({ loading, datasets, displays,optionData }) {
                     loading={!Boolean(data) && loading}
                     data={data}
                     displays={displays}
-                    optionData={optionData}
                     key={index}
                   />
                 );

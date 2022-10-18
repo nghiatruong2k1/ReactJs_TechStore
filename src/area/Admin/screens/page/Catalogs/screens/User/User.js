@@ -11,7 +11,6 @@ import { userModel } from '~/models/user';
 import { formatDate } from '~/config/Format';
 import { Grid } from '@mui/material';
 import { useInitLoading } from '~/hooks/Loading';
-import { useHandleTitle } from '~/hooks/Title';
 import CatalogLayout from '../../layout';
 
 import { reducerState, initState, initCase } from '../../init';
@@ -21,7 +20,6 @@ function CatalogUserComponent(props) {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, handleLoading] = useInitLoading();
-  const handleTitle = useHandleTitle();
   useEffect(() => {
     setData(Array(state.limit).fill(null));
     const ourLoading = handleLoading();
@@ -128,6 +126,7 @@ function CatalogUserComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
+      title={'Quản lí người dùng'+ (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

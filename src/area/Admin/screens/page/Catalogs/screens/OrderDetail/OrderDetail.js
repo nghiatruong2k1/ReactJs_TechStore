@@ -12,11 +12,7 @@ import formatNumber from 'number-format.js';
 import OrderServices from '~/services/order';
 import { orderDetailModel } from '~/models/order';
 
-import { formatDate } from '~/config/Format';
-
 import { useInitLoading } from '~/hooks/Loading';
-import { useHandleTitle } from '~/hooks/Title';
-import { getAction, routersAdmin } from '~/config/Router';
 
 import CatalogLayout from '../../layout';
 import { reducerState, initState, initCase } from '../../init';
@@ -28,7 +24,6 @@ function CatalogOrderDetailComponent(props) {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, handleLoading] = useInitLoading();
-  const handleTitle = useHandleTitle();
   useEffect(() => {
     if (Number(id) > 0) {
       setData(Array(state.limit).fill(null));
@@ -119,6 +114,7 @@ function CatalogOrderDetailComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
+        title={'Quản lí chi tiết đơn hàng'+ (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

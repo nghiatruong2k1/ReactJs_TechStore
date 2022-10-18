@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './LinkTo.module.css';
-function LinkSetAction({ text, beforeText, afterText, to, ...props }) {
+function LinkSetAction({ text, beforeText, afterText, to }) {
   return (
     <span>
       {beforeText}

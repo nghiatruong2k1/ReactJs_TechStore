@@ -1,10 +1,16 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import NoteList from './NoteList';
 import Statistics from './Statistics';
 import ChartRegisters from './ChartRegisters';
 import ChartOrders from './ChartOrders';
-function DashBoardComponent() {
+
+import { useHandleTitle } from '~/hooks/Title';
+function DashboardComponent() {
+  const handleTitle = useHandleTitle();
+  useEffect(()=>{
+    return handleTitle('Dashboard')
+  },[])
   return (
     <Grid container>
       <NoteList component={Grid} item xs={12} />
@@ -14,4 +20,4 @@ function DashBoardComponent() {
     </Grid>
   );
 }
-export default memo(DashBoardComponent);
+export default memo(DashboardComponent);

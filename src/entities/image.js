@@ -11,7 +11,7 @@ export let imageEntity = {
     displayName: 'Định danh',
   },
   Url: {
-    displayName: 'Đường dẫn',
+    displayName: 'Hình ảnh',
   },
   Size: {
     displayName: 'Kích thước',

@@ -1,31 +1,38 @@
 import { memo, useReducer, useCallback } from 'react';
 import { FormControl } from '@mui/material/';
 import { checkObject } from '~/config/Validate';
+import { useGetAuth } from '~/hooks/Auth';
 import { reducerState, initCase } from './init';
 import Provider from './provider';
+import clsx from 'clsx';
 function FormProvider({ initValues, rules, onSubmit, children }) {
   const [state, dispath] = useReducer(reducerState, {
     values: initValues || {},
     valids: {},
-    isLoading: false,
   });
+  const {
+    state: { isLoading },
+    handle: { handleLoading },
+  } = useGetAuth();
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      dispath([initCase.SET_LOADING, true]);
-      const rs = checkObject(state.values, rules, (name, valids) => {
-        dispath([initCase.CHANGE_VALID, { [name]: valids[0] }]);
-      });
-      if (rs === 0) {
-        onSubmit &&
-          onSubmit(state.values, () => {
-            dispath([initCase.SET_LOADING,false]);
-          });
-      } else {
-        dispath([initCase.SET_LOADING, false]);
+      if (!isLoading) {
+        const ourLoading = handleLoading();
+        const rs = checkObject(state.values, rules, (name, valids) => {
+          dispath([initCase.CHANGE_VALID, { [name]: valids[0] }]);
+        });
+        if (rs === 0) {
+          onSubmit &&
+            onSubmit(state.values, () => {
+              ourLoading();
+            });
+        } else {
+          ourLoading();
+        }
       }
     },
-    [state],
+    [state, isLoading],
   );
   return (
     <Provider
@@ -39,7 +46,7 @@ function FormProvider({ initValues, rules, onSubmit, children }) {
         fullWidth
         component="form"
         method="post"
-        disabled={state.isLoading}
+        className={ clsx({disabled:isLoading}) }
       >
         {children}
       </FormControl>

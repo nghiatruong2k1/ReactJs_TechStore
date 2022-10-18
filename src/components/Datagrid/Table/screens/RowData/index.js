@@ -2,7 +2,7 @@ import { memo, useCallback,  useEffect, useState } from 'react';
 import { TableRow } from '@mui/material/';
 import Cell from '../../components/Cell';
 
-function RowData({ data, loading, displays, optionData }) {
+function RowData({ data, loading, displays }) {
   const [isCheck, setCheck] = useState(false);
   useEffect(()=>{
       setCheck(false);
@@ -36,11 +36,6 @@ function RowData({ data, loading, displays, optionData }) {
             />
           );
         })}
-        {optionData && (
-          <Cell key={displays.length + 1} loading={loading}>
-            {data && optionData.content && optionData.content(data)}
-          </Cell>
-        )}
       </TableRow>
     </>
   );
