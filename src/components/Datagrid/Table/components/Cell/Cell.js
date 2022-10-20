@@ -8,7 +8,16 @@ import NumberType from './Number';
 import DatetimeType from './Datetime';
 import OptionType from './Option';
 import TextType from './Text';
+import PropTypes from 'prop-types';
 
+const types = {
+  checkbox: CheckboxType,
+  image: ImageType,
+  number: NumberType,
+  datetime: DatetimeType,
+  option: OptionType,
+  text: TextType,
+};
 function CellComponent({
   loading,
   type,
@@ -17,28 +26,9 @@ function CellComponent({
   text,
   beforeChild,
   afterChild,
-  children,
 }) {
   const Component = useMemo(() => {
-    switch (type) {
-      case 'checkbox': {
-        return CheckboxType;
-      }
-      case 'image': {
-        return ImageType;
-      }
-      case 'number': {
-        return NumberType;
-      }
-      case 'datetime': {
-        return DatetimeType;
-      }case 'option': {
-        return OptionType;
-      }
-      default: {
-        return TextType;
-      }
-    }
+    return types[type] ?? type.text;
   }, [type]);
   if (display?.hidden) {
     return <></>;
@@ -71,8 +61,11 @@ function CellComponent({
   }
 }
 
-CellComponent.propTypes = {};
+CellComponent.propTypes = {
+  type:PropTypes.oneOf(Object.keys(types))
+};
 CellComponent.defaultProps = {
   display: {},
+  type:'text'
 };
 export default memo(CellComponent);

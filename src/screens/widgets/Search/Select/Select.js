@@ -1,27 +1,22 @@
 import { memo } from 'react';
-import { InputAdornment, Select, MenuItem, FormControl } from '@mui/material/';
+import { Select, MenuItem, FormControl } from '@mui/material/';
+import styles from '../Search.module.css';
 function SearchSelect({ value, onChange, data }) {
   return (
-    <InputAdornment
-      position="end"
-      sx={{ color: 'inherit !important', width: '6em' }}
-    >
+    <>
       <FormControl fullWidth variant="standard">
         <Select
           size="small"
-          sx={{ color: 'inherit !important' }}
           displayEmpty
           fullWidth
           disableUnderline
+          className={styles.select}
           value={value || ''}
           onChange={(e, o) => {
             onChange && onChange(o.props.value);
           }}
           SelectDisplayProps={{
-            sx: {
-              textAlign: 'center',
-              background: 'transparent',
-            },
+            className: styles.display,
           }}
           MenuProps={{
             MenuListProps: {
@@ -50,7 +45,7 @@ function SearchSelect({ value, onChange, data }) {
           })}
         </Select>
       </FormControl>
-    </InputAdornment>
+    </>
   );
 }
 export default memo(SearchSelect);

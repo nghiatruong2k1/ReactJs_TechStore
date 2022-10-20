@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
 import { Get, CancelToken } from '~/utils/HttpRequest';
 import { useGetGlobalLoadingContext } from '~/screens/Loading';
@@ -6,56 +6,42 @@ import { useGetGlobalLoadingContext } from '~/screens/Loading';
 export default function useServices(location) {
   const handleLoading = useGetGlobalLoadingContext();
   const { enqueueSnackbar } = useSnackbar();
-  return useMemo(() => {
-    return {
-      getServices: ({
-        method = Get,
-        api,
-        params,
-        onStart,
-        onEnd,
-        onThen,
-        onCatch,
-      }) => {
-        // const ourRequest = CancelToken.source();
-        // const controller = new AbortController();
-        async function handleMethod() {
-          console.log(`[start]  service`, [method.name, api, location]);
-          const ourLoading = handleLoading(location);
-          onStart && onStart();
-          await method(api, params, {
-            // cancelToken: ourRequest.token,
-            // signal: controller.signal,
+  return useCallback(
+    ({ method = Get, api, params, onStart, onEnd, onThen, onCatch }) => {
+      const ourRequest = CancelToken.source();
+      const controller = new AbortController();
+      async function handleMethod() {
+        console.log(`[start]  service`, [method.name, api, location]);
+        const ourLoading = handleLoading(location);
+        onStart && onStart();
+        await method(api, params, {
+          cancelToken: ourRequest.token,
+          signal: controller.signal,
+        })
+          .then((res) => {
+            console.log(`[end]  service`, [method.name, api, res, location]);
+            handleResult(enqueueSnackbar, res.data.message);
+            onThen && onThen(res.data);
           })
-            .then((res) => {
-              console.log(`[end]  service`, [method.name, api, res, location]);
-              handleResult(enqueueSnackbar, res.data.message);
-              onThen && onThen(res.data);
-            })
-            .catch((error) => {
-              console.log(`[error] service`, [
-                method.name,
-                api,
-                error,
-                location,
-              ]);
-              handleError(enqueueSnackbar, error);
-              onCatch && onCatch(error);
-            })
-            .finally(() => {
-              onEnd && onEnd();
-              ourLoading && ourLoading();
-            });
-        }
-        handleMethod();
-        return () => {
-          console.log(`[cancel] service`, [method.name, api, location]);
-          // ourRequest && ourRequest.cancel();
-          // controller && controller.abort();
-        };
-      },
-    };
-  }, [location]);
+          .catch((error) => {
+            console.log(`[error] service`, [method.name, api, error, location]);
+            handleError(enqueueSnackbar, error);
+            onCatch && onCatch(error);
+          })
+          .finally(() => {
+            onEnd && onEnd();
+            ourLoading && ourLoading();
+          });
+      }
+      handleMethod();
+      return () => {
+        console.log(`[cancel] service`, [method.name, api, location]);
+        ourRequest && ourRequest.cancel();
+        controller && controller.abort();
+      };
+    },
+    [],
+  );
 }
 
 async function handleError(toast, error) {

@@ -15,7 +15,7 @@ import styles from './Navbar.module.css';
 import NavbarItem from './Item';
 import NavbarAccordion from './Accordion';
 import { getAction, routersAdmin } from '~/config/Router';
-function Navbar() {
+function NavbarComponent() {
   const Catalogs = useMemo(function () {
     return [
       {
@@ -130,4 +130,4 @@ function Navbar() {
     </Stack>
   );
 }
-export default memo(Navbar);
+export default memo(NavbarComponent);

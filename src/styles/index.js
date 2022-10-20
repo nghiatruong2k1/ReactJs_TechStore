@@ -2,6 +2,7 @@ import { memo } from 'react';
 import './styles.css';
 import './fontawesome.css';
 import './animations.css';
+import './LightTheme.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 

@@ -1,10 +1,11 @@
-import { memo } from 'react';
+import { memo, Fragment, useCallback } from 'react';
 import clsx from 'clsx';
 import { TableRow } from '@mui/material/';
 import styles from '../../Table.module.css';
 
 import Cell from '../../components/Cell';
-// import AfterOption from "./AfterOption";
+import { useGetDatagridContext } from '../../../provider';
+import AfterOption from './AfterOption';
 
 function handleCheckChange(event) {
   const table = event.target.closest('.MuiAccordion-root');
@@ -18,19 +19,34 @@ function handleCheckChange(event) {
 }
 
 function RowTitle({ displays }) {
+  const { state, dispath } = useGetDatagridContext();
+  const handleToggleShow = useCallback((name, show) => {
+    dispath([name, show]);
+  }, []);
   return (
     <TableRow className={clsx(styles.head)}>
       <Cell key={0} text={''} display={{ width: '2em' }} />
-
       {displays.map(({ title, ...display }, index) => {
-        return (
-          <Cell
-            key={index + 1}
-            display={display}
-            text={title}
-            // afterChild={<AfterOption display={display}/>}
-          />
-        );
+        if (state[display.name]) {
+          return (
+            <Cell
+              key={index + 1}
+              display={display}
+              text={title}
+              afterChild={
+                display.name && (
+                  <AfterOption
+                    name={display.name}
+                    show={state[display.name]}
+                    onToggleShow={handleToggleShow}
+                  />
+                )
+              }
+            />
+          );
+        } else {
+          return <Fragment key={index + 1} />;
+        }
       })}
     </TableRow>
   );

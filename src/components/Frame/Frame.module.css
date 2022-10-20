@@ -10,13 +10,13 @@
 	overflow: hidden;
 }
 .square{
-	padding-top: 100%;
+	padding-top: var(--frame-height,100%);
 }
 .rectangle{
-	padding-top: 50%;
+	padding-top: var(--frame-height,50%);
 }
 .circle{
-	padding-top: 100%;
+	padding-top: var(--frame-height,100%);
 	border-radius: 100%;
 }
 .content{

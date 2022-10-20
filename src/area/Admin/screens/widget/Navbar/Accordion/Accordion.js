@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import {
-  List,
+  List,ListItem,
   ListItemText,
   ListItemIcon,
   ListItemButton,
@@ -21,7 +21,8 @@ function NavbarAccordion({ icon, text, subData }) {
   const [isOpen, {toggle}] = useDisclosure(false);
   return (
     <Accordion
-      component="li"
+      component={ListItem}
+      divider
       disableGutters
       defaultExpanded
       expanded={isOpen}
@@ -35,7 +36,7 @@ function NavbarAccordion({ icon, text, subData }) {
         </ListItemIcon>
       </ListItemButton>
       <AccordionDetails className={styles.body}>
-        <List disablePadding>
+        <List disablePadding sx={{width:'100%'}}>
           {subData.map(function (data, index) {
             return (
               <NavbarItem

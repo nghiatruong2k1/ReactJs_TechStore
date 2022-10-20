@@ -12,11 +12,11 @@
   --white: #fff;
   --gray: #e5e7ea;
   --gray-dark: #343a40;
+/* 
+  --primary: var(--text-primary);
+  --primaryBg:var(--primary-bg);
 
-  --primary: --text-primary;
-  --primaryBg:--primary-bg;
-
-  --secondary: #12225b;
+  --secondary: #12225b; */
 
   --success: #00b517;
   --successBg: #d9f9dd;
@@ -63,9 +63,9 @@
   border: 0;
   outline: 0;
   font: inherit;
-  font-weight: inherit !important;
+  font-weight: inherit;
   font-size: 1em;
-  text-transform: initial !important;
+  text-transform: initial;
   vertical-align: baseline;
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -170,19 +170,7 @@ table {
   inset: 0 !important;
 }
 
-[class*='MuiCircularProgress-root'],
-[class*='MuiAvatar-root'],
-[class*='MuiSvgIcon-root'],
-[class*='fa-'],
-[class*='icon_root'] {
-  font-size: 1em !important;
-  width: 1em !important;
-  height: 1em !important;
-  color: inherit !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
+
 .MuiTypography-root,
 .line-clamp-1,
 .line-clamp-2,
@@ -286,7 +274,9 @@ h1,
   font-size: 2.2rem !important;
   font-weight: bold !important;
 }
-
+strong,.strong{
+  font-weight: bolder !important;
+}
 b,.b {
   font-weight: bold !important;
 }
@@ -303,3 +293,11 @@ u,.u {
   -webkit-box-shadow: transparent !important;
 }
 
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition: color 9999s ease-out, background-color 9999s ease-out !important;
+    -webkit-transition-delay: 9999s !important;
+}

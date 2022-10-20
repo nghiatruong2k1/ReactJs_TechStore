@@ -2,6 +2,7 @@ import { defaultEntity } from './default';
 import { imageEntity } from './image';
 export let userTypeEntity = {
   Id: {
+    ...defaultEntity.Id,
     displayName: 'Mã cấp bậc',
   },
   Name: {
@@ -18,6 +19,7 @@ export let userTypeEntity = {
 };
 export let userEntity = {
   Id: {
+    ...defaultEntity.Id,
     displayName: 'Mã người dùng',
   },
   FirstName: {
@@ -34,6 +36,7 @@ export let userEntity = {
   },
   Email: {
     displayName: 'Email',
+    disabledUpdate:true,
     rulers: {
       isRequired: ['Vui lòng nhập Email!'],
       isEmail: [null, ['gmail.com']],

@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { FileUploadRounded } from '@mui/icons-material/';
 import { IconButton, Tooltip } from '@mui/material';
-function ExportButton({ ...props }) {
+function ExportButton() {
   return (
     <Tooltip title="Export" placement="top" arrow>
       <span>

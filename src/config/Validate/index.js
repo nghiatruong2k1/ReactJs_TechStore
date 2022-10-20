@@ -31,7 +31,7 @@ function validateNumber(value,callback){
 			if(value === ""){
 				return callback && callback(value) || "";
 			}
-			if(Number.isNaN(value));{
+			if(Number.isNaN(Number(value)));{
 				break;
 			}
 		}
@@ -48,7 +48,7 @@ export const validates = (function(){
 		isRequired:function(value,props){
 			const [message] = props;
 			if(((typeof(value) === 'string') && (value.trim() !== ""))
-				|| ((typeof(value) === 'number') && (!Number.isNaN(value)))
+				|| ((typeof(value) === 'number') && (!Number.isNaN(Number(value))))
 				|| ((typeof(value) === 'boolean') && value)
 			){
 				return "";

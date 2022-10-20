@@ -1,6 +1,9 @@
 .container{
     z-index: var(--index-toast) !important;
 }
+.title{
+    vertical-align: middle !important;
+}
 .body{
     width: 100% !important;
     max-width: 22em!important;

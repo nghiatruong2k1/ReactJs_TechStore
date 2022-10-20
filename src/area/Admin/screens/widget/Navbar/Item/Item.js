@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import styles from '../Navbar.module.css';
 function NavbarItem({ icon, activeIcon, isActive, text, to }) {
   return (
-    <ListItem disablePadding className={styles.item}>
+    <ListItem disablePadding divider className={styles.item}>
       <ListItemButton
         component={Link}
         to={to || '/404'}

@@ -1,6 +1,7 @@
-import { memo, useCallback,  useEffect, useState } from 'react';
+import { memo, useCallback,  useEffect, useState,Fragment } from 'react';
 import { TableRow } from '@mui/material/';
 import Cell from '../../components/Cell';
+import { useGetDatagridContext } from '../../../provider';
 
 function RowData({ data, loading, displays }) {
   const [isCheck, setCheck] = useState(false);
@@ -12,6 +13,7 @@ function RowData({ data, loading, displays }) {
   const handleChange = useCallback((name, check) => {
     setCheck(check);
   }, []);
+  const { state } = useGetDatagridContext();
   return (
     <>
       <TableRow>
@@ -26,15 +28,19 @@ function RowData({ data, loading, displays }) {
           loading={loading}
         />
         {displays.map(({ type, ...display }, index) => {
-          return (
-            <Cell
+          if (state[display.name]) {
+            return (
+              <Cell
               type={type}
               key={index + 1}
               data={data}
               display={display}
               loading={loading}
-            />
-          );
+              />
+            );
+          } else {
+            return <Fragment key={index + 1} />;
+          }
         })}
       </TableRow>
     </>

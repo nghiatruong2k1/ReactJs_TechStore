@@ -74,6 +74,8 @@ export const routersAdmin = {
     },
     user: {
       index: 'danh-sach-nguoi-dung',
+      add: 'them-nguoi-dung',
+      update: 'cap-nhat-nguoi-dung/:id',
     },image:{
       index:'danh-sach-hinh-anh'
     }

@@ -8,7 +8,7 @@ function ImageComponent({
   className,
   height,
   width,
-  classes,
+  classes:{ wrapper, image },
   alt,
   src,
   placeholder,
@@ -18,7 +18,6 @@ function ImageComponent({
   loading,
   ...props
 }) {
-  const { wrapper, image } = classes;
   return (
     <Paper
       elevation={0}
@@ -45,10 +44,9 @@ function ImageComponent({
             })}
             alt={alt || src || 'Hình ảnh'}
             src={src}
-            style={{
-              height: height,
-              width: width,
-            }}
+            loading={'lazy'}
+            height={height}
+            width={width}
           />
         )}
       </figure>

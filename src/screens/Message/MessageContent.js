@@ -40,8 +40,8 @@ const MessageContent = forwardRef(function (
       >
         <AccordionSummary classes={{ content: styles.content }}>
           <Stack direction="row" alignItems="center" width="100%" spacing={1}>
+            {Icon}
             <Typography variant="h6" flex="1" className={styles.title}>
-              {Icon}
               {Title}
             </Typography>
             <IconButton onClick={toggle}>

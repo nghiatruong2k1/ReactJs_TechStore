@@ -1,38 +1,92 @@
 import { useCallback } from 'react';
-import { Post } from '~/utils/HttpRequest';
+import { Delete, Post ,Put} from '~/utils/HttpRequest';
 import useServices from '~/services/DefaultServices';
 const API = 'api/admin/user';
 export default function UserAdminServices(location) {
-  const services = useServices(location)
-  const getStatistic = useCallback((onThen) => {
-    return services.getServices({
+  const services = useServices(location);
+  const getStatistic = useCallback((onThen, onEnd) => {
+    return services({
       api: `${API}/statistic`,
       onThen,
       onCatch: () => {
         onThen && onThen([]);
-      },location
+      },
+      onEnd,
+      location,
     });
   }, []);
-  const getCount = useCallback((params,onThen) => {
-    return services.getServices({
+  const getCount = useCallback((params, onThen, onEnd) => {
+    return services({
       api: `${API}/count`,
       params,
       onThen,
       onCatch: () => {
         onThen && onThen(0);
-      },location
+      },
+      onEnd,
+      location,
     });
   }, []);
-  const getAll = useCallback((params,onThen) => {
-    return services.getServices({
+  const getAll = useCallback((params, onThen, onEnd) => {
+    return services({
       api: `${API}`,
       params,
       onThen,
       onCatch: () => {
         onThen && onThen(0);
-      },location
+      },
+      onEnd,
+      location,
     });
   }, []);
-  return { getStatistic,getCount,getAll };
+  const putData = useCallback((params, onThen, onEnd) => {
+    return services({
+      api: `${API}`,
+      params,
+      onThen,
+      onCatch: () => {
+        onThen && onThen({});
+      },
+      onEnd,
+      method: Put,
+      location,
+    });
+  }, []);
+  const postData = useCallback((params, onThen, onEnd) => {
+    return services({
+      api: `${API}`,
+      params,
+      onThen,
+      onCatch: () => {
+        onThen && onThen({});
+      },
+      onEnd,
+      method: Post,
+      location,
+    });
+  }, []);
+  const deleteData = useCallback((id, onThen, onEnd) => {
+    return services({
+      api: `${API}/${id}`,
+      onThen,
+      onCatch: () => {
+        onThen && onThen({});
+      },
+      onEnd,
+      method: Delete,
+      location,
+    });
+  }, []);
+  const getById = useCallback((id, onThen, onEnd) => {
+    return services({
+      api: `${API}/${id}`,
+      onThen,
+      onCatch: () => {
+        onThen && onThen(null);
+      },
+      onEnd,
+      location,
+    });
+  }, []);
+  return { getStatistic, getCount, getAll, putData, postData ,deleteData,getById};
 }
-

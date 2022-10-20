@@ -1,9 +1,12 @@
 .paper{
-    background-color: var(--primary-bg) !important;
-    color:var(--text-primary) !important;
     padding: 0.2em;
 }
-
+.list{
+    padding: 0.2em !important;
+}
 .text{
     text-align: left !important;
+}
+.button{
+    padding: 0.1em 0.4em !important;
 }

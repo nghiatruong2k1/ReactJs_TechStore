@@ -44,3 +44,6 @@
     word-break: break-word !important;
     text-align: center;
 }
+.skeleton *{
+    visibility: visible !important;
+}

@@ -14,6 +14,7 @@ function DropdownComponent({ data, open, anchorEl, classes, ...props }) {
       classes={{
         ...classes,
         paper: styles.paper,
+        list:styles.list
       }}
       {...props}
     >

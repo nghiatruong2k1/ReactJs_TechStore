@@ -14,6 +14,7 @@ function CellNumber({
         type="date"
         size="small"
         disabled={loading}
+        value={data ? (Boolean(data[name]) || '') : ''}
         onChange={(e) => {
           if (data) {
             data[name] = e.target.value;

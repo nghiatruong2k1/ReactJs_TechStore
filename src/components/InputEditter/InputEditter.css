@@ -1,0 +1,35 @@
+.ck-editor{
+	display: flex;
+	flex-direction: column;
+	border-radius: 4px !important;
+	overflow: hidden;
+	border:2px solid transparent !important;
+	background-color: var(--alpha-bg) !important;
+	color: var(--text-primary) !important;
+	transition: border-color 0.25s !important;
+}
+.ck-editor:has( .ck-focused){
+	border-color: currentColor !important;
+}
+.ck-editor__editable{
+	background-color: transparent !important;
+	border:0 !important
+}
+.ck-reset_all,.ck-reset_all *{
+	color: var(--text-primary) !important;
+}
+.ck-editor__main{
+	flex: 1;
+	
+}
+.ck-sticky-panel__content{
+	position: relative !important;
+}
+.ck-toolbar{
+	background-color: var(--alpha-bg) !important;
+	border:0 !important;
+}
+.ck-content{
+	min-height: 400px !important;
+	max-height: 500px !important;
+}

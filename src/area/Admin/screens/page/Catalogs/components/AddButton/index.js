@@ -1,13 +1,13 @@
 import { memo} from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
-function AddComponent({to}) {
+function AddComponent({title,...props}) {
   return (
-    <Tooltip title={'Thêm sản phẩm'} placement="top" arrow>
+    <Tooltip title={title || 'Thêm'} placement="top" arrow>
       <IconButton
         color="inherit"
-        component={Link}
-        to={to || '/404'}
+        component={(props.to && Link) || 'span'}
+        {...props}
       >
         <span className="fas fa-plus" />
       </IconButton>

@@ -12,6 +12,7 @@ function CellText({
       <TextField
         fullWidth
         size="small"
+        value={data ? (Boolean(data[name]) || '') : ''}
         disabled={loading}
         onChange={(e) => {
           if (data) {

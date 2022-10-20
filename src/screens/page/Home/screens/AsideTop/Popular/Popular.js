@@ -16,7 +16,7 @@ function Populars({ ...props }) {
   useEffect(() => {
     setData(Array(5).fill(null));
     const ourLoading = handleLoading();
-    const ourRequest = categoryServices.getAll({}, (data) => {
+    const ourRequest = categoryServices.getPopular({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
         imgUrl: item.ImageUrl,

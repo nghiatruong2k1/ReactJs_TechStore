@@ -12,7 +12,9 @@ export const productModel = {
     ...imageEntity.Url,
     displayName:'Hình ảnh'
   },
-  Rating: productRatingEntity.Rating,
+  Rating: {
+    displayName:'Đánh giá'
+  },
   TypeName: productTypeEntity.Name,
 };
 

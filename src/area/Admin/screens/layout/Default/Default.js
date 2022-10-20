@@ -5,7 +5,7 @@ import { ScrollArea, Sidebar } from '~/components';
 import { LogoWidget } from '~/screens/widgets';
 
 import Header from '~/area/Admin/screens/Header';
-import { AdminNavbarWidget } from '~/area/Admin/screens/widget';
+import { AdminNavbarWidget,AdminAuthWidget } from '~/area/Admin/screens/widget';
 function AdminDefaultLayout({children}) {
   return (
     <div className={styles.root}>
@@ -21,6 +21,7 @@ function AdminDefaultLayout({children}) {
             className={'fullview'}
             isScroll
           >
+            <AdminAuthWidget />
             <AdminNavbarWidget />
           </Sidebar>
         </Grid>

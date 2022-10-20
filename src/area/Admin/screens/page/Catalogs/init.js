@@ -1,43 +1,55 @@
 export const initState = {
-	limit:5,
-	page:1,
-	sort:null,
-	filter:{},
-	enableEdit:false,
-	inTrash:false
+  limit: 5,
+  page: 1,
+  // sort:null,
+  // filter:{},
+  // enableEdit:false,
+  inTrash: false,
 };
 export const initCase = {
-    TOGGLE_TRASH:'[TOGGLE_TRASH,?bool]',
-    SET_PAGE:'[SET_PAGE,?num]',
-    RESET:'[RESET,?object]'
-
+  TOGGLE_TRASH: '[TOGGLE_TRASH,?bool]',
+  SET_PAGE: '[SET_PAGE,?num]',
+  CALLBACK: '[CALLBACK,?func]',
+  RESET: '[RESET,?object]',
 };
-export function reducerState(prevState,[key,payload]){
-    switch(key){
-        case initCase.TOGGLE_TRASH:{
-            if (payload !== prevState.inTrash) {
-                return {
-                  ...prevState,
-                  inTrash: typeof payload === 'boolean' ? payload : !prevState.inTrash,
-                };
-              }
-            break;
-        }
-        case initCase.SET_PAGE:{
-            if (payload !== prevState.page) {
-                return {
-                  ...prevState,
-                  page:payload > 1 ? payload : 1,
-                };
-              }
-            break;
-        }
-        default:{
-            console.log(`không tôn tại case`,key,initCase)
-        }
+function getTrash(payload, inTrash) {
+  return typeof payload === 'boolean' ? payload : inTrash || false;
+}
+function getPage(payload) {
+  return payload > 1 ? payload : 1;
+}
+export function reducerState(prevState, [key, payload]) {
+  switch (key) {
+    case initCase.TOGGLE_TRASH: {
+      if (payload !== prevState.inTrash) {
+        return {
+          ...prevState,
+          inTrash: getTrash(payload, !prevState.inTrash),
+        };
+      }
+      break;
     }
-    return prevState
-};
+    case initCase.SET_PAGE: {
+      if (payload !== prevState.page) {
+        return {
+          ...prevState,
+          page: getPage(payload),
+        };
+      }
+      break;
+    }
+    case initCase.CALLBACK: {
+      if (payload && typeof payload === 'function') {
+        payload(prevState);
+      }
+      break;
+    }
+    default: {
+      console.log(`không tôn tại case`, key, initCase);
+    }
+  }
+  return prevState;
+}
 
 // export function r(prevState,[key,payload]) {
 // 	switch(key){
@@ -108,6 +120,3 @@ export function reducerState(prevState,[key,payload]){
 // 		}
 // 	}
 // };
-
-
-

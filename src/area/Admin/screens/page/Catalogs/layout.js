@@ -4,8 +4,7 @@ import { initCase } from './init';
 import { useHandleTitle } from '~/hooks/Title';
 import AddButton from './components/AddButton';
 import TrashButton from './components/TrashButton';
-// import PublicButton from './components/PublicButton';
-// import DeleteButton from './components/DeleteButton';
+
 function CatalogLayout({
   state,
   dispath,
@@ -14,31 +13,37 @@ function CatalogLayout({
   data,
   title,
   loading,
+  option,
   ...props
 }) {
-
   const handleTitle = useHandleTitle();
-  useEffect(()=>{
-    return handleTitle(title)
-  },[title])
+  useEffect(() => {
+    return handleTitle(title);
+  }, [title]);
+
   const handleChangePage = useCallback((index) => {
     dispath([initCase.SET_PAGE, index]);
   }, []);
+
   const handleChangeTrash = useCallback(() => {
     dispath([initCase.TOGGLE_TRASH]);
   }, []);
+
   return (
     <>
-      <AccorCard open={true} {...props}>
+      <AccorCard title={'Bảng quản lý'} open={true} {...props}>
         <Datagrid
+          title={title}
           option={
             <>
-              <AddButton />
-              <TrashButton
-                onClick={handleChangeTrash}
-                loading={state.isLoading}
-                inTrash={state.inTrash}
-              />
+              {option.add && <AddButton {...option.add} />}
+              {option.trash && (
+                <TrashButton
+                  onClick={handleChangeTrash}
+                  loading={state.isLoading}
+                  inTrash={state.inTrash}
+                />
+              )}
             </>
           }
           loading={loading}
@@ -58,4 +63,7 @@ function CatalogLayout({
     </>
   );
 }
+CatalogLayout.defaultProps = {
+  option: {},
+};
 export default memo(CatalogLayout);

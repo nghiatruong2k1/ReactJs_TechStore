@@ -10,12 +10,12 @@ export default function MailerServices(location) {
   const services = useServices(location);
   const send = useCallback(({
     subject,content,user
-  }, onThen,onCatch) => {
+  }, onThen,onCatch, onEnd) => {
 
     let name = (user.FirstName || "") +" "+ (user.LastName || "");
     const div = document.createElement("div");
     render(content,div);
-    return services.getServices({
+    return services({
       api: API, 
       method:Post,
       params: {
@@ -30,7 +30,7 @@ export default function MailerServices(location) {
       },
       onCatch: (e) => {
         onCatch && onCatch(e);
-      },location
+      }, onEnd,location
     });
   }, []);
   return { send };

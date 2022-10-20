@@ -4,7 +4,11 @@ export { default as Chart } from './Chart';
 export { default as Datagrid } from './Datagrid';
 export { default as Dropdown } from './Dropdown';
 export { default as Frame } from './Frame';
+
 export { default as Image } from './Image';
+export { default as InputEditter} from './InputEditter';
+export { default as InputImage } from './InputImage';
+export { default as InputSelect } from './InputSelect';
 export { default as ListNav } from './ListNav';
 export { default as Paging } from './Paging';
 export { default as ScrollArea } from './ScrollArea';

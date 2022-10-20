@@ -16,7 +16,8 @@ import { useInitLoading } from '~/hooks/Loading';
 
 import CatalogLayout from '../../layout';
 import { reducerState, initState, initCase } from '../../init';
-
+import PublicButton from '../../components/PublicButton';
+import DeleteButton from '../../components/DeleteButton';
 function CatalogOrderDetailComponent(props) {
   const services = OrderServices('CatalogOrderDetailComponent');
   const { id } = useParams();
@@ -24,25 +25,56 @@ function CatalogOrderDetailComponent(props) {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, handleLoading] = useInitLoading();
+  const handleFetch = useCallback(
+    (onEnd) => {
+      let ourRequest;
+      dispath([
+        initCase.CALLBACK,
+        (prev) => {
+          ourRequest = services.getsByDetail(
+            id,
+            {
+              offset: (prev.page - 1) * prev.limit,
+              limit: prev.limit,
+            },
+            (data) => {
+              setData(data);
+            },
+            onEnd,
+          );
+        },
+      ]);
+      return ourRequest;
+    },
+    [id],
+  );
   useEffect(() => {
-    if (Number(id) > 0) {
-      setData(Array(state.limit).fill(null));
-      const ourLoading = handleLoading();
-      return services.getsByDetail(
-        id,
-        {
-          offset: (state.page - 1) * state.limit,
-          limit: state.limit,
-        },
-        (data) => {
-          setData(data);
-          ourLoading();
-        },
-      );
-    } else {
-      setData([]);
-    }
+    setData(Array(state.limit).fill(null));
+    const ourLoading = handleLoading();
+    return handleFetch(ourLoading);
   }, [id, state.page, state.limit]);
+  const handleUpdate = useCallback((data, onEnd) => {
+    return services.putData(
+      data,
+      (data) => {
+        if (data?.value !== false) {
+          handleFetch();
+        }
+      },
+      onEnd,
+    );
+  }, []);
+  const handleDelete = useCallback((id, onEnd) => {
+    return services.deleteData(
+      id,
+      (data) => {
+        if (data?.value !== false) {
+          handleFetch();
+        }
+      },
+      onEnd,
+    );
+  }, []);
   useEffect(() => {
     if (Number(id) > 0) {
       setTotal(1);
@@ -63,7 +95,7 @@ function CatalogOrderDetailComponent(props) {
         name: 'ImageUrl',
         nameAlt: 'Name',
         type: 'image',
-        width: '10em',
+        width: '5em',
       },
       {
         title: orderDetailModel.Name.displayName,
@@ -105,16 +137,12 @@ function CatalogOrderDetailComponent(props) {
       },
     ];
   }, []);
-  const handleChangePage = useCallback((index) => {
-    dispath([initCase.SET_PAGE, index]);
-  }, []);
-  const handleChangeTrash = useCallback(() => {
-    dispath([initCase.TOGGLE_TRASH]);
-  }, []);
   return (
     <Grid container>
       <CatalogLayout
-        title={'Quản lí chi tiết đơn hàng'+ (state.inTrash ? ' (thùng rác) ' : '')}
+        title={
+          'Quản lí chi tiết đơn hàng' + (state.inTrash ? ' (thùng rác) ' : '')
+        }
         state={state}
         dispath={dispath}
         data={data}

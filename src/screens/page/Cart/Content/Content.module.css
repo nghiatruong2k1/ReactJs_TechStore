@@ -3,7 +3,7 @@
 }
 
 .row{
-    border-color: var(--primary);
+    border-color: var(--text-primary);
     border-style: solid;
     border-bottom-width: 1px;
 }
@@ -29,7 +29,7 @@
 	flex:1;
 }
 .current{
-	color: var(--primary);
+	color: var(--text-primary);
 }
 .old{
 	opacity: 0.8;

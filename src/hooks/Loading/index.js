@@ -9,6 +9,6 @@ export const useInitLoading = (name)=>{
             //console.log(`Clean loading ${name} in ${location}`)
             dispath(false)
         }
-    })
+    },[])
     return [Boolean(state > 0),handleLoading]
 }

@@ -4,6 +4,7 @@ import { userEntity } from './user';
 
 export let orderStatusEntity = {
   Id: {
+    ...defaultEntity.Id,
     displayName: 'Mã trạng thái',
   },
   Name: {
@@ -13,9 +14,7 @@ export let orderStatusEntity = {
   IsTrash: defaultEntity.IsTrash,
 };
 export let orderEntity = {
-  Id: {
-    displayName: 'Mã đơn hàng',
-  },
+  Id: { ...defaultEntity.Id, displayName: 'Mã đơn hàng' },
   VoucherSale: {
     displayName: 'Giảm',
   },
@@ -27,9 +26,7 @@ export let orderEntity = {
   UpdateDate: defaultEntity.UpdateDate,
 };
 export let orderDetailEntity = {
-  Id: {
-    displayName: 'Mã chi tiết đơn hàng',
-  },
+  Id: { ...defaultEntity.Id, displayName: 'Mã chi tiết đơn hàng' },
   Quantity: {
     displayName: 'Số lượng',
   },
@@ -41,7 +38,7 @@ export let orderDetailEntity = {
 };
 export let orderVoucherEntity = {
   Id: {
-    displayName: 'Id',
+    ...defaultEntity.Id,
   },
   Name: {
     displayName: 'Tên mã giảm giá',

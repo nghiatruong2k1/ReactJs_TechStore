@@ -1,4 +1,4 @@
-import { forwardRef, memo } from 'react';
+import {  memo } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import styles from './Frame.module.css';
@@ -9,14 +9,20 @@ function FrameComponent({
   loading,
   children,
   className,
-  containerProps,
   contentProps,
   variant,
+  height,
   ...props
 }) {
   return (
-    <Box className={ clsx(styles.frame,className) } {...props}>
-      <Box {...containerProps} className={clsx(styles.container,styles[variant],containerProps.className)}>
+    <Box className={clsx(styles.frame, className)} {...props}>
+      <Box
+        className={clsx(
+          styles.container,
+          styles[variant]
+        )}
+        sx={{'--frame-height':height}}
+      >
         <Box className={styles.content}>{children}</Box>
         {loading && <Skeleton className={styles.skeleton} />}
       </Box>
@@ -25,13 +31,11 @@ function FrameComponent({
 }
 FrameComponent.defaultProps = {
   variant: 'auto',
-  containerProps:{},
   sx: {},
   classes: {},
 };
 FrameComponent.propTypes = {
   variant: PropTypes.oneOf(['auto', 'rectangle', 'square', 'circle']),
-  containerProps:PropTypes.object,
   sx: PropTypes.object,
   classes: PropTypes.object,
 };

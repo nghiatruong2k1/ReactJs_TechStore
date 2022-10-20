@@ -1,0 +1,21 @@
+.outline{
+    border-radius: 2em !important;
+}
+.adorment{
+    height: 100% !important;
+    margin: 0 !important;
+}
+.input{
+    padding:0.1em 0.3em !important;
+    margin: 0.2em 0 !important;
+    border-left: 1px solid currentColor !important;
+    border-right: 1px solid currentColor !important;
+}
+
+.select{
+    background-color: transparent !important;
+}
+.display{
+    padding: 0.2em 1em 0.2em 0.2em !important;
+
+}

@@ -2,9 +2,10 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { MenuList } from '@mui/material';
 import ItemComponent from './DropdownItem';
+import styles from './Dropdown.module.css';
 function DropdownListComponent({ data }) {
   return (
-    <MenuList className={'fullwidth'}>
+    <MenuList className='fullwidth'>
       {data.map((item, index) => {
         return <ItemComponent key={index} data={item} />;
       })}

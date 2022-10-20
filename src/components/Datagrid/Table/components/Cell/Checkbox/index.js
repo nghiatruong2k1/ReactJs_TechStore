@@ -5,7 +5,7 @@ function CellCheckbox({ loading, text, display:{name,onChange,onSave}, data }) {
   return (
     <Checkbox
       disabled={loading}
-      checked={data && Boolean(data[name])}
+      checked={data ? (Boolean(data[name]) || false) : false}
       onChange={(e) => {
         if(onChange){
           data[name] = e.target.value;

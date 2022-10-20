@@ -41,8 +41,7 @@ function FormRegister({ onClose }) {
           () => {},
         );
       }
-      onEnd && onEnd();
-    });
+    },onEnd);
   }, []);
   return (
     <FormProvider onSubmit={handleSubmit} rules={rules}>

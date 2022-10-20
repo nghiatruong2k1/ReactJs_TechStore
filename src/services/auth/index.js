@@ -7,8 +7,8 @@ const API = '/api/auth';
 export default function AuthServices(location) {
   const services = useServices(location);
   const [cookies,setCookies,deleteCookies] = useCookies(["token"])
-  const login = useCallback((params, onThen) => {
-    return services.getServices({
+  const login = useCallback((params, onThen, onEnd) => {
+    return services({
       api: API+'/login',
       method:Post,  
       params,
@@ -22,11 +22,11 @@ export default function AuthServices(location) {
       },
       onCatch: () => {
         onThen && onThen(null);
-      },location
+      }, onEnd,location
     });
   }, []);
-  const register = useCallback((params, onThen) => {
-    return services.getServices({
+  const register = useCallback((params, onThen, onEnd) => {
+    return services({
       api: API+'/register',
       method:Post,  
       params:{...params,Id:0},
@@ -40,7 +40,7 @@ export default function AuthServices(location) {
       },
       onCatch: () => {
         onThen && onThen(null);
-      },location
+      }, onEnd,location
     });
   }, []);
   const logout = useCallback(()=>{

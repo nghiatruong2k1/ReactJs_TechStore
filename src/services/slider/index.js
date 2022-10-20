@@ -4,8 +4,8 @@ import useServices from '../DefaultServices';
 const API = '/api/slider';
 export default function SliderServices(location) {
   const services = useServices(location);
-  const getAll = useCallback((params, onThen) => {
-    // return services.getServices({
+  const getAll = useCallback((params, onThen, onEnd) => {
+    // return services({
     //   api: API,
     //   params,
     //   onThen,
@@ -34,6 +34,7 @@ export default function SliderServices(location) {
           ImageUrl: '/images/banners/slide2.png',
         },
       ]);
+    onEnd && onEnd();
   }, []);
   return { getAll };
 }

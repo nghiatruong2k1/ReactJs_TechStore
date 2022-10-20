@@ -3,6 +3,7 @@ import { imageEntity } from "./image";
 
 export let sliderEntity = {
   Id: {
+    ...defaultEntity.Id,
     displayName: 'Id',
   },
   Alt: {

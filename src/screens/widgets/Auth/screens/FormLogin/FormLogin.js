@@ -21,8 +21,7 @@ function FormLogin({ onClose }) {
       if (data) {
         onClose && onClose();
       }
-      onEnd && onEnd();
-    });
+    },onEnd);
   }, []);
   return (
     <FormProvider onSubmit={handleSubmit} rules={rules}>

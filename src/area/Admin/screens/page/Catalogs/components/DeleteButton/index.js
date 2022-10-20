@@ -1,9 +1,10 @@
-import { memo } from 'react';
-import clsx from 'clsx';
+import { memo} from 'react';
 import { RestoreFromTrash, DeleteForeverRounded } from '@mui/icons-material/';
 import { IconButton, Tooltip } from '@mui/material';
-function TrashButton({ isTrash, loading, onClick }) {
-  return (
+import { useInitLoading } from '~/hooks/Loading';
+function TrashButton({ isTrash, loading, onClick, onDelete }) {
+  const [isLoading, handleLoading] = useInitLoading();
+  return(
     <>
       <Tooltip
         title={(isTrash && 'Khôi phục') || 'Xóa tạm'}
@@ -12,9 +13,14 @@ function TrashButton({ isTrash, loading, onClick }) {
       >
         <span>
           <IconButton
-            disabled={loading}
+            disabled={loading || isLoading}
             color="warning"
-            onClick={onClick}
+            onClick={() => {
+              if(onClick){
+                const ourLoading = handleLoading();
+                onClick(ourLoading);
+              }
+            }}
             size="large"
           >
             {(isTrash && <RestoreFromTrash />) || <DeleteForeverRounded />}
@@ -22,16 +28,17 @@ function TrashButton({ isTrash, loading, onClick }) {
         </span>
       </Tooltip>
       {isTrash && (
-        <Tooltip
-          title={'Xóa vĩnh viễn'}
-          placement="top"
-          arrow
-        >
+        <Tooltip title={'Xóa vĩnh viễn'} placement="top" arrow>
           <span>
             <IconButton
-              disabled={loading}
+              disabled={loading || isLoading}
               color="error"
-              onClick={onClick}
+              onClick={() => {
+                if(onDelete){
+                  const ourLoading = handleLoading();
+                  onDelete(ourLoading);
+                }
+              }}
               size="large"
             >
               {<DeleteForeverRounded />}

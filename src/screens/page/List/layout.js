@@ -10,7 +10,7 @@ function LayoutComponent({ data,loading,state, title, controller }) {
   }, [title]);
   return (
     <Provider value={{ data,loading,state }}>
-      <Grid container spacing={2}>
+      <Grid container spacing={2}  py={2}>
         <ViewList
           controller={controller}
           loading={loading || !Boolean(data)}

@@ -4,23 +4,23 @@ import useServices from '../DefaultServices';
 const API = '/api/brand';
 export default function BrandServices(location) {
   const services = useServices(location)
-  const getAll = useCallback((params, onThen) => {
-    return services.getServices({
+  const getAll = useCallback((params, onThen, onEnd) => {
+    return services({
       api: API,
       params,
       onThen,
       onCatch: () => {
         onThen && onThen([]);
-      },location
+      }, onEnd,location
     });
   }, []);
-  const getByAlias = useCallback((alias, onThen) => {
-    return services.getServices({
+  const getByAlias = useCallback((alias, onThen, onEnd) => {
+    return services({
       api: `${API}/${alias}`,
       onThen,
       onCatch: () => {
         onThen && onThen({});
-      },location
+      }, onEnd,location
     });
   }, []);
   return { getAll,getByAlias };

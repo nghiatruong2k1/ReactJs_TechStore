@@ -1,17 +1,19 @@
-export const initState = {
-	enableEdit:false
+export const initState = (displays) => {
+  return displays.reduce((rs, i) => {
+    rs[i.name] = true;
+    return rs;
+  }, {});
 };
-export const initCase = {
-
-};
-export function reducerState(prevState,[key,payload]){
-    switch(key){
-        default:{
-            console.log(`không tôn tại case`,key,initCase)
-        }
-    }
-    return prevState
-};
+export const initCase = {};
+export function reducerState(prevState, [name, show]) {
+  if (prevState[name] !== undefined) {
+    prevState[name] = Boolean(show);
+    return {
+      ...prevState,
+    };
+  }
+  return prevState;
+}
 
 // export function r(prevState,[key,payload]) {
 // 	switch(key){
@@ -95,4 +97,3 @@ export function reducerState(prevState,[key,payload]){
 // 		}
 // 	}
 // };
-
