@@ -27,7 +27,7 @@ function RowTitle({ displays }) {
     <TableRow className={clsx(styles.head)}>
       <Cell key={0} text={''} display={{ width: '2em' }} />
       {displays.map(({ title, ...display }, index) => {
-        if (state[display.name]) {
+        if (state[display.name]?.isShow) {
           return (
             <Cell
               key={index + 1}
@@ -37,7 +37,7 @@ function RowTitle({ displays }) {
                 display.name && (
                   <AfterOption
                     name={display.name}
-                    show={state[display.name]}
+                    show={state[display.name]?.isShow}
                     onToggleShow={handleToggleShow}
                   />
                 )

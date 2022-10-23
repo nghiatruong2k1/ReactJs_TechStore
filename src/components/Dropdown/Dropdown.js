@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styles from './Dropdown.module.css';
 import ItemComponent from './DropdownItem';
 
-function DropdownComponent({ data, open, anchorEl, classes, ...props }) {
+function DropdownComponent({ data, open, anchorEl, classes,children, ...props }) {
   return (
     <Menu
       open={Boolean(anchorEl && open)}
@@ -20,6 +20,9 @@ function DropdownComponent({ data, open, anchorEl, classes, ...props }) {
     >
       {Array.isArray(data) && data.map((item, index) => {
         return <ItemComponent key={index} data={item} />;
+      })}
+      {Array.isArray(children) && children.map((item,index)=>{
+        return <ItemComponent key={index}>{item}</ItemComponent>;
       })}
     </Menu>
   );

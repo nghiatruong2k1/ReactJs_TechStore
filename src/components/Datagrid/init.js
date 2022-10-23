@@ -1,13 +1,18 @@
 export const initState = (displays) => {
   return displays.reduce((rs, i) => {
-    rs[i.name] = true;
+    if (i.name) {
+      rs[i.name] = {
+        isShow: true,
+        title: i.title,
+      };
+    }
     return rs;
   }, {});
 };
 export const initCase = {};
 export function reducerState(prevState, [name, show]) {
   if (prevState[name] !== undefined) {
-    prevState[name] = Boolean(show);
+    prevState[name].isShow = typeof(show) === 'boolean' ? show : !prevState[name].isShow;
     return {
       ...prevState,
     };

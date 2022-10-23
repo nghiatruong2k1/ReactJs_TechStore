@@ -18,10 +18,10 @@ function SidebarComponent({
 }) {
   return (
     <Box className={clsx(styles.root, { [className]: className })} {...props}>
-      <Card sx={{ height: (isScroll && '100%') || 'auto' }}>
+      <Card sx={{ height: Boolean(isScroll) ? '100%' : 'auto' }}>
         <CardContent sx={{ p: 1 }}>{header}</CardContent>
         <CardContent sx={{ flex: 1, p: 1, overflow: 'hidden' }}>
-          <Box component={(isScroll && ScrollArea) || 'div'}>{children}</Box>
+          <Box component={Boolean(isScroll) ? ScrollArea : 'div'}>{children}</Box>
         </CardContent>
         <CardContent sx={{ p: 1 }}>{footer}</CardContent>
         <div></div>

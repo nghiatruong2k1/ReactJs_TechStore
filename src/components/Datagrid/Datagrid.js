@@ -12,7 +12,6 @@ function DatagridComponent({
   displays,
   title,
   option,
-  optionData,
   footer,
 }) {
   const [state, dispath] = useReducer(reducerState, initState(displays));
@@ -25,11 +24,9 @@ function DatagridComponent({
         </CardActions>
         <CardContent>
           <DataTable
-            state={state}
             datasets={datasets}
             displays={displays}
             loading={loading}
-            optionData={optionData}
           />
         </CardContent>
         <CardContent>{footer}</CardContent>

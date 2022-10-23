@@ -1,3 +1,6 @@
+.card{
+	height: 100%;
+}
 .card:hover{
 	box-shadow: 0 0px 7px 0px currentColor;
 	transition: box-shadow 0.3s;

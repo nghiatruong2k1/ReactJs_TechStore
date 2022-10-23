@@ -15,7 +15,7 @@ import styles from './Item.module.css';
 function Item({ data, loading }) {
   return (
     <Box sx={{ p: 1 }}>
-      <Card sx={styles.card}>
+      <Card className={styles.card}>
         <CardHeader
           sx={{ py: 1 }}
           title={

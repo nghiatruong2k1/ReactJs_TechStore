@@ -21,7 +21,7 @@ function ViewItem({
 }) {
   return (
     <Grid item xs={6} sm={4} xl={3}>
-      <Card sx={{ height: '100%' }} className={styles.card}>
+      <Card className={styles.card}>
         <CardContent>
           <Frame variant="rectangle" loading={loading}>
             <ItemBookmask price={Price} salePrice={SalePrice} />

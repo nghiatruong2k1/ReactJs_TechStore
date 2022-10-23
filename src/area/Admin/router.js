@@ -22,7 +22,7 @@ import { AdminDefaultLayout } from '~/area/Admin/screens/layout';
 import { CheckAdminPrivate } from '~/area/Admin/private';
 export const adminRouters = {
   defaultLayout: AdminDefaultLayout,
-  path: routersAdmin.area,
+  path: routersAdmin.path,
   element: CheckAdminPrivate,
   routes: [
     {

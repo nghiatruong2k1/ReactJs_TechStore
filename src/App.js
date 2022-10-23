@@ -48,7 +48,7 @@ function App() {
             );
           })}
           <Route
-            path={'/' + adminRouters.path}
+            path={`/${adminRouters.path}`}
             element={<adminRouters.element />}
           >
             {adminRouters.routes.map(({ layout, path, page }, index) => {

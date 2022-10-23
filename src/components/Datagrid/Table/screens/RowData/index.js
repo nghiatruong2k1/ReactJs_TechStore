@@ -28,7 +28,7 @@ function RowData({ data, loading, displays }) {
           loading={loading}
         />
         {displays.map(({ type, ...display }, index) => {
-          if (state[display.name]) {
+          if (state[display.name]?.isShow) {
             return (
               <Cell
               type={type}

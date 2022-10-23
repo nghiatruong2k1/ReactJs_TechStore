@@ -33,7 +33,7 @@ function PopularItem({ data, loading, ...props }) {
             loading={loading}
             className={styles.button}
             component={(!loading && NavLink) || 'button'}
-            to={data && data.to}
+            to={data && data.to || "/404"}
             color='info'
           >
             Xem ngay

@@ -40,7 +40,7 @@ function CardStatistic({ title, to,icon, handleGetData, ...props }) {
           <Button
             component={(!isLoading && to && NavLink) || 'span'}
             className={styles.button}
-            to={to ?? '/404'}
+            to={to || '/404'}
             size="small"
             endIcon={<ArrowForward />}
           >
