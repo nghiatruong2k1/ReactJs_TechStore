@@ -40,7 +40,7 @@ function ListNavComponent({ title, datas, icon, loading, divider, ...props }) {
                     (!isLoading && data && data.to && NavLink) || 'span'
                   }
                   to={(data && data.to) || '/404'}
-                  sx={{ py: '0.1em', px: '0.5em' }}
+                  className={styles.button}
                 >
                   {(isLoading && <Skeleton variant="text" />) || (
                     <>

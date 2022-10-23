@@ -18,7 +18,7 @@ import { initCase, initState, reducerState } from '../../init';
 import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { getAction, routersAdmin } from '~/config/Router';
+import { routersAdmin } from '~/config/Router';
 export const CatalogAddProductPage = memo(() => {
   const productAdminService = ProductAdminServices('CatalogAddProductPage');
   const categoryAdminServices = CategoryAdminServices('CatalogAddProductPage');
@@ -74,10 +74,10 @@ export const CatalogAddProductPage = memo(() => {
       },
       ourLoading1,
     );
-    return ()=>{
+    return () => {
       ourRequest1 && ourRequest1();
       ourRequest2 && ourRequest2();
-    }
+    };
   }, []);
   return (
     <Layout
@@ -85,7 +85,7 @@ export const CatalogAddProductPage = memo(() => {
       dispath={dispath}
       title={'Thêm sản phẩm'}
       loading={loading}
-      datas={{categories,brands}}
+      datas={{ categories, brands }}
       handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}
     />
@@ -118,13 +118,7 @@ export const CatalogUpdateProductPage = memo(() => {
             message: 'Sản phẩm không tồn tại',
             type: 'warning',
           });
-          navigator(
-            getAction(
-              routersAdmin.routers.product.index,
-              {},
-              routersAdmin.area,
-            ),
-          );
+          navigator(routersAdmin.product.index.getAction());
         }
       },
       () => {
@@ -175,10 +169,10 @@ export const CatalogUpdateProductPage = memo(() => {
       },
       ourLoading1,
     );
-    return ()=>{
+    return () => {
       ourRequest1 && ourRequest1();
       ourRequest2 && ourRequest2();
-    }
+    };
   }, []);
   return (
     <Layout
@@ -186,7 +180,7 @@ export const CatalogUpdateProductPage = memo(() => {
       dispath={dispath}
       title={'Cập nhật sản phẩm'}
       loading={loading}
-      datas={{categories,brands}}
+      datas={{ categories, brands }}
       handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}
     />

@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react';
 import { useHandleTitle } from '~/hooks/Title';
 import { Grid } from '@mui/material';
 
-import { getAction, routersAdmin } from '~/config/Router';
+import {  routersAdmin } from '~/config/Router';
 
 import Provider from '../../provider';
 import Head from '../../components/Head';
@@ -36,11 +36,7 @@ function CatalogProductLayoutComponent({
         <Head
           xs={12}
           title={title}
-          back={getAction(
-            routersAdmin.routers.product.index,
-            {},
-            routersAdmin.area,
-          )}
+          back={routersAdmin.product.index.getAction()}
         />
         <InfoComponent xs={7} />
         <OptionComponent xs={5} />

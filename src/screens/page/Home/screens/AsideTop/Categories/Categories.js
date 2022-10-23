@@ -10,24 +10,26 @@ import {
 } from '@mui/material/';
 import { NavLink } from 'react-router-dom';
 import CategoryServices from '~/services/category';
-import { routers, getAction } from '~/config/Router';
+import { routers } from '~/config/Router';
 import { useInitLoading } from '~/hooks/Loading';
 function Categories({ ...props }) {
   const categoryServices = CategoryServices('home categories');
   const [loading, handleLoading] = useInitLoading();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(Array(5).fill(null));
   useEffect(() => {
-    setData(Array(5).fill(null));
     const ourLoading = handleLoading();
     const ourRequest = categoryServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
-        to: getAction(routers.product.category, { alias: item.Alias }),
+        to: routers.product.category.getAction( { alias: item.Alias }),
       }));
       setData(newdata);
       ourLoading();
     });
-    return ourRequest;
+    return ()=>{
+      ourRequest();
+      setData(Array(5).fill(null));
+    };
   }, []);
   return (
     <>

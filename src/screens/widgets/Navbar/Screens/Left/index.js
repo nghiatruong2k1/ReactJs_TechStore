@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react';
-import { routers, getAction } from '~/config/Router';
+import { routers } from '~/config/Router';
 import NavMenu from '../../components/NavMenu';
 function LeftNav(props) {
   const datas = useMemo(function () {
@@ -9,19 +9,19 @@ function LeftNav(props) {
         text: 'Trang chủ',
       },
       {
-        to: getAction(routers.category?.index),
+        to: routers.category.index?.getAction(),
         text: 'Danh mục',
       },
       {
-        to: getAction(routers.brand?.index),
+        to: routers.brand.index?.getAction(),
         text: 'Thương hiệu',
       },
       {
-        to: getAction(routers.services?.index),
+        to: routers.services?.index?.getAction(),
         text: 'Dịch vụ',
       },
       {
-        to: getAction(routers.post?.index),
+        to: routers.post?.index?.getAction(),
         text: 'Tin tức',
       },
     ];

@@ -6,6 +6,7 @@ import {
   InputLabel,
   FormHelperText,
 } from '@mui/material/';
+import clsx from 'clsx';
 import styles from './InputSelect.module.css';
 function InputSelectComponent({
   size,
@@ -19,10 +20,11 @@ function InputSelectComponent({
   label,
   error,
   helperText,
+  isRequired
 }) {
   return (
     <>
-      <FormControl fullWidth variant={variant} className={styles.root} disabled={disabled}>
+      <FormControl fullWidth className={clsx(styles.root,styles[variant])} disabled={disabled}>
         <InputLabel>{label}</InputLabel>
         <Select
           size={size}
@@ -52,7 +54,7 @@ function InputSelectComponent({
               if (cont) {
                 return cont.text;
               } else {
-                onChange && onChange(initValue);
+                isRequired && onChange && onChange(data[0].value);
               }
             }
             return '';

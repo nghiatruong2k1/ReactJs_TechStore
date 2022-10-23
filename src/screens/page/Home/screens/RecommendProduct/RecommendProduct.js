@@ -9,9 +9,8 @@ function RecommendComponent() {
   const productServices = ProductServices('home recommend product');
   const [state, dispath] = useReducer(reducerState, initState);
   const [isLoading, handleLoading] = useInitLoading();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(Array(initState.limit).fill(null));
   useEffect(() => {
-    setData(Array(state.limit).fill(null));
     const ourLoading = handleLoading();
     const ourRequest = productServices.getsRecommend(
       {
@@ -23,7 +22,10 @@ function RecommendComponent() {
         ourLoading();
       },
     );
-    return ourRequest;
+    return () => {
+      ourRequest();
+      setData(Array(state.limit).fill(null));
+    };
   }, [state.limit]);
   return (
     <>

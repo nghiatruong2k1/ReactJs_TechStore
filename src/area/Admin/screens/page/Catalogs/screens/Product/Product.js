@@ -11,7 +11,7 @@ import { productModel } from '~/models/product';
 import formatNumber from 'number-format.js';
 import { formatDate } from '~/config/Format';
 import { Link } from 'react-router-dom';
-import { getAction, routersAdmin } from '~/config/Router';
+import {routersAdmin } from '~/config/Router';
 import { Grid } from '@mui/material';
 import { useInitLoading } from '~/hooks/Loading';
 
@@ -102,11 +102,7 @@ function CatalogProductComponent(props) {
         width: '5em',
         format: (v, data) => (
           <Link
-            to={getAction(
-              routersAdmin.routers.product.update,
-              { id: data.Id },
-              routersAdmin.area,
-            )}
+            to={routersAdmin.product.update.getAction({ id: data.Id })}
           >
             {v}
           </Link>
@@ -131,11 +127,7 @@ function CatalogProductComponent(props) {
         width: '10em',
         format: (v, data) => (
           <Link
-            to={getAction(
-              routersAdmin.routers.category.update,
-              { id: data.CategoryId },
-              routersAdmin.area,
-            )}
+            to={routersAdmin.category.update.getAction({ id: data.CategoryId })}
           >
             {v}
           </Link>
@@ -148,11 +140,7 @@ function CatalogProductComponent(props) {
         width: '10em',
         format: (v, data) => (
           <Link
-            to={getAction(
-              routersAdmin.routers.brand.update,
-              { id: data.BrandId },
-              routersAdmin.area,
-            )}
+            to={routersAdmin.brand.update.getAction({ id: data.BrandId })}
           >
             {v}
           </Link>
@@ -249,11 +237,7 @@ function CatalogProductComponent(props) {
         displays={displays}
         option={{
           add: {
-            to: getAction(
-              routersAdmin.routers.product.add,
-              {},
-              routersAdmin.area,
-            ),
+            to: routersAdmin.product.add.getAction(),
           },trash:{},
         }}
         component={Grid}

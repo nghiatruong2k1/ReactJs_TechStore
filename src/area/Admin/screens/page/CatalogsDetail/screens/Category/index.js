@@ -9,7 +9,7 @@ import { initCase, initState, reducerState } from '../../init';
 import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { getAction, routersAdmin } from '~/config/Router';
+import {  routersAdmin } from '~/config/Router';
 export const CatalogAddCategoryPage = memo(() => {
   const categoryAdminService = CategoryAdminServices('CatalogAddCategoryPage');
   const [state, dispath] = useReducer(reducerState, {
@@ -63,7 +63,7 @@ export const CatalogUpdateCategoryPage = memo(() => {
             type: 'warning',
           });
           navigator(
-            getAction(routersAdmin.routers.category.index, {}, routersAdmin.area),
+            routersAdmin.category.index.getAction(),
           );
         }
       },

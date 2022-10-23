@@ -16,7 +16,8 @@ import { reducerState, initState, initCase } from '../../init';
 import CatalogLayout from '../../layout';
 import PublicButton from '../../components/PublicButton';
 import DeleteButton from '../../components/DeleteButton';
-import { getAction, routersAdmin } from '~/config/Router';
+import { routersAdmin } from '~/config/Router';
+import { Link } from 'react-router-dom';
 function CatalogUserComponent(props) {
   const services = UserAdminServices('CatalogUserComponent');
   const [state, dispath] = useReducer(reducerState, initState);
@@ -95,6 +96,18 @@ function CatalogUserComponent(props) {
   const displays = useMemo(() => {
     return [
       {
+        title: userModel.Id.displayName,
+        name: 'Id',
+        type: 'text',
+        width: '5em',
+        format: (v, data) => (
+          <Link
+            to={routersAdmin.user.update.getAction({ id: data.Id })}
+          >
+            {v}
+          </Link>
+        ),
+      },{
         title: userModel.ImageUrl.displayName,
         name: 'ImageUrl',
         nameAlt: 'Email',

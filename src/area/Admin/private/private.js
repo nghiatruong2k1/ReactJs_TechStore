@@ -8,13 +8,13 @@ function CheckAdminPrivate() {
   } = useGetAuth();
   const { enqueueSnackbar } = useSnackbar();
   return useMemo(() => {
-    // if (user && user.TypeId < 4) {
-    //   enqueueSnackbar({
-    //     message: 'Bạn cần quyền Admin để truy cập',
-    //     type: 'warning',
-    //   });
-    //   return <Navigate to="/" />;
-    // }
+    if (user && user.TypeId < 4) {
+      enqueueSnackbar({
+        message: 'Bạn cần quyền Admin để truy cập',
+        type: 'warning',
+      });
+      return <Navigate to="/" />;
+    }
     return <Outlet />;
   }, [user]);
 }

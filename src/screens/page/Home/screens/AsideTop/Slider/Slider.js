@@ -10,15 +10,17 @@ function SliderComponent({ ...props }) {
   const sliderServices = SliderServices('home sliders');
   const [state, dispath] = useReducer(reducerState, initState);
   const [loading, handleLoading] = useInitLoading();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(Array(5).fill(null));
   useEffect(() => {
-    setData(Array(5).fill(null));
     const ourLoading = handleLoading();
     const ourRequest = sliderServices.getAll({}, (data) => {
       setData(data);
       ourLoading();
     });
-    return ourRequest;
+    return () => {
+      ourRequest();
+      setData(Array(5).fill(null));
+    };
   }, []);
   return (
     <>

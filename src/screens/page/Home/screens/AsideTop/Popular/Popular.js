@@ -8,24 +8,27 @@ import { ViewContent } from '~/components';
 import styles from './Popular.module.css';
 import { useInitLoading } from '~/hooks/Loading';
 import PopularItem from './Item';
+import { useMediaQuery } from '@mantine/hooks';
 
 function Populars({ ...props }) {
   const categoryServices = CategoryServices('home categories popular');
   const [loading, handleLoading] = useInitLoading();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(Array(5).fill(null));
   useEffect(() => {
-    setData(Array(5).fill(null));
     const ourLoading = handleLoading();
     const ourRequest = categoryServices.getPopular({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
         imgUrl: item.ImageUrl,
-        to: getAction(routers.product.category, { alias: item.Alias }),
+        to: routers.product.category.getAction({ alias: item.Alias }),
       }));
       setData(newdata);
       ourLoading();
     });
-    return ourRequest;
+    return () => {
+      ourRequest();
+      setData(Array(5).fill(null));
+    };
   }, []);
   const settings = useMemo(function () {
     return {
@@ -37,11 +40,10 @@ function Populars({ ...props }) {
       infinite: true,
       autoplay: true,
       swipeToSlide: true,
-      vertical: true,
-      verticalSwiping: true,
-      slidesToShow: 2,
     };
   }, []);
+  const isMediumSize = useMediaQuery('(max-width: 900px)');
+  const isSmallSize = useMediaQuery('(max-width: 500px)');
   return (
     <Grid item xs px={0} {...props}>
       <Typography className={styles.title} component="h6">
@@ -49,7 +51,7 @@ function Populars({ ...props }) {
       </Typography>
       <Box position="relative">
         <ViewContent loading={loading} length={data.length}>
-          <Slider {...settings}>
+          <Slider {...settings} vertical={!isMediumSize} verticalSwiping={!isMediumSize} slidesToShow={isSmallSize ? 3 : 2}>
             {data.map((item, index) => {
               return (
                 <PopularItem

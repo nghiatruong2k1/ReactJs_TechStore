@@ -5,7 +5,7 @@ import styles from './Loading.module.css';
 import { useInitLoading } from '~/hooks/Loading';
 import Provider from './provider';
 function GlobalLoadingComponent({ children }) {
-  const [isLoading,handle] = useInitLoading('Global Loading');
+  const [isLoading,handle] = useInitLoading();
   return (
     <Provider value={handle}>
       {isLoading && (

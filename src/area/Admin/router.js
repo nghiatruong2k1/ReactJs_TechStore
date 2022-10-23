@@ -14,6 +14,7 @@ import {
   CatalogAddUserPage,
   CatalogUpdateBrandPage,
   CatalogUpdateCategoryPage,
+  CatalogUpdateOrderPage,
   CatalogUpdateProductPage,
   CatalogUpdateUserPage,
 } from '~/area/Admin/screens/page';
@@ -25,66 +26,65 @@ export const adminRouters = {
   element: CheckAdminPrivate,
   routes: [
     {
-      path: routersAdmin.routers.dashboard,
+      path: routersAdmin.dashboard,
       page: AdminDashboardPage,
     },
     {
-      path: routersAdmin.routers.product.index,
+      path: routersAdmin.product.index,
       page: AdminProductPage,
     }, {
-      path: routersAdmin.routers.product.add,
+      path: routersAdmin.product.add,
       page: CatalogAddProductPage,
     },
     {
-      path: routersAdmin.routers.product.update,
+      path: routersAdmin.product.update,
       page: CatalogUpdateProductPage,
     },
     {
-      path: routersAdmin.routers.category.index,
+      path: routersAdmin.category.index,
       page: AdminCategoryPage,
     },
     {
-      path: routersAdmin.routers.category.add,
+      path: routersAdmin.category.add,
       page: CatalogAddCategoryPage,
     },
     {
-      path: routersAdmin.routers.category.update,
+      path: routersAdmin.category.update,
       page: CatalogUpdateCategoryPage,
     },
     {
-      path: routersAdmin.routers.brand.index,
+      path: routersAdmin.brand.index,
       page: AdminBrandPage,
     },
     {
-      path: routersAdmin.routers.brand.add,
+      path: routersAdmin.brand.add,
       page: CatalogAddBrandPage,
     },
     {
-      path: routersAdmin.routers.brand.update,
+      path: routersAdmin.brand.update,
       page: CatalogUpdateBrandPage,
     },
     {
-      path: routersAdmin.routers.order.index,
+      path: routersAdmin.order.index,
       page: AdminOrderPage,
+    },    {
+      path: routersAdmin.order.update,
+      page: CatalogUpdateOrderPage,
     },
     {
-      path: routersAdmin.routers.order.detail,
+      path: routersAdmin.order.detail,
       page: AdminOrderDetailPage,
     },
     {
-      path: routersAdmin.routers.user.index,
+      path: routersAdmin.user.index,
       page: AdminUserPage,
     },
-    // {
-    //   path: routersAdmin.routers.user.add,
-    //   page: CatalogAddUserPage,
-    // },
-    // {
-    //   path: routersAdmin.routers.user.update,
-    //   page: CatalogUpdateUserPage,
-    // },
     {
-      path: routersAdmin.routers.image.index,
+      path: routersAdmin.user.update,
+      page: CatalogUpdateUserPage,
+    },
+    {
+      path: routersAdmin.image.index,
       page: AdminImagePage,
     },
   ],

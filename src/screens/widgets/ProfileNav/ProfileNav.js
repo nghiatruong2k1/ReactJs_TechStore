@@ -8,19 +8,19 @@ function FooterSocial(props) {
         {
             text:"Tài khoản",
             icon:(<span className="fas fa-user-circle"/>),
-            to:getAction(routers.profile.index)
+            to:routers.profile.index.getAction()
           },{
             text:"Đơn hàng",
             icon:(<span className="fas fa-store"/>),
-            to:getAction(routers.profile.orders)
+            to:routers.profile.orders.getAction()
           },{
             text:"Thông báo",
             icon:(<span className="fas fa-bell"/>),
-            to:getAction(routers.profile.message)
+            to:routers.profile.message.getAction()
           },{
             text:"Tùy chọn",
             icon:(<span className="fas fa-cog"/>),
-            to:getAction(routers.profile.settings)
+            to:routers.profile.settings.getAction()
           }
       ],
       isLoading: false,

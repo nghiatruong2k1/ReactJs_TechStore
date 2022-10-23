@@ -8,14 +8,17 @@ function BrandComponent() {
   const brandServices = BrandServices('list brand');
   const [state, dispath] = useReducer(reducerState, initState);
   const [loading, handleLoading] = useInitLoading();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(Array(initState.limit).fill(null));
   useEffect(() => {
     const ourLoading = handleLoading();
-    setData(Array(state.limit).fill(null));
-    return brandServices.getAll({}, (data) => {
+    const ourRequest = brandServices.getAll({}, (data) => {
       setData(data);
       ourLoading();
     });
+    return () => {
+      setData(Array(state.limit).fill(null));
+      ourRequest();
+    };
   }, [state.limit]);
   return (
     <ViewLayout

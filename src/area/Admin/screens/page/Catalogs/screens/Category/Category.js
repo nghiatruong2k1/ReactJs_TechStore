@@ -10,7 +10,7 @@ import CategoryAdminServices from '~/area/Admin/services/categoryAdmin';
 import { categoryModel } from '~/models/category';
 import { formatDate } from '~/config/Format';
 import { Link } from 'react-router-dom';
-import { getAction, routersAdmin } from '~/config/Router';
+import { routersAdmin } from '~/config/Router';
 import { Grid } from '@mui/material';
 import { useInitLoading } from '~/hooks/Loading';
 import CatalogLayout from '../../layout';
@@ -101,17 +101,12 @@ function CatalogCategoryComponent(props) {
         type: 'text',
         width: '5em',
         format: (v) => (
-          <Link
-            to={getAction(
-              routersAdmin.routers.category.update,
-              { id: v },
-              routersAdmin.area,
-            )}
-          >
+          <Link to={routersAdmin.category.update.getAction({ id: v })}>
             {v}
           </Link>
         ),
-      },{
+      },
+      {
         title: categoryModel.ImageUrl.displayName,
         name: 'ImageUrl',
         nameAlt: 'Name',
@@ -201,12 +196,9 @@ function CatalogCategoryComponent(props) {
         displays={displays}
         option={{
           add: {
-            to: getAction(
-              routersAdmin.routers.category.add,
-              {},
-              routersAdmin.area,
-            ),
-          },trash:{},
+            to: routersAdmin.category.add.getAction(),
+          },
+          trash: {},
         }}
         component={Grid}
         item

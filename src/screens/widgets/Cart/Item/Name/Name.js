@@ -7,7 +7,7 @@ function ItemName({ loading, alias, name}) {
   return (
     <Typography
       component={(!loading && Link) || 'span'}
-      to={getAction(routers.product.detail, { alias })}
+      to={routers.product.detail.getAction({ alias })}
       align="center"
     >
       {(loading && <Skeleton variant="text" className="skeleton" />) || name}

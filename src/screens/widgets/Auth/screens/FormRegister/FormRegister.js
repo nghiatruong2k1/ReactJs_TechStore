@@ -22,36 +22,36 @@ function FormRegister({ onClose }) {
   const mailerServices = MailerServices('form register');
   const { enqueueSnackbar } = useSnackbar();
   const handleSubmit = useCallback(({ Email, Password }, onEnd) => {
-    authServices.register({ Email, Password }, (data) => {
-      if (data) {
-        onClose && onClose();
-        const Content = <FormRegisterMail Email={Email} Password={Password} />;
-        mailerServices.send(
-          {
-            content: Content,
-            subject: 'Bạn có 1 tài khoản cần xác nhận',
-            user:{Email},
-          },
-          () => {
-            enqueueSnackbar({
-              message: 'Đã gửi xác thực tài khoản đến Email của bạn!',
-              type: 'success',
-            });
-          },
-          () => {},
-        );
-      }
-    },onEnd);
+    authServices.register(
+      { Email, Password },
+      (data) => {
+        if (data) {
+          onClose && onClose();
+          const Content = (
+            <FormRegisterMail Email={Email} Password={Password} />
+          );
+          mailerServices.send(
+            {
+              content: Content,
+              subject: 'Bạn có 1 tài khoản cần xác nhận',
+              user: { Email },
+            },
+            () => {
+              enqueueSnackbar({
+                message: 'Đã gửi xác thực tài khoản đến Email của bạn!',
+                type: 'success',
+              });
+            },
+            () => {},
+          );
+        }
+      },
+      onEnd,
+    );
   }, []);
   return (
     <FormProvider onSubmit={handleSubmit} rules={rules}>
-      <Stack
-        spacing={1}
-        sx={{
-          px: { xs: 0, sm: 6, md: 8, lg: 10 },
-          py: 1,
-        }}
-      >
+      <Stack spacing={1}>
         <InputText
           name="Email"
           title={registerAuthModel.Email.displayName}

@@ -12,7 +12,6 @@ function FooterComponent({ ...props }) {
       <Container
         maxWidth="xxl"
         component={Paper}
-        sx={{ pb: 6 }}
         className={styles.container}
       >
         <Grid container>

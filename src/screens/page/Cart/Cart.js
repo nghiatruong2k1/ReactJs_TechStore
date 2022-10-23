@@ -11,15 +11,16 @@ import CartVoucher from './Voucher';
 import CartPayment from './Payment';
 import { useReducer } from 'react';
 import { initCase, initState, reducerState } from './init';
+import { routers } from '~/config/Router';
 function CartComponent() {
   const {
     state: { total, data, isLoading, totalPrice },
-    handle:{reset}
+    handle: { reset },
   } = useGetCart();
   const [state, dispath] = useReducer(reducerState, initState);
   const handleTitle = useHandleTitle();
   useEffect(() => {
-    return handleTitle('Giỏ hàng');
+    return handleTitle(routers.profile.cart.title);
   }, []);
   const handleChange = useCallback((data) => {
     dispath([initCase.CHANGE_VOUCHER, data]);

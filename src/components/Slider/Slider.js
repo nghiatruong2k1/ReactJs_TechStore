@@ -7,7 +7,7 @@ import Images from './Images';
 import Arrows from './Arrows';
 import Dots from './Dots';
 import './Slider.css';
-function SliderComponent({ variant, fit, data, loading}) {
+function SliderComponent({ variant, fit, data, loading }) {
   const [state, dispath] = useReducer(reducerState, initState);
   const thisRef = useRef(null);
   return (

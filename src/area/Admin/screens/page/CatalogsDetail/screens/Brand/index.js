@@ -9,7 +9,7 @@ import { initCase, initState, reducerState } from '../../init';
 import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { getAction, routersAdmin } from '~/config/Router';
+import { routersAdmin } from '~/config/Router';
 export const CatalogAddBrandPage = memo(() => {
   const brandAdminService = BrandAdminServices('CatalogAddBrandPage');
   const [state, dispath] = useReducer(reducerState, {
@@ -63,7 +63,7 @@ export const CatalogUpdateBrandPage = memo(() => {
             type: 'warning',
           });
           navigator(
-            getAction(routersAdmin.routers.brand.index, {}, routersAdmin.area),
+            routersAdmin.brand.index.getAction(),
           );
         }
       },

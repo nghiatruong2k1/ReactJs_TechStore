@@ -1,4 +1,4 @@
-import { routers,routersAdmin } from '~/config/Router';
+import { routers } from '~/config/Router';
 import {
   CartPage,
   ProfilePage,

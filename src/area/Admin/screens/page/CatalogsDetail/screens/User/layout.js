@@ -6,7 +6,7 @@ import OptionComponent from './Option';
 import ImageComponent from './Image';
 import Provider from '../../provider';
 import Head from '../../components/Head';
-import { getAction, routersAdmin } from '~/config/Router';
+import {  routersAdmin } from '~/config/Router';
 function CatalogUserLayoutComponent({
   state,
   dispath,
@@ -33,7 +33,7 @@ function CatalogUserLayoutComponent({
           xs={12}
           title={title}
           back={getAction(
-            routersAdmin.routers.user.index,
+            routersAdmin.user.index,
             {},
             routersAdmin.area,
           )}

@@ -10,16 +10,19 @@ function BrandsComponent() {
   const brandServices = BrandServices('home brands');
   const [state, dispath] = useReducer(reducerState, initState);
   const [loading, handleLoading] = useInitLoading();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(Array(initState.limit).fill(null));
   useEffect(() => {
-    setData(Array(state.limit).fill(null));
     const ourLoading = handleLoading();
     const ourRequest = brandServices.getAll({}, (data) => {
       setData(data);
       ourLoading();
     });
-    return ourRequest;
+    return () => {
+      ourRequest();
+      setData(Array(state.limit).fill(null));
+    };
   }, [state.limit]);
+
   return (
     <Provider value={{ state, dispath, data, loading }}>
       <Box>

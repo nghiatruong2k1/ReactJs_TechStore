@@ -8,6 +8,7 @@ import { AuthServices } from '~/services';
 
 function UserProfileComponent({
   toggleComponent,
+  loading,
   ImageUrl,
   FirstName,
   LastName,
@@ -23,7 +24,7 @@ function UserProfileComponent({
     const newData = [
       {
         text: 'Tài khoản',
-        to: getAction(routers.profile.index),
+        to: routers.profile.index.getAction(),
         icon: <span className="fa fa-user" />,
       },{
         text:'Đăng xuất',
@@ -35,7 +36,7 @@ function UserProfileComponent({
     ];
     if (TypeId === 4) {
       newData.unshift({
-        to: getAction(routersAdmin.area),
+        to: routersAdmin.dashboard.getAction(),
         icon: <span className={'fa fa-user-cog'} />,
         text: 'Trang quản trị',
       });
@@ -50,6 +51,7 @@ function UserProfileComponent({
         icon={<Avatar src={ImageUrl} />}
         title={fullName}
         onClick={open}
+        disabled={loading}
       />
       <Dropdown
         data={data}

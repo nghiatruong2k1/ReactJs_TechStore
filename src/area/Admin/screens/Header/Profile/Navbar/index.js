@@ -28,7 +28,7 @@ function LogoutButton(){
     auth.handle.open();
   }
   return(
-    <ProfileLink to="" 
+    <ProfileLink 
       onClick={handleClick}
       icon={<span className={clsx("fas fa-sign-out-alt")}/>}
       text={"Đăng xuất"}

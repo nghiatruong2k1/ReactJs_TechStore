@@ -11,7 +11,7 @@ function CartFooter({ onClose }) {
         component={NavLink}
         onClick={onClose}
         color='success'
-        to={getAction(routers.profile.cart)}
+        to={routers.profile.cart.getAction()}
       >
         Xem chi tiết giỏ hàng
       </Button>

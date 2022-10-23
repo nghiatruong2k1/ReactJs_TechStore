@@ -1,40 +1,32 @@
 import { memo, useMemo } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import {
-  FormControl,
-  FormHelperText,
-  FormControlLabel,
-  InputLabel,
-} from '@mui/material/';
+import { FormControl, FormHelperText, FormLabel } from '@mui/material/';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import styles from './InputEditter.module.css';
 import './InputEditter.css';
-const sizes = {
-  small: { minRows: 6, maxRows: 8 },
-  medium: { minRows: 8, maxRows: 10 },
-  large: { minRows: 10, maxRows: 12 },
-};
+const sizes = ['small','medium','large']
 function InputEditter({
-  label,
   size,
+  label,
   value,
   onChange,
   disabled,
+  readOnly,
   error,
   helperText,
 }) {
-  const sizeProps = useMemo(() => {
-    return sizes[size] ?? size['small'];
-  }, [size]);
+
+
   return (
     <FormControl
       fullWidth
       className={clsx(styles.root, { [styles.disabled]: disabled })}
       disabled={disabled}
+      readOnly={readOnly}
     >
-      {/* <InputLabel>{label}</InputLabel> */}
+      <FormLabel>{label}</FormLabel>
       <FormHelperText error={Boolean(error)}>{helperText ?? ''}</FormHelperText>
       <CKEditor
         init={{
@@ -57,7 +49,7 @@ function InputEditter({
         onReady={(editor) => {}}
         onChange={(event, editor) => {}}
         onBlur={(event, editor) => {
-          !disabled && onChange && onChange(event, editor.data.get());
+          !readOnly && !disabled && onChange && onChange(event, editor.data.get());
         }}
         onFocus={(event, editor) => {}}
       />
@@ -68,7 +60,7 @@ InputEditter.defaultProps = {
   size: 'small',
 };
 InputEditter.propTypes = {
-  size: PropTypes.oneOf(Object.keys(sizes)),
+  size: PropTypes.oneOf(sizes),
 };
 export default memo(InputEditter);
 

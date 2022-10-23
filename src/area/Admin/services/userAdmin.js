@@ -39,6 +39,17 @@ export default function UserAdminServices(location) {
       location,
     });
   }, []);
+  const getsType = useCallback((onThen, onEnd) => {
+    return services({
+      api: `${API}status`,
+      onThen,
+      onCatch: () => {
+        onThen && onThen([]);
+      },
+      onEnd,
+      location,
+    });
+  }, []);
   const putData = useCallback((params, onThen, onEnd) => {
     return services({
       api: `${API}`,

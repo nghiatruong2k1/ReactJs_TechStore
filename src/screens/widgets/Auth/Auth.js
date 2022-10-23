@@ -9,7 +9,7 @@ function AuthComponent({ toggleComponent, ...props }) {
     return routerActions[state.action].content ?? Fragment;
   }, [state.action]);
   if (Boolean(state.user)) {
-    return <UserProfile toggleComponent={toggleComponent} {...state.user} />;
+    return <UserProfile toggleComponent={toggleComponent} loading={state.isLoading} {...state.user} />;
   } else {
     return (
       <AuthLayoutComponent

@@ -9,7 +9,7 @@ function DataName({ loading, alias, name}) {
     <Typography
       component={(!loading && Link) || 'span'}
       className={styles.name}
-      to={getAction(routers.product.detail, { alias })}
+      to={routers.product.detail.getAction({ alias })}
       align="center"
     >
       {(loading && <Skeleton />) || name}

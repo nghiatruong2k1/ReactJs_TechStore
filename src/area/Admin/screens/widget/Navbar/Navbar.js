@@ -14,33 +14,25 @@ import {
 import styles from './Navbar.module.css';
 import NavbarItem from './Item';
 import NavbarAccordion from './Accordion';
-import { getAction, routersAdmin } from '~/config/Router';
+import {  routersAdmin } from '~/config/Router';
 function NavbarComponent() {
   const Catalogs = useMemo(function () {
     return [
       {
         text: 'Sản phẩm',
-        to: getAction(
-          routersAdmin.routers.product.index,
-          {},
-          routersAdmin.area,
-        ),
+        to: routersAdmin.product.index.getAction(),
       },
       {
         text: 'Danh mục',
-        to: getAction(
-          routersAdmin.routers.category.index,
-          {},
-          routersAdmin.area,
-        ),
+        to: routersAdmin.category.index.getAction(),
       },
       {
         text: 'Thương hiệu',
-        to: getAction(routersAdmin.routers.brand.index, {}, routersAdmin.area),
+        to: routersAdmin.brand.index.getAction(),
       },
       {
         text: 'Hình ảnh',
-        to: getAction(routersAdmin.routers.image.index, {}, routersAdmin.area),
+        to: routersAdmin.image.index.getAction(),
       },
     ];
   }, []);
@@ -48,31 +40,19 @@ function NavbarComponent() {
     return [
       {
         text: 'Danh sách',
-        to: getAction(routersAdmin.routers.order.index, {}, routersAdmin.area),
+        to: routersAdmin.order.index.getAction(),
       },
       {
         text: 'Giao hàng',
-        to: getAction(
-          routersAdmin.routers.order.shipment,
-          {},
-          routersAdmin.area,
-        ),
+        to: routersAdmin.order.shipment.getAction(),
       },
       {
         text: 'Phản hồi',
-        to: getAction(
-          routersAdmin.routers.order.feedback,
-          {},
-          routersAdmin.area,
-        ),
+        to: routersAdmin.order.feedback.getAction(),
       },
       {
         text: 'Mã giảm giá',
-        to: getAction(
-          routersAdmin.routers.order.voucher,
-          {},
-          routersAdmin.area,
-        ),
+        to: routersAdmin.order.voucher.getAction(),
       },
     ];
   }, []);
@@ -80,7 +60,7 @@ function NavbarComponent() {
     return [
       {
         text: 'Danh sách',
-        to: getAction(routersAdmin.routers.user.index, {}, routersAdmin.area),
+        to: routersAdmin.user.index.getAction(),
       },
     ];
   }, []);
@@ -99,7 +79,7 @@ function NavbarComponent() {
       <List disablePadding>
         <NavbarItem
           icon={<Airplay />}
-          to={getAction(routersAdmin.area)}
+          to={routersAdmin.dashboard.getAction()}
           text="Dashboard"
         />
         <NavbarAccordion

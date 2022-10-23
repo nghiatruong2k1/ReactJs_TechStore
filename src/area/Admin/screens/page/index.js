@@ -15,6 +15,10 @@ export {
   CatalogUpdateBrandPage,
 } from './CatalogsDetail/screens/Brand';
 export { default as AdminOrderPage } from './Catalogs/screens/Order';
+export {
+  CatalogAddOrderPage,
+  CatalogUpdateOrderPage,
+} from './CatalogsDetail/screens/Order';
 export { default as AdminOrderDetailPage } from './Catalogs/screens/OrderDetail';
 export { default as AdminUserPage } from './Catalogs/screens/User';
 export {

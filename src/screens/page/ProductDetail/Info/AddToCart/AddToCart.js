@@ -4,6 +4,7 @@ import styles from '../Info.module.css';
 import { useGetInfoContext } from '../provider';
 import { Tooltip } from '@mui/material';
 import { useGetCart } from '~/hooks/Cart';
+import { Box } from '@mui/system';
 
 const min = 1;
 const max = 100;
@@ -39,7 +40,7 @@ function AddToCartButton({ loading,data,Quantity }) {
           variant="contained"
           color="warning"
         >
-          Thêm vào giỏ hàng
+          <Box sx={{display:{xs:'none',lg:'inline'}}}>Thêm vào giỏ hàng</Box>
         </LoadingButton>
       </span>
     </Tooltip>

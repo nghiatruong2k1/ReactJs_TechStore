@@ -1,83 +1,140 @@
-const regex = /\:[a-zA-Z]{1,}/g;
+class Action extends String {
+  constructor(_title, _path, _defaultParams) {
+    super(_path);
+    let regex = /\:[a-zA-Z]{1,}/g;
+    this.title = _title;
+    this.__proto__.valueOf = function () {
+      return `${_path}`;
+    };
+    this.setParent = function (_parent) {
+      this.parent = _parent;
+    };
 
-export const getAction = (str, params, area) => {
-  if (typeof str === 'string') {
-    const args = str.match(regex);
-    if (args && Array.isArray(args)) {
-      args.forEach((arg) => {
-        const key = arg.replace(':', '');
-        str = str.replaceAll(arg, (params && params[key]) || '');
-      });
-    }
-    return `/${area ? (area + '/') : ''}${str}`;
+    this.getAction = function (params) {
+      let area = this.parent?.parent?.path;
+      let controller = this.parent?.path;
+      let str = `/${area ? area + '/' : ''}${
+        controller ? controller + '/' : ''
+      }${_path}`;
+      if (typeof str === 'string') {
+        const args = str.match(regex);
+        if (args && Array.isArray(args)) {
+          args.forEach((arg) => {
+            const key = arg.replace(':', '');
+            str = str.replaceAll(
+              arg,
+              (params && params[key]) || _defaultParams?.[key] || '',
+            );
+          });
+        }
+        return str;
+      }
+      return '/404';
+    };
+    Object.defineProperty(this, 'title', { enumerable: false, writable: true });
+    Object.defineProperty(this, 'setParent', { enumerable: false });
+    Object.defineProperty(this, 'parent', {
+      enumerable: false,
+      writable: true,
+    });
+    Object.defineProperty(this, 'getAction', { enumerable: false });
   }
-  return '/404';
-};
+}
+class Controller {
+  constructor(path, actions) {
+    this.path = path;
+    this.setParent = function (parent) {
+      this.parent = parent;
+    };
+    Object.keys(actions).forEach((key) => {
+      this[key] = actions[key];
+      this[key].setParent(this);
+    });
+    Object.defineProperty(this, 'path', { enumerable: false, writable: true });
+    Object.defineProperty(this, 'setParent', { enumerable: false });
+    Object.defineProperty(this, 'parent', {
+      enumerable: false,
+      writable: true,
+    });
+  }
+}
 
-export const routers = {
-  home: '',
-  product: {
-    detail: 'chi-tiet-san-pham/:alias',
-    category: 'danh-muc-san-pham/:alias',
-    brand: 'thuong-hieu-san-pham/:alias',
-    search: 'tim-kiem-san-pham',
-  },
-  category: {
-    index: 'danh-sach-danh-muc',
-    search: 'tim-kiem-danh-muc',
-  },
-  brand: {
-    index: 'danh-sach-thuong-hieu',
-    search: 'tim-kiem-thuong-hieu',
-  },
-  profile: {
-    index: 'thong-tin',
-    orders: 'don-hang',
-    settings: 'tuy-chon',
-    message: 'thong-bao',
-    cart: 'gio-hang',
-  },
-  post: {
-    index: 'tin-tuc',
-  },
-  about: {},
-  notfound: '*',
-};
+class Router {
+  constructor(path, routers) {
+    this.path = path;
+    Object.keys(routers).forEach((key) => {
+      this[key] = routers[key];
+      this[key].setParent(this);
+    });
 
-export const routersAdmin = {
-  area: 'trang-quan-tri',
-  routers: {
-    dashboard: '',
-    product: {
-      index: 'danh-sach-san-pham',
-      add: 'them-san-pham',
-      update: 'cap-nhat-san-pham/:id',
-    },
-    brand: {
-      index: 'danh-sach-thuong-hieu',
-      add: 'them-thuong-hieu',
-      update: 'cap-nhat-thuong-hieu/:id',
-    },
-    category: {
-      index: 'danh-sach-danh-muc',
-      add: 'them-danh-muc',
-      update: 'cap-nhat-danh-muc/:id',
-    },
-    order: {
-      index: 'danh-sach-don-hang',
-      detail: 'chi-tiet-don-hang/:id',
-      update: 'cap-nhat-don-hang/:id',
-      add: 'them-don-hang',
-      shipment: 'giao-hang',
-      feedback: 'phan-hoi',
-      voucher: 'ma-giam-gia',
-    },
-    user: {
-      index: 'danh-sach-nguoi-dung',
-      add: 'them-nguoi-dung',
-      update: 'cap-nhat-nguoi-dung/:id',
-    },image:{
-      index:'danh-sach-hinh-anh'
-    }
-  },
-};
+    Object.defineProperty(this, 'path', { enumerable: false, writable: true });
+  }
+}
+
+export const routers = new Router('', {
+  home: new Action('', ''),
+  product: new Controller('', {
+    detail: new Action('Chi tiết sản phẩm', 'chi-tiet-san-pham/:alias'),
+    category: new Action('Danh mục sản phẩm', 'danh-muc-san-pham/:alias'),
+    brand: new Action('Thương hiệu sản phẩm', 'thuong-hieu-san-pham/:alias'),
+    search: new Action('Tìm kiếm sản phẩm', 'tim-kiem-san-pham'),
+  }),
+  category: new Controller('', {
+    index: new Action('Danh mục', 'danh-sach-danh-muc'),
+    search: new Action('Tìm kiếm danh mục', 'tim-kiem-danh-muc'),
+  }),
+  brand: new Controller('', {
+    index: new Action('Thương hiệu', 'danh-sach-thuong-hieu'),
+    search: new Action('Tìm kiếm thương hiệu', 'tim-kiem-thuong-hieu'),
+  }),
+  profile: new Controller('', {
+    index: new Action('Thương hiệu', 'thong-tin-tai-khoan'),
+    orders: new Action('Đơn hàng', 'don-hang'),
+    settings: new Action('Tùy chọn', 'tuy-chon'),
+    message: new Action('Thông báo', 'thong-bao'),
+    cart: new Action('Giỏ hàng', 'gio-hang'),
+  }),
+  post: new Controller('', {
+    index: new Action('Tin tức', 'tin-tuc'),
+  }),
+  about: new Controller('', {}),
+  notfound: new Action('Not Found', '*'),
+});
+
+export const routersAdmin = new Router('trang-quan-tri', {
+  dashboard: new Action('Dashboard', ''),
+  product: new Controller('', {
+    index: new Action('Quản lý sản phẩm', 'quan-ly-san-pham'),
+    add: new Action('Thêm sản phẩm', 'them-san-pham'),
+    update: new Action('Cập nhật sản phẩm', 'cap-nhat-san-pham/id'),
+  }),
+  brand: new Controller('', {
+    index: new Action('Quản lý thương hiệu', 'quan-ly-thuong-hieu'),
+    add: new Action('Thêm thương hiệu', 'them-thuong-hieu'),
+    update: new Action('Cập nhật thương hiệu', 'cap-nhat-thuong-hieu/id'),
+  }),
+  category: new Controller('', {
+    index: new Action('Quản lý danh mục', 'quan-ly-danh-muc'),
+    add: new Action('Thêm danh mục', 'them-danh-muc'),
+    update: new Action('Cập nhật danh mục', 'cap-nhat-danh-muc/id'),
+  }),
+  user: new Controller('', {
+    index: new Action('Quản lý tài khoản', 'quan-ly-danh-muc'),
+    add: new Action('Thêm tài khoản', 'them-danh-muc'),
+    update: new Action('Cập nhật tài khoản', 'cap-nhat-danh-muc/id'),
+  }),
+  image: new Controller('', {
+    index: new Action('Quản lý hình ảnh', 'quan-ly-hinh-anh'),
+    add: new Action('Thêm hình ảnh', 'them-hinh-anh'),
+    update: new Action('Cập nhật hình ảnh', 'cap-nhat-hinh-anh/id'),
+  }),
+  order: new Controller('', {
+    index: new Action('Quản lý đơn hàng', 'danh-sach-don-hang'),
+    detail: new Action('Chi tiết đơn hàng', 'chi-tiet-don-hang/:id'),
+    update: new Action('Cập nhật đơn hàng', 'cap-nhat-don-hang/:id'),
+    add: new Action('Thêm đơn hàng', 'them-don-hang'),
+    shipment: new Action('Giao hàng', 'giao-hang'),
+    feedback: new Action('Phản hồi', 'phan-hoi'),
+    voucher: new Action('Mã giảm giá', 'ma-giam-gia'),
+  }),
+});

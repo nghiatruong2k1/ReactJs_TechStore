@@ -47,7 +47,6 @@ export const publicRouters = [
   },
   {
     path: routers.notfound,
-    title: '404',
     layout: null,
     page: NotfoundPage,
   },

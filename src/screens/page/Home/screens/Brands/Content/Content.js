@@ -6,6 +6,7 @@ import { ViewContent } from '~/components';
 import Slider from 'react-slick';
 
 import BrandsItem from '../Item';
+import { useMediaQuery } from '@mantine/hooks';
 
 function Content({ children, ...props }) {
   const { state, data,loading } = useGetBrandsContext();
@@ -21,14 +22,14 @@ function Content({ children, ...props }) {
       infinite: true,
       rows: 2,
       slidesToShow: 1,
-      slidesPerRow: 4,
     };
   }, []);
+  const isSmallSize = useMediaQuery('(max-width: 600px)');
   return (
     <Grid item {...props}>
       <Box position="relative">
         <ViewContent loading={loading} length={data.length}>
-          <Slider {...settings}>
+          <Slider {...settings} slidesPerRow={isSmallSize ? 3 : 4}>
             {data.map((item, index)=>{
               return (
                 <div key={index}>

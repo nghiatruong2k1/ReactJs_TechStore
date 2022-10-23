@@ -45,8 +45,10 @@ function ImageComponent({
             alt={alt || src || 'Hình ảnh'}
             src={src}
             loading={'lazy'}
-            height={height}
-            width={width}
+            style={{
+              height:height,
+              width:width
+            }}
           />
         )}
       </figure>

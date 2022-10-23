@@ -12,7 +12,7 @@ function FooterCategories(props) {
     const ourRequest = categoryServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
-        to: getAction(routers.product.category, { alias: item.Alias }),
+        to: routers.product.category.getAction({ alias: item.Alias }),
       }));
       setData(newdata);
       setLoading(false);

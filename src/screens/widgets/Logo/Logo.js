@@ -1,10 +1,10 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import Image from '~/components/Image';
-import {getAction, routers} from '~/config/Router';
+import { routers} from '~/config/Router';
 function LogoComponent(props) {
   return (
-    <Link to={getAction(routers.home)}>
+    <Link to={routers.home.getAction()}>
       <Image
         alt={process.env.REACT_APP_WEBSITE_NAME}
         placeholder={process.env.REACT_APP_WEBSITE_NAME}

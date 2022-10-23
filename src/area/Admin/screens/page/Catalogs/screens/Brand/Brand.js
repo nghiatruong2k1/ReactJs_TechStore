@@ -10,7 +10,7 @@ import BrandAdminServices from '~/area/Admin/services/brandAdmin';
 import { brandModel } from '~/models/brand';
 import { formatDate } from '~/config/Format';
 import { Link } from 'react-router-dom';
-import { getAction, routersAdmin } from '~/config/Router';
+import { routersAdmin } from '~/config/Router';
 import { Grid } from '@mui/material';
 import { useInitLoading } from '~/hooks/Loading';
 import CatalogLayout from '../../layout';
@@ -101,16 +101,13 @@ function CatalogBrandComponent(props) {
         width: '5em',
         format: (v, data) => (
           <Link
-            to={getAction(
-              routersAdmin.routers.brand.update,
-              { id: data.Id },
-              routersAdmin.area,
-            )}
+            to={routersAdmin.brand.update.getAction({ id: data.Id })}
           >
             {v}
           </Link>
         ),
-      },{
+      },
+      {
         title: brandModel.ImageUrl.displayName,
         name: 'ImageUrl',
         nameAlt: 'Name',
@@ -200,12 +197,9 @@ function CatalogBrandComponent(props) {
         displays={displays}
         option={{
           add: {
-            to: getAction(
-              routersAdmin.routers.brand.add,
-              {},
-              routersAdmin.area,
-            ),
-          },trash:{}
+            to: routersAdmin.brand.add.getAction(),
+          },
+          trash: {},
         }}
         component={Grid}
         item

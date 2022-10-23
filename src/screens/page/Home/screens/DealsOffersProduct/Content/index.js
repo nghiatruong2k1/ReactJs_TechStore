@@ -6,6 +6,7 @@ import Slider from 'react-slick';
 
 import ProductItem from '../Product';
 import { useGetDealsOffersContext } from '../provider';
+import { useMediaQuery } from '@mantine/hooks';
 
 function Content({ children }) {
   const { data,loading,state } = useGetDealsOffersContext();
@@ -20,10 +21,9 @@ function Content({ children }) {
       infinite: true,
       autoplay: true,
       swipeToSlide: true,
-      slidesToShow: 4,
     };
   }, []);
-
+  const isSmallSize = useMediaQuery('(max-width: 600px)');
   return (
     <Box sx={{p:1}}>
       <Box position="relative">
@@ -31,6 +31,7 @@ function Content({ children }) {
           <Slider
             ref={ref}
             {...settings}
+            slidesToShow = {isSmallSize ? 3 : 4}
           >
             {data.map((item, index)=>{
               return (

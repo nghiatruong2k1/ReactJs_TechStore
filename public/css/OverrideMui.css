@@ -1,13 +1,5 @@
-*.MuiInputBase-root,
-*.InputAdornment-root {
-  color: inherit;
-}
-*.MuiFilledInput-root {
-  background-color: var(--alpha-bg);
-}
-*.MuiAutocomplete-loading {
-  opacity: 0.8;
-  color: inherit;
+*.MuiButton-root{
+  min-width: 2em !important;
 }
 *.ToggleButtonGroup-root {
   background-color: var(--alpha-bg);
@@ -143,12 +135,18 @@
 [class*='-thumbSizeMedium'] {
   font-size: 1em ;
 } */
-
+*.MuiListItemText-primary{
+  font-weight: inherit !important;
+}
 *.MuiTypography-root,
 *.MuiLink-root,
 *.MuiButton-root {
   color: inherit;
   text-decoration-line: none;
+  text-transform: none !important;
+}
+*.MuiLink-root,
+*.MuiButton-root {
   user-select: none !important;
 }
 a:not([type='button']):hover {
@@ -296,11 +294,6 @@ a:not([type='button']).active {
   color: var(--purple-primary);
 }
 
-.MuiSelect-select {
-}
-.MuiInputBase-root {
-  background-color: var(--alpha-bg);
-}
 
 .MuiFormHelperText-root {
   line-height: 1em !important;
@@ -320,9 +313,6 @@ a:not([type='button']).active {
   max-width: 100%;
   flex: 1 1 auto;
   height: 100%;
-}
-.MuiInputAdornment-root {
-  color: inherit !important;
 }
 
 .MuiStepIcon-root.Mui-active {
@@ -369,7 +359,18 @@ a:not([type='button']).active {
     0px 2px 2px 0px var(--main-box-shadow),
     0px 1px 5px 0px var(--main-box-shadow) !important; */
 }
-
+*.MuiInputBase-root,
+*.InputAdornment-root {
+  color: inherit;
+}
+*.MuiFilledInput-root {
+  background-color: var(--alpha-bg);
+}
+*.MuiAutocomplete-loading {
+  opacity: 0.8;
+  color: inherit;
+}
+.MuiFormLabel-root,
 .MuiInputLabel-outlined {
   line-height: 1.2em !important;
   opacity: 0.8 !important;
@@ -380,4 +381,26 @@ a:not([type='button']).active {
 .MuiFormControlLabel-label.Mui-disabled{
   color: currentColor !important;
   opacity: 0.8 !important;
+}
+*.MuiInputAdornment-root {
+  color: inherit !important;
+  height: 100% !important;
+  margin-top: 0.25em !important;
+  margin-bottom: 0.25em !important;
+}
+
+.MuiSelect-select {
+}
+.MuiInputBase-root {
+  background-color: var(--alpha-bg);
+}
+
+.MuiInputBase-input.Mui-disabled{
+  opacity: 0.8 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.MuiButton-startIcon,
+.MuiButton-endIcon{
+  margin: 0 0.2em !important;
 }

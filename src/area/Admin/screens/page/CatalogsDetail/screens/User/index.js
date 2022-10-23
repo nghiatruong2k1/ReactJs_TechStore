@@ -9,7 +9,7 @@ import { initCase, initState, reducerState } from '../../init';
 import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { getAction, routersAdmin } from '~/config/Router';
+import {  routersAdmin } from '~/config/Router';
 export const CatalogAddUserPage = memo(() => {
   const userAdminService = UserAdminServices(CatalogAddUserPage);
   const [state, dispath] = useReducer(reducerState, {
@@ -63,7 +63,7 @@ export const CatalogUpdateUserPage = memo(() => {
             type: 'warning',
           });
           navigator(
-            getAction(routersAdmin.routers.user.index, {}, routersAdmin.area),
+            routersAdmin.user.index.getAction(),
           );
         }
       },

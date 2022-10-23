@@ -27,10 +27,6 @@ function FormLogin({ onClose }) {
     <FormProvider onSubmit={handleSubmit} rules={rules}>
       <Stack
         spacing={1}
-        sx={{
-          px: { xs: 0, sm: 3, md: 6, lg: 12 },
-          py: 1,
-        }}
       >
         <InputText
           name="Email"

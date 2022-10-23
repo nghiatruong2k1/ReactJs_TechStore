@@ -35,6 +35,7 @@ export default function SliderServices(location) {
         },
       ]);
     onEnd && onEnd();
+    return ()=>{}
   }, []);
   return { getAll };
 }

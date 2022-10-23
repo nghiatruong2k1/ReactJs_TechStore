@@ -7,19 +7,18 @@ function FooterHelps(props) {
       datas: [
         {
           text: 'Chính sách bảo mật',
-          //to: getAction(routers.about.a),
+          
         },
         {
           text: 'Chính sách thanh toán',
-          //to: getAction(routers.about.a),
+          
         },
         {
           text: 'Chính sách giao hàng',
-          //to: getAction(routers.about.a),
         },
         {
           text: 'Chính sách khuyến mãi',
-          //to: getAction(routers.about.a),
+          
         },
       ],
       isLoading: false,

@@ -87,6 +87,55 @@ section {
 html {
   font-size: 18px;
 }
+@media (max-width: 1600px)
+{
+	html
+	{
+		font-size: 18px !important;
+	}
+}
+@media (max-width: 1500px)
+{
+	html
+	{
+		font-size: 17px !important;
+	}
+}
+@media (max-width: 1400px)
+{
+	html
+	{
+		font-size: 16px !important;
+	}
+}
+@media (max-width: 1000px)
+{
+	html
+	{
+		font-size: 15px !important;
+  }
+}
+@media (max-width: 800px)
+{
+	html
+	{
+		font-size: 14px !important;
+  }
+}
+@media (max-width: 500px)
+{
+	html
+	{
+		font-size: 13px !important;
+	}
+}
+@media (max-width: 400px)
+{
+	html
+	{
+		font-size: 12px !important;
+	}
+}
 body {
   line-height: 1.5;
   background-color: transparent !important;
@@ -171,7 +220,6 @@ table {
 }
 
 
-.MuiTypography-root,
 .line-clamp-1,
 .line-clamp-2,
 .line-clamp-3,
@@ -300,4 +348,9 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-transition: color 9999s ease-out, background-color 9999s ease-out !important;
     -webkit-transition-delay: 9999s !important;
+}
+
+.slick-slide{
+  cursor: grab !important;
+
 }

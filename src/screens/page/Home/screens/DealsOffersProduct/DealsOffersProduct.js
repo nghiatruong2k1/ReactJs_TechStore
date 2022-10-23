@@ -8,13 +8,12 @@ import TimerContent from './Timer';
 import ViewContent from './Content';
 import { useInitLoading } from '~/hooks/Loading';
 import { ProductServices } from '~/services';
-function DealsOffersProduct({ ...props }) {
+function DealsOffersProduct() {
   const productServices = ProductServices('home Deals Offers Product');
   const [state, dispath] = useReducer(reducerState, initState);
   const [loading, handleLoading] = useInitLoading();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(Array(initState.limit).fill(null));
   useEffect(() => {
-    setData(Array(state.limit).fill(null));
     const ourLoading = handleLoading();
     const ourRequest = productServices.getsDealsOffers(
       {
@@ -26,7 +25,10 @@ function DealsOffersProduct({ ...props }) {
         ourLoading();
       },
     );
-    return ourRequest;
+    return () => {
+      ourRequest();
+      setData(Array(state.limit).fill(null));
+    };
   }, [state.limit]);
   return (
     <Provider value={{ state, dispath, loading, data }}>

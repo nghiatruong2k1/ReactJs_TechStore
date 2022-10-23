@@ -23,14 +23,30 @@ function InfoComponent({ ...props }) {
           <TextField
             size="small"
             autoComplete="off"
+            value={values.FirstName ?? ''}
+            helperText={valids.FirstName ?? ''}
+            FormHelperTextProps={{
+              error: Boolean(valids.FirstName),
+            }}            
+            label={`${userModel.FirstName.displayName}:`}
+          />
+          <TextField
+            size="small"
+            autoComplete="off"
+            value={values.LastName ?? ''}
+            helperText={valids.LastName ?? ''}
+            FormHelperTextProps={{
+              error: Boolean(valids.LastName),
+            }}
+            label={`${userModel.LastName.displayName}:`}
+          />{' '}
+          <TextField
+            size="small"
+            autoComplete="off"
             value={values.Email ?? ''}
             helperText={valids.Email ?? ''}
             FormHelperTextProps={{
               error: Boolean(valids.Email),
-            }}
-            disabled={loading}
-            onChange={(e) => {
-              handleChangeValue('Email', e.target.value);
             }}
             label={`${userModel.Email.displayName}:`}
           />
@@ -43,10 +59,6 @@ function InfoComponent({ ...props }) {
             FormHelperTextProps={{
               error: Boolean(valids.Password),
             }}
-            disabled={loading}
-            onChange={(e) => {
-              handleChangeValue('Password', e.target.value);
-            }}
             label={`${userModel.Password.displayName}:`}
           />
           <TextField
@@ -56,10 +68,6 @@ function InfoComponent({ ...props }) {
             helperText={valids.Location ?? ''}
             FormHelperTextProps={{
               error: Boolean(valids.Location),
-            }}
-            disabled={loading}
-            onChange={(e) => {
-              handleChangeValue('Location', e.target.value);
             }}
             label={`${userModel.Location.displayName}:`}
           />
@@ -71,39 +79,7 @@ function InfoComponent({ ...props }) {
             FormHelperTextProps={{
               error: Boolean(valids.Phone),
             }}
-            disabled={loading}
-            onChange={(e) => {
-              handleChangeValue('Phone', e.target.value);
-            }}
             label={`${userModel.Phone.displayName}:`}
-          />
-          <TextField
-            size="small"
-            autoComplete="off"
-            value={values.FirstName ?? ''}
-            helperText={valids.FirstName ?? ''}
-            FormHelperTextProps={{
-              error: Boolean(valids.FirstName),
-            }}
-            disabled={loading}
-            onChange={(e) => {
-              handleChangeValue('FirstName', e.target.value);
-            }}
-            label={`${userModel.FirstName.displayName}:`}
-          />
-          <TextField
-            size="small"
-            autoComplete="off"
-            value={values.LastName ?? ''}
-            helperText={valids.LastName ?? ''}
-            FormHelperTextProps={{
-              error: Boolean(valids.LastName),
-            }}
-            disabled={loading}
-            onChange={(e) => {
-              handleChangeValue('LastName', e.target.value);
-            }}
-            label={`${userModel.LastName.displayName}:`}
           />
         </Stack>
       </AccorCard>

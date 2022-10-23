@@ -1,0 +1,15 @@
+.root{
+    background-color: var(--alpha-bg) !important;
+    border-radius: 4px !important;
+    padding: 0.2em 0.1em !important;
+}
+.outlined{
+    border:1px solid transparent !important;
+}
+.outlined .label{
+    transform: translateX(0.5em) scale(1) !important;
+}
+
+.group{
+    padding-left: 0.5em !important;
+}

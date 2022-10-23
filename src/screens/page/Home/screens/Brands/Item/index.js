@@ -23,11 +23,10 @@ function Item({ data, loading }) {
               className="h5"
               component={(!loading && NavLink) || 'span'}
               to={
-                (!loading &&
-                  getAction(routers.product.brand, {
-                    alias: data && data.Alias,
-                  })) ||
-                '/'
+                !loading &&
+                routers.product.brand.getAction({
+                  alias: data && data.Alias,
+                })
               }
             >
               {(!loading && data.Name) || (
@@ -36,7 +35,7 @@ function Item({ data, loading }) {
             </Typography>
           }
         />
-        <CardContent sx={{ py: 1,px:5 }}>
+        <CardContent sx={{ py: 1, px: 5 }}>
           <Frame variant="circle" loading={loading}>
             <Image fit="contain" src={data && data.ImageUrl} />
           </Frame>

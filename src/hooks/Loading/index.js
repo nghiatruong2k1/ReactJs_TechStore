@@ -1,14 +1,15 @@
-import { useCallback, useReducer } from "react";
-import { initState, reducerState} from "./init";
-export const useInitLoading = (name)=>{
-    const [state,dispath] = useReducer(reducerState,initState);
-    const handleLoading = useCallback((location)=>{
-        dispath(true)
-        //console.log(`Start loading ${name} in ${location}`)
-        return ()=>{
-            //console.log(`Clean loading ${name} in ${location}`)
-            dispath(false)
-        }
-    },[])
-    return [Boolean(state > 0),handleLoading]
-}
+import { useCallback, useReducer } from 'react';
+import { reducerState } from './init';
+export const useInitLoading = (initLoading) => {
+  const [state, dispath] = useReducer(
+    reducerState,
+    Boolean(initLoading) ? 1 : 0,
+  );
+  const handleLoading = useCallback(() => {
+    dispath(!initLoading);
+    return () => {
+      dispath(initLoading);
+    };
+  }, []);
+  return [Boolean(state > 0), handleLoading];
+};

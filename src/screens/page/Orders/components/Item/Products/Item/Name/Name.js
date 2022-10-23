@@ -7,9 +7,9 @@ function NameName({ loading, alias, name}) {
     <Typography
       textAlign={'left'}
       component={(!loading && Link) || 'span'}
-      to={getAction(routers.product.detail, { alias })}
+      to={routers.product.detail.getAction({ alias })}
     >
-      {(loading && <Skeleton variant="text" className="skeleton" />) || name}
+      {(loading && <Skeleton />) || name}
     </Typography>
   );
 }

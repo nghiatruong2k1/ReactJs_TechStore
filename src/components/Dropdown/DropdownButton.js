@@ -16,7 +16,7 @@ function DropdownButtonComponent({ to, icon, endIcon, text,onClick, data }) {
         ref={ref}
         onClick={()=>{data && open();onClick && onClick()}}
         component={to ? Link : 'button'}
-        to={to}
+        to={to || "/404"}
         className={styles.button}
       >
         <ListItemIcon>

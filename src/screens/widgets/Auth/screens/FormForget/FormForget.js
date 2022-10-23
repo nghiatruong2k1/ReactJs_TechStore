@@ -14,20 +14,12 @@ const rules = getRulers(forgetAuthModel);
 function FormForget() {
   return (
     <FormProvider rules={rules}>
-      <Stack
-        spacing={1}
-        sx={{
-          px: {
-            xs: 0,
-            sm: 6,
-            md: 8,
-            lg: 12,
-          },
-          py: 1,
-        }}
-      >
+      <Stack spacing={1}>
         <InputText name="Email" title="Email" placeholder="Nhập Email" />
-        <SubmitButton disabled color="info"> Gửi mã xác nhận </SubmitButton>
+        <SubmitButton disabled color="info">
+          {' '}
+          Gửi mã xác nhận{' '}
+        </SubmitButton>
         <LinkSetAction
           component={Typography}
           action={initCase.TO_LOGIN}

@@ -31,6 +31,7 @@ function PopularItem({ data, loading, ...props }) {
           <LoadingButton
             variant="contained"
             loading={loading}
+            className={styles.button}
             component={(!loading && NavLink) || 'button'}
             to={data && data.to}
             color='info'

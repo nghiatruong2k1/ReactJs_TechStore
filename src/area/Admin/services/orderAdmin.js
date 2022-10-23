@@ -4,6 +4,17 @@ import useServices from '~/services/DefaultServices';
 const API = 'api/admin/order';
 export default function OrderAdminServices(location) {
   const services = useServices(location);
+  const getsStatus = useCallback((onThen, onEnd) => {
+    return services({
+      api: `${API}status`,
+      onThen,
+      onCatch: () => {
+        onThen && onThen([]);
+      },
+      onEnd,
+      location,
+    });
+  }, []);
   const getStatistic = useCallback((onThen, onEnd) => {
     return services({
       api: `${API}/statistic`,
@@ -63,6 +74,17 @@ export default function OrderAdminServices(location) {
       location,
     });
   }, []);
+  const getById = useCallback((id, onThen, onEnd) => {
+    return services({
+      api: `${API}/${id}`,
+      onThen,
+      onCatch: () => {
+        onThen && onThen(null);
+      },
+      onEnd,
+      location,
+    });
+  }, []);
   const putData = useCallback((params, onThen, onEnd) => {
     return services({
       api: `${API}`,
@@ -101,7 +123,10 @@ export default function OrderAdminServices(location) {
       location,
     });
   }, []);
+
   return {
+    getsStatus,
+    getById,
     getStatistic,
     getCount,
     getAll,

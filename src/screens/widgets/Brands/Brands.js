@@ -12,7 +12,7 @@ function FooterBrands(props) {
     const ourRequest = brandServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
-        to: getAction(routers.product.brand, { alias: item.Alias }),
+        to: routers.product.brand.getAction( { alias: item.Alias }),
       }));
       setData(newdata);
       setLoading(false);

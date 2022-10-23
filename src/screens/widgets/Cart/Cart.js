@@ -1,19 +1,20 @@
 import { memo, useCallback, useEffect, useMemo } from 'react';
 import { Box } from '@mui/material';
-import CartLayout from './layout';
 import { useHandleTitle } from '~/hooks/Title';
 import { useGetCart } from '~/hooks/Cart';
+import { ViewContent } from '~/components';
+import { routers } from '~/config/Router';
+import CartLayout from './layout';
 import CartHeader from './Header';
 import CartFooter from './Footer';
 import CartEmpty from './Empty';
 import CartContent from './Content';
-import { ViewContent } from '~/components';
 function CartComponent({ isToggle, toggleComponent }) {
   const { state, dispath, initCase } = useGetCart();
   const handleTitle = useHandleTitle();
   useEffect(() => {
     if (state.isOpen) {
-      return handleTitle('Giỏ hàng');
+      return handleTitle(routers.profile.cart.title);
     }
   }, [state.isOpen]);
   const open=useCallback(()=>{
