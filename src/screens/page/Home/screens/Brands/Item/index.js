@@ -10,7 +10,7 @@ import {
 } from '@mui/material/';
 import { NavLink } from 'react-router-dom';
 import { Frame, Image } from '~/components';
-import { routers, getAction } from '~/config/Router';
+import { routers } from '~/config/Router';
 import styles from './Item.module.css';
 function Item({ data, loading }) {
   return (

@@ -2,7 +2,7 @@ import { memo } from 'react';
 import clsx from 'clsx';
 import { Skeleton, Typography } from '@mui/material/';
 import { Link } from 'react-router-dom';
-import { routers, getAction } from '~/config/Router';
+import { routers } from '~/config/Router';
 function ItemName({ loading, alias, name}) {
   return (
     <Typography

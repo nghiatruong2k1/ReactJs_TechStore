@@ -1,7 +1,7 @@
 import { memo, Fragment, useState, useEffect } from 'react';
 import { ListNav } from '~/components';
 import CategoryServices from '~/services/category';
-import { routers, getAction } from '~/config/Router';
+import { routers } from '~/config/Router';
 function FooterCategories(props) {
   const categoryServices = CategoryServices('footer categories');
   const [isLoading, setLoading] = useState(false);

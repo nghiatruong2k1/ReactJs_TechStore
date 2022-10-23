@@ -2,7 +2,7 @@ import { memo, useEffect, useMemo, useState } from 'react';
 import { Box, Grid, Typography } from '@mui/material/';
 import Slider from 'react-slick';
 import CategoryServices from '~/services/category';
-import { routers, getAction } from '~/config/Router';
+import { routers } from '~/config/Router';
 
 import { ViewContent } from '~/components';
 import styles from './Popular.module.css';

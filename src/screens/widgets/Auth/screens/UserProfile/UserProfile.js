@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Avatar, Box } from '@mui/material';
 import { Dropdown } from '~/components';
 import { useDisclosure } from '@mantine/hooks';
-import { routers, getAction, routersAdmin } from '~/config/Router';
+import { routers, routersAdmin } from '~/config/Router';
 import { AuthServices } from '~/services';
 
 function UserProfileComponent({

@@ -1,6 +1,6 @@
 import { memo, Fragment, useMemo } from 'react';
 import { ListNav } from '~/components';
-// import { routers, getAction } from '~/config/Router';
+// import { routers } from '~/config/Router';
 function FooterHelps(props) {
   const { datas, isLoading } = useMemo(function () {
     return {

@@ -1,7 +1,7 @@
 import { memo, Fragment, useState, useEffect } from 'react';
 import { ListNav } from '~/components';
 import BrandServices from '~/services/brand';
-import { routers, getAction } from '~/config/Router';
+import { routers } from '~/config/Router';
 function FooterBrands(props) {
   const brandServices = BrandServices('footer brands');
   const [isLoading, setLoading] = useState(false);

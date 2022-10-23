@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { memo, useCallback, useReducer } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { routers, getAction } from '~/config/Router';
+import { routers } from '~/config/Router';
 import { initState, reducerState, initCase } from './init';
 import SearchLayout from './layout';
 function SearchComponent({ controllers,...props }) {

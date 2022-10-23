@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Skeleton, Typography } from '@mui/material/';
 import { Link } from 'react-router-dom';
-import { routers, getAction } from '~/config/Router';
+import { routers } from '~/config/Router';
 function NameName({ loading, alias, name}) {
   return (
     <Typography

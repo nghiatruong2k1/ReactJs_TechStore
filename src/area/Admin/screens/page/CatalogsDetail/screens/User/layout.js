@@ -32,11 +32,7 @@ function CatalogUserLayoutComponent({
         <Head
           xs={12}
           title={title}
-          back={getAction(
-            routersAdmin.user.index,
-            {},
-            routersAdmin.area,
-          )}
+          back={routersAdmin.user.index.getAction()}
         />
         <InfoComponent xs={7} />
         <OptionComponent xs={5} />
