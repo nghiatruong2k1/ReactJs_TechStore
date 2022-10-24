@@ -1,4 +1,11 @@
-import { memo, useCallback, useEffect, useMemo, useReducer } from 'react';
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useState,
+} from 'react';
 import { getDefaultValues, getRulers } from '~/models';
 import { userModel } from '~/models/user';
 import { userEntity } from '~/entities/user';
@@ -9,8 +16,9 @@ import { initCase, initState, reducerState } from '../../init';
 import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import {  routersAdmin } from '~/config/Router';
-export const CatalogAddUserPage = memo(() => {
+import { routersAdmin } from '~/config/Router';
+
+function init() {
   const userAdminService = UserAdminServices(CatalogAddUserPage);
   const [state, dispath] = useReducer(reducerState, {
     ...initState,
@@ -20,35 +28,77 @@ export const CatalogAddUserPage = memo(() => {
   const rulers = useMemo(() => {
     return getRulers(userEntity);
   }, []);
+  const [types, setTypes] = useState([]);
+  useEffect(() => {
+    const ourLoading = handleLoading();
+    return userAdminService.getTypes(
+      { IsTrash: false, isPublic: true },
+      (data) => {
+        if (data && Array.isArray(data)) {
+          setTypes(
+            data.map((i) => {
+              return {
+                value: i.Id,
+                text: i.Name,
+              };
+            }),
+          );
+        }
+      },
+      ourLoading,
+    );
+  }, []);
+  return {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    rulers,
+    types,
+    userAdminService,
+  };
+}
+export const CatalogAddUserPage = memo(() => {
+  const {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    types,
+    rulers,
+    userAdminService,
+  } = init();
   const handleSave = useCallback((data, onEnd) => {
     return userAdminService.postData(data, null, onEnd);
   }, []);
-  const handleFetch = useCallback(()=>{
+  const handleFetch = useCallback(() => {
     dispath([initCase.SET_VALUES, {}]);
-  },[])
+  }, []);
   return (
     <Layout
       state={state}
       dispath={dispath}
-      title={'Thêm tài khoản'}
+      title={routersAdmin.user.add.title}
       loading={loading}
-      handle={{ handleLoading, handleSave,handleFetch }}
+      datas={{ types }}
+      handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}
     />
   );
 });
 export const CatalogUpdateUserPage = memo(() => {
-  const userAdminService = UserAdminServices(CatalogAddUserPage);
+  const {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    types,
+    rulers,
+    userAdminService,
+  } = init();
   const { enqueueSnackbar } = useSnackbar();
   const navigator = useNavigate();
-  const [state, dispath] = useReducer(reducerState, {
-    ...initState,
-    values: getDefaultValues(userModel),
-  });
-  const [loading, handleLoading] = useInitLoading();
-  const rulers = useMemo(() => {
-    return getRulers(userEntity);
-  }, []);
+
   const { id } = useParams();
   const handleFetch = useCallback(() => {
     const ourLoading = handleLoading();
@@ -62,9 +112,7 @@ export const CatalogUpdateUserPage = memo(() => {
             message: 'Tài khoản không tồn tại',
             type: 'warning',
           });
-          navigator(
-            routersAdmin.user.index.getAction(),
-          );
+          navigator(routersAdmin.user.index.getAction());
         }
       },
       () => {
@@ -82,9 +130,10 @@ export const CatalogUpdateUserPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={'Cập nhật tài khoản'}
+      title={routersAdmin.user.update.title}
       loading={loading}
-      handle={{ handleLoading, handleSave,handleFetch }}
+      datas={{ types }}
+      handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}
     />
   );

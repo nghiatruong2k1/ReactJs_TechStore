@@ -6,9 +6,11 @@ import {
   useReducer,
   useState,
 } from 'react';
+
+import { Grid } from '@mui/material';
 import ImageAdminServices from '~/area/Admin/services/imageAdmin';
 import { imageModel } from '~/models/image';
-import { Grid } from '@mui/material';
+import { routersAdmin } from '~/config/Router';
 import { useInitLoading } from '~/hooks/Loading';
 import CatalogLayout from '../../layout';
 import PublicButton from '../../components/PublicButton';
@@ -26,7 +28,6 @@ function CatalogImageComponent(props) {
     dispath([
       initCase.CALLBACK,
       (prev) => {
-        console.log(prev);
         ourRequest = services.getAll(
           {
             offset: (prev.page - 1) * prev.limit,
@@ -179,7 +180,7 @@ function CatalogImageComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={'Quản lí hình ảnh' + (state.inTrash ? ' (thùng rác) ' : '')}
+        title={routersAdmin.image.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

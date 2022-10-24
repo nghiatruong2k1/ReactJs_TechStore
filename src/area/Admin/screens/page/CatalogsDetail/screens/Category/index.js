@@ -9,8 +9,9 @@ import { initCase, initState, reducerState } from '../../init';
 import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import {  routersAdmin } from '~/config/Router';
-export const CatalogAddCategoryPage = memo(() => {
+import { routersAdmin } from '~/config/Router';
+
+function init() {
   const categoryAdminService = CategoryAdminServices('CatalogAddCategoryPage');
   const [state, dispath] = useReducer(reducerState, {
     ...initState,
@@ -20,35 +21,52 @@ export const CatalogAddCategoryPage = memo(() => {
   const rulers = useMemo(() => {
     return getRulers(categoryEntity);
   }, []);
+  return {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    rulers,
+    categoryAdminService,
+  };
+}
+export const CatalogAddCategoryPage = memo(() => {
+  const {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    rulers,
+    categoryAdminService,
+  } = init();
   const handleSave = useCallback((data, onEnd) => {
     return categoryAdminService.postData(data, null, onEnd);
   }, []);
-  const handleFetch = useCallback(()=>{
+  const handleFetch = useCallback(() => {
     dispath([initCase.SET_VALUES, {}]);
-  },[])
+  }, []);
   return (
     <Layout
       state={state}
       dispath={dispath}
-      title={'Thêm danh mục'}
+      title={routersAdmin.category.add.title}
       loading={loading}
-      handle={{ handleLoading, handleSave,handleFetch }}
+      handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}
     />
   );
 });
 export const CatalogUpdateCategoryPage = memo(() => {
-  const categoryAdminService = CategoryAdminServices('CatalogUpdateCategoryPage');
+  const {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    rulers,
+    categoryAdminService,
+  } = init();
   const { enqueueSnackbar } = useSnackbar();
   const navigator = useNavigate();
-  const [state, dispath] = useReducer(reducerState, {
-    ...initState,
-    values: getDefaultValues(categoryModel),
-  });
-  const [loading, handleLoading] = useInitLoading();
-  const rulers = useMemo(() => {
-    return getRulers(categoryEntity);
-  }, []);
   const { id } = useParams();
   const handleFetch = useCallback(() => {
     const ourLoading = handleLoading();
@@ -62,9 +80,7 @@ export const CatalogUpdateCategoryPage = memo(() => {
             message: 'Danh mục không tồn tại',
             type: 'warning',
           });
-          navigator(
-            routersAdmin.category.index.getAction(),
-          );
+          navigator(routersAdmin.category.index.getAction());
         }
       },
       () => {
@@ -82,9 +98,9 @@ export const CatalogUpdateCategoryPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={'Cập nhật danh mục'}
+      title={routersAdmin.category.update.title}
       loading={loading}
-      handle={{ handleLoading, handleSave,handleFetch }}
+      handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}
     />
   );

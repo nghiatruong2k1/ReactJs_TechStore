@@ -11,13 +11,14 @@ import { Grid } from '@mui/material';
 import formatNumber from 'number-format.js';
 import OrderServices from '~/services/order';
 import { orderDetailModel } from '~/models/order';
-
+import { routersAdmin } from '~/config/Router';
 import { useInitLoading } from '~/hooks/Loading';
 
 import CatalogLayout from '../../layout';
 import { reducerState, initState, initCase } from '../../init';
 import PublicButton from '../../components/PublicButton';
 import DeleteButton from '../../components/DeleteButton';
+
 function CatalogOrderDetailComponent(props) {
   const services = OrderServices('CatalogOrderDetailComponent');
   const { id } = useParams();
@@ -141,7 +142,7 @@ function CatalogOrderDetailComponent(props) {
     <Grid container>
       <CatalogLayout
         title={
-          'Quản lí chi tiết đơn hàng' + (state.inTrash ? ' (thùng rác) ' : '')
+          routersAdmin.order.detail.title + (state.inTrash ? ' (thùng rác) ' : '')
         }
         state={state}
         dispath={dispath}

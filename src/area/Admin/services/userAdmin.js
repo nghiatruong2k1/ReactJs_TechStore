@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Delete, Post ,Put} from '~/utils/HttpRequest';
+import { Delete, Post, Put } from '~/utils/HttpRequest';
 import useServices from '~/services/DefaultServices';
 const API = 'api/admin/user';
 export default function UserAdminServices(location) {
@@ -40,15 +40,27 @@ export default function UserAdminServices(location) {
     });
   }, []);
   const getsType = useCallback((onThen, onEnd) => {
-    return services({
-      api: `${API}status`,
-      onThen,
-      onCatch: () => {
-        onThen && onThen([]);
-      },
-      onEnd,
-      location,
-    });
+    // return services({
+    //   api: `${API}status`,
+    //   onThen,
+    //   onCatch: () => {
+    //     onThen && onThen([]);
+    //   },
+    //   onEnd,
+    //   location,
+    // });
+    onThen &&
+      onThen([
+        {
+          Id: 1,
+          Name: 'Khách hàng',
+        },
+        {
+          Id: 4,
+          Name: 'Người quản trị',
+        },
+      ]);
+    onEnd && onEnd();
   }, []);
   const putData = useCallback((params, onThen, onEnd) => {
     return services({
@@ -99,5 +111,13 @@ export default function UserAdminServices(location) {
       location,
     });
   }, []);
-  return { getStatistic, getCount, getAll, putData, postData ,deleteData,getById};
+  return {
+    getStatistic,
+    getCount,
+    getAll,
+    putData,
+    postData,
+    deleteData,
+    getById,
+  };
 }

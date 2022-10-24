@@ -17,7 +17,8 @@ import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { routersAdmin } from '~/config/Router';
-export const CatalogAddOrderPage = memo(() => {
+
+function init() {
   const orderAdminService = OrderAdminServices('CatalogAddOrderPage');
   const [state, dispath] = useReducer(reducerState, {
     ...initState,
@@ -26,12 +27,6 @@ export const CatalogAddOrderPage = memo(() => {
   const [loading, handleLoading] = useInitLoading();
   const rulers = useMemo(() => {
     return getRulers(orderEntity);
-  }, []);
-  const handleSave = useCallback((data, onEnd) => {
-    return orderAdminService.postData(data, null, onEnd);
-  }, []);
-  const handleFetch = useCallback(() => {
-    dispath([initCase.SET_VALUES, {}]);
   }, []);
   const [status, setStatus] = useState([]);
   useEffect(() => {
@@ -49,11 +44,39 @@ export const CatalogAddOrderPage = memo(() => {
       }
     }, ourLoading);
   }, []);
+  return {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    rulers,
+    status,
+    orderAdminService,
+  };
+}
+export const CatalogAddOrderPage = memo(() => {
+  const {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    rulers,
+    status,
+    orderAdminService,
+  } = init();
+
+  const handleSave = useCallback((data, onEnd) => {
+    return orderAdminService.postData(data, null, onEnd);
+  }, []);
+  const handleFetch = useCallback(() => {
+    dispath([initCase.SET_VALUES, {}]);
+  }, []);
+
   return (
     <Layout
       state={state}
       dispath={dispath}
-      title={'Thêm đơn hàng'}
+      title={routersAdmin.order.add.title}
       loading={loading}
       datas={{ status }}
       handle={{ handleLoading, handleSave, handleFetch }}
@@ -62,17 +85,17 @@ export const CatalogAddOrderPage = memo(() => {
   );
 });
 export const CatalogUpdateOrderPage = memo(() => {
-  const orderAdminService = OrderAdminServices('CatalogUpdateOrderPage');
+  const {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    rulers,
+    status,
+    orderAdminService,
+  } = init();
   const { enqueueSnackbar } = useSnackbar();
   const navigator = useNavigate();
-  const [state, dispath] = useReducer(reducerState, {
-    ...initState,
-    values: getDefaultValues(orderModel),
-  });
-  const [loading, handleLoading] = useInitLoading();
-  const rulers = useMemo(() => {
-    return getRulers(orderEntity);
-  }, []);
   const { id } = useParams();
   const handleFetch = useCallback(() => {
     const ourLoading = handleLoading();
@@ -98,28 +121,11 @@ export const CatalogUpdateOrderPage = memo(() => {
   useEffect(() => {
     return handleFetch();
   }, [id]);
-
-  const [status, setStatus] = useState([]);
-  useEffect(() => {
-    const ourLoading = handleLoading();
-    return orderAdminService.getsStatus((data) => {
-      if (data && Array.isArray(data)) {
-        setStatus(
-          data.map((i) => {
-            return {
-              value: i.Id,
-              text: i.Name,
-            };
-          }),
-        );
-      }
-    }, ourLoading);
-  }, []);
   return (
     <Layout
       state={state}
       dispath={dispath}
-      title={'Cập nhật đơn hàng'}
+      title={routersAdmin.order.update.title}
       loading={loading}
       datas={{ status }}
       handle={{ handleLoading, handleSave, handleFetch }}

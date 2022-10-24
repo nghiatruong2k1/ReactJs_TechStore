@@ -15,7 +15,6 @@ function ColumnButton() {
   const { state, dispath } = useGetDatagridContext();
   const [isOpen, setOpen] = useState(false);
   const thisRef = useRef();
-  console.log(state);
   return (
     <>
       <Tooltip title="Hiển thị" placement="top" arrow>

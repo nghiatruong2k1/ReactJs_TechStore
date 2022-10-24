@@ -28,7 +28,6 @@ function CatalogCategoryComponent(props) {
     dispath([
       initCase.CALLBACK,
       (prev) => {
-        console.log(prev);
         ourRequest = services.getAll(
           {
             offset: (prev.page - 1) * prev.limit,
@@ -187,7 +186,7 @@ function CatalogCategoryComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={'Quản lí danh mục' + (state.inTrash ? ' (thùng rác) ' : '')}
+        title={routersAdmin.category.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

@@ -29,7 +29,6 @@ function CatalogUserComponent(props) {
     dispath([
       initCase.CALLBACK,
       (prev) => {
-        console.log(prev);
         ourRequest = services.getAll(
           {
             offset: (prev.page - 1) * prev.limit,
@@ -224,7 +223,7 @@ function CatalogUserComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={'Quản lí người dùng' + (state.inTrash ? ' (thùng rác) ' : '')}
+        title={routersAdmin.user.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

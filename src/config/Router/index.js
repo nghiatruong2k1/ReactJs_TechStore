@@ -106,27 +106,27 @@ export const routersAdmin = new Router('trang-quan-tri', {
   product: new Controller('', {
     index: new Action('Quản lý sản phẩm', 'quan-ly-san-pham'),
     add: new Action('Thêm sản phẩm', 'them-san-pham'),
-    update: new Action('Cập nhật sản phẩm', 'cap-nhat-san-pham/id'),
+    update: new Action('Cập nhật sản phẩm', 'cap-nhat-san-pham/:id'),
   }),
   brand: new Controller('', {
     index: new Action('Quản lý thương hiệu', 'quan-ly-thuong-hieu'),
     add: new Action('Thêm thương hiệu', 'them-thuong-hieu'),
-    update: new Action('Cập nhật thương hiệu', 'cap-nhat-thuong-hieu/id'),
+    update: new Action('Cập nhật thương hiệu', 'cap-nhat-thuong-hieu/:id'),
   }),
   category: new Controller('', {
     index: new Action('Quản lý danh mục', 'quan-ly-danh-muc'),
     add: new Action('Thêm danh mục', 'them-danh-muc'),
-    update: new Action('Cập nhật danh mục', 'cap-nhat-danh-muc/id'),
+    update: new Action('Cập nhật danh mục', 'cap-nhat-danh-muc/:id'),
   }),
   user: new Controller('', {
-    index: new Action('Quản lý tài khoản', 'quan-ly-danh-muc'),
-    add: new Action('Thêm tài khoản', 'them-danh-muc'),
-    update: new Action('Cập nhật tài khoản', 'cap-nhat-danh-muc/id'),
+    index: new Action('Quản lý tài khoản', 'quan-ly-tai-khoan'),
+    add: new Action('Thêm tài khoản', 'them-tai-khoan'),
+    update: new Action('Cập nhật tài khoản', 'cap-nhat-tai-khoan/:id'),
   }),
   image: new Controller('', {
     index: new Action('Quản lý hình ảnh', 'quan-ly-hinh-anh'),
     add: new Action('Thêm hình ảnh', 'them-hinh-anh'),
-    update: new Action('Cập nhật hình ảnh', 'cap-nhat-hinh-anh/id'),
+    update: new Action('Cập nhật hình ảnh', 'cap-nhat-hinh-anh/:id'),
   }),
   order: new Controller('', {
     index: new Action('Quản lý đơn hàng', 'danh-sach-don-hang'),

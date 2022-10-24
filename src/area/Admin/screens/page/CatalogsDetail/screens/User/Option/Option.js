@@ -1,10 +1,13 @@
 import { memo } from 'react';
 import { Switch, FormControlLabel, Grid, Stack } from '@mui/material';
 import { AccorCard } from '~/components';
-import { brandModel } from '~/models/brand';
+import { userModel } from '~/models/brand';
 import { useGetCatalogDetailContext } from '../../../provider';
+import InputRadios from '~/components/InputRadios';
+import { userModel } from '../../../../../../../../models/user';
 function OptionComponent({ ...props }) {
   const {
+    datas:{types},
     state: { values, valids },
     handle: { handleChangeValue },
     loading
@@ -19,6 +22,17 @@ function OptionComponent({ ...props }) {
         {...props}
       >
         <Stack>
+          <InputRadios
+            label={`${userModel.TypeName.displayName}:`}
+            value={values.TypeId || 0}
+            onChange={(e, v) => {
+              handleChangeValue('TypeId', Number(v));
+            }}
+            data={types}
+            disabled={loading}
+            loading={loading}
+            variant='outlined'
+          />
           <FormControlLabel
             onChange={(e, c) => {
               handleChangeValue('IsPublic', c);
@@ -30,7 +44,7 @@ function OptionComponent({ ...props }) {
                 checked={values.IsPublic ?? false}
               />
             }
-            label={brandModel.IsPublic.displayName}
+            label={userModel.IsPublic.displayName}
           />
           <FormControlLabel
             onChange={(e, c) => {
@@ -43,7 +57,7 @@ function OptionComponent({ ...props }) {
                 checked={values.IsTrash ?? false}
               />
             }
-            label={brandModel.IsTrash.displayName}
+            label={userModel.IsTrash.displayName}
           />
         </Stack>
       </AccorCard>

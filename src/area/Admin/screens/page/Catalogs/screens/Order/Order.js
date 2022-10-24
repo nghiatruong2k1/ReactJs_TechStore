@@ -32,7 +32,6 @@ function CatalogOrderComponent(props) {
     dispath([
       initCase.CALLBACK,
       (prev) => {
-        console.log(prev);
         ourRequest = services.getAll(
           {
             offset: (prev.page - 1) * prev.limit,
@@ -247,7 +246,7 @@ function CatalogOrderComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={'Quản lí đơn hàng' + (state.inTrash ? ' (thùng rác) ' : '')}
+        title={routersAdmin.order.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

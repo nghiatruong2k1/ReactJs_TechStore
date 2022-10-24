@@ -13,6 +13,7 @@ function CatalogUserLayoutComponent({
   rulers,
   title,
   loading,
+  datas,
   handle,
 }) {
   const handleTitle = useHandleTitle();
@@ -28,6 +29,7 @@ function CatalogUserLayoutComponent({
         rulers={rulers}
         loading={loading}
         handle={handle}
+        datas={datas}
       >
         <Head
           xs={12}

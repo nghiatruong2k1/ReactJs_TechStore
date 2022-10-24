@@ -19,7 +19,8 @@ import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { routersAdmin } from '~/config/Router';
-export const CatalogAddProductPage = memo(() => {
+
+function init() {
   const productAdminService = ProductAdminServices('CatalogAddProductPage');
   const categoryAdminServices = CategoryAdminServices('CatalogAddProductPage');
   const brandAdminServices = BrandAdminServices('CatalogAddProductPage');
@@ -30,12 +31,6 @@ export const CatalogAddProductPage = memo(() => {
   const [loading, handleLoading] = useInitLoading();
   const rulers = useMemo(() => {
     return getRulers(productEntity);
-  }, []);
-  const handleSave = useCallback((data, onEnd) => {
-    return productAdminService.postData(data, null, onEnd);
-  }, []);
-  const handleFetch = useCallback(() => {
-    dispath([initCase.SET_VALUES, {}]);
   }, []);
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
@@ -79,32 +74,57 @@ export const CatalogAddProductPage = memo(() => {
       ourRequest2 && ourRequest2();
     };
   }, []);
+  return {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    rulers,
+    datas: { categories, brands },
+    productAdminService,
+  };
+}
+export const CatalogAddProductPage = memo(() => {
+  const {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    rulers,
+    datas,
+    productAdminService,
+  } = init();
+  const handleSave = useCallback((data, onEnd) => {
+    return productAdminService.postData(data, null, onEnd);
+  }, []);
+  const handleFetch = useCallback(() => {
+    dispath([initCase.SET_VALUES, {}]);
+  }, []);
+
   return (
     <Layout
       state={state}
       dispath={dispath}
-      title={'Thêm sản phẩm'}
+      title={routersAdmin.product.add.title}
       loading={loading}
-      datas={{ categories, brands }}
+      datas={datas}
       handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}
     />
   );
 });
 export const CatalogUpdateProductPage = memo(() => {
-  const productAdminService = ProductAdminServices('CatalogAddProductPage');
-  const categoryAdminServices = CategoryAdminServices('CatalogAddProductPage');
-  const brandAdminServices = BrandAdminServices('CatalogAddProductPage');
+  const {
+    state,
+    dispath,
+    loading,
+    handleLoading,
+    rulers,
+    datas,
+    productAdminService,
+  } = init();
   const { enqueueSnackbar } = useSnackbar();
   const navigator = useNavigate();
-  const [state, dispath] = useReducer(reducerState, {
-    ...initState,
-    values: getDefaultValues(productModel),
-  });
-  const [loading, handleLoading] = useInitLoading();
-  const rulers = useMemo(() => {
-    return getRulers(productEntity);
-  }, []);
   const { id } = useParams();
   const handleFetch = useCallback(() => {
     const ourLoading = handleLoading();
@@ -132,55 +152,13 @@ export const CatalogUpdateProductPage = memo(() => {
   useEffect(() => {
     return handleFetch();
   }, [id]);
-  const [categories, setCategories] = useState([]);
-  const [brands, setBrands] = useState([]);
-  useEffect(() => {
-    const ourLoading1 = handleLoading();
-    const ourRequest1 = categoryAdminServices.getAll(
-      { IsTrash: false, isPublic: true },
-      (data) => {
-        if (data && Array.isArray(data)) {
-          setCategories(
-            data.map((i) => {
-              return {
-                value: i.Id,
-                text: i.Name,
-              };
-            }),
-          );
-        }
-      },
-      ourLoading1,
-    );
-    const ourLoading2 = handleLoading();
-    const ourRequest2 = brandAdminServices.getAll(
-      { IsTrash: false, isPublic: true },
-      (data) => {
-        if (data && Array.isArray(data)) {
-          setBrands(
-            data.map((i) => {
-              return {
-                value: i.Id,
-                text: i.Name,
-              };
-            }),
-          );
-        }
-      },
-      ourLoading1,
-    );
-    return () => {
-      ourRequest1 && ourRequest1();
-      ourRequest2 && ourRequest2();
-    };
-  }, []);
   return (
     <Layout
       state={state}
       dispath={dispath}
-      title={'Cập nhật sản phẩm'}
+      title={routersAdmin.product.update.title}
       loading={loading}
-      datas={{ categories, brands }}
+      datas={datas}
       handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}
     />

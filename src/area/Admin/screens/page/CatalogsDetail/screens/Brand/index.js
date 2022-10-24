@@ -10,7 +10,8 @@ import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { routersAdmin } from '~/config/Router';
-export const CatalogAddBrandPage = memo(() => {
+
+function init(){
   const brandAdminService = BrandAdminServices('CatalogAddBrandPage');
   const [state, dispath] = useReducer(reducerState, {
     ...initState,
@@ -20,6 +21,10 @@ export const CatalogAddBrandPage = memo(() => {
   const rulers = useMemo(() => {
     return getRulers(brandEntity);
   }, []);
+  return {state, dispath,loading, handleLoading,rulers,brandAdminService}
+}
+export const CatalogAddBrandPage = memo(() => {
+  const {state, dispath,loading, handleLoading,rulers} = init();
   const handleSave = useCallback((data, onEnd) => {
     return brandAdminService.postData(data, null, onEnd);
   }, []);
@@ -30,7 +35,7 @@ export const CatalogAddBrandPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={'Thêm thương hiệu'}
+      title={routersAdmin.brand.add.title}
       loading={loading}
       handle={{ handleLoading, handleSave,handleFetch }}
       rulers={rulers}
@@ -38,17 +43,9 @@ export const CatalogAddBrandPage = memo(() => {
   );
 });
 export const CatalogUpdateBrandPage = memo(() => {
-  const brandAdminService = BrandAdminServices('CatalogUpdateBrandPage');
+  const {state, dispath,loading, handleLoading,rulers,brandAdminService} = init();
   const { enqueueSnackbar } = useSnackbar();
   const navigator = useNavigate();
-  const [state, dispath] = useReducer(reducerState, {
-    ...initState,
-    values: getDefaultValues(brandModel),
-  });
-  const [loading, handleLoading] = useInitLoading();
-  const rulers = useMemo(() => {
-    return getRulers(brandEntity);
-  }, []);
   const { id } = useParams();
   const handleFetch = useCallback(() => {
     const ourLoading = handleLoading();
@@ -82,7 +79,7 @@ export const CatalogUpdateBrandPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={'Cập nhật thương hiệu'}
+      title={routersAdmin.brand.update.title}
       loading={loading}
       handle={{ handleLoading, handleSave,handleFetch }}
       rulers={rulers}

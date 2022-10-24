@@ -228,7 +228,7 @@ function CatalogProductComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={'Quản lí sản phẩm' + (state.inTrash ? ' (thùng rác) ' : '')}
+        title={routersAdmin.product.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

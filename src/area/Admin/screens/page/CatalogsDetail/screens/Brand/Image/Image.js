@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Grid, Stack } from '@mui/material';
 import { AccorCard } from '~/components';
-import InputImage from '~/components/InputImage';
+import InputFile from '~/components/InputFile';
 import { useGetCatalogDetailContext } from '../../../provider';
 function ImageComponent({ ...props }) {
   const {
@@ -19,7 +19,7 @@ function ImageComponent({ ...props }) {
         {...props}
       >
         <Stack>
-          <InputImage disabled={loading}/>
+          <InputFile disabled={loading}/>
         </Stack>
       </AccorCard>
     </>
