@@ -5,9 +5,8 @@ import { routers } from '~/config/Router';
 function FooterCategories(props) {
   const categoryServices = CategoryServices('footer categories');
   const [isLoading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(Array(5).fill(null));
   useEffect(() => {
-    setData(Array(5).fill(null));
     setLoading(true);
     const ourRequest = categoryServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
@@ -17,7 +16,10 @@ function FooterCategories(props) {
       setData(newdata);
       setLoading(false);
     });
-    return ourRequest;
+    return () => {
+      ourRequest();
+      setData(Array(5).fill(null));
+    };
   }, []);
   return (
     <Fragment>

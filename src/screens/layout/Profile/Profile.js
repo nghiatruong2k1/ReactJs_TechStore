@@ -5,18 +5,18 @@ import { Container, Grid, Stack } from '@mui/material';
 
 import { ProfileNavWidget } from '~/screens/widgets';
 import { Sidebar } from '~/components';
+import { useMediaQuery } from '@mantine/hooks';
 function ProfileLayoutComponent({ children }) {
+  const isSmallSize = useMediaQuery('(max-width: 650px)');
   return (
     <Fragment>
       <Header />
       <Container maxWidth="lg">
         <Grid container spacing={2} py={2}>
-          <Sidebar component={Grid} item xs={3}>
-            <Stack spacing={1}>
+          <Sidebar component={Grid} fixed={isSmallSize} item xs={isSmallSize ? 1 : 3}>
               <ProfileNavWidget divider={true} />
-            </Stack>
           </Sidebar>
-          <Grid item xs={9} component={'main'}>
+          <Grid item xs={isSmallSize ? 11 : 9} component={'main'}>
             {children}
           </Grid>
         </Grid>

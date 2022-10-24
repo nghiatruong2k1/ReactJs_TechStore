@@ -18,7 +18,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { routersAdmin } from '~/config/Router';
 
-function init() {
+function useInit() {
   const orderAdminService = OrderAdminServices('CatalogAddOrderPage');
   const [state, dispath] = useReducer(reducerState, {
     ...initState,
@@ -63,7 +63,7 @@ export const CatalogAddOrderPage = memo(() => {
     rulers,
     status,
     orderAdminService,
-  } = init();
+  } = useInit();
 
   const handleSave = useCallback((data, onEnd) => {
     return orderAdminService.postData(data, null, onEnd);
@@ -93,7 +93,7 @@ export const CatalogUpdateOrderPage = memo(() => {
     rulers,
     status,
     orderAdminService,
-  } = init();
+  } = useInit();
   const { enqueueSnackbar } = useSnackbar();
   const navigator = useNavigate();
   const { id } = useParams();

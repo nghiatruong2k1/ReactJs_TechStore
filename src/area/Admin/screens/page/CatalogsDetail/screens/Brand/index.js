@@ -11,7 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { routersAdmin } from '~/config/Router';
 
-function init(){
+function useInit(){
   const brandAdminService = BrandAdminServices('CatalogAddBrandPage');
   const [state, dispath] = useReducer(reducerState, {
     ...initState,
@@ -24,7 +24,7 @@ function init(){
   return {state, dispath,loading, handleLoading,rulers,brandAdminService}
 }
 export const CatalogAddBrandPage = memo(() => {
-  const {state, dispath,loading, handleLoading,rulers} = init();
+  const {state, dispath,loading, handleLoading,rulers,brandAdminService} = useInit();
   const handleSave = useCallback((data, onEnd) => {
     return brandAdminService.postData(data, null, onEnd);
   }, []);
@@ -43,7 +43,7 @@ export const CatalogAddBrandPage = memo(() => {
   );
 });
 export const CatalogUpdateBrandPage = memo(() => {
-  const {state, dispath,loading, handleLoading,rulers,brandAdminService} = init();
+  const {state, dispath,loading, handleLoading,rulers,brandAdminService} = useInit();
   const { enqueueSnackbar } = useSnackbar();
   const navigator = useNavigate();
   const { id } = useParams();

@@ -16,7 +16,7 @@ function ViewItem({ data, controller, loading }) {
     <Grid item xs={6} sm={4} md={3} >
       <Card sx={{height:'100%'}}>
         <CardActions>
-          <Frame sx={{px:8}} variant='circle' loading={loading}>
+          <Frame height="5em" variant='circle' loading={loading}>
             <Image fit="contain" src={data && data.ImageUrl} />
           </Frame>
         </CardActions>

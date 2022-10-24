@@ -1,6 +1,7 @@
 import { memo, useState, useCallback } from 'react';
 import { LoadingButton } from '@mui/lab/';
 import { useGetCart } from '~/hooks/Cart';
+import { Box } from '@mui/material';
 
 function AddToCartButton({ loading, data, ...props }) {
   const [isLoading, setLoading] = useState(false);
@@ -29,7 +30,7 @@ function AddToCartButton({ loading, data, ...props }) {
           variant="contained"
           color="warning"
         >
-          Thêm vào giỏ hàng
+          <Box sx={{display:{xs:'none',lg:'inline'}}}>Thêm vào giỏ hàng</Box>
         </LoadingButton>
       </span>
     </>

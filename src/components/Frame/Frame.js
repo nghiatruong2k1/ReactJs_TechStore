@@ -24,7 +24,6 @@ function FrameComponent({
           styles[variant],
           containerProps.className
         )}
-        data-height={height}
         sx={{'--frame-height':height}}
       >
         <Box {...contentProps} className={clsx(styles.content,contentProps.className)}>{children}</Box>

@@ -22,14 +22,14 @@ function ViewItem({
   return (
     <Grid item xs={6} sm={4} xl={3}>
       <Card className={styles.card}>
-        <CardContent>
+        <CardContent xs={{p:1}}>
           <Frame variant="rectangle" loading={loading}>
             <ItemBookmask price={Price} salePrice={SalePrice} />
             <Image fit="contain" loading={loading} src={ImageUrl} />
           </Frame>
         </CardContent>
         <Divider />
-        <CardContent sx={{ textAlign: 'center', flex: 1 }}>
+        <CardContent sx={{ textAlign: 'center', flex: 1,p:1 }}>
           <ItemName loading={loading} name={Name} alias={Alias} />
           <ItemRating rating={Rating || 0} loading={loading} />
           <ItemSalePrice
@@ -40,7 +40,7 @@ function ViewItem({
           <ItemPrice loading={loading} price={Price} salePrice={SalePrice} />
         </CardContent>
         <Divider />
-        <CardContent sx={{ textAlign: 'center' }}>
+        <CardContent sx={{ textAlign: 'center',p:1 }}>
           <ItemAddToCart
             loading={loading}
             data={{ Id, Alias, Name, ImageUrl, Price, SalePrice }}

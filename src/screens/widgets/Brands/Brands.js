@@ -5,9 +5,8 @@ import { routers } from '~/config/Router';
 function FooterBrands(props) {
   const brandServices = BrandServices('footer brands');
   const [isLoading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(Array(5).fill(null));
   useEffect(() => {
-    setData(Array(5).fill(null));
     setLoading(true);
     const ourRequest = brandServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
@@ -17,7 +16,10 @@ function FooterBrands(props) {
       setData(newdata);
       setLoading(false);
     });
-    return ourRequest;
+    return () => {
+      ourRequest();
+      setData(Array(5).fill(null));
+    };
   }, []);
   return (
     <Fragment>

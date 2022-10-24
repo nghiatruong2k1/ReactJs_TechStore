@@ -35,11 +35,12 @@ function Item({ data, loading }) {
             </Typography>
           }
         />
-        <CardContent sx={{ py: 1, px: 5 }}>
-          <Frame variant="circle" loading={loading}>
+        <CardContent sx={{ py: 1 }}>
+          <Frame height={'5em'} variant="circle" loading={loading}>
             <Image fit="contain" src={data && data.ImageUrl} />
           </Frame>
         </CardContent>
+        <div></div>
       </Card>
     </Box>
   );

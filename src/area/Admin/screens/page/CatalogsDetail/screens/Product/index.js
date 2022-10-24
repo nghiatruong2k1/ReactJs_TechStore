@@ -20,7 +20,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { routersAdmin } from '~/config/Router';
 
-function init() {
+function useInit() {
   const productAdminService = ProductAdminServices('CatalogAddProductPage');
   const categoryAdminServices = CategoryAdminServices('CatalogAddProductPage');
   const brandAdminServices = BrandAdminServices('CatalogAddProductPage');
@@ -93,7 +93,7 @@ export const CatalogAddProductPage = memo(() => {
     rulers,
     datas,
     productAdminService,
-  } = init();
+  } = useInit();
   const handleSave = useCallback((data, onEnd) => {
     return productAdminService.postData(data, null, onEnd);
   }, []);
@@ -122,7 +122,7 @@ export const CatalogUpdateProductPage = memo(() => {
     rulers,
     datas,
     productAdminService,
-  } = init();
+  } = useInit();
   const { enqueueSnackbar } = useSnackbar();
   const navigator = useNavigate();
   const { id } = useParams();

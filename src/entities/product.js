@@ -44,11 +44,11 @@ export let productEntity = {
     displayName: 'Mô tả ngắn',
     rulers: {
       isRequired: ['Vui lòng nhập mô tả ngắn!'],
-      maxLength: [200],
+      maxLength: [500],
     },
   },
   FullDes: {
-    displayName: 'Mô tả',
+    displayName: 'Mô tả đầy đủ',
   },
   Properties: {
     displayName: 'Thuộc tính',

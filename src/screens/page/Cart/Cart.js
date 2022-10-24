@@ -32,10 +32,10 @@ function CartComponent() {
   return (
     <Provider value={{ state, dispath }}>
       <Grid container spacing={2}>
-        <Stack item xs={8} component={Grid} spacing={2}>
+        <Stack item xs={12} lg={8} component={Grid} spacing={2}>
           <CartContent data={data} loading={isLoading} />
         </Stack>
-        <Stack item xs={4} component={Grid} spacing={2}>
+        <Stack item xs={12} lg={4} component={Grid} spacing={2}>
           <CartVoucher voucher={state.voucher} onChange={handleChange} />
           <CartTotal
             total={total}
