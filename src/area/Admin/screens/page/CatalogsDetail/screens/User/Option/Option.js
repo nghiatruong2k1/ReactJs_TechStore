@@ -4,7 +4,7 @@ import { AccorCard } from '~/components';
 import { userModel } from '~/models/brand';
 import { useGetCatalogDetailContext } from '../../../provider';
 import InputRadios from '~/components/InputRadios';
-import { userModel } from '../../../../../../../../models/user';
+import { userModel } from '~/models/user';
 function OptionComponent({ ...props }) {
   const {
     datas:{types},
