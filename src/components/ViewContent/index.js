@@ -1,8 +1,4 @@
-import {memo,useContext} from 'react';
-import clsx from 'clsx';
-import {Stack} from '@mui/material/';
-import {} from '@mui/icons-material/';
-import styles from './styles.module.css';
+import {memo} from 'react';
 
 
 
@@ -21,7 +17,7 @@ function ViewContent({loading,viewLoading,length,empty,children,...props}){
     }
   }
 
-  return children
+  return <>{children}</>
   
 }
 export default memo(ViewContent);

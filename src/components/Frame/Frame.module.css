@@ -2,9 +2,10 @@
 	display: flex;
 	width: 100%;
 	position: relative;
+	justify-content: center;
 }
 .container{
-	width: 100%;
+	width: var(--frame-height,100%);
 	position: relative;
 	border-radius: 0.5em;
 	overflow: hidden;
@@ -17,7 +18,7 @@
 }
 .circle{
 	padding-top: var(--frame-height,100%);
-	border-radius: 100%;
+	border-radius: 100000rem;
 }
 .content{
 	position: absolute;

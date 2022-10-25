@@ -30,16 +30,16 @@ function ListNavComponent({ title, datas, icon, loading, divider, ...props }) {
         }
       >
         {Array.isArray(datas) &&
-          datas.map(function (data, index) {
+          datas.map((data, index)=>{
             const isLoading = loading || !Boolean(data);
             return (
               <ListItem disablePadding key={index} divider={divider}>
                 <ListItemButton
+                  {...data}
                   disabled={isLoading}
                   component={
                     (!isLoading && data && data.to && NavLink) || 'span'
                   }
-                  to={(data && data.to) || '/404'}
                   className={styles.button}
                 >
                   {(isLoading && <Skeleton variant="text" />) || (

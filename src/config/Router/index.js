@@ -3,7 +3,7 @@ class Action extends String {
     super(_path);
     let regex = /\:[a-zA-Z]{1,}/g;
     this.title = _title;
-    this.__proto__.valueOf = function () {
+    this.valueOf = function () {
       return `${_path}`;
     };
     this.setParent = function (_parent) {
@@ -33,6 +33,7 @@ class Action extends String {
     };
     Object.defineProperty(this, 'title', { enumerable: false, writable: true });
     Object.defineProperty(this, 'setParent', { enumerable: false });
+    Object.defineProperty(this, 'valueOf', { enumerable: false });
     Object.defineProperty(this, 'parent', {
       enumerable: false,
       writable: true,
@@ -107,6 +108,7 @@ export const routersAdmin = new Router('trang-quan-tri', {
     index: new Action('Quản lý sản phẩm', 'quan-ly-san-pham'),
     add: new Action('Thêm sản phẩm', 'them-san-pham'),
     update: new Action('Cập nhật sản phẩm', 'cap-nhat-san-pham/:id'),
+    image: new Action('Hình ảnh sản phẩm', 'hinh-anh-san-pham/:id'),
   }),
   brand: new Controller('', {
     index: new Action('Quản lý thương hiệu', 'quan-ly-thuong-hieu'),

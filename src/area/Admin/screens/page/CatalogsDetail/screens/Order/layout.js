@@ -2,6 +2,7 @@ import { memo, useEffect } from 'react';
 import { useHandleTitle } from '~/hooks/Title';
 import { Grid } from '@mui/material';
 import InfoComponent from './Info';
+import DetailComponent from './Detail';
 import OptionComponent from './Option';
 import Provider from '../../provider';
 import Head from '../../components/Head';
@@ -35,6 +36,7 @@ function CatalogBrandLayoutComponent({
           title={title}
           back={routersAdmin.order.index.getAction()}
         />
+        <DetailComponent xs={12} />
         <InfoComponent xs={7} />
         <OptionComponent xs={5} />
       </Provider>

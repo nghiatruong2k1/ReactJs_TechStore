@@ -31,8 +31,7 @@ function useInit() {
   const [types, setTypes] = useState([]);
   useEffect(() => {
     const ourLoading = handleLoading();
-    return userAdminService.getTypes(
-      { IsTrash: false, isPublic: true },
+    return userAdminService.getsType(
       (data) => {
         if (data && Array.isArray(data)) {
           setTypes(

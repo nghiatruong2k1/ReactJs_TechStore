@@ -1,12 +1,12 @@
 import { memo } from 'react';
-import { FileDownloadRounded } from '@mui/icons-material/';
+import { FileUploadRounded } from '@mui/icons-material/';
 import { IconButton, Tooltip } from '@mui/material';
 function ImportButton() {
   return (
     <Tooltip title="Import" placement="top" arrow>
       <span>
         <IconButton color='inherit'>
-          <FileDownloadRounded />
+          <FileUploadRounded />
         </IconButton>
       </span>
     </Tooltip>

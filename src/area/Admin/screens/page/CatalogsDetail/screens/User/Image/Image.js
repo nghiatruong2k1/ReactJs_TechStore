@@ -3,11 +3,12 @@ import { Grid, Stack } from '@mui/material';
 import { AccorCard } from '~/components';
 import InputFile from '~/components/InputFile';
 import { useGetCatalogDetailContext } from '../../../provider';
+import { userModel } from '~/models/user';
 function ImageComponent({ ...props }) {
   const {
     state: { values, valids },
     handle: { handleChangeValue },
-    loading
+    loading,
   } = useGetCatalogDetailContext();
   return (
     <>
@@ -19,7 +20,16 @@ function ImageComponent({ ...props }) {
         {...props}
       >
         <Stack>
-          <InputFile disabled={loading}/>
+          <InputFile
+            src={values.ImageUrl}
+            value={values.ImageId}
+            onChange={(data) => {
+              handleChangeValue('ImageId', data.Id);
+              handleChangeValue('ImageUrl', data.Url);
+            }}
+            alt={userModel.ImageUrl.displayName}
+            disabled={loading}
+          />
         </Stack>
       </AccorCard>
     </>

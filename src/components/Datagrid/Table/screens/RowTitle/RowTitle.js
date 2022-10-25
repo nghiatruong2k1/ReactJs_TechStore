@@ -25,11 +25,12 @@ function RowTitle({ displays }) {
   }, []);
   return (
     <TableRow className={clsx(styles.head)}>
-      <Cell key={0} text={''} display={{ width: '2em' }} />
+      <Cell key={0} text={''} display={{ width: '2em' }} title/>
       {displays.map(({ title, ...display }, index) => {
-        if (state[display.name]?.isShow) {
+        if (state[display.name]?.isShow !== false) {
           return (
             <Cell
+              title
               key={index + 1}
               display={display}
               text={title}

@@ -6,7 +6,7 @@ import {
   useReducer,
   useState,
 } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import {  useParams, useSearchParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import formatNumber from 'number-format.js';
 import OrderServices from '~/services/order';
@@ -22,7 +22,12 @@ import DeleteButton from '../../components/DeleteButton';
 function CatalogOrderDetailComponent(props) {
   const services = OrderServices('CatalogOrderDetailComponent');
   const { id } = useParams();
-  const [state, dispath] = useReducer(reducerState, initState);
+  const [searchs] = useSearchParams();
+  const [state, dispath] = useReducer(reducerState, initState({
+    limit:searchs.get('limit'),
+    page:searchs.get('page'),
+    inTrash:searchs.get('inTrash')
+  }));
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, handleLoading] = useInitLoading();
@@ -88,7 +93,7 @@ function CatalogOrderDetailComponent(props) {
     } else {
       setTotal(0);
     }
-  }, []);
+  }, [id]);
   const displays = useMemo(() => {
     return [
       {

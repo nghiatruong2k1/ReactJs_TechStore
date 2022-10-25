@@ -119,5 +119,6 @@ export default function UserAdminServices(location) {
     postData,
     deleteData,
     getById,
+    getsType
   };
 }

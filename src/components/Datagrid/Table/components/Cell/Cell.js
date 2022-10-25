@@ -26,6 +26,7 @@ function CellComponent({
   text,
   beforeChild,
   afterChild,
+  title
 }) {
   const Component = useMemo(() => {
     return types[type] ?? type.text;
@@ -50,8 +51,8 @@ function CellComponent({
           {beforeChild}
           <Component
             text={text}
-            data={data}
-            display={display}
+            data={title === false ? data : {}}
+            display={title === false ? display : {}}
             loading={loading}
           />
           {afterChild}
@@ -62,10 +63,12 @@ function CellComponent({
 }
 
 CellComponent.propTypes = {
-  type:PropTypes.oneOf(Object.keys(types))
+  type:PropTypes.oneOf(Object.keys(types)),
+  title:PropTypes.bool
 };
 CellComponent.defaultProps = {
   display: {},
-  type:'text'
+  type:'text',
+  title:false
 };
 export default memo(CellComponent);

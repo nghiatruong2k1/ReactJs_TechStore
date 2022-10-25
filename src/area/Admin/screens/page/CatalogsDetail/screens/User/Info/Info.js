@@ -53,17 +53,6 @@ function InfoComponent({ ...props }) {
           <TextField
             size="small"
             autoComplete="off"
-            value={values.Password ?? ''}
-            type="password"
-            helperText={valids.Password ?? ''}
-            FormHelperTextProps={{
-              error: Boolean(valids.Password),
-            }}
-            label={`${userModel.Password.displayName}:`}
-          />
-          <TextField
-            size="small"
-            autoComplete="off"
             value={values.Location ?? ''}
             helperText={valids.Location ?? ''}
             FormHelperTextProps={{

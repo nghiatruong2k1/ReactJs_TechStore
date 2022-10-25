@@ -9,8 +9,6 @@ import StylesGlobal from '~/styles';
 import StateGlobal from '~/states';
 import MessageProvider from '~/screens/Message';
 import LoadingProvider from '~/screens/Loading';
-import { routers ,routersAdmin} from '~/config/Router';
-console.log({routers ,routersAdmin})
 ReactDOM.render(
   <Fragment>
     <FontsGlobal>

@@ -1,4 +1,4 @@
-import { memo, useContext } from 'react';
+import { forwardRef, memo, useContext } from 'react';
 import clsx from 'clsx';
 import { TableContainer, Table, TableHead, TableBody } from '@mui/material/';
 import styles from './Table.module.css';
@@ -6,10 +6,10 @@ import { ViewContent } from '~/components';
 import RowTitle from './screens/RowTitle';
 import RowData from './screens/RowData';
 import RowEmpty from './screens/RowEmpty';
-function TableComponent({ loading, datasets, displays }) {
+function TableComponent({ loading, datasets, displays },ref) {
   return (
     <TableContainer className={clsx(styles.container)}>
-      <Table stickyHeader className={styles.table}>
+      <Table ref={ref} stickyHeader className={styles.table}>
         <TableHead>
           <RowTitle displays={displays}/>
         </TableHead>
@@ -36,4 +36,4 @@ function TableComponent({ loading, datasets, displays }) {
     </TableContainer>
   );
 }
-export default memo(TableComponent);
+export default memo(forwardRef(TableComponent));

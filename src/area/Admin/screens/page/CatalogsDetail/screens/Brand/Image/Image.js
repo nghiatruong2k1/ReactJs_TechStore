@@ -1,13 +1,14 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { Grid, Stack } from '@mui/material';
 import { AccorCard } from '~/components';
 import InputFile from '~/components/InputFile';
+import { brandModel } from '~/models/brand';
 import { useGetCatalogDetailContext } from '../../../provider';
 function ImageComponent({ ...props }) {
   const {
     state: { values, valids },
     handle: { handleChangeValue },
-    loading
+    loading,
   } = useGetCatalogDetailContext();
   return (
     <>
@@ -19,7 +20,16 @@ function ImageComponent({ ...props }) {
         {...props}
       >
         <Stack>
-          <InputFile disabled={loading}/>
+          <InputFile
+            src={values.ImageUrl}
+            value={values.ImageId}
+            onChange={(data) => {
+              handleChangeValue('ImageId', data.Id);
+              handleChangeValue('ImageUrl', data.Url);
+            }}
+            alt={brandModel.ImageUrl.displayName}
+            disabled={loading}
+          />
         </Stack>
       </AccorCard>
     </>

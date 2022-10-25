@@ -13,3 +13,9 @@ export const getDefaultValues = (model) => {
     return rs;
   }, {});
 };
+export const getValues = (model,values) => {
+  return Object.keys(model).reduce((rs, key) => {
+    rs[key] = values[key] || model[key].defaultValue;
+    return rs;
+  }, {});
+};

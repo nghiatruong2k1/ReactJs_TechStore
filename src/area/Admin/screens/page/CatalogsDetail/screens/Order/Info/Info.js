@@ -13,23 +13,13 @@ function InfoComponent({ ...props }) {
   return (
     <>
       <AccorCard
-        title={'Thông tin'}
+        title={'Khách hàng'}
         open={true}
         component={Grid}
         item
         {...props}
       >
         <Stack spacing={1}>
-        <TextField
-            size="small"
-            autoComplete="off"
-            value={values.Id ?? ''}
-            helperText={valids.Id ?? ''}
-            FormHelperTextProps={{
-              error: Boolean(valids.Id),
-            }}
-            label={`${orderModel.Id.displayName}:`}
-          />
           <TextField
             size="small"
             autoComplete="off"
@@ -48,7 +38,6 @@ function InfoComponent({ ...props }) {
             FormHelperTextProps={{
               error: Boolean(valids.FirstName),
             }}
-            
             label={`${orderModel.FirstName.displayName}:`}
           />
           <TextField
@@ -59,7 +48,6 @@ function InfoComponent({ ...props }) {
             FormHelperTextProps={{
               error: Boolean(valids.LastName),
             }}
-            
             label={`${orderModel.LastName.displayName}:`}
           />
           <TextField
@@ -70,7 +58,6 @@ function InfoComponent({ ...props }) {
             FormHelperTextProps={{
               error: Boolean(valids.Location),
             }}
-            
             label={`${orderModel.Location.displayName}:`}
           />
           <TextField
@@ -81,42 +68,7 @@ function InfoComponent({ ...props }) {
             FormHelperTextProps={{
               error: Boolean(valids.Phone),
             }}
-            
             label={`${orderModel.Phone.displayName}:`}
-          />
-          <TextField
-            size="small"
-            autoComplete="off"
-            value={values.VoucherSale ?? ''}
-            helperText={valids.VoucherSale ?? ''}
-            FormHelperTextProps={{
-              error: Boolean(valids.VoucherSale),
-            }}
-            
-            label={`${orderModel.VoucherSale.displayName}:`}
-          />
-          <TextField
-            size="small"
-            autoComplete="off"
-            value={values.TotalPrice ?? ''}
-            helperText={valids.TotalPrice ?? ''}
-            FormHelperTextProps={{
-              error: Boolean(valids.TotalPrice),
-            }}
-            
-            label={`${orderModel.TotalPrice.displayName}:`}
-          />
-          <TextField
-            size="small"
-            autoComplete="off"
-            type='datetime-local'
-            value={values.CreateDate ?? ''}
-            helperText={valids.CreateDate ?? ''}
-            FormHelperTextProps={{
-              error: Boolean(valids.CreateDate),
-            }}
-            
-            label={`${orderModel.CreateDate.displayName}:`}
           />
         </Stack>
       </AccorCard>

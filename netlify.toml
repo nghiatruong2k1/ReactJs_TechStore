@@ -12,5 +12,6 @@ package = "netlify-plugin-inline-functions-env"
     "REACT_APP_BASE_API",
     "REACT_APP_WEBSITE_NAME",
     "REACT_APP_WEBSITE_LOGO",
-    "REACT_APP_WEBSITE_ICON"
+    "REACT_APP_WEBSITE_ICON",
+    "REACT_APP_DEVELOPER_MODE"
   ]

@@ -4,6 +4,7 @@ export {
     CatalogAddProductPage,
     CatalogUpdateProductPage,
   } from './CatalogsDetail/screens/Product';
+export { default as AdminProductImagePage } from './Catalogs/screens/ProductImage';
 export { default as AdminCategoryPage } from './Catalogs/screens/Category';
 export {
   CatalogAddCategoryPage,

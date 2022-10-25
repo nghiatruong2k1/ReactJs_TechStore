@@ -9,11 +9,11 @@ function LeftNav(props) {
         text: 'Trang chủ',
       },
       {
-        to: routers.category.index?.getAction(),
+        to: routers.category.index.getAction(),
         text: 'Danh mục',
       },
       {
-        to: routers.brand.index?.getAction(),
+        to: routers.brand.index.getAction(),
         text: 'Thương hiệu',
       },
       {

@@ -2,8 +2,7 @@ import {memo,useContext} from 'react';
 import clsx from 'clsx';
 import {Menu,MenuItem,ListItemButton,ListItemIcon,ListItemText} from '@mui/material/';
 import {NavLink} from "react-router-dom";
-import {useCookies} from 'react-cookie';
-import {getRoute} from "../../../../../../config/Router";
+import {routers} from "~/config/Router";
 
 
 
@@ -53,7 +52,7 @@ function Navbar({anchorEl,isAdmin,open,onClose,...props}){
       }}
     > 
         <ProfileLink 
-          to={`${getRoute("user","profile","index")}`}
+          to={routers.profile.index.getAction()}
           icon={<span className={clsx("fa fa-user")}/>}
           text={"Tài khoản"}
         />

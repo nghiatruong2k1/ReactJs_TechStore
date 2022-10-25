@@ -17,10 +17,16 @@ import CatalogLayout from '../../layout';
 import PublicButton from '../../components/PublicButton';
 import DeleteButton from '../../components/DeleteButton';
 import { routersAdmin } from '~/config/Router';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 function CatalogUserComponent(props) {
   const services = UserAdminServices('CatalogUserComponent');
-  const [state, dispath] = useReducer(reducerState, initState);
+  
+  const [searchs] = useSearchParams();
+  const [state, dispath] = useReducer(reducerState, initState({
+    limit:searchs.get('limit'),
+    page:searchs.get('page'),
+    inTrash:searchs.get('inTrash')
+  }));
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, handleLoading] = useInitLoading();

@@ -8,12 +8,12 @@ import {
 } from '@mui/material/';
 import { Link } from 'react-router-dom';
 import styles from '../Navbar.module.css';
-function NavbarItem({ icon, activeIcon, isActive, text, to }) {
+function NavbarItem({ icon, activeIcon, isActive, text, ...props }) {
   return (
     <ListItem disablePadding divider className={styles.item}>
       <ListItemButton
-        component={Link}
-        to={to || '/404'}
+        {...props}
+        component={(props.to && Link) || 'span'}
         className={clsx(styles.button)}
       >
         <ListItemIcon className={styles.icon}>

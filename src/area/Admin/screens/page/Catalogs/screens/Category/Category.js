@@ -9,7 +9,7 @@ import {
 import CategoryAdminServices from '~/area/Admin/services/categoryAdmin';
 import { categoryModel } from '~/models/category';
 import { formatDate } from '~/config/Format';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { routersAdmin } from '~/config/Router';
 import { Grid } from '@mui/material';
 import { useInitLoading } from '~/hooks/Loading';
@@ -17,9 +17,15 @@ import CatalogLayout from '../../layout';
 import PublicButton from '../../components/PublicButton';
 import DeleteButton from '../../components/DeleteButton';
 import { reducerState, initState, initCase } from '../../init';
+import { categoryEntity } from '~/entities/category';
 function CatalogCategoryComponent(props) {
   const services = CategoryAdminServices('CatalogCategoryComponent');
-  const [state, dispath] = useReducer(reducerState, initState);
+  const [searchs] = useSearchParams();
+  const [state, dispath] = useReducer(reducerState, initState({
+    limit:searchs.get('limit'),
+    page:searchs.get('page'),
+    inTrash:searchs.get('inTrash')
+  }));
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, handleLoading] = useInitLoading();
@@ -199,6 +205,7 @@ function CatalogCategoryComponent(props) {
           },
           trash: {},
         }}
+        model={categoryEntity}
         component={Grid}
         item
         xs={12}

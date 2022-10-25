@@ -16,10 +16,12 @@ function AuthProfileComponent({ icon, title, to, className, ...props }, ref) {
           component={Button}
           classes={{
             root:styles.button,
-            avatar:styles.avatar
+            avatar:styles.avatar,
+            title:styles.title
           }}
           avatar={icon}
           title={title}
+      
           {...props}
         />
       </Card>

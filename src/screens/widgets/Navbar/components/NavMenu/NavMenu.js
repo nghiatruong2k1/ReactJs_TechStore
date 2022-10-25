@@ -10,12 +10,13 @@ import {
 } from '@mui/material/';
 import { NavLink } from 'react-router-dom';
 import styles from './NavMenu.module.css';
+import clsx from 'clsx';
 function NavMenu({ datas, loading, children,vertical, onClose }) {
   return (
     <Stack component={List} direction={vertical ? 'column' : 'row'} sx={{ p: 0 }}>
       {Array.isArray(datas) &&
         datas.map(
-          ({ to, text, icon, disabled, children, onClick }, index) => {
+          ({  text, icon, children, onClick ,className,...items }, index) => {
             return (
               <ListItem
                 key={index}
@@ -28,10 +29,9 @@ function NavMenu({ datas, loading, children,vertical, onClose }) {
                 }}
               >
                 <ListItemButton
-                  disabled={disabled}
-                  component={(to && !loading && NavLink) || 'button'}
-                  to={to || '#'}
-                  className={styles.button}
+                  component={(items.to && !loading && NavLink) || 'button'}
+                  className={  clsx(styles.button,className)}
+                  {...items}
                 >
                   {icon && <ListItemIcon>{icon}</ListItemIcon>}
                   <ListItemText>

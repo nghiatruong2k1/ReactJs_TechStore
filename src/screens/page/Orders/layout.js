@@ -14,7 +14,7 @@ function OrdersLayoutComponent({state,dispath,data,loading,total,status}) {
   const [searchs,setSearchParams] = useSearchParams();
   const handleTitle = useHandleTitle();
   useEffect(() => {
-    return handleTitle(routers.profile.order.title);
+    return handleTitle(routers.profile.orders.title);
   }, []);
   const handleChangeStatus = useCallback((index) => {
     dispath([initCase.SET_STATUS_INDEX, index]);

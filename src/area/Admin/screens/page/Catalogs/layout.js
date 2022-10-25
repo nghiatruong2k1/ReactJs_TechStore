@@ -4,6 +4,7 @@ import { initCase } from './init';
 import { useHandleTitle } from '~/hooks/Title';
 import AddButton from './components/AddButton';
 import TrashButton from './components/TrashButton';
+import { useSearchParams } from 'react-router-dom';
 
 function CatalogLayout({
   state,
@@ -16,6 +17,7 @@ function CatalogLayout({
   option,
   ...props
 }) {
+  const [searchs,setSearchParams] = useSearchParams();
   const handleTitle = useHandleTitle();
   useEffect(() => {
     return handleTitle(title);
@@ -29,6 +31,9 @@ function CatalogLayout({
     dispath([initCase.TOGGLE_TRASH]);
   }, []);
 
+  useEffect(()=>{
+    setSearchParams(state)
+  },[state])
   return (
     <>
       <AccorCard title={'Bảng quản lý'} open={true} {...props}>

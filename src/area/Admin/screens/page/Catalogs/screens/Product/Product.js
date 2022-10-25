@@ -10,19 +10,27 @@ import ProductAdminServices from '~/area/Admin/services/productAdmin';
 import { productModel } from '~/models/product';
 import formatNumber from 'number-format.js';
 import { formatDate } from '~/config/Format';
-import { Link } from 'react-router-dom';
-import {routersAdmin } from '~/config/Router';
+import { Link, useSearchParams } from 'react-router-dom';
+import { routersAdmin } from '~/config/Router';
 import { Grid } from '@mui/material';
 import { useInitLoading } from '~/hooks/Loading';
-
+import { productEntity } from '~/entities/product';
 import { reducerState, initState, initCase } from '../../init';
-
 import CatalogLayout from '../../layout';
 import PublicButton from '../../components/PublicButton';
 import DeleteButton from '../../components/DeleteButton';
-function CatalogProductComponent(props) {
+
+function CatalogProductComponent() {
   const services = ProductAdminServices('CatalogProductComponent');
-  const [state, dispath] = useReducer(reducerState, initState);
+  const [searchs] = useSearchParams();
+  const [state, dispath] = useReducer(
+    reducerState,
+    initState({
+      limit: searchs.get('limit'),
+      page: searchs.get('page'),
+      inTrash: searchs.get('inTrash'),
+    }),
+  );
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, handleLoading] = useInitLoading();
@@ -101,18 +109,20 @@ function CatalogProductComponent(props) {
         type: 'text',
         width: '5em',
         format: (v, data) => (
-          <Link
-            to={routersAdmin.product.update.getAction({ id: data.Id })}
-          >
+          <Link to={routersAdmin.product.update.getAction({ id: data.Id })}>
             {v}
           </Link>
         ),
-      },{
+      },
+      {
         title: productModel.ImageUrl.displayName,
         name: 'ImageUrl',
         nameAlt: 'Name',
         type: 'image',
         width: '5em',
+        to: (data) => {
+          return routersAdmin.product.image.getAction({ id: data.Id });
+        },
       },
       {
         title: productModel.Name.displayName,
@@ -139,9 +149,7 @@ function CatalogProductComponent(props) {
         type: 'text',
         width: '10em',
         format: (v, data) => (
-          <Link
-            to={routersAdmin.brand.update.getAction({ id: data.BrandId })}
-          >
+          <Link to={routersAdmin.brand.update.getAction({ id: data.BrandId })}>
             {v}
           </Link>
         ),
@@ -228,7 +236,10 @@ function CatalogProductComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={routersAdmin.product.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
+        title={
+          routersAdmin.product.index.title +
+          (state.inTrash ? ' (thùng rác) ' : '')
+        }
         state={state}
         dispath={dispath}
         data={data}
@@ -238,8 +249,10 @@ function CatalogProductComponent(props) {
         option={{
           add: {
             to: routersAdmin.product.add.getAction(),
-          },trash:{},
+          },
+          trash: {},
         }}
+        model={productEntity}
         component={Grid}
         item
         xs={12}

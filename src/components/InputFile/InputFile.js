@@ -1,28 +1,35 @@
-import { memo } from 'react';
-import { FormControl, Input,Dialog } from '@mui/material/';
+import { memo, useCallback, useReducer } from 'react';
+import { FormControl, Input, Dialog } from '@mui/material/';
 import styles from './InputFile.module.css';
 import { Frame, Image } from '~/components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUpload } from '@fortawesome/free-solid-svg-icons';
-import { useDisclosure } from '@mantine/hooks';
-function InputFile({ value, alt , disabled }) {
-  const [isOpen, { close, open }] = useDisclosure(false);
+import { reducerState, initState, initCase } from './init';
+
+import ContentList from './ContentList';
+function InputFile({ src, alt, onChange, value, disabled }) {
+  const [state, dispath] = useReducer(reducerState, initState);
+  const handleOpen = useCallback(() => {
+    dispath([initCase.TOGGLE_OPEN, true]);
+  }, []);
+  const handleClose = useCallback(() => {
+    dispath([initCase.TOGGLE_OPEN, false]);
+  }, []);
   return (
-    <FormControl className={styles.root} onClick={open} disabled={disabled}>
-      <Input sx={{ display: 'none' }} />
-      <Frame variant={'rectangle'}>
+    <FormControl className={styles.root} disabled={disabled}>
+      <Frame variant={'rectangle'} onClick={handleOpen}>
         <Image
-          variant={'contain'}
+          fit={'contain'}
           alt={alt ?? ''}
-          src={value ?? ''}
+          src={src ?? ''}
           placeholder={
             <FontAwesomeIcon className={styles.icon} icon={faCloudUpload} />
           }
         />
       </Frame>
       <Dialog
-        open={isOpen}
-        onClose={close}
+        open={state.isOpen}
+        onClose={handleClose}
         fullWidth={true}
         disablePortal
         scroll={'body'}
@@ -30,13 +37,20 @@ function InputFile({ value, alt , disabled }) {
           sx: {
             m: {
               xs: 1,
-              md: 1.5
+              md: 1.5,
             },
             p: 1,
           },
         }}
       >
-        
+        {(state.router === 'add' && <></>) ||
+          (state.router === 'update' && <></>) || (
+            <ContentList
+              onClose={handleClose}
+              onChange={onChange}
+              value={value}
+            />
+          )}
       </Dialog>
     </FormControl>
   );

@@ -81,6 +81,19 @@
 *.MuiListItemButton-root {
   border-radius: 0.2em !important;
 }
+
+.MuiMenu-paper {
+  padding: 0.2em !important;
+}
+.MuiList-root {
+  padding: 0 !important;
+}
+.MuiMenuItem-root {
+  padding: 0.15em !important;
+}
+.MuiListItemButton-root {
+  padding: 0.15em 0.5em !important;
+}
 *.MuiListItemButton-root:hover {
   background-color: var(--alpha-bg) !important;
 }
@@ -412,16 +425,3 @@ a:not([type='button']).active {
 }
 
 
-
-.MuiMenu-paper {
-  padding: 0.2em !important;
-}
-.MuiList-root {
-  padding: 0 !important;
-}
-.MuiMenuItem-root {
-  padding: 0.15em !important;
-}
-.MuiListItemButton-root {
-  padding: 0.1em 0.4em !important;
-}

@@ -10,21 +10,21 @@ export const useGetChartOrdersContext = () => {
 };
 function OrdersProvider({ state, dispath, children }) {
   const orderAdminServices = OrderAdminServices('OrdersProvider');
-  const orderServices = OrderServices('OrdersProvider')
+  const orderServices = OrderServices('OrdersProvider');
   useEffect(() => {
     dispath([initCase.SET_DATA]);
-	dispath([initCase.SET_STATUS]);
+    dispath([initCase.SET_STATUS]);
     dispath([initCase.SET_LOADING, true]);
     const outStatic = orderAdminServices.getStatistic((data) => {
       dispath([initCase.SET_DATA, data]);
       dispath([initCase.SET_LOADING, false]);
     });
-	const outStatus = orderServices.getsStatus((data)=>{
-		dispath([initCase.SET_STATUS, data]);
-	})
+    const outStatus = orderServices.getsStatus((data) => {
+      dispath([initCase.SET_STATUS, data]);
+    });
     return () => {
       outStatic && outStatic();
-	  outStatus && outStatus();
+      outStatus && outStatus();
     };
   }, []);
   // 	const gstatus = await Fetch.get({

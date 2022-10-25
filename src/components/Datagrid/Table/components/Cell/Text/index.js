@@ -4,7 +4,7 @@ import { Typography, Skeleton, TextField } from '@mui/material/';
 function CellText({
   loading,
   text,
-  display: { onChange, onSave, name, format },
+  display: { onChange, name, format },
   data,
 }) {
   if (onChange) {
@@ -12,17 +12,13 @@ function CellText({
       <TextField
         fullWidth
         size="small"
-        value={data ? (Boolean(data[name]) || '') : ''}
+        value={data ? (data[name] || "") : ''}
         disabled={loading}
+        autoComplete='off'
         onChange={(e) => {
           if (data) {
             data[name] = e.target.value;
-            onChange && onChange(data);
-          }
-        }}
-        onBlur={(e) => {
-          if (data) {
-            onSave && onSave(data);
+            onChange && onChange(name, e.target.value, data);
           }
         }}
       />

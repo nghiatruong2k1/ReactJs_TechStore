@@ -17,9 +17,16 @@ import PublicButton from '../../components/PublicButton';
 import DeleteButton from '../../components/DeleteButton';
 import { reducerState, initState, initCase } from '../../init';
 import { formatByte, formatDate } from '~/config/Format';
+import { useSearchParams } from 'react-router-dom';
+import { imageEntity } from '~/entities/image';
 function CatalogImageComponent(props) {
   const services = ImageAdminServices('CatalogImageComponent');
-  const [state, dispath] = useReducer(reducerState, initState);
+  const [searchs] = useSearchParams();
+  const [state, dispath] = useReducer(reducerState, initState({
+    limit:searchs.get('limit'),
+    page:searchs.get('page'),
+    inTrash:searchs.get('inTrash')
+  }));
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, handleLoading] = useInitLoading();
@@ -191,6 +198,7 @@ function CatalogImageComponent(props) {
           add: {},
           trash: {},
         }}
+        model={imageEntity}
         component={Grid}
         item
         xs={12}

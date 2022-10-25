@@ -6,6 +6,7 @@ import {
   AdminImagePage,
   AdminOrderDetailPage,
   AdminOrderPage,
+  AdminProductImagePage,
   AdminProductPage,
   AdminUserPage,
   CatalogAddBrandPage,
@@ -39,7 +40,10 @@ export const adminRouters = {
     {
       path: routersAdmin.product.update,
       page: CatalogUpdateProductPage,
-    },
+    },{
+      path: routersAdmin.product.image,
+      page: AdminProductImagePage,
+    }, 
     {
       path: routersAdmin.category.index,
       page: AdminCategoryPage,
