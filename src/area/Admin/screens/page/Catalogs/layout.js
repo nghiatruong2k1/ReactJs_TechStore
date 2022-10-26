@@ -15,6 +15,7 @@ function CatalogLayout({
   title,
   loading,
   option,
+  model,
   ...props
 }) {
   const [searchs,setSearchParams] = useSearchParams();
@@ -54,6 +55,7 @@ function CatalogLayout({
           loading={loading}
           datasets={data}
           displays={displays}
+          model={model}
           footer={
             <Paging
               total={total}

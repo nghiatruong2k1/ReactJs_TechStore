@@ -1,9 +1,11 @@
 import { useCallback } from 'react';
 import { Delete, Post, Put } from '~/utils/HttpRequest';
 import useServices from '~/services/DefaultServices';
+import useDialogResult from '~/hooks/DialogResult';
 const API = 'api/admin/user';
 export default function UserAdminServices(location) {
   const services = useServices(location);
+  const dialogResult = useDialogResult();
   const getStatistic = useCallback((onThen, onEnd) => {
     return services({
       api: `${API}/statistic`,
@@ -89,16 +91,30 @@ export default function UserAdminServices(location) {
     });
   }, []);
   const deleteData = useCallback((id, onThen, onEnd) => {
-    return services({
-      api: `${API}/${id}`,
-      onThen,
-      onCatch: () => {
-        onThen && onThen({});
-      },
-      onEnd,
-      method: Delete,
-      location,
-    });
+    let ourService;
+    try {
+      dialogResult({
+        type: 'warning',
+        title: 'Thông báo',
+        message: 'Bạn có muốn xóa tài khoản này?',
+        onSuccess: () => {
+          ourService = services({
+            api: `${API}/${id}`,
+            onThen,
+            onCatch: () => {
+              onThen && onThen({});
+            },
+            onEnd,
+            method: Delete,
+            location,
+          });
+        },onCancel:onEnd
+      });
+    } catch (error) {
+      console.log(error);
+      ourService = ()=>{}
+    }
+    return ourService
   }, []);
   const getById = useCallback((id, onThen, onEnd) => {
     return services({

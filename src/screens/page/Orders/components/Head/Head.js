@@ -9,4 +9,5 @@ function HeadComponent({total,loading}){
             </Typography>
         </Stack>
     )
-};export default memo(HeadComponent)
+};
+export default memo(HeadComponent)
