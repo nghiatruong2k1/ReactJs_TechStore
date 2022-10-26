@@ -425,3 +425,8 @@ a:not([type='button']).active {
 }
 
 
+.MuiBadge-badge{
+  height: 1.4em !important;
+  line-height: 1.4em !important;
+  min-width: 1.4em !important;
+}
