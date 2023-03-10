@@ -9,7 +9,7 @@ import { initCase, initState, reducerState } from '../../init';
 import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 
 function useInit(){
   const brandAdminService = BrandAdminServices('CatalogAddBrandPage');
@@ -35,7 +35,7 @@ export const CatalogAddBrandPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={routersAdmin.brand.add.title}
+      title={adminRouters.brand.add.title}
       loading={loading}
       handle={{ handleLoading, handleSave,handleFetch }}
       rulers={rulers}
@@ -60,7 +60,7 @@ export const CatalogUpdateBrandPage = memo(() => {
             type: 'warning',
           });
           navigator(
-            routersAdmin.brand.index.getAction(),
+            adminRouters.brand.index.getAction(),
           );
         }
       },
@@ -79,7 +79,7 @@ export const CatalogUpdateBrandPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={routersAdmin.brand.update.title}
+      title={adminRouters.brand.update.title}
       loading={loading}
       handle={{ handleLoading, handleSave,handleFetch }}
       rulers={rulers}

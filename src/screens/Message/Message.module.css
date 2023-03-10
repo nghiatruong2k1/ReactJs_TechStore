@@ -1,13 +1,18 @@
 .container{
     z-index: var(--index-toast) !important;
 }
+.icon{
+    color: var(--color) !important;
+}
 .title{
     vertical-align: middle !important;
+    color: var(--color) !important;
 }
 .body{
     width: 100% !important;
     max-width: 22em!important;
     min-width: 22em!important;
+    background-color: var( --sidebar-popup-bg) !important;
 }
 
 .content{

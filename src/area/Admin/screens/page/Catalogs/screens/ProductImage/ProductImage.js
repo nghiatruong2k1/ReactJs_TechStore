@@ -8,10 +8,9 @@ import {
 } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
-import formatNumber from 'number-format.js';
 import ProductImageServices from '~/area/Admin/services/productImageAdmin';
 import { productImageModel } from '~/models/product';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 import { useInitLoading } from '~/hooks/Loading';
 
 import CatalogLayout from '../../layout';
@@ -202,7 +201,7 @@ function CatalogProductImageDetailComponent(props) {
     <Grid container>
       <CatalogLayout
         title={
-          routersAdmin.product.image.title +
+          adminRouters.product.image.title +
           (state.inTrash ? ' (thùng rác) ' : '')
         }
         option={{

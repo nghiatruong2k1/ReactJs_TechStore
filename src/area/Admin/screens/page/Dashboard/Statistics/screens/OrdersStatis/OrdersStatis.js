@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import OrderAdminServices from '~/area/Admin/services/orderAdmin';
 import CardStatistic from '../../components/CardStatistic';
 function OrdersStatisComponent(props) {

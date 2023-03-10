@@ -11,7 +11,7 @@ import { productModel } from '~/models/product';
 import formatNumber from 'number-format.js';
 import { formatDate } from '~/config/Format';
 import { Link, useSearchParams } from 'react-router-dom';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 import { Grid } from '@mui/material';
 import { useInitLoading } from '~/hooks/Loading';
 import { productEntity } from '~/entities/product';
@@ -109,7 +109,7 @@ function CatalogProductComponent() {
         type: 'text',
         width: '5em',
         format: (v, data) => (
-          <Link to={routersAdmin.product.update.getAction({ id: data.Id })}>
+          <Link to={adminRouters.product.update.getAction({ id: data.Id })}>
             {v}
           </Link>
         ),
@@ -121,7 +121,7 @@ function CatalogProductComponent() {
         type: 'image',
         width: '5em',
         to: (data) => {
-          return routersAdmin.product.image.getAction({ id: data.Id });
+          return adminRouters.product.image.getAction({ id: data.Id });
         },
       },
       {
@@ -137,7 +137,7 @@ function CatalogProductComponent() {
         width: '10em',
         format: (v, data) => (
           <Link
-            to={routersAdmin.category.update.getAction({ id: data.CategoryId })}
+            to={adminRouters.category.update.getAction({ id: data.CategoryId })}
           >
             {v}
           </Link>
@@ -149,7 +149,7 @@ function CatalogProductComponent() {
         type: 'text',
         width: '10em',
         format: (v, data) => (
-          <Link to={routersAdmin.brand.update.getAction({ id: data.BrandId })}>
+          <Link to={adminRouters.brand.update.getAction({ id: data.BrandId })}>
             {v}
           </Link>
         ),
@@ -237,7 +237,7 @@ function CatalogProductComponent() {
     <Grid container>
       <CatalogLayout
         title={
-          routersAdmin.product.index.title +
+          adminRouters.product.index.title +
           (state.inTrash ? ' (thùng rác) ' : '')
         }
         state={state}
@@ -248,7 +248,7 @@ function CatalogProductComponent() {
         displays={displays}
         option={{
           add: {
-            to: routersAdmin.product.add.getAction(),
+            to: adminRouters.product.add.getAction(),
           },
           trash: {},
         }}

@@ -3,8 +3,9 @@ import clsx from 'clsx';
 import { Avatar, Box } from '@mui/material';
 import { Dropdown } from '~/components';
 import { useDisclosure } from '@mantine/hooks';
-import { routers, routersAdmin } from '~/config/Router';
+import { privateRouters } from '~/routers/Private';
 import { AuthServices } from '~/services';
+import { adminRouters } from '~/area/Admin/router';
 
 function UserProfileComponent({
   toggleComponent,
@@ -24,7 +25,7 @@ function UserProfileComponent({
     const newData = [
       {
         text: 'Tài khoản',
-        to: routers.profile.index.getAction(),
+        to: privateRouters.profile.index.getAction(),
         icon: <span className="fa fa-user" />,
       },{
         text:'Đăng xuất',
@@ -36,7 +37,7 @@ function UserProfileComponent({
     ];
     if (TypeId === 4) {
       newData.unshift({
-        to: routersAdmin.dashboard.getAction(),
+       // to: adminRouters.dashboard.getAction(),
         icon: <span className={'fa fa-user-cog'} />,
         text: 'Trang quản trị',
       });

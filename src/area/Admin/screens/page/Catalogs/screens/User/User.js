@@ -16,7 +16,7 @@ import { reducerState, initState, initCase } from '../../init';
 import CatalogLayout from '../../layout';
 import PublicButton from '../../components/PublicButton';
 import DeleteButton from '../../components/DeleteButton';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 import { Link, useSearchParams } from 'react-router-dom';
 function CatalogUserComponent(props) {
   const services = UserAdminServices('CatalogUserComponent');
@@ -107,7 +107,7 @@ function CatalogUserComponent(props) {
         width: '5em',
         format: (v, data) => (
           <Link
-            to={routersAdmin.user.update.getAction({ id: data.Id })}
+            to={adminRouters.user.update.getAction({ id: data.Id })}
           >
             {v}
           </Link>
@@ -229,7 +229,7 @@ function CatalogUserComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={routersAdmin.user.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
+        title={adminRouters.user.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

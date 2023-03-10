@@ -18,25 +18,7 @@
 
   --secondary: #12225b; */
 
-  --success: #00b517;
-  --successBg: #d9f9dd;
 
-  --info: #00aefd;
-  --infoBg: rgb(229, 246, 253);
-
-  --bell: #0288d1;
-  --bellBg: rgb(229, 246, 253);
-
-  --help: #0038ff;
-  --helpBg: rgb(229, 246, 253);
-
-  --warning: rgb(243 104 5);
-  --warningBg: rgb(255, 244, 229);
-
-  --danger: #fa3434;
-
-  --error: rgb(255 4 0);
-  --errorBg: rgb(253, 237, 237);
 
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;

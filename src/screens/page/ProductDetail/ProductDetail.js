@@ -8,13 +8,13 @@ import { Grid } from '@mui/material';
 import DetailInfo from './Info';
 import DetailDescription from './Description';
 import DetailPicture from './Picture';
-function ProductDetailComponent(props) {
+function ProductDetailComponent({title}) {
   const [state, dispath] = useReducer(reducerState, initState);
   const loading = useMemo(() => {
     return state.isLoading || !Boolean(state.data);
   }, [state.isLoading, state.data]);
   return (
-    <Provider value={{ state, dispath }}>
+    <Provider value={{ state, dispath }} title={title}>
       <ViewContent loading={state.isLoading} length={state.data.Id}>
         <Grid container py={2} spacing={2}>
           <DetailPicture loading={loading}

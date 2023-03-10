@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import clsx from 'clsx';
 import { RestoreFromTrash, DeleteForeverRounded } from '@mui/icons-material/';
 import { IconButton, Tooltip } from '@mui/material';
 function TrashButton({ inTrash, loading, onClick }) {

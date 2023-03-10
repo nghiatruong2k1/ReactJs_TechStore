@@ -1,7 +1,7 @@
 import { memo, Fragment, useState, useEffect } from 'react';
 import { ListNav } from '~/components';
 import BrandServices from '~/services/brand';
-import { routers } from '~/config/Router';
+import { publicRouters} from '~/routers/Public';
 function FooterBrands(props) {
   const brandServices = BrandServices('footer brands');
   const [isLoading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ function FooterBrands(props) {
     const ourRequest = brandServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
-        to: routers.product.brand.getAction( { alias: item.Alias }),
+        to: publicRouters.product.brand.getAction( { alias: item.Alias }),
       }));
       setData(newdata);
       setLoading(false);

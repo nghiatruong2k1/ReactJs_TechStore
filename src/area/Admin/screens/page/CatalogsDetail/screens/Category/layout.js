@@ -6,7 +6,7 @@ import OptionComponent from './Option';
 import ImageComponent from './Image';
 import Provider from '../../provider';
 import Head from '../../components/Head';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 function CatalogCategoryLayoutComponent({
   state,
   dispath,
@@ -32,7 +32,7 @@ function CatalogCategoryLayoutComponent({
         <Head
           xs={12}
           title={title}
-          back={routersAdmin.category.index.getAction()}
+          back={adminRouters.category.index.getAction()}
         />
         <InfoComponent xs={7} />
         <OptionComponent xs={5} />

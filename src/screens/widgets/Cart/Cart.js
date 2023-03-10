@@ -1,9 +1,8 @@
 import { memo, useCallback, useEffect, useMemo } from 'react';
-import { Box } from '@mui/material';
 import { useHandleTitle } from '~/hooks/Title';
 import { useGetCart } from '~/hooks/Cart';
 import { ViewContent } from '~/components';
-import { routers } from '~/config/Router';
+import { privateRouters } from '~/routers/Private';
 import CartLayout from './layout';
 import CartHeader from './Header';
 import CartFooter from './Footer';
@@ -14,7 +13,7 @@ function CartComponent({ isToggle, toggleComponent }) {
   const handleTitle = useHandleTitle();
   useEffect(() => {
     if (state.isOpen) {
-      return handleTitle(routers.profile.cart.title);
+      return handleTitle(privateRouters.cart.index.title);
     }
   }, [state.isOpen]);
   const open=useCallback(()=>{

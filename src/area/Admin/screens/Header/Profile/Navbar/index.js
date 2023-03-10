@@ -2,7 +2,7 @@ import {memo,useContext} from 'react';
 import clsx from 'clsx';
 import {Menu,MenuItem,ListItemButton,ListItemIcon,ListItemText} from '@mui/material/';
 import {NavLink} from "react-router-dom";
-import {routers} from "~/config/Router";
+import { privateRouters } from '~/routers/Private';
 
 
 
@@ -52,7 +52,7 @@ function Navbar({anchorEl,isAdmin,open,onClose,...props}){
       }}
     > 
         <ProfileLink 
-          to={routers.profile.index.getAction()}
+          to={privateRouters.profile.index.getAction()}
           icon={<span className={clsx("fa fa-user")}/>}
           text={"Tài khoản"}
         />

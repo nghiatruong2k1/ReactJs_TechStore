@@ -18,7 +18,7 @@ import { initCase, initState, reducerState } from '../../init';
 import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 
 function useInit() {
   const productAdminService = ProductAdminServices('CatalogAddProductPage');
@@ -105,7 +105,7 @@ export const CatalogAddProductPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={routersAdmin.product.add.title}
+      title={adminRouters.product.add.title}
       loading={loading}
       datas={datas}
       handle={{ handleLoading, handleSave, handleFetch }}
@@ -138,7 +138,7 @@ export const CatalogUpdateProductPage = memo(() => {
             message: 'Sản phẩm không tồn tại',
             type: 'warning',
           });
-          navigator(routersAdmin.product.index.getAction());
+          navigator(adminRouters.product.index.getAction());
         }
       },
       () => {
@@ -156,7 +156,7 @@ export const CatalogUpdateProductPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={routersAdmin.product.update.title}
+      title={adminRouters.product.update.title}
       loading={loading}
       datas={datas}
       handle={{ handleLoading, handleSave, handleFetch }}

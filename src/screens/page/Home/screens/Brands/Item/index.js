@@ -10,7 +10,7 @@ import {
 } from '@mui/material/';
 import { NavLink } from 'react-router-dom';
 import { Frame, Image } from '~/components';
-import { routers } from '~/config/Router';
+import { publicRouters} from '~/routers/Public';
 import styles from './Item.module.css';
 function Item({ data, loading }) {
   return (
@@ -24,7 +24,7 @@ function Item({ data, loading }) {
               component={(!loading && NavLink) || 'span'}
               to={
                 !loading &&
-                routers.product.brand.getAction({
+                publicRouters.product.brand.getAction({
                   alias: data && data.Alias,
                 })
               }

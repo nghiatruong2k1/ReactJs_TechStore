@@ -11,7 +11,7 @@ import CartVoucher from './Voucher';
 import CartPayment from './Payment';
 import { useReducer } from 'react';
 import { initCase, initState, reducerState } from './init';
-import { routers } from '~/config/Router';
+import { privateRouters } from '~/routers/Private';
 function CartComponent() {
   const {
     state: { total, data, isLoading, totalPrice },
@@ -20,7 +20,7 @@ function CartComponent() {
   const [state, dispath] = useReducer(reducerState, initState);
   const handleTitle = useHandleTitle();
   useEffect(() => {
-    return handleTitle(routers.profile.cart.title);
+    return handleTitle(privateRouters.cart.index.title);
   }, []);
   const handleChange = useCallback((data) => {
     dispath([initCase.CHANGE_VOUCHER, data]);

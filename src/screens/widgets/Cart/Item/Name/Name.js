@@ -2,12 +2,12 @@ import { memo } from 'react';
 import clsx from 'clsx';
 import { Skeleton, Typography } from '@mui/material/';
 import { Link } from 'react-router-dom';
-import { routers } from '~/config/Router';
+import { publicRouters} from '~/routers/Public';
 function ItemName({ loading, alias, name}) {
   return (
     <Typography
       component={(!loading && Link) || 'span'}
-      to={routers.product.detail.getAction({ alias })}
+      to={publicRouters.product.detail.getAction({ alias })}
       align="center"
     >
       {(loading && <Skeleton variant="text" className="skeleton" />) || name}

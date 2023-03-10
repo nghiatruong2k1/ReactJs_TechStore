@@ -1,0 +1,63 @@
+.default {
+  --success-text: #00b517;
+  --success-bg: #d9f9dd;
+
+  --info-text: #00aefd;
+  --info-bg: rgb(229, 246, 253);
+
+  --bell-text: #0288d1;
+  --bell-bg: rgb(229, 246, 253);
+
+  --help-text: #0038ff;
+  --help-bg: rgb(229, 246, 253);
+
+  --warning-text: rgb(243 104 5);
+  --warning-bg: rgb(255, 244, 229);
+
+  --danger-text: #fa3434;
+
+  --error-text: rgb(255 4 0);
+  --error-bg: rgb(253, 237, 237);
+}
+.light {
+  --primary-text: #32323d;
+  --primary-bg: #fafafa;
+
+  --layout-bg: #f3f3f3;
+
+  --sidebar-bg: rgba(0, 0, 0, 0.01);
+  --sidebar-popup-bg: #f7f7f7;
+  
+  --alpha-bg: rgba(0, 0, 0, 0.05);
+  --contrast-bg: rgba(20, 20, 20, 0.4);
+  --contrast-bg-1: rgba(20, 20, 20, 0.4);
+  --contrast-color: rgba(254, 255, 255, 0.8);
+  --banner-home-dot: #d8d8d8;
+  --loading-bg: rgba(0, 0, 0, 0.5);
+  --loading-bg-animation: #f5f5f5;
+  --scroll-thumb-bg: rgba(0, 0, 0, 0.1);
+  --no-content-bg: #f9f9f9;
+  --box-item-bg: #fff;
+  --artist-layout-bg: hsla(0, 0%, 100%, 0.8);
+  --alpha-layout-bg: rgba(12, 3, 3, 0.8);
+  --tab-active-bg: #fff;
+  --queue-player-popup-bg: #fff;
+  --progressbar-active-bg: var(--purple-primary);
+  --progressbar-player-bg: rgba(0, 0, 0, 0.1);
+  --kara-lyrics-bg: #9882bd;
+  --kara-btn-bg: hsla(0, 0%, 100%, 0.1);
+  --theme-setting-active: rgba(0, 0, 0, 0.15);
+  --player-bg: #fff;
+  --select-bg: rgba(0, 0, 0, 0.15);
+  
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --purple-primary: #8d22c3;
+  --text-item-hover: #8d22c3;
+  --link-text-hover: #8d22c3;
+
+
+  --text-placeholder: #757575;
+  --border-box: rgba(0, 0, 0, 0.2);
+  --queue-border: rgba(0, 0, 0, 0.1);
+  --border-player: rgba(0, 0, 0, 0.05);
+}

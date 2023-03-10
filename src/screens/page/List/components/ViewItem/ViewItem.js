@@ -10,7 +10,7 @@ import {
 } from '@mui/material/';
 import { NavLink } from 'react-router-dom';
 import { Frame, Image } from '~/components';
-import {  routers } from '~/config/Router';
+import { publicRouters} from '~/routers/Public';
 function ViewItem({ data, controller, loading }) {
   return (
     <Grid item xs={6} sm={4} md={3} >
@@ -27,7 +27,7 @@ function ViewItem({ data, controller, loading }) {
             className="h4"
             align="center"
             display="block"
-            to={routers.product[controller].getAction({alias: data && data.Alias})}
+            to={publicRouters.product[controller].getAction({alias: data && data.Alias})}
           >
             {!loading ? data.Name : <Skeleton />}
           </Typography>

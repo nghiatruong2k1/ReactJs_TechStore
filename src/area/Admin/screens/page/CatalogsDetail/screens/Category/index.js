@@ -9,7 +9,7 @@ import { initCase, initState, reducerState } from '../../init';
 import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 
 function useInit() {
   const categoryAdminService = CategoryAdminServices('CatalogAddCategoryPage');
@@ -49,7 +49,7 @@ export const CatalogAddCategoryPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={routersAdmin.category.add.title}
+      title={adminRouters.category.add.title}
       loading={loading}
       handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}
@@ -80,7 +80,7 @@ export const CatalogUpdateCategoryPage = memo(() => {
             message: 'Danh mục không tồn tại',
             type: 'warning',
           });
-          navigator(routersAdmin.category.index.getAction());
+          navigator(adminRouters.category.index.getAction());
         }
       },
       () => {
@@ -98,7 +98,7 @@ export const CatalogUpdateCategoryPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={routersAdmin.category.update.title}
+      title={adminRouters.category.update.title}
       loading={loading}
       handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}

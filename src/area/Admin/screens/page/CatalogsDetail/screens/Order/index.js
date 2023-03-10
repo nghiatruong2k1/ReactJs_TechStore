@@ -16,7 +16,7 @@ import { initCase, initState, reducerState } from '../../init';
 import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 
 function useInit() {
   const orderAdminService = OrderAdminServices('CatalogAddOrderPage');
@@ -76,7 +76,7 @@ export const CatalogAddOrderPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={routersAdmin.order.add.title}
+      title={adminRouters.order.add.title}
       loading={loading}
       datas={{ status }}
       handle={{ handleLoading, handleSave, handleFetch }}
@@ -109,7 +109,7 @@ export const CatalogUpdateOrderPage = memo(() => {
             message: 'Đơn hàng không tồn tại',
             type: 'warning',
           });
-          navigator(routersAdmin.order.index.getAction());
+          navigator(adminRouters.order.index.getAction());
         }
       },
       ourLoading,
@@ -125,7 +125,7 @@ export const CatalogUpdateOrderPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={routersAdmin.order.update.title}
+      title={adminRouters.order.update.title}
       loading={loading}
       datas={{ status }}
       handle={{ handleLoading, handleSave, handleFetch }}

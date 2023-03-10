@@ -1,5 +1,3 @@
-import { privateRouters } from './Private';
 import { publicRouters } from './Public';
-
-const renderRouters = {publicRouters, privateRouters};
-export default renderRouters
+import { privateRouters } from './Private';
+export const routers = [publicRouters, privateRouters];

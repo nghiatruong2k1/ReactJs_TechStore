@@ -15,7 +15,7 @@ import { orderModel } from '~/models/order';
 import { formatDate } from '~/config/Format';
 
 import { useInitLoading } from '~/hooks/Loading';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 
 import CatalogLayout from '../../layout';
 import { reducerState, initState, initCase } from '../../init';
@@ -110,7 +110,7 @@ function CatalogOrderComponent(props) {
         width: '5em',
         format: (v, data) => (
           <Link
-            to={routersAdmin.order.update.getAction({ id: v })}
+            to={adminRouters.order.update.getAction({ id: v })}
           >
             {v}
           </Link>
@@ -197,7 +197,7 @@ function CatalogOrderComponent(props) {
         width: '5em',
         format: (v, data) => (
           <Link
-            to={routersAdmin.order.detail.getAction({ id: data.Id })}
+            to={adminRouters.order.detail.getAction({ id: data.Id })}
           >
             {'Xem chi tiết'}
           </Link>
@@ -251,7 +251,7 @@ function CatalogOrderComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={routersAdmin.order.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
+        title={adminRouters.order.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

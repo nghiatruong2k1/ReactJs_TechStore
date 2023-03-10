@@ -10,7 +10,7 @@ import {
 import { Grid } from '@mui/material';
 import ImageAdminServices from '~/area/Admin/services/imageAdmin';
 import { imageModel } from '~/models/image';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 import { useInitLoading } from '~/hooks/Loading';
 import CatalogLayout from '../../layout';
 import PublicButton from '../../components/PublicButton';
@@ -187,7 +187,7 @@ function CatalogImageComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={routersAdmin.image.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
+        title={adminRouters.image.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

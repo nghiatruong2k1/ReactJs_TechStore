@@ -6,7 +6,7 @@ import { useHandleTitle } from '~/hooks/Title';
 import { CategoryServices, ProductServices } from '~/services';
 import { initState, reducerState, initCase } from '../../init';
 import ViewLayout from '../../layout';
-function CategoryProductsPageComponent() {
+function CategoryProductsPageComponent({title}) {
   const categoryServices = CategoryServices('products Category');
   const productServices = ProductServices('products Category');
   const [searchs] = useSearchParams();
@@ -24,7 +24,7 @@ function CategoryProductsPageComponent() {
     const ourLoading1 = handleLoading();
     let ourTitle;
     const ourRequestTitle = categoryServices.getByAlias(alias, (data) => {
-      ourTitle = handleTitle(data.Name);
+      ourTitle = handleTitle(data.Name || title);
       ourLoading1();
     });
 

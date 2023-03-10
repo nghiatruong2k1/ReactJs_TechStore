@@ -1,7 +1,7 @@
 import { memo} from 'react';
 import { NavLink } from 'react-router-dom';
 import { CardActions, Button } from '@mui/material/';
-import { routers } from '~/config/Router';
+import { privateRouters } from '~/routers/Private';
 function CartFooter({ onClose }) {
   return (
     <CardActions sx={{ justifyContent: 'center',p:0.5 }}>
@@ -11,7 +11,7 @@ function CartFooter({ onClose }) {
         component={NavLink}
         onClick={onClose}
         color='success'
-        to={routers.profile.cart.getAction()}
+        to={privateRouters.cart.index.getAction()}
       >
         Xem chi tiết giỏ hàng
       </Button>

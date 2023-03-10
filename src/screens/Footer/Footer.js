@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import { Box, Container, Paper, Grid } from '@mui/material/';
 import styles from './Footer.module.css';
-import FooterSocial from '../widgets/Social';
-import FooterHelps from '../widgets/Helps';
-import FooterAccount from '../widgets/Account';
-import FooterBrands from '../widgets/Brands';
-import FooterCategories from '../widgets/Categories';
+import ListSocial from '../widgets/Social';
+import ListHelps from '../widgets/Helps';
+import ListAccount from '../widgets/Account';
+import ListBrands from '../widgets/Brands';
+import ListCategories from '../widgets/Categories';
 function FooterComponent({ ...props }) {
   return (
     <Box component="footer" className={styles.section}>
@@ -15,11 +15,11 @@ function FooterComponent({ ...props }) {
         className={styles.container}
       >
         <Grid container>
-          <FooterHelps item  xs={12} sm={6} md={3} lg />
-          <FooterBrands item  xs={12} sm={6} md={3} lg />
-          <FooterCategories item  xs={12} sm={6} md={3} lg />
-          <FooterAccount item  xs={12} sm={6} md={3} lg />
-          <FooterSocial item  xs={12} sm={6} md={3} lg />
+          <ListHelps item  xs={12} sm={6} md={3} lg />
+          <ListBrands item  xs={12} sm={6} md={3} lg />
+          <ListCategories item  xs={12} sm={6} md={3} lg />
+          <ListAccount item  xs={12} sm={6} md={3} lg />
+          <ListSocial item  xs={12} sm={6} md={3} lg />
         </Grid>
       </Container>
     </Box>

@@ -40,14 +40,13 @@ const MessageContent = forwardRef(function (
       >
         <AccordionSummary classes={{ content: styles.content }}>
           <Stack direction="row" alignItems="center" width="100%" spacing={1}>
-            {Icon}
+            <span  className={styles.icon}>{Icon}</span>
             <Typography variant="h6" flex="1" className={styles.title}>
               {Title}
             </Typography>
             <IconButton onClick={toggle}>
               <SvgIcon
                 component={ExpandMore}
-                className={clsx(styles.icon)}
                 sx={{
                   transform: (isOpen && 'rotate(0deg)') || 'rotate(-90deg)',
                 }}

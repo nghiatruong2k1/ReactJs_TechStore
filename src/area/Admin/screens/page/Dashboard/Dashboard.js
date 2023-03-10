@@ -5,11 +5,11 @@ import Statistics from './Statistics';
 import ChartRegisters from './ChartRegisters';
 import ChartOrders from './ChartOrders';
 import { useHandleTitle } from '~/hooks/Title';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 function DashboardComponent() {
   const handleTitle = useHandleTitle();
   useEffect(()=>{
-    return handleTitle(routersAdmin.dashboard.title)
+    return handleTitle(adminRouters.dashboard.title)
   },[])
   return (
     <Grid container>

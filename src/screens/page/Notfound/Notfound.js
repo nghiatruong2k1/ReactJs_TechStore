@@ -1,24 +1,30 @@
-import { useCallback, memo } from 'react';
+import { useCallback, memo, useEffect } from 'react';
 import { Button, Container, Stack, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Notfound.module.css';
 import { AnimationText } from '~/components';
-function NotfoundComponent() {
+import { useHandleTitle } from '~/hooks/Title';
+function NotfoundComponent({ title }) {
+  
   const navigator = useNavigate();
   const handleClickBackButton = useCallback(function () {
-    navigator(-1)
+    navigator(-1);
+  }, []);
+  const handleTitle = useHandleTitle();
+  useEffect(() => {
+    return handleTitle(title);
   }, []);
   return (
-    <Container maxWidth={'100%'} >
+    <Container maxWidth={'100%'}>
       <Stack alignItems={'center'} justifyContent={'center'} spacing={1} mb={5}>
         <Typography className={styles.number}>
           <AnimationText text="404" />
         </Typography>
         <Typography className={styles.title}>
-          <AnimationText text="PAGE NOT FOUNT"/>
+          <AnimationText text="PAGE NOT FOUNT" />
         </Typography>
         <Typography className={styles.description}>
-          <AnimationText text="Oh no, We can't see the page you're looking for."/>
+          <AnimationText text="Oh no, We can't see the page you're looking for." />
         </Typography>
         <Stack direction={'row'} alignItems={'center'} spacing={2}>
           <Button

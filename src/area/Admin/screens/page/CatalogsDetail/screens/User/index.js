@@ -16,7 +16,7 @@ import { initCase, initState, reducerState } from '../../init';
 import Layout from './layout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 
 function useInit() {
   const userAdminService = UserAdminServices(CatalogAddUserPage);
@@ -77,7 +77,7 @@ export const CatalogAddUserPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={routersAdmin.user.add.title}
+      title={adminRouters.user.add.title}
       loading={loading}
       datas={{ types }}
       handle={{ handleLoading, handleSave, handleFetch }}
@@ -111,7 +111,7 @@ export const CatalogUpdateUserPage = memo(() => {
             message: 'Tài khoản không tồn tại',
             type: 'warning',
           });
-          navigator(routersAdmin.user.index.getAction());
+          navigator(adminRouters.user.index.getAction());
         }
       },
       () => {
@@ -129,7 +129,7 @@ export const CatalogUpdateUserPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={routersAdmin.user.update.title}
+      title={adminRouters.user.update.title}
       loading={loading}
       datas={{ types }}
       handle={{ handleLoading, handleSave, handleFetch }}

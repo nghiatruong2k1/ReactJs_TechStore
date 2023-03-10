@@ -11,7 +11,7 @@ import { Grid } from '@mui/material';
 import formatNumber from 'number-format.js';
 import OrderServices from '~/services/order';
 import { orderDetailModel } from '~/models/order';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 import { useInitLoading } from '~/hooks/Loading';
 
 import CatalogLayout from '../../layout';
@@ -147,7 +147,7 @@ function CatalogOrderDetailComponent(props) {
     <Grid container>
       <CatalogLayout
         title={
-          routersAdmin.order.detail.title + (state.inTrash ? ' (thùng rác) ' : '')
+          adminRouters.order.detail.title + (state.inTrash ? ' (thùng rác) ' : '')
         }
         state={state}
         dispath={dispath}

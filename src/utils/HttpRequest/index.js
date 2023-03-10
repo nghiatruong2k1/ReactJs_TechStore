@@ -5,6 +5,7 @@ axios.defaults.insecureHTTPParser = true;
 axios.defaults.credentials = "include";
 axios.defaults.xsrfCookieName = "token";
 axios.defaults.xsrfHeaderName = "token";
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.baseURL = process.env.REACT_APP_BASE_API;
 
 export const CancelToken = axios.CancelToken;

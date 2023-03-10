@@ -6,7 +6,7 @@ import DetailComponent from './Detail';
 import OptionComponent from './Option';
 import Provider from '../../provider';
 import Head from '../../components/Head';
-import { routersAdmin } from '~/config/Router';
+import { adminRouters } from '~/area/Admin/router';
 function CatalogBrandLayoutComponent({
   state,
   dispath,
@@ -34,7 +34,7 @@ function CatalogBrandLayoutComponent({
         <Head
           xs={12}
           title={title}
-          back={routersAdmin.order.index.getAction()}
+          back={adminRouters.order.index.getAction()}
         />
         <DetailComponent xs={12} />
         <InfoComponent xs={7} />

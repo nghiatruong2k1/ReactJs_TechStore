@@ -3,7 +3,7 @@ import { Box, Container, Grid, Paper } from '@mui/material/';
 import clsx from 'clsx';
 import { useMediaQuery } from '@mantine/hooks';
 import { Home } from '@mui/icons-material';
-import { routers } from '~/config/Router';
+import { publicRouters} from '~/routers/Public';
 import {
   AuthWidget,
   LogoWidget,
@@ -71,7 +71,7 @@ function HeaderComponent() {
             {isSmallSize && (
               <HeaderOption
                 icon={<Home />}
-                to={routers.home.getAction()}
+                to={publicRouters.home.getAction()}
                 text={'Trang chủ'}
               />
             )}

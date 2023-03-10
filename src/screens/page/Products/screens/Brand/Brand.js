@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useInitLoading } from '~/hooks/Loading';
 import { useHandleTitle } from '~/hooks/Title';
-function BrandProductsPageComponent() {
+function BrandProductsPageComponent({title}) {
   const brandServices = BrandServices('products Brand');
   const productServices = ProductServices('products Brand');
   const [searchs] = useSearchParams();
@@ -25,7 +25,7 @@ function BrandProductsPageComponent() {
     const ourLoading1 = handleLoading();
     const ourLoading2 = handleLoading();
     const ourRequestTitle = brandServices.getByAlias(alias, (data) => {
-      ourTitle = handleTitle(data.Name);
+      ourTitle = handleTitle(data.Name || title);
       ourLoading1();
     });
     const ourRequestTotal = productServices.getCountByBrand(alias, (data) => {
