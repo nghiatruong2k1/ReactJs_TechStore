@@ -13,8 +13,7 @@ function App() {
   }, []);
   return (
     <>
-      {/* <Loading />
-       */}
+      <Loading />
       <Router />
     </>
   );

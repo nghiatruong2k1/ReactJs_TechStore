@@ -25,7 +25,6 @@ import CheckLoginPrivate from './private';
 const Element = memo(({ title, page, layout }) => {
   const Layout = layout === null ? Fragment : layout ?? DefaultLayout;
   const Page = page ?? 'div';
-  console.log(Page, Layout);
   return (
     <Fragment>
       <Layout>
