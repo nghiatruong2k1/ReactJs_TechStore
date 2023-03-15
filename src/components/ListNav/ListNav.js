@@ -35,8 +35,8 @@ function ListNavComponent({ title, datas, icon, loading, divider, ...props }) {
             return (
               <ListItem disablePadding key={index} divider={divider}>
                 <ListItemButton
-                  {...data}
                   disabled={isLoading}
+                  to={data && data.to}
                   component={
                     (!isLoading && data && data.to && NavLink) || 'span'
                   }

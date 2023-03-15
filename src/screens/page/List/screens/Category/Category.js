@@ -4,7 +4,7 @@ import { CategoryServices } from '~/services';
 import { useInitLoading } from '~/hooks/Loading';
 import { initState, reducerState } from '../../init';
 import ViewLayout from '../../layout';
-function CategoryComponent(props) {
+function CategoryComponent({title}) {
   const categoryServices = CategoryServices('list category');
   const [state, dispath] = useReducer(reducerState, initState);
   const [loading, handleLoading] = useInitLoading();
@@ -22,7 +22,7 @@ function CategoryComponent(props) {
   }, [state.limit]);
   return (
     <ViewLayout
-      title={'Danh mục'}
+      title={title}
       loading={loading}
       data={data}
       controller="category"

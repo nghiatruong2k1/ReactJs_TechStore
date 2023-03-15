@@ -7,11 +7,13 @@ function DefaultLayoutComponent({ children }) {
   return (
     <Fragment>
       <Header />
+      
       <Container maxWidth="lg" component={'main'}>
         {children}
         <Subscribe />
       </Container>
-      <Footer />
+      
+       <Footer />
     </Fragment>
   );
 }

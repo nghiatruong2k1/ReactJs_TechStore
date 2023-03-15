@@ -1,9 +1,8 @@
-import { memo, useState, useEffect, useRef, useMemo,Fragment } from 'react';
+import { memo, useState, useEffect, useRef, useMemo, Fragment } from 'react';
 import { Box, Container, Grid, Paper } from '@mui/material/';
 import clsx from 'clsx';
 import { useMediaQuery } from '@mantine/hooks';
 import { Home } from '@mui/icons-material';
-import { publicRouters} from '~/routers/Public';
 import {
   AuthWidget,
   LogoWidget,
@@ -15,6 +14,7 @@ import { controllers } from './init';
 import HeaderOption from './component/HeaderOption';
 import BottomNav from './component/BottomNav';
 import styles from './Header.module.css';
+import { DefaultController } from '~/controllers';
 const bodyRoot = document.getElementById('root');
 function HeaderComponent() {
   const [isFixed, setFixed] = useState(false);
@@ -38,9 +38,9 @@ function HeaderComponent() {
       bodyRoot.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  const Content = useMemo(()=>{
-    return (isSmallSize && BottomNav) || Fragment
-  },[isSmallSize])
+  const Content = useMemo(() => {
+    return (isSmallSize && BottomNav) || Fragment;
+  }, [isSmallSize]);
   return (
     <Box component="header" ref={thisRef}>
       <Container
@@ -71,7 +71,7 @@ function HeaderComponent() {
             {isSmallSize && (
               <HeaderOption
                 icon={<Home />}
-                to={publicRouters.home.getAction()}
+                to={DefaultController.home.getAction()}
                 text={'Trang chủ'}
               />
             )}

@@ -5,7 +5,7 @@ import { OrderServices } from '~/services';
 import { useInitLoading } from '~/hooks/Loading';
 import { initState, reducerState, initCase } from './init';
 import ViewLayout from './layout';
-function OrdersComponent(props) {
+function OrdersComponent({title}) {
   const [searchs] = useSearchParams();
   const [state, dispath] = useReducer(
     reducerState,
@@ -69,6 +69,7 @@ function OrdersComponent(props) {
       data={data}
       total={total}
       status={status}
+      title={title}
     />
   );
 }

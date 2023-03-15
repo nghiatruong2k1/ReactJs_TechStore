@@ -1,22 +1,24 @@
+import { BrandController, CategoryController, ProductController } from "~/controllers";
+
 export const controllers =  [
     {
-      value: 'product',
+      value: ProductController.search.getAction(),
       text: 'Sản phẩm',
     },
     {
-      value: 'category',
+      value: CategoryController.search.getAction(),
       text: 'Danh mục',
     },
     {
-      value: 'brand',
+      value: BrandController.search.getAction(),
       text: 'Thương hiệu',
     },
-    {
-      value: 'post',
-      text: 'Bài viết',
-    },
-    {
-      value: 'topic',
-      text: 'Chủ đề',
-    },
+    // {
+    //   value: PostController.search,
+    //   text: 'Bài viết',
+    // },
+    // {
+    //   value: 'topic',
+    //   text: 'Chủ đề',
+    // },
 ];

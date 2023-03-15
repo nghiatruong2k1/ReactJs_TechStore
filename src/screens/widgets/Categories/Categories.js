@@ -1,20 +1,21 @@
 import { memo, Fragment, useState, useEffect } from 'react';
 import { ListNav } from '~/components';
+import { ProductController } from '~/controllers';
+import { useInitLoading } from '~/hooks/Loading';
 import CategoryServices from '~/services/category';
-import { publicRouters} from '~/routers/Public';
 function FooterCategories(props) {
   const categoryServices = CategoryServices('footer categories');
-  const [isLoading, setLoading] = useState(false);
+  const [loading, handleLoading] = useInitLoading();
   const [data, setData] = useState(Array(5).fill(null));
   useEffect(() => {
-    setLoading(true);
+    const ourLoading = handleLoading();
     const ourRequest = categoryServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
-        to: publicRouters.product.category.getAction({ alias: item.Alias }),
+        to: ProductController.category.getAction({ alias: item.Alias }),
       }));
       setData(newdata);
-      setLoading(false);
+      ourLoading();
     });
     return () => {
       ourRequest();
@@ -26,7 +27,7 @@ function FooterCategories(props) {
       <ListNav
         icon={<span className="fas fa-chevron-right" />}
         datas={data}
-        loading={isLoading}
+        loading={loading}
         title="Danh mục"
         {...props}
       />

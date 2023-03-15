@@ -77,7 +77,7 @@ export const CatalogAddUserPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={adminRouters.user.add.title}
+      //title={adminRouters.user.add.title}
       loading={loading}
       datas={{ types }}
       handle={{ handleLoading, handleSave, handleFetch }}
@@ -111,7 +111,7 @@ export const CatalogUpdateUserPage = memo(() => {
             message: 'Tài khoản không tồn tại',
             type: 'warning',
           });
-          navigator(adminRouters.user.index.getAction());
+          //navigator(adminRouters.user.index.getAction());
         }
       },
       () => {
@@ -129,7 +129,7 @@ export const CatalogUpdateUserPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={adminRouters.user.update.title}
+      //title={adminRouters.user.update.title}
       loading={loading}
       datas={{ types }}
       handle={{ handleLoading, handleSave, handleFetch }}

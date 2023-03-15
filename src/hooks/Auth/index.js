@@ -22,19 +22,19 @@ export function useInitAuth() {
   useEffect(() => {
     LocalStore.set(KEY_STORE, state.user);
   }, [state.user]);
-  useEffect(() => {
-    if (cookies['token']) {
-      const ourLoading = handleLoading();
-      const ourRequest = useServices.get({}, (data) => {
-        dispath([initCase.SET_USER, data]);
-        ourLoading();
-      });
-      return ourRequest;
-    } else {
-      dispath([initCase.SET_USER, null]);
-      LocalStore.set(KEY_STORE, null);
-    }
-  }, [cookies['token']]);
+  // useEffect(() => {
+  //   if (cookies['token']) {
+  //     const ourLoading = handleLoading();
+  //     const ourRequest = useServices.get({}, (data) => {
+  //       dispath([initCase.SET_USER, data]);
+  //       ourLoading();
+  //     });
+  //     return ourRequest;
+  //   } else {
+  //     dispath([initCase.SET_USER, null]);
+  //     LocalStore.set(KEY_STORE, null);
+  //   }
+  // }, [cookies['token']]);
   const handleOpen = useCallback(() => {
     dispath([initCase.TOGGLE_OPEN, true]);
   }, []);

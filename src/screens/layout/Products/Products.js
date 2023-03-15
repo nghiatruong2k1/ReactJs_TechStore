@@ -2,7 +2,7 @@ import { memo, Fragment } from 'react';
 import Header from '~/screens/Header';
 import Footer from '~/screens/Footer';
 import Subscribe from '~/screens/Subscribe';
-import { Container, Grid, Stack } from '@mui/material';
+import { Container, Grid} from '@mui/material';
 
 import { BrandsWidget, CategoriesWidget } from '~/screens/widgets';
 import { Sidebar } from '~/components';
@@ -12,6 +12,7 @@ function ProductsLayoutComponent({ children }) {
   return (
     <Fragment>
       <Header />
+      
       <Container maxWidth="lg">
         <Grid container spacing={2} py={2}>
           <Sidebar item xs={isSmallSize ? 1 : 3} component={Grid} fixed={isSmallSize}>

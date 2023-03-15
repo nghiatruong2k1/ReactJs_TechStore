@@ -32,7 +32,7 @@ function CatalogBrandLayoutComponent({
         <Head
           xs={12}
           title={title}
-          back={adminRouters.brand.index.getAction()}
+          //back={adminRouters.brand.index.getAction()}
         />
         <InfoComponent xs={7} />
         <OptionComponent xs={5} />

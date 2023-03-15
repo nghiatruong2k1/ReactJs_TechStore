@@ -187,7 +187,7 @@ function CatalogImageComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={adminRouters.image.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
+        //title={adminRouters.image.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

@@ -107,7 +107,7 @@ function CatalogUserComponent(props) {
         width: '5em',
         format: (v, data) => (
           <Link
-            to={adminRouters.user.update.getAction({ id: data.Id })}
+            //to={adminRouters.user.update.getAction({ id: data.Id })}
           >
             {v}
           </Link>
@@ -229,7 +229,7 @@ function CatalogUserComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={adminRouters.user.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
+        //title={adminRouters.user.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

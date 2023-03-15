@@ -2,7 +2,6 @@ import { memo, useCallback, useEffect, useMemo } from 'react';
 import { useHandleTitle } from '~/hooks/Title';
 import { useGetCart } from '~/hooks/Cart';
 import { ViewContent } from '~/components';
-import { privateRouters } from '~/routers/Private';
 import CartLayout from './layout';
 import CartHeader from './Header';
 import CartFooter from './Footer';
@@ -11,17 +10,12 @@ import CartContent from './Content';
 function CartComponent({ isToggle, toggleComponent }) {
   const { state, dispath, initCase } = useGetCart();
   const handleTitle = useHandleTitle();
-  useEffect(() => {
-    if (state.isOpen) {
-      return handleTitle(privateRouters.cart.index.title);
-    }
-  }, [state.isOpen]);
-  const open=useCallback(()=>{
-    dispath([initCase.TOGGLE_OPEN,true])
-  },[])
-  const close=useCallback(()=>{
-    dispath([initCase.TOGGLE_OPEN,false])
-  },[])
+  const open = useCallback(() => {
+    dispath([initCase.TOGGLE_OPEN, true]);
+  }, []);
+  const close = useCallback(() => {
+    dispath([initCase.TOGGLE_OPEN, false]);
+  }, []);
   return (
     <>
       <CartLayout
@@ -33,8 +27,12 @@ function CartComponent({ isToggle, toggleComponent }) {
         header={CartHeader}
         footer={CartFooter}
       >
-        <ViewContent loading={state.isLoading} length={state.data?.length} empty={<CartEmpty />}>
-            <CartContent data={state.data}/>
+        <ViewContent
+          loading={state.isLoading}
+          length={state.data?.length}
+          empty={<CartEmpty />}
+        >
+          <CartContent data={state.data} />
         </ViewContent>
       </CartLayout>
     </>

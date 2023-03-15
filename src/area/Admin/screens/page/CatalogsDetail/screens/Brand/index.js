@@ -35,7 +35,7 @@ export const CatalogAddBrandPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={adminRouters.brand.add.title}
+      //title={adminRouters.brand.add.title}
       loading={loading}
       handle={{ handleLoading, handleSave,handleFetch }}
       rulers={rulers}
@@ -59,9 +59,9 @@ export const CatalogUpdateBrandPage = memo(() => {
             message: 'Thương hiệu không tồn tại',
             type: 'warning',
           });
-          navigator(
-            adminRouters.brand.index.getAction(),
-          );
+          // navigator(
+          //   adminRouters.brand.index.getAction(),
+          // );
         }
       },
       () => {
@@ -79,7 +79,7 @@ export const CatalogUpdateBrandPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={adminRouters.brand.update.title}
+      //title={adminRouters.brand.update.title}
       loading={loading}
       handle={{ handleLoading, handleSave,handleFetch }}
       rulers={rulers}

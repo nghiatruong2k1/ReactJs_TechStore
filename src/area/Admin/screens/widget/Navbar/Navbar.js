@@ -20,19 +20,19 @@ function NavbarComponent() {
     return [
       {
         text: 'Sản phẩm',
-        to: adminRouters.product.index.getAction(),
+        //to: adminRouters.product.index.getAction(),
       },
       {
         text: 'Danh mục',
-        to: adminRouters.category.index.getAction(),
+        //to: adminRouters.category.index.getAction(),
       },
       {
         text: 'Thương hiệu',
-        to: adminRouters.brand.index.getAction(),
+        //to: adminRouters.brand.index.getAction(),
       },
       {
         text: 'Hình ảnh',
-        to: adminRouters.image.index.getAction(),
+        //to: adminRouters.image.index.getAction(),
       },
     ];
   }, []);
@@ -40,19 +40,19 @@ function NavbarComponent() {
     return [
       {
         text: 'Danh sách',
-        to: adminRouters.order.index.getAction(),
+        //to: adminRouters.order.index.getAction(),
       },
       {
         text: 'Giao hàng',
-        to: adminRouters.order.shipment.getAction(),
+        //to: adminRouters.order.shipment.getAction(),
       },
       {
         text: 'Phản hồi',
-        to: adminRouters.order.feedback.getAction(),
+        //to: adminRouters.order.feedback.getAction(),
       },
       {
         text: 'Mã giảm giá',
-        to: adminRouters.order.voucher.getAction(),
+        //to: adminRouters.order.voucher.getAction(),
       },
     ];
   }, []);
@@ -60,7 +60,7 @@ function NavbarComponent() {
     return [
       {
         text: 'Danh sách',
-        to: adminRouters.user.index.getAction(),
+        //to: adminRouters.user.index.getAction(),
       },
     ];
   }, []);
@@ -79,7 +79,7 @@ function NavbarComponent() {
       <List disablePadding>
         <NavbarItem
           icon={<Airplay />}
-          to={adminRouters.dashboard.getAction()}
+          //to={adminRouters.dashboard.getAction()}
           text="Dashboard"
         />
         <NavbarAccordion

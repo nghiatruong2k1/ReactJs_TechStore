@@ -32,7 +32,7 @@ function CatalogCategoryLayoutComponent({
         <Head
           xs={12}
           title={title}
-          back={adminRouters.category.index.getAction()}
+          //back={adminRouters.category.index.getAction()}
         />
         <InfoComponent xs={7} />
         <OptionComponent xs={5} />

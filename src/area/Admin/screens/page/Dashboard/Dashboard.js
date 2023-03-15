@@ -9,7 +9,7 @@ import { adminRouters } from '~/area/Admin/router';
 function DashboardComponent() {
   const handleTitle = useHandleTitle();
   useEffect(()=>{
-    return handleTitle(adminRouters.dashboard.title)
+    //return handleTitle(adminRouters.dashboard.title)
   },[])
   return (
     <Grid container>

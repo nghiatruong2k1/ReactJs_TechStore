@@ -1,6 +1,6 @@
-import { defaultEntity } from '../default';
-import { productEntity } from '../product';
-import { userEntity } from '../user';
+import { defaultEntity } from './default';
+import { productEntity } from './product';
+import { userEntity } from './user';
 
 export let orderStatusEntity = {
   Id: {

@@ -1,25 +1,22 @@
-import {memo,Fragment,useMemo} from 'react';
+import { memo, Fragment, useMemo } from 'react';
 import { ListNav } from '~/components';
-function FooterAccount(props){
-  const {datas,isLoading} = useMemo(function(){
-    return {
-      datas:[
-        {
-          icon:(<span className="fas fa-user" />)
-          ,text:"Trực tuyến:"
-        },{
-          icon:(<span className="fas fa-user" />)
-          ,text:"Khách hàng:"
-        },{
-          icon:(<span className="fas fa-user" />)
-          ,text:"Tổng:"
-      }],isLoading:false
-    }
-  },[])
+function FooterAccount(props) {
+  const data = useMemo(function () {
+    return [
+      {
+        icon: <span className="fas fa-user" />,
+        text: 'Trực tuyến: 0',
+      },
+      {
+        icon: <span className="fas fa-user" />,
+        text: 'Khách hàng: 0',
+      },
+    ];
+  }, []);
   return (
     <Fragment>
-      <ListNav datas={datas} loading={isLoading} title="Khách hàng" {...props}/>
+      <ListNav datas={data} loading={false} title="Người dùng" {...props} />
     </Fragment>
-  )
-};
-export default memo(FooterAccount)
+  );
+}
+export default memo(FooterAccount);

@@ -1,5 +1,5 @@
-import { defaultEntity } from '../default';
-import { imageEntity } from '../image';
+import { defaultEntity } from './default';
+import { imageEntity } from './image';
 
 export let categoryEntity = {
   Id: {

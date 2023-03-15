@@ -2,13 +2,13 @@ import { memo, useEffect, useMemo, useState } from 'react';
 import { Box, Grid, Typography } from '@mui/material/';
 import Slider from 'react-slick';
 import CategoryServices from '~/services/category';
-import { publicRouters} from '~/routers/Public';
 
 import { ViewContent } from '~/components';
 import styles from './Popular.module.css';
 import { useInitLoading } from '~/hooks/Loading';
 import PopularItem from './Item';
 import { useMediaQuery } from '@mantine/hooks';
+import { ProductController } from '~/controllers';
 
 function Populars({ ...props }) {
   const categoryServices = CategoryServices('home categories popular');
@@ -20,7 +20,7 @@ function Populars({ ...props }) {
       const newdata = data.map((item) => ({
         text: item.Name,
         imgUrl: item.ImageUrl,
-        to: publicRouters.product.category.getAction({ alias: item.Alias }),
+        to: ProductController.category.getAction({ alias: item.Alias }),
       }));
       setData(newdata);
       ourLoading();

@@ -1,7 +1,7 @@
 import { memo, Fragment } from 'react';
 import Header from '~/screens/Header';
 import Footer from '~/screens/Footer';
-import { Container, Grid, Stack } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 
 import { ProfileNavWidget } from '~/screens/widgets';
 import { Sidebar } from '~/components';

@@ -1,6 +1,6 @@
 export const initState = {
   isOpen: false,
-  user: null,
+  user: {},
   action: 'login',
 };
 export const initCase = {

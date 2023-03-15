@@ -200,10 +200,10 @@ function CatalogProductImageDetailComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={
-          adminRouters.product.image.title +
-          (state.inTrash ? ' (thùng rác) ' : '')
-        }
+        // title={
+        //   adminRouters.product.image.title +
+        //   (state.inTrash ? ' (thùng rác) ' : '')
+        // }
         option={{
           trash: {},
         }}

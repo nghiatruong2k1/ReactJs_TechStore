@@ -17,8 +17,7 @@ function FormForget() {
       <Stack spacing={1}>
         <InputText name="Email" title="Email" placeholder="Nhập Email" />
         <SubmitButton disabled color="info">
-          {' '}
-          Gửi mã xác nhận{' '}
+          Gửi mã xác nhận
         </SubmitButton>
         <LinkSetAction
           component={Typography}

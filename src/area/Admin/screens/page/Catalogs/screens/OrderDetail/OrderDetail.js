@@ -146,9 +146,7 @@ function CatalogOrderDetailComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={
-          adminRouters.order.detail.title + (state.inTrash ? ' (thùng rác) ' : '')
-        }
+        //title={adminRouters.order.detail.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

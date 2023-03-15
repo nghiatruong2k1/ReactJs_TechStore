@@ -1,27 +1,27 @@
 import { memo, useMemo } from 'react';
-import { publicRouters} from '~/routers/Public';
+import { BrandController, CategoryController, DefaultController } from '~/controllers';
 import NavMenu from '../../components/NavMenu';
 function LeftNav(props) {
   const datas = useMemo(function () {
     return [
       {
-        to: '/',
+        to: DefaultController.home.getAction(),
         text: 'Trang chủ',
       },
       {
-        to: publicRouters.category.index.getAction(),
+        to: CategoryController.index.getAction(),
         text: 'Danh mục',
       },
       {
-        to: publicRouters.brand.index.getAction(),
+        to:BrandController.index.getAction(),
         text: 'Thương hiệu',
       },
       {
-        to: publicRouters.services?.index?.getAction(),
+        //to: ServiceController?.index.getAction(),
         text: 'Dịch vụ',
       },
       {
-        to: publicRouters.post?.index?.getAction(),
+        //to: PostController?.index.getAction(),
         text: 'Tin tức',
       },
     ];

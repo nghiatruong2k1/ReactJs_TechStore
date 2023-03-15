@@ -105,7 +105,7 @@ export const CatalogAddProductPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={adminRouters.product.add.title}
+      //title={adminRouters.product.add.title}
       loading={loading}
       datas={datas}
       handle={{ handleLoading, handleSave, handleFetch }}
@@ -138,7 +138,7 @@ export const CatalogUpdateProductPage = memo(() => {
             message: 'Sản phẩm không tồn tại',
             type: 'warning',
           });
-          navigator(adminRouters.product.index.getAction());
+          //navigator(adminRouters.product.index.getAction());
         }
       },
       () => {
@@ -156,7 +156,7 @@ export const CatalogUpdateProductPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={adminRouters.product.update.title}
+      //title={adminRouters.product.update.title}
       loading={loading}
       datas={datas}
       handle={{ handleLoading, handleSave, handleFetch }}

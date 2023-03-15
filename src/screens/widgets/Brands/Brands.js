@@ -1,20 +1,23 @@
 import { memo, Fragment, useState, useEffect } from 'react';
 import { ListNav } from '~/components';
+import { ProductController } from '~/controllers';
+// import { ProductController } from '~/controllers';
+import { useInitLoading } from '~/hooks/Loading';
 import BrandServices from '~/services/brand';
-import { publicRouters} from '~/routers/Public';
 function FooterBrands(props) {
   const brandServices = BrandServices('footer brands');
-  const [isLoading, setLoading] = useState(false);
+  const [loading, handleLoading] = useInitLoading();
   const [data, setData] = useState(Array(5).fill(null));
   useEffect(() => {
-    setLoading(true);
+    const ourLoading = handleLoading();
     const ourRequest = brandServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
-        to: publicRouters.product.brand.getAction( { alias: item.Alias }),
+        to: ProductController.brand.getAction({ alias: item.Alias }),
       }));
       setData(newdata);
-      setLoading(false);
+      console.log(ProductController,data)
+      ourLoading();
     });
     return () => {
       ourRequest();
@@ -26,7 +29,7 @@ function FooterBrands(props) {
       <ListNav
         icon={<span className="fas fa-chevron-right" />}
         datas={data}
-        loading={isLoading}
+        loading={loading}
         title="Thương hiệu"
         {...props}
       />

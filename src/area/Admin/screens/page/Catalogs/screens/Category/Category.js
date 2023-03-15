@@ -106,7 +106,9 @@ function CatalogCategoryComponent(props) {
         type: 'text',
         width: '5em',
         format: (v) => (
-          <Link to={adminRouters.category.update.getAction({ id: v })}>
+          <Link 
+            //to={adminRouters.category.update.getAction({ id: v })}
+          >
             {v}
           </Link>
         ),
@@ -192,7 +194,7 @@ function CatalogCategoryComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={adminRouters.category.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
+        //title={adminRouters.category.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}
@@ -201,7 +203,7 @@ function CatalogCategoryComponent(props) {
         displays={displays}
         option={{
           add: {
-            to: adminRouters.category.add.getAction(),
+            //to: adminRouters.category.add.getAction(),
           },
           trash: {},
         }}

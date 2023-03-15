@@ -95,6 +95,33 @@ export default function ProductServices(location) {
       });
     }
   }, []);
+  const getCountBySearch = useCallback((query, onThen, onEnd) => {
+    if (query) {
+      return services({
+        api: `${API}/search/count/${query}`,
+        onThen,
+        onCatch: () => {
+          onThen && onThen(0);
+        },
+        onEnd,
+        location,
+      });
+    }
+  }, []);
+  const getsBySearch = useCallback((query, params, onThen, onEnd) => {
+    if (query) {
+      return services({
+        api: `${API}/search/${query}`,
+        params,
+        onThen,
+        onCatch: () => {
+          onThen && onThen([]);
+        },
+        onEnd,
+        location,
+      });
+    }
+  }, []);
   return {
     getsRecommend,
     getsDealsOffers,
@@ -103,5 +130,7 @@ export default function ProductServices(location) {
     getCountByBrand,
     getsByCategory,
     getCountByCategory,
+    getsBySearch,
+    getCountBySearch,
   };
 }

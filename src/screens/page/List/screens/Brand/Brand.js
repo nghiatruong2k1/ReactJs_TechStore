@@ -4,7 +4,7 @@ import { BrandServices } from '~/services';
 import { useInitLoading } from '~/hooks/Loading';
 import { initState, reducerState } from '../../init';
 import ViewLayout from '../../layout';
-function BrandComponent() {
+function BrandComponent({title}) {
   const brandServices = BrandServices('list brand');
   const [state, dispath] = useReducer(reducerState, initState);
   const [loading, handleLoading] = useInitLoading();
@@ -22,7 +22,7 @@ function BrandComponent() {
   }, [state.limit]);
   return (
     <ViewLayout
-      title={'Thương hiệu'}
+      title={title}
       loading={loading}
       data={data}
       controller="brand"

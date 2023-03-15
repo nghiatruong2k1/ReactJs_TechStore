@@ -106,7 +106,7 @@ function CatalogBrandComponent(props) {
         width: '5em',
         format: (v, data) => (
           <Link
-            to={adminRouters.brand.update.getAction({ id: data.Id })}
+            //to={adminRouters.brand.update.getAction({ id: data.Id })}
           >
             {v}
           </Link>
@@ -193,7 +193,7 @@ function CatalogBrandComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={adminRouters.brand.index.title+ (state.inTrash ? ' (thùng rác) ' : '')}
+        //title={adminRouters.brand.index.title+ (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}
@@ -202,7 +202,7 @@ function CatalogBrandComponent(props) {
         displays={displays}
         option={{
           add: {
-            to: adminRouters.brand.add.getAction(),
+            //to: adminRouters.brand.add.getAction(),
           },
           trash: {},
         }}

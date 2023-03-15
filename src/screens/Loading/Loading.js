@@ -8,7 +8,7 @@ function GlobalLoadingComponent({ children }) {
   const [isLoading,handle] = useInitLoading();
   return (
     <Provider value={handle}>
-      {true && (
+      {isLoading && (
         <div className={clsx(styles.root)}>
           <Button variant="outlined" color="info" className={styles.button}>
             <CircularProgress color="info" className={styles.svg} />

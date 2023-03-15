@@ -109,7 +109,9 @@ function CatalogProductComponent() {
         type: 'text',
         width: '5em',
         format: (v, data) => (
-          <Link to={adminRouters.product.update.getAction({ id: data.Id })}>
+          <Link 
+            //to={adminRouters.product.update.getAction({ id: data.Id })}
+          >
             {v}
           </Link>
         ),
@@ -121,7 +123,7 @@ function CatalogProductComponent() {
         type: 'image',
         width: '5em',
         to: (data) => {
-          return adminRouters.product.image.getAction({ id: data.Id });
+          //return adminRouters.product.image.getAction({ id: data.Id });
         },
       },
       {
@@ -137,7 +139,7 @@ function CatalogProductComponent() {
         width: '10em',
         format: (v, data) => (
           <Link
-            to={adminRouters.category.update.getAction({ id: data.CategoryId })}
+            //to={adminRouters.category.update.getAction({ id: data.CategoryId })}
           >
             {v}
           </Link>
@@ -149,7 +151,9 @@ function CatalogProductComponent() {
         type: 'text',
         width: '10em',
         format: (v, data) => (
-          <Link to={adminRouters.brand.update.getAction({ id: data.BrandId })}>
+          <Link 
+          //to={adminRouters.brand.update.getAction({ id: data.BrandId })}
+          >
             {v}
           </Link>
         ),
@@ -236,10 +240,10 @@ function CatalogProductComponent() {
   return (
     <Grid container>
       <CatalogLayout
-        title={
-          adminRouters.product.index.title +
-          (state.inTrash ? ' (thùng rác) ' : '')
-        }
+        // title={
+        //   adminRouters.product.index.title +
+        //   (state.inTrash ? ' (thùng rác) ' : '')
+        // }
         state={state}
         dispath={dispath}
         data={data}
@@ -248,7 +252,7 @@ function CatalogProductComponent() {
         displays={displays}
         option={{
           add: {
-            to: adminRouters.product.add.getAction(),
+           // to: adminRouters.product.add.getAction(),
           },
           trash: {},
         }}

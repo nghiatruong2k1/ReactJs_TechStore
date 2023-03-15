@@ -49,7 +49,7 @@ export const CatalogAddCategoryPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={adminRouters.category.add.title}
+      //title={adminRouters.category.add.title}
       loading={loading}
       handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}
@@ -80,7 +80,7 @@ export const CatalogUpdateCategoryPage = memo(() => {
             message: 'Danh mục không tồn tại',
             type: 'warning',
           });
-          navigator(adminRouters.category.index.getAction());
+          //navigator(adminRouters.category.index.getAction());
         }
       },
       () => {
@@ -98,7 +98,7 @@ export const CatalogUpdateCategoryPage = memo(() => {
     <Layout
       state={state}
       dispath={dispath}
-      title={adminRouters.category.update.title}
+      //title={adminRouters.category.update.title}
       loading={loading}
       handle={{ handleLoading, handleSave, handleFetch }}
       rulers={rulers}

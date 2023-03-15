@@ -16,18 +16,20 @@ function SearchLayout({
       fullWidth
       autoComplete="off"
       component="form"
+      data-action={state.controller}
+      data-method={'get'}
       onSubmit={handleSubmit}
     >
       <TextField
         size="small"
         color="info"
         inputProps={{
-            className:styles.input
+          className: styles.input,
         }}
         InputProps={{
           className: styles.outline,
           startAdornment: (
-            <InputAdornment position='start'className={styles.adorment}>
+            <InputAdornment position="start" className={styles.adorment}>
               <SearchSelect
                 data={controllers}
                 value={state.controller}
@@ -36,7 +38,7 @@ function SearchLayout({
             </InputAdornment>
           ),
           endAdornment: (
-            <InputAdornment position='end' className={styles.adorment}>
+            <InputAdornment position="end" className={styles.adorment}>
               <SearchOption />
             </InputAdornment>
           ),

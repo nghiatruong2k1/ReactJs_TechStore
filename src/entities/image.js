@@ -1,4 +1,4 @@
-import { defaultEntity } from '../default';
+import { defaultEntity } from './default';
 
 export let imageEntity = {
   Id: {

@@ -1,8 +1,8 @@
-import { defaultEntity } from '../default';
-import { brandEntity } from '../brand';
-import { categoryEntity } from '../category';
-import { imageEntity } from '../image';
-import { userEntity } from '../user';
+import { defaultEntity } from './default';
+import { brandEntity } from './brand';
+import { categoryEntity } from './category';
+import { imageEntity } from './image';
+import { userEntity } from './user';
 
 export let productTypeEntity = {
   Id: {

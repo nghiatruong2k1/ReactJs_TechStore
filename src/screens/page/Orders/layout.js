@@ -4,17 +4,16 @@ import { useSearchParams } from 'react-router-dom';
 import { Stack } from '@mui/material';
 import { Paging, ViewContent } from '~/components';
 import { useHandleTitle } from '~/hooks/Title';
-import { privateRouters } from '~/routers/Private';
 import { initCase } from './init';
 import Provider from './provider';
 import ViewHead from './components/Head';
 import ViewStep from './components/Step';
 import ViewItem from './components/Item';
-function OrdersLayoutComponent({state,dispath,data,loading,total,status}) {
+function OrdersLayoutComponent({state,dispath,data,loading,total,status,title}) {
   const [searchs,setSearchParams] = useSearchParams();
   const handleTitle = useHandleTitle();
   useEffect(() => {
-    return handleTitle(privateRouters.profile.orders.title);
+    return handleTitle(title);
   }, []);
   const handleChangeStatus = useCallback((index) => {
     dispath([initCase.SET_STATUS_INDEX, index]);

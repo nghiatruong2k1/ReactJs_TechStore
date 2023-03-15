@@ -6,10 +6,14 @@ export function getLimit(payload) {
   payload = Number(payload);
   return payload > 0 ? payload : 12;
 }
-export const initState = ({ limit, page }) => {
+export function getQuery(payload) {
+  return payload !== '';
+}
+export const initState = ({ limit, page, query }) => {
   return {
     limit: getLimit(limit),
     page: getPage(page),
+    query: getQuery(query),
   };
 };
 export const initCase = {

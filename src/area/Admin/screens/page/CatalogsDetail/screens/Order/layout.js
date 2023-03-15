@@ -34,7 +34,7 @@ function CatalogBrandLayoutComponent({
         <Head
           xs={12}
           title={title}
-          back={adminRouters.order.index.getAction()}
+          //back={adminRouters.order.index.getAction()}
         />
         <DetailComponent xs={12} />
         <InfoComponent xs={7} />

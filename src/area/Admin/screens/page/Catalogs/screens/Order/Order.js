@@ -110,7 +110,7 @@ function CatalogOrderComponent(props) {
         width: '5em',
         format: (v, data) => (
           <Link
-            to={adminRouters.order.update.getAction({ id: v })}
+            //to={adminRouters.order.update.getAction({ id: v })}
           >
             {v}
           </Link>
@@ -197,7 +197,7 @@ function CatalogOrderComponent(props) {
         width: '5em',
         format: (v, data) => (
           <Link
-            to={adminRouters.order.detail.getAction({ id: data.Id })}
+           // to={adminRouters.order.detail.getAction({ id: data.Id })}
           >
             {'Xem chi tiết'}
           </Link>
@@ -251,7 +251,7 @@ function CatalogOrderComponent(props) {
   return (
     <Grid container>
       <CatalogLayout
-        title={adminRouters.order.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
+        //title={adminRouters.order.index.title + (state.inTrash ? ' (thùng rác) ' : '')}
         state={state}
         dispath={dispath}
         data={data}

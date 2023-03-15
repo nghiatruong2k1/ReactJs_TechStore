@@ -10,8 +10,8 @@ import {
 } from '@mui/material/';
 import { NavLink } from 'react-router-dom';
 import CategoryServices from '~/services/category';
-import { publicRouters} from '~/routers/Public';
 import { useInitLoading } from '~/hooks/Loading';
+import { ProductController } from '~/controllers';
 function Categories({ ...props }) {
   const categoryServices = CategoryServices('home categories');
   const [loading, handleLoading] = useInitLoading();
@@ -21,12 +21,12 @@ function Categories({ ...props }) {
     const ourRequest = categoryServices.getAll({}, (data) => {
       const newdata = data.map((item) => ({
         text: item.Name,
-        to: publicRouters.product.category.getAction( { alias: item.Alias }),
+        to: ProductController.category.getAction({ alias: item.Alias }),
       }));
       setData(newdata);
       ourLoading();
     });
-    return ()=>{
+    return () => {
       ourRequest();
       setData(Array(5).fill(null));
     };

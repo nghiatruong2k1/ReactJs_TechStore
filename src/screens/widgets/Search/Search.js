@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
 import { memo, useCallback, useReducer } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { publicRouters } from '~/routers/Public';
 import { initState, reducerState, initCase } from './init';
 import SearchLayout from './layout';
 function SearchComponent({ controllers,...props }) {
@@ -17,9 +16,9 @@ function SearchComponent({ controllers,...props }) {
     (e) => {
       e.isDefaultPrevented();
       e.preventDefault();
-      if (state.query !== '' && publicRouters[state.controller]) {
+      if (state.query !== '' && state.controller) {
         navigator({
-          pathname: `${publicRouters[state.controller]?.search.getAction()}?query=${state.query}`,
+          pathname: `${state.controller}?query=${state.query}`,
         });
         dispath([initCase.SET_QUERY, '']);
       }
