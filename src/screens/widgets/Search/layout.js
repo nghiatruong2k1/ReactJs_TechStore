@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo} from 'react';
 
 import { FormControl, TextField } from '@mui/material/';
 import styles from './Search.module.css';
@@ -9,20 +9,22 @@ function SearchLayout({
   controllers,
   state,
   dispath,
-  handle: { handleSubmit, handleChangeSelect },
+  handle: { handleSubmit, handleChangeSelect, handleChangeInput },
 }) {
   return (
     <FormControl
       fullWidth
       autoComplete="off"
       component="form"
-      data-action={state.controller}
+      data-action={controllers[state.controller]}
       data-method={'get'}
       onSubmit={handleSubmit}
     >
       <TextField
         size="small"
         color="info"
+        value={state.query}
+        onChange={handleChangeInput}
         inputProps={{
           className: styles.input,
         }}

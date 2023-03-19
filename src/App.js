@@ -1,7 +1,6 @@
 import { Fragment, memo, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Loading from '~/screens/Loading';
-import Router from './router';
 const bodyRoot = document.getElementById('root');
 function App() {
   const location = useLocation();
@@ -9,12 +8,11 @@ function App() {
     bodyRoot.scrollTop = 0;
   }, [location]);
   useEffect(() => {
-    console.log(process.env);
+    console.log('env:', process.env);
   }, []);
   return (
     <>
       <Loading />
-      <Router />
     </>
   );
 }

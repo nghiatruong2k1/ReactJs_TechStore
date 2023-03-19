@@ -2,7 +2,6 @@ import { memo, useEffect } from 'react';
 import { useHandleTitle } from '~/hooks/Title';
 import { Grid } from '@mui/material';
 
-import {  routersAdmin } from '~/config/Router';
 
 import Provider from '../../provider';
 import Head from '../../components/Head';

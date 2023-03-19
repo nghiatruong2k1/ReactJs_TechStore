@@ -1,12 +1,12 @@
 import { Box } from '@mui/material';
 import { memo, useCallback, useReducer } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { initState, reducerState, initCase } from './init';
 import SearchLayout from './layout';
-function SearchComponent({ controllers,...props }) {
+function SearchComponent({ controllers, ...props }) {
   const [state, dispath] = useReducer(reducerState, initState);
-  const handleChangeInput = useCallback((value) => {
-    dispath([initCase.SET_QUERY, value]);
+  const handleChangeInput = useCallback((e) => {
+    dispath([initCase.SET_QUERY, e.target.value]);
   }, []);
   const handleChangeSelect = useCallback((value) => {
     dispath([initCase.SET_CONTROLLER, value]);
@@ -16,9 +16,15 @@ function SearchComponent({ controllers,...props }) {
     (e) => {
       e.isDefaultPrevented();
       e.preventDefault();
-      if (state.query !== '' && state.controller) {
+      if (
+        state.query !== '' &&
+        controllers[state.controller] &&
+        controllers[state.controller].search
+      ) {
         navigator({
-          pathname: `${state.controller}?query=${state.query}`,
+          pathname: controllers[state.controller].search.getAction({
+            query: state.query,
+          }),
         });
         dispath([initCase.SET_QUERY, '']);
       }

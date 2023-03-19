@@ -45,6 +45,7 @@ function ImageComponent({
             alt={alt || src || 'Hình ảnh'}
             src={src}
             loading={'lazy'}
+            data-loading={loading}
             style={{
               height:height,
               width:width

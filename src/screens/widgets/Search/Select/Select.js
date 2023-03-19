@@ -26,20 +26,17 @@ function SearchSelect({ value, onChange, data }) {
             },
           }}
           renderValue={() => {
-            const cont = data.find((i) => {
-              return i.value === value;
-            });
-            if (cont) {
-              return cont.text;
+            if (data[value]) {
+              return data[value].title;
             } else {
-              onChange && onChange(data[0].value);
+              onChange && onChange(0);
             }
           }}
         >
-          {data.map(function (type, index) {
+          {data.map((controller, key) => {
             return (
-              <MenuItem key={index} value={type.value}>
-                {type.text}
+              <MenuItem key={key} value={key}>
+                {controller.title}
               </MenuItem>
             );
           })}

@@ -5,6 +5,7 @@ import Provider from './provider';
 import SliderServices from '~/services/slider';
 import { useInitLoading } from '~/hooks/Loading';
 import { Slider } from '~/components';
+import styles from './Slider.module.css';
 function SliderComponent({ ...props }) {
   const thisRef = useRef(null);
   const sliderServices = SliderServices('home sliders');
@@ -26,7 +27,7 @@ function SliderComponent({ ...props }) {
     <>
       <Grid item p={0.5} {...props}>
         <Provider value={{ state, dispath, slider: thisRef.current }}>
-          <Slider data={data} loading={loading} />
+          <Slider className={styles.root} data={data} loading={loading} />
         </Provider>
       </Grid>
     </>

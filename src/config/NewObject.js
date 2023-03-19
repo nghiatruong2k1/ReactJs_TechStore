@@ -1,12 +1,21 @@
 export class NewObject extends Object {
-  constructor(props) {
+  constructor(props, privateProps) {
     super(props);
+    const _this = this;
     if (typeof props === 'object') {
       Object.keys(props).forEach((key) => {
-        this[key] = props[key];
+        _this[key] = props[key];
       });
     }
-    Object.defineProperty(this, 'map', {
+    if (typeof privateProps === 'object') {
+      Object.keys(privateProps).forEach((key) => {
+        Object.defineProperty(_this, key, {
+          enumerable: false,
+          value: privateProps[key],
+        });
+      });
+    }
+    Object.defineProperty(_this, 'map', {
       enumerable: false,
       value: function (callback) {
         return Object.keys(this).map((key) => {
@@ -18,7 +27,7 @@ export class NewObject extends Object {
         });
       },
     });
-    Object.defineProperty(this, 'forEach', {
+    Object.defineProperty(_this, 'forEach', {
       enumerable: false,
       value: function (callback) {
         return Object.keys(this).forEach((key) => {
@@ -30,7 +39,7 @@ export class NewObject extends Object {
         });
       },
     });
-    Object.defineProperty(this, 'reduce', {
+    Object.defineProperty(_this, 'reduce', {
       enumerable: false,
       value: function (callback, result) {
         return Object.keys(this).reduce((rs, key) => {

@@ -12,13 +12,6 @@
   --white: #fff;
   --gray: #e5e7ea;
   --gray-dark: #343a40;
-/* 
-  --primary: var(--text-primary);
-  --primaryBg:var(--primary-bg);
-
-  --secondary: #12225b; */
-
-
 
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
@@ -32,11 +25,10 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
 
-    --font-text: 'TimesNewRoman';
+  --font-text: 'TimesNewRoman';
 
-
-    --index-loading:999999999999999;
-    --index-toast:999999999999998;
+  --index-loading: 999999999999999;
+  --index-toast: 999999999999998;
 }
 
 * {
@@ -69,54 +61,45 @@ section {
 html {
   font-size: 18px;
 }
-@media (max-width: 1600px)
-{
-	html
-	{
-		font-size: 18px !important;
-	}
-}
-@media (max-width: 1500px)
-{
-	html
-	{
-		font-size: 17px !important;
-	}
-}
-@media (max-width: 1400px)
-{
-	html
-	{
-		font-size: 16px !important;
-	}
-}
-@media (max-width: 1000px)
-{
-	html
-	{
-		font-size: 15px !important;
+@media (max-width: 1600px) {
+  html {
+    font-size: 18px !important;
   }
 }
-@media (max-width: 800px)
-{
-	html
-	{
-		font-size: 14px !important;
+@media (max-width: 1500px) {
+  html {
+    font-size: 17px !important;
   }
 }
-@media (max-width: 500px)
-{
-	html
-	{
-		font-size: 13px !important;
-	}
+@media (max-width: 1400px) {
+  html {
+    font-size: 16.5px !important;
+  }
 }
-@media (max-width: 400px)
-{
-	html
-	{
-		font-size: 12px !important;
-	}
+@media (max-width: 1200px) {
+  html {
+    font-size: 16px !important;
+  }
+}
+@media (max-width: 1000px) {
+  html {
+    font-size: 15.5px !important;
+  }
+}
+@media (max-width: 800px) {
+  html {
+    font-size: 15px !important;
+  }
+}
+@media (max-width: 500px) {
+  html {
+    font-size: 14.5px !important;
+  }
+}
+@media (max-width: 400px) {
+  html {
+    font-size: 14px !important;
+  }
 }
 body {
   line-height: 1.5;
@@ -131,7 +114,9 @@ body {
   inset: 0;
   overflow: auto;
 }
-*:not([class*='-fa']):not([class*='fa-']):not([class*='icon']):not(path):not(svg) {
+*:not([class*='-fa']):not([class*='fa-']):not([class*='icon']):not(path):not(
+    svg
+  ) {
   font-family: var(--font-text) !important;
 }
 
@@ -201,7 +186,6 @@ table {
   inset: 0 !important;
 }
 
-
 .line-clamp-1,
 .line-clamp-2,
 .line-clamp-3,
@@ -251,11 +235,10 @@ button:not(.disabled):not(:disabled),
 a:not(.disabled):not(:disabled) {
   cursor: pointer !important;
 }
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
-
 
 ::-webkit-scrollbar {
   width: 0.5rem;
@@ -271,7 +254,8 @@ a{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-small,.small{
+small,
+.small {
   font-size: 0.875rem !important;
 }
 h6,
@@ -304,17 +288,21 @@ h1,
   font-size: 2.2rem !important;
   font-weight: bold !important;
 }
-strong,.strong{
+strong,
+.strong {
   font-weight: bolder !important;
 }
-b,.b {
+b,
+.b {
   font-weight: bold !important;
 }
-i,.i {
+i,
+.i {
   font-style: italic !important;
 }
-u,.u {
- text-decoration-line: underline !important;
+u,
+.u {
+  text-decoration-line: underline !important;
 }
 *:-internal-autofill-selected {
   background-color: transparent !important;
@@ -323,16 +311,11 @@ u,.u {
   -webkit-box-shadow: transparent !important;
 }
 
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-transition: color 9999s ease-out, background-color 9999s ease-out !important;
-    -webkit-transition-delay: 9999s !important;
+  -webkit-transition: color 9999s ease-out, background-color 9999s ease-out !important;
+  -webkit-transition-delay: 9999s !important;
 }
 
-.slick-slide{
-  cursor: grab !important;
-
-}

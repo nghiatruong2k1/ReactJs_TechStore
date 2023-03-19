@@ -1,5 +1,6 @@
-import { memo, Fragment, useMemo, useEffect } from 'react';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { memo, useMemo } from 'react';
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
+import { NewObject } from './config/NewObject';
 import {
   BrandController,
   CartController,
@@ -22,66 +23,79 @@ import {
   ProfilePage,
 } from './screens/page';
 import CheckLoginPrivate from './private';
-const Element = memo(({ title, page, layout }) => {
-  const Layout = layout === null ? Fragment : layout ?? DefaultLayout;
-  const Page = page ?? 'div';
-  return (
-    <Fragment>
-      <Layout>
-        <Page title={title} />
-      </Layout>
-    </Fragment>
-  );
-});
+import { Routers } from './config/Routers';
+import { adminRouters } from './area/Admin/router';
 
-function RoutersComponent(props) {
+function RoutersComponent({ children }) {
   const routers = useMemo(() => {
-    function route(props, page, layout) {
-      return {
-        path: props.path,
-        element: <Element title={props.title} page={page} layout={layout} />,
-      };
-    }
-    const rs = {};
-    rs.public = [
-      route(DefaultController.home, HomePage),
-      route(DefaultController.notfound, NotfoundPage, null),
-      route(ProductController.brand, ProductsBrandPage, ProductsLayout),
-      route(ProductController.category, ProductsCategoryPage, ProductsLayout),
-      route(ProductController.search, ProductsSearchPage, ProductsLayout),
-      route(ProductController.detail, ProductDetailPage),
-      route(BrandController.index, BrandsPage),
-      route(CategoryController.index, CategorysPage),
-    ];
-    rs.private = [
-      route(CartController.index, CartPage),
-      route(ProfileController.index, ProfilePage, ProfileLayout),
-    ];
+    const rs = new NewObject();
+    rs.public = new Routers(
+      [
+        [DefaultController.home, HomePage],
+        [DefaultController.notfound, NotfoundPage, null],
+        [ProductController.detail, ProductDetailPage],
+        [ProductController.brand, ProductsBrandPage, ProductsLayout],
+        [ProductController.category, ProductsCategoryPage, ProductsLayout],
+        [ProductController.search, ProductsSearchPage, ProductsLayout],
+        [CategoryController.index, CategorysPage],
+        [BrandController.index, BrandsPage],
+      ],
+      { layout: DefaultLayout },
+    );
+    rs.private = new Routers(
+      [
+        [CartController.index, CartPage],
+        [ProfileController.index, ProfilePage, ProfileLayout],
+      ],
+      { layout: DefaultLayout },
+    );
+    rs.admin = adminRouters;
+    console.log('routes: ', rs);
     return rs;
   }, []);
   return (
-    <Routes>
-      {routers.public.map((route, index) => {
-        return (
-          <Route
-            key={'public:' + index}
-            path={route.path}
-            element={route.element}
-          />
-        );
-      })}
-      <Route key={'checkLogin'} element={<CheckLoginPrivate />}>
-        {routers.private.map((route, index) => {
+    <BrowserRouter>
+      {children}
+      <Routes>
+        {routers.public.map((route, indexRoute) => {
           return (
             <Route
-              key={'private:' + index}
+              key={'public:' + indexRoute}
               path={route.path}
               element={route.element}
             />
           );
         })}
-      </Route>
-    </Routes>
+        <Route key={'Check Login Private'} element={<CheckLoginPrivate />}>
+          {routers.private.map((route, indexRoute) => {
+            return (
+              <Route
+                key={'private:' + indexRoute}
+                path={route.path}
+                element={route.element}
+              />
+            );
+          })}
+          {routers.admin instanceof Routers && (
+            <Route
+              key={routers.admin.title}
+              path={routers.admin.path}
+              element={<routers.admin.page />}
+            >
+              {routers.admin.map((route, indexRoute) => {
+                return (
+                  <Route
+                    key={'admin:' + indexRoute}
+                    path={route.path}
+                    element={route.element}
+                  />
+                );
+              })}
+            </Route>
+          )}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 export default memo(RoutersComponent);

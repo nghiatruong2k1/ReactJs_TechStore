@@ -1,0 +1,21 @@
+.root {
+}
+.root [class*='Slider_images'] [class*='slick-slide'] {
+  transform: perspective(100px) translateZ(-0.5em) translateX(0) !important;
+  z-index: 0;
+}
+.root
+  [class*='Slider_images']
+  [class*='slick-slide']:has(+ [class*='slick-current']) {
+  transform: perspective(100px) translateZ(-0.5em) translateX(4em) !important;
+}
+.root
+  [class*='Slider_images']
+  [class*='slick-current']
+  + [class*='slick-slide'] {
+  transform: perspective(100px) translateZ(-0.5em) translateX(-4em) !important;
+}
+.root [class*='Slider_images'] [class*='slick-current'] {
+  transform: perspective(100px) translateZ(0em) translateX(0) !important;
+  z-index: 2;
+}

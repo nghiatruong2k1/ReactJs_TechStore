@@ -6,7 +6,7 @@ import OptionComponent from './Option';
 import ImageComponent from './Image';
 import Provider from '../../provider';
 import Head from '../../components/Head';
-import {  routersAdmin } from '~/config/Router';
+
 function CatalogBrandLayoutComponent({
   state,
   dispath,

@@ -9,6 +9,7 @@ import StylesGlobal from '~/styles';
 import StateGlobal from '~/states';
 import MessageProvider from '~/screens/Message';
 import LoadingProvider from '~/screens/Loading';
+import Routers from './router';
 ReactDOM.render(
   <Fragment>
     <FontsGlobal>
@@ -17,9 +18,9 @@ ReactDOM.render(
           <MessageProvider>
             <CookiesProvider>
               <StateGlobal>
-                <BrowserRouter>
+                <Routers>
                   <App />
-                </BrowserRouter>
+                </Routers>
               </StateGlobal>
             </CookiesProvider>
           </MessageProvider>

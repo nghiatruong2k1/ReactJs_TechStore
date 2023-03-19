@@ -16,7 +16,6 @@ function FooterBrands(props) {
         to: ProductController.brand.getAction({ alias: item.Alias }),
       }));
       setData(newdata);
-      console.log(ProductController,data)
       ourLoading();
     });
     return () => {

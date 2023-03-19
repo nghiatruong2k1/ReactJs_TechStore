@@ -6,14 +6,17 @@ import { useSearchParams } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useInitLoading } from '~/hooks/Loading';
 import { useHandleTitle } from '~/hooks/Title';
-function BrandProductsPageComponent({title}) {
+function BrandProductsPageComponent({ title }) {
   const brandServices = BrandServices('products Brand');
   const productServices = ProductServices('products Brand');
   const [searchs] = useSearchParams();
-  const [state, dispath] = useReducer(reducerState, initState({
-    limit: searchs.get('limit'),
-    page: searchs.get('page'),
-  }));
+  const [state, dispath] = useReducer(
+    reducerState,
+    initState({
+      limit: searchs.get('limit'),
+      page: searchs.get('page'),
+    }),
+  );
   const { alias } = useParams();
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);

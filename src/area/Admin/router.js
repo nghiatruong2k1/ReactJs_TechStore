@@ -20,7 +20,27 @@ import {
 } from '~/area/Admin/screens/page';
 import { AdminDefaultLayout } from '~/area/Admin/screens/layout';
 import { CheckAdminPrivate } from '~/area/Admin/private';
-export const adminRouters = {
+import { Routers } from '~/config/Routers';
+import {
+  AdminArea,
+  AdminDashboardController,
+  AdminProductController,
+} from './controllers';
+export const adminRouters = new Routers(
+  [
+    [AdminDashboardController.index, AdminDashboardPage],
+    // [AdminProductController.index, AdminProductPage],
+    // [AdminProductController.add, CatalogAddProductPage],
+    // [AdminProductController.update, CatalogUpdateProductPage],
+  ],
+  {
+    title: AdminArea.title,
+    path: AdminArea.path,
+    page: CheckAdminPrivate,
+    layout: AdminDefaultLayout,
+  },
+);
+export const adminRouter = {
   // defaultLayout: AdminDefaultLayout,
   // path: adminRouters.path,
   // element: CheckAdminPrivate,

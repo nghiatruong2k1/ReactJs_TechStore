@@ -14,7 +14,7 @@ import {
 import styles from './Navbar.module.css';
 import NavbarItem from './Item';
 import NavbarAccordion from './Accordion';
-import {  routersAdmin } from '~/config/Router';
+
 function NavbarComponent() {
   const Catalogs = useMemo(function () {
     return [

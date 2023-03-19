@@ -4,25 +4,21 @@ export class ActionConfig {
   /**
    * title:String,
    * path: String,
-   * page:Component,
-   * options:{
-   *      params:Object,
-   *
-   *      layout:Component
+   * params:Object
    * }*/
-  constructor(title, path, page, options = {}) {
+  constructor(title, path, params) {
     const regex = /:[a-zA-Z]{1,}/g;
-    const { params, layout } = options;
     const _this = this;
     Object.defineProperty(_this, 'title', {
       enumerable: true,
       writable: false,
       value: title,
     });
-    Object.defineProperty(_this, 'path', {
-      enumerable: true,
-      writable: false,
-      value: path,
+    Object.defineProperty(_this, 'getPath', {
+      enumerable: false,
+      value: function () {
+        return path || '';
+      },
     });
     Object.defineProperty(_this, 'params', {
       enumerable: false,
@@ -32,27 +28,14 @@ export class ActionConfig {
       enumerable: false,
       writable: true,
     });
-    Object.defineProperty(_this, 'getPage', {
-      enumerable: false,
-      value: function () {
-        return page;
-      },
-    });
-    Object.defineProperty(_this, 'getLayout', {
-      enumerable: false,
-      value: function () {
-        return layout !== undefined
-          ? layout
-          : _this?.parent?.getLayout && _this.parent.getLayout();
-      },
-    });
+
     Object.defineProperty(_this, 'getAction', {
       enumerable: false,
       value: function (values) {
         let str = `/${path}`;
         let parent = _this.parent;
         while (parent) {
-          const parentPath = parent?.path;
+          const parentPath = parent?.getPath();
           str = (parentPath ? '/' + parentPath : '') + str;
           parent = parent?.parent;
         }
@@ -83,12 +66,10 @@ export class ControllerConfig extends NewObject {
    * options:{
    *    path: string,
    *    title:String
-   *    page:Component,
-   *    layout:Component
    * }*/
   constructor(actions, options = {}) {
     super({});
-    const { title, path, page, layout } = options;
+    const { title, path } = options;
     const _this = this;
     Object.defineProperty(_this, 'title', {
       enumerable: false,
@@ -98,22 +79,19 @@ export class ControllerConfig extends NewObject {
       enumerable: false,
       writable: true,
     });
-    Object.defineProperty(_this, 'path', {
-      enumerable: false,
-      value: path || '',
-    });
-    Object.defineProperty(_this, 'getPage', {
+    Object.defineProperty(_this, 'getPath', {
       enumerable: false,
       value: function () {
-        return page;
+        return path || '';
       },
     });
-    Object.defineProperty(_this, 'getLayout', {
+    Object.defineProperty(_this, 'addAction', {
       enumerable: false,
-      value: function () {
-        return layout !== undefined
-          ? layout
-          : _this?.parent?.getLayout && _this.parent.getLayout();
+      value: function (key, action) {
+        if (typeof actions === 'object' && action instanceof ActionConfig) {
+          _this[key] = action;
+          _this[key].parent = _this;
+        }
       },
     });
     Object.defineProperty(_this, 'addActions', {
@@ -133,38 +111,20 @@ export class ControllerConfig extends NewObject {
 }
 export class AreaConfig extends NewObject {
   /**
-   *
-   * controllers:{
-   *    controller:ControllerConfig
-   * },
-   * options:{
    * path: string,
-   *    title:String
+   * title:String
    * }*/
-  constructor(path, options = {}) {
+  constructor(path, title) {
     super({});
     const _this = this;
-    const { title, page, layout } = options;
     Object.defineProperty(_this, 'title', {
       enumerable: false,
       value: title || '',
     });
-    Object.defineProperty(_this, 'path', {
-      enumerable: false,
-      value: path || '',
-    });
-    Object.defineProperty(_this, 'getPage', {
+    Object.defineProperty(_this, 'getPath', {
       enumerable: false,
       value: function () {
-        return page;
-      },
-    });
-    Object.defineProperty(_this, 'getLayout', {
-      enumerable: false,
-      value: function () {
-        return layout !== undefined
-          ? layout
-          : _this?.parent?.getLayout && _this.parent.getLayout();
+        return path || '';
       },
     });
   }

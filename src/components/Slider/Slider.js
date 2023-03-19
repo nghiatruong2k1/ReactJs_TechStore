@@ -7,11 +7,11 @@ import Images from './Images';
 import Arrows from './Arrows';
 import Dots from './Dots';
 import './Slider.css';
-function SliderComponent({ variant, fit, data, loading }) {
+function SliderComponent({ className, variant, fit, data, loading }) {
   const [state, dispath] = useReducer(reducerState, initState);
   const thisRef = useRef(null);
   return (
-    <Box position="relative">
+    <Box position="relative" className={className}>
       <Provider
         value={{ data, loading, state, dispath, slider: thisRef.current }}
       >
